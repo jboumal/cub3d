@@ -1,2 +1,1 @@
-# cub3d
-Code wolfeinstein3d with minilibx
+# 42 cub3d
