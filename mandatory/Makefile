@@ -6,15 +6,18 @@
 #    By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/12 16:10:08 by bel-mous         ###   ########.fr        #
+#    Updated: 2022/07/12 18:20:56 by bel-mous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
+SRC = 	src/cub3d.c \
+		src/event/event.c \
+		src/gameloop/gameloop.c \
+		src/parser/parser.c \
+		src/render/render.c \
 
-SRC = $(wildcard src/*.c)
-
-INCLUDES = includes
+INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 

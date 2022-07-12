@@ -6,13 +6,24 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/12 16:22:34 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:32:00 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include <unistd.h>
+# include <mlx.h>
+# include <stdlib.h>
+
+# define SCREEN_W 1920
+# define SCREEN_H 1080
+# define SCREEN_TITLE "cub3d"
+# define FPS 60
+
+# define K_PRESS_EVENT 2
+# define K_RELEASE_EVENT 3
+# define DESTROY_NOTIFY_EVENT 17
 
 typedef struct s_data {
 	void	*img;
@@ -37,9 +48,16 @@ typedef struct t_map
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*window;
-	t_map		map;
+	int		accumulator;
+	void	*mlx;
+	void	*window;
+	t_map	map;
 }	t_game;
+
+int		game_loop(t_game *game);
+int		key_down(int code, t_game *game);
+int		key_release(int code, t_game *game);
+void	parser(t_game *game, char **argv);
+void	render(t_game *game);
 
 #endif

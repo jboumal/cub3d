@@ -6,7 +6,14 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:38 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/12 16:33:39 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:30:26 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cub3d.h>
+
+void	parser(t_game *game, char **argv)
+{
+	(void) game;
+	(void) argv;
+}
