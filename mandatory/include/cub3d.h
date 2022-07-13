@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 17:05:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:50:08 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <unistd.h>
 # include <mlx.h>
 # include <stdlib.h>
+# include <math.h>
 
 # define SCREEN_W 1920
 # define SCREEN_H 1080
 # define SCREEN_TITLE "cub3d"
-# define FPS 60
 
 # define K_PRESS_EVENT 2
 # define K_RELEASE_EVENT 3
@@ -62,7 +62,6 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	int			accumulator;
 	void		*mlx;
 	void		*window;
 	t_map		map;
@@ -86,5 +85,7 @@ t_data		get_new_img(t_game *game);
 double		dda(t_vector ray_dir, int *side, t_game *game);
 
 void		raycasting(int x, t_data *img, t_game *game);
+
+void		*ft_memset(void *b, int c, size_t len);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
+#    By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/13 13:34:03 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/07/13 20:34:15 by bel-mous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 
 LIB = -lmlx -framework OpenGL -framework AppKit
 
