@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 13:26:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:05:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,9 @@ t_vector	vector(double x, double y);
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_data		get_new_img(t_game *game);
+
+double		dda(t_vector ray_dir, int *side, t_game *game);
+
+void		raycasting(int x, t_data *img, t_game *game);
 
 #endif
