@@ -6,7 +6,7 @@
 #    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/13 13:07:40 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/07/13 13:34:03 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	./$(NAME)
+	./$(NAME) map.cub
 
 .PHONY: $(NAME) all clean fclean re run rerun
