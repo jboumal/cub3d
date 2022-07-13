@@ -6,14 +6,17 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:48 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/13 15:24:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:36:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_vector
-	get_side_dist(t_vector ray_dir, int cell, t_vector delta_dist, t_game *game)
+t_vector	get_side_dist(
+				t_vector ray_dir,
+				int cell,
+				t_vector delta_dist,
+				t_game *game)
 {
 	t_vector	pos;
 	t_vector	side_dist;
