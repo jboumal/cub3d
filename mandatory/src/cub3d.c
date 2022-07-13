@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:05:59 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/12 18:31:56 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/13 12:57:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, K_PRESS_EVENT, 1L << 1, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, 1L, quit, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
-	mlx_loop(game.window);
+	mlx_loop(game.mlx);
 	return (0);
 }
