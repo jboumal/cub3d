@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 13:14:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:26:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,18 @@ typedef struct s_game
 	t_player	player;
 }	t_game;
 
-int		game_loop(t_game *game);
-int		key_down(int code, t_game *game);
-int		key_release(int code, t_game *game);
-void	parser(t_game *game, char **argv);
-void	render(t_game *game);
+int			game_loop(t_game *game);
+int			key_down(int code, t_game *game);
+int			key_release(int code, t_game *game);
+void		parser(t_game *game, char **argv);
+void		render(t_game *game);
 
 /*utils*/
 t_vector	vector(double x, double y);
+
+/*mlx_utils*/
+
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_data		get_new_img(t_game *game);
 
 #endif

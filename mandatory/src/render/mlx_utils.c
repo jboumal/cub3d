@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 13:01:48 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/13 13:20:31 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/07/13 13:22:47 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/07/13 13:25:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	dda(t_vector ray_dir, t_game *game)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int			cell;
-	t_vector	delta_dist;
-	t_vector	side_dist;
-	int			step;
+	char	*dst;
 
-	cell = (int)game->player.pos.y * game->map.width + (int)game->player.pos.x;
-	delta_dist = vector(1 / ray_dir.x, 1 / ray_dir.y);
+	dst = data->addr
+		+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *) dst = color;
+}
+
+t_data	get_new_img(t_game *game)
+{
+	t_data	img;
+
+	img.img = mlx_new_image(game->mlx, SCREEN_W, SCREEN_H);
+	img.addr = mlx_get_data_addr(
+			img.img,
+			&img.bits_per_pixel,
+			&img.line_length,
+			&img.endian);
+	return (img);
 }
