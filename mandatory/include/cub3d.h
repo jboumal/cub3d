@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 13:00:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:14:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
-typedef struct t_map
+typedef struct s_map
 {
 	int		*data;
 	size_t	width;
@@ -53,12 +53,20 @@ typedef struct t_map
 	t_data	*ea;
 }	t_map;
 
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
+}	t_player;
+
 typedef struct s_game
 {
-	int		accumulator;
-	void	*mlx;
-	void	*window;
-	t_map	map;
+	int			accumulator;
+	void		*mlx;
+	void		*window;
+	t_map		map;
+	t_player	player;
 }	t_game;
 
 int		game_loop(t_game *game);
@@ -66,5 +74,8 @@ int		key_down(int code, t_game *game);
 int		key_release(int code, t_game *game);
 void	parser(t_game *game, char **argv);
 void	render(t_game *game);
+
+/*utils*/
+t_vector	vector(double x, double y);
 
 #endif
