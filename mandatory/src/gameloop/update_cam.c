@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:16:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 13:17:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:55:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,25 @@ void	translate_cam(t_game *game)
 {
 	t_vector	*pos;
 	t_vector	dir;
-	t_vector	pos_up;
-	t_vector	pos_down;
+	t_vector	np;
 
 	pos = &game->player.pos;
 	dir = game->player.dir;
-	pos_up = vector(pos->x + dir.x * MOVE_SPEED, pos->y + dir.y * MOVE_SPEED);
-	pos_down = vector(pos->x - dir.x * MOVE_SPEED, pos->y - dir.y * MOVE_SPEED);
 	if (game->state.up)
 	{
-		if (!game->map.data[(int)pos->y * game->map.width + (int)pos_up.x])
-			pos->x = pos_up.x;
-		if (!game->map.data[(int)pos_up.y * game->map.width + (int)pos->x])
-			pos->y = pos_up.y;
+		np = vector(pos->x + dir.x * MOVE_SPEED, pos->y + dir.y * MOVE_SPEED);
+		if (!game->map.data[(int)pos->y * game->map.width + (int)np.x])
+			pos->x = np.x;
+		if (!game->map.data[(int)np.y * game->map.width + (int)pos->x])
+			pos->y = np.y;
 	}
 	if (game->state.down)
 	{
-		if (!game->map.data[(int)pos->y * game->map.width + (int)pos_down.x])
-			pos->x = pos_down.x;
-		if (!game->map.data[(int)pos_down.y * game->map.width + (int)pos->x])
-			pos->y = pos_down.y;
+		np = vector(pos->x - dir.x * MOVE_SPEED, pos->y - dir.y * MOVE_SPEED);
+		if (!game->map.data[(int)pos->y * game->map.width + (int)np.x])
+			pos->x = np.x;
+		if (!game->map.data[(int)np.y * game->map.width + (int)pos->x])
+			pos->y = np.y;
 	}
 }
 

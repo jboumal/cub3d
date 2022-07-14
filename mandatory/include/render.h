@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 09:42:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:37:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include "cub3d.h"
 
 # define TILEMAP_SIZE 12
+
+enum e_side
+{
+	N,
+	E,
+	S,
+	W
+};
 
 typedef struct s_rect
 {
@@ -27,7 +35,7 @@ typedef struct s_rect
 }	t_rect;
 
 /*dda*/
-double	dda(t_vector ray_dir, int *side, t_game *game);
+double	dda(t_vector ray_dir, enum e_side *side, t_game *game);
 
 /*minimap*/
 void	render_minimap(t_data *img, t_game *game);

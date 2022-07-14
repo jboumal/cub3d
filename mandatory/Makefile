@@ -3,14 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+         #
+#    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/13 20:34:15 by bel-mous         ###   ########.fr        #
+#    Updated: 2022/07/14 13:25:14 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
+
+#!!!! DANGER
 SRC = 	$(wildcard src/*/*.c)\
 		src/cub3d.c
 

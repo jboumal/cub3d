@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:48 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 13:19:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:44:27 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_vector	get_side_dist(
 	return (side_dist);
 }
 
-double	dda(t_vector ray_dir, int *side, t_game *game)
+double	dda(t_vector ray_dir, enum e_side *side, t_game *game)
 {
 	int			cell;
 	t_vector	delta_dist;
@@ -48,16 +48,16 @@ double	dda(t_vector ray_dir, int *side, t_game *game)
 		{
 			side_dist.x += delta_dist.x;
 			cell += -2 * (ray_dir.x < 0) + 1;
-			*side = 0;
+			*side = W * (ray_dir.x <= 0) + E * (ray_dir.x > 0);
 		}
 		else
 		{
 			side_dist.y += delta_dist.y;
 			cell += -2 * game->map.width * (ray_dir.y < 0) + game->map.width;
-			*side = 1;
+			*side = N * (ray_dir.y >= 0) + S * (ray_dir.y < 0);
 		}
 	}
-	if (!*side)
+	if (*side == W || *side == E)
 		return (side_dist.x - delta_dist.x);
 	return (side_dist.y - delta_dist.y);
 }

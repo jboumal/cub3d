@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 12:31:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:48:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	draw_line(int x, double wall_dist, int side, t_data *img)
 		else if (y > draw_end)
 			my_mlx_pixel_put(img, x, y, 0x00444444);
 		else
-			my_mlx_pixel_put(img, x, y, 0x88 + 0x55 * side);
+			my_mlx_pixel_put(img, x, y, 0x88 + 0x55 * (side % 2));
 		y++;
 	}
 }
@@ -49,7 +49,7 @@ void	raycasting(int x, t_data *img, t_game *game)
 {
 	double		camera_x;
 	t_vector	ray_dir;
-	int			side;
+	enum e_side	side;
 	double		wall_dist;
 
 	camera_x = 2 * x / (double) SCREEN_W - 1;
