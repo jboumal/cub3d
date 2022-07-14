@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:48 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/13 20:36:01 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:38:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ double	dda(t_vector ray_dir, int *side, t_game *game)
 		else
 		{
 			side_dist.y += delta_dist.y;
-			cell += -2 * game->map.width * (ray_dir.x < 0) + game->map.width;
+			cell += -2 * game->map.width * (ray_dir.y < 0) + game->map.width;
 			*side = 1;
 		}
 	}

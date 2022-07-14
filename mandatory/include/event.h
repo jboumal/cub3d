@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 09:46:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:20:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # define K_PRESS_EVENT 2
 # define K_RELEASE_EVENT 3
 # define DESTROY_NOTIFY_EVENT 17
+
+# define K_W 13
+# define K_A 0
+# define K_S 1
+# define K_D 2
 
 /*event*/
 int	key_down(int code, t_game *game);

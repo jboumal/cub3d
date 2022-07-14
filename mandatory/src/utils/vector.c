@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:05:46 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 10:05:50 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:35:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ t_vector	vector(double x, double y)
 	v.x = x;
 	v.y = y;
 	return (v);
+}
+
+t_vector	vector_add(t_vector v1, t_vector v2)
+{
+	return (vector(v1.x + v2.x, v1.y + v2.y));
 }
 
 t_vector	vector_rotate(t_vector v, double a)

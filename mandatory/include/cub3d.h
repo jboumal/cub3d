@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 09:45:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:18:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
+# include <stdbool.h>
+# include <stdint.h>
+
+//!!
+# include <stdio.h>
 
 # include "utils.h"
 # include "parser.h"

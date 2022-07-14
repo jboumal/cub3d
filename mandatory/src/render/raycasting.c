@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/13 21:55:50 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/14 11:38:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	raycasting(int x, t_data *img, t_game *game)
 	wall_dist = dda(ray_dir, &side, game);
 	draw_line(x, wall_dist, side, img);
 	if (x + 1 < SCREEN_W)
-		raycasting(x + 1, img, game);
+		return raycasting(x + 1, img, game);
 }

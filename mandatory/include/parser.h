@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 09:44:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:15:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,21 @@ typedef struct s_player
 	t_vector	plane;
 }	t_player;
 
+typedef struct s_state
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+}	t_state;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
 	t_map		map;
 	t_player	player;
+	t_state		state;
 }	t_game;
 
 /*parser*/
