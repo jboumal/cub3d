@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 14:29:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:34:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_rect
 }	t_rect;
 
 /*dda*/
-double	dda(t_vector ray_dir, t_face *face, t_game *g);
+double	dda(t_vector ray_dir, t_face *face, t_game *game);
 
 /*minimap*/
 void	render_minimap(t_data *img, t_game *game);
@@ -51,7 +51,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_data	get_new_img(t_game *game);
 
 /*raycasting*/
-void	raycasting(int x, t_data *img, t_game *g);
+void	raycasting(int x, t_data *img, t_game *game);
 
 /*render*/
 void	render(t_game *game);

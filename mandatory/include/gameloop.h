@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 14:31:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:34:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int		game_loop(t_game *game);
 
 /*update_cam*/
-void	translate_cam(t_game *g);
-void	rotate_cam(t_game *g);
+void	translate_cam(t_game *game);
+void	rotate_cam(t_game *game);
 
 #endif
