@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 09:45:19 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/07/14 09:36:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <unistd.h>
-# include <mlx.h>
-# include <stdlib.h>
-# include <math.h>
+# include "cub3d.h"
 
-# include "utils.h"
-# include "parser.h"
-# include "gameloop.h"
-# include "event.h"
-# include "render.h"
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
-# define SCREEN_W 1920
-# define SCREEN_H 1080
-# define SCREEN_TITLE "cub3d"
+/*vector*/
+t_vector	vector(double x, double y);
 
 #endif
