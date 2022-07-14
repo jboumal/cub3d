@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 09:36:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:06:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ typedef struct s_vector
 
 /*vector*/
 t_vector	vector(double x, double y);
+t_vector	vector_rotate(t_vector v, double a);
 
 #endif

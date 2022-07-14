@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:38 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 22:02:54 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:09:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	temp_init_map(t_game *game)
 	game->player.dir.y = 0;
 	game->player.plane.x = 0;
 	game->player.plane.y = 0.66;
+
+	game->player.dir = vector_rotate(game->player.dir, 0.5);
+	game->player.plane = vector_rotate(game->player.plane, 0.5);
 }
 
 void	parser(t_game *game, char **argv)
