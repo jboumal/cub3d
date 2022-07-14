@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 10:15:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:07:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ typedef struct s_game
 }	t_game;
 
 /*parser*/
-void	parser(t_game *game, char **argv);
+void	parser(int argc, char **argv, t_game *game);
 
 #endif

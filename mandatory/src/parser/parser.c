@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:38 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 11:10:28 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:06:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 // Temporary function to be deleted when parsing works.
 void	temp_init_map(t_game *game)
 {
-	static int	map[49] = {
+	static int	map[] = {
 		1, 1, 1, 1, 1, 1, 1,
 		1, 0, 0, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 1, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 1, 1,
 		1, 1, 1, 1, 1, 1, 1,
 	};
 
@@ -36,8 +36,9 @@ void	temp_init_map(t_game *game)
 	game->player.plane.y = 0;
 }
 
-void	parser(t_game *game, char **argv)
+void	parser(int argc, char **argv, t_game *game)
 {
+	(void) argc;
 	(void) argv;
 	temp_init_map(game);
 }
