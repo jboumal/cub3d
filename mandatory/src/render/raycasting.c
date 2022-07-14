@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 11:38:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 12:31:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	raycasting(int x, t_data *img, t_game *game)
 	wall_dist = dda(ray_dir, &side, game);
 	draw_line(x, wall_dist, side, img);
 	if (x + 1 < SCREEN_W)
-		return raycasting(x + 1, img, game);
+		return (raycasting(x + 1, img, game));
 }
