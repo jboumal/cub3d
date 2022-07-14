@@ -6,48 +6,48 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:16:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 13:55:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:31:27 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	translate_cam(t_game *game)
+void	translate_cam(t_game *g)
 {
 	t_vector	*pos;
 	t_vector	dir;
 	t_vector	np;
 
-	pos = &game->player.pos;
-	dir = game->player.dir;
-	if (game->state.up)
+	pos = &g->player.pos;
+	dir = g->player.dir;
+	if (g->state.up)
 	{
 		np = vector(pos->x + dir.x * MOVE_SPEED, pos->y + dir.y * MOVE_SPEED);
-		if (!game->map.data[(int)pos->y * game->map.width + (int)np.x])
+		if (!g->map.data[(int)pos->y * g->map.width + (int)np.x])
 			pos->x = np.x;
-		if (!game->map.data[(int)np.y * game->map.width + (int)pos->x])
+		if (!g->map.data[(int)np.y * g->map.width + (int)pos->x])
 			pos->y = np.y;
 	}
-	if (game->state.down)
+	if (g->state.down)
 	{
 		np = vector(pos->x - dir.x * MOVE_SPEED, pos->y - dir.y * MOVE_SPEED);
-		if (!game->map.data[(int)pos->y * game->map.width + (int)np.x])
+		if (!g->map.data[(int)pos->y * g->map.width + (int)np.x])
 			pos->x = np.x;
-		if (!game->map.data[(int)np.y * game->map.width + (int)pos->x])
+		if (!g->map.data[(int)np.y * g->map.width + (int)pos->x])
 			pos->y = np.y;
 	}
 }
 
-void	rotate_cam(t_game *game)
+void	rotate_cam(t_game *g)
 {
-	if (game->state.left)
+	if (g->state.left)
 	{
-		game->player.dir = vector_rotate(game->player.dir, ROT_SPEED);
-		game->player.plane = vector_rotate(game->player.plane, ROT_SPEED);
+		g->player.dir = vector_rotate(g->player.dir, ROT_SPEED);
+		g->player.plane = vector_rotate(g->player.plane, ROT_SPEED);
 	}
-	if (game->state.right)
+	if (g->state.right)
 	{
-		game->player.dir = vector_rotate(game->player.dir, -ROT_SPEED);
-		game->player.plane = vector_rotate(game->player.plane, -ROT_SPEED);
+		g->player.dir = vector_rotate(g->player.dir, -ROT_SPEED);
+		g->player.plane = vector_rotate(g->player.plane, -ROT_SPEED);
 	}
 }
