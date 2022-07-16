@@ -12,6 +12,11 @@
 
 #include "cub3d.h"
 
+static void draw_pixel()
+{
+	
+}
+
 static void	draw_line(int x, double wall_dist, t_face face, t_data *img)
 {
 	int	line_height;
