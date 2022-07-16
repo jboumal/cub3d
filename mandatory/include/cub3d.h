@@ -28,6 +28,7 @@
 # include "gameloop.h"
 # include "event.h"
 # include "render.h"
+# include "textures.h"
 
 # define SCREEN_W 1920
 # define SCREEN_H 1080

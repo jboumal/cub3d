@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "cub3d.h"
+# include "textures.h"
 
 typedef struct s_data
 {
@@ -59,6 +60,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
+	t_textures	textures;
 }	t_game;
 
 /*parser*/

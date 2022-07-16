@@ -40,6 +40,9 @@ typedef struct s_rect
 	int	color;
 }	t_rect;
 
+/*init*/
+void	load_textures(t_game *game);
+
 /*dda*/
 double	dda(t_vector ray_dir, t_face *face, t_game *game);
 

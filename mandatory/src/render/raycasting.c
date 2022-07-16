@@ -22,19 +22,28 @@ static void	set_start_end(int line_height, int *start, int *end)
 		*end = SCREEN_H - 1;
 }
 
-static void	draw_pixel(t_data *img, t_point p, t_face face, int line_height)
+static void	draw_pixel(t_data *img, t_point p, t_face face, double wall_dist, t_game *g)
 {
 	int		draw_start;
 	int		draw_end;
-	double	d;
+	int		scaled_y;
+	int		scaled_x;
+	int		color;
+	int		line_height;
 
-	(void) face;
+	line_height = SCREEN_H / wall_dist;
+	(void) face; 	(void) g;
 	set_start_end(line_height, &draw_start, &draw_end);
-	d = (double)(p.y - draw_start) / (double)(draw_end - draw_start);
-	my_mlx_pixel_put(img, p.x, p.y, d * 0x00ffffff);
+	scaled_y = (int) (((double)(p.y - draw_start) / (double)(draw_end - draw_start)) * g->textures.wall.height);
+	scaled_x = (int) (p.x / 3) % g->textures.wall.width;
+	color = g->textures.wall.img[scaled_y * g->textures.wall.height + scaled_x];
+	if (face.cell == 24 && (face.side == N || face.side == S))
+		my_mlx_pixel_put(img, p.x, p.y, color);
+	else
+		my_mlx_pixel_put(img, p.x, p.y, 100);
 }
 
-static void	draw_line(int x, double wall_dist, t_face face, t_data *img)
+static void	draw_line(int x, double wall_dist, t_face face, t_data *img, t_game *g)
 {
 	int		line_height;
 	int		draw_start;
@@ -51,7 +60,7 @@ static void	draw_line(int x, double wall_dist, t_face face, t_data *img)
 		else if (p.y > draw_end)
 			my_mlx_pixel_put(img, p.x, p.y, 0x00444444);
 		else
-			draw_pixel(img, p, face, line_height);
+			draw_pixel(img, p, face, wall_dist, g);
 		p.y++;
 	}
 }
@@ -67,7 +76,7 @@ void	raycasting(int x, t_data *img, t_game *g)
 	ray_dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray_dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	wall_dist = dda(ray_dir, &face, g);
-	draw_line(x, wall_dist, face, img);
+	draw_line(x, wall_dist, face, img, g);
 	if (x + 1 < SCREEN_W)
 		return (raycasting(x + 1, img, g));
 }
