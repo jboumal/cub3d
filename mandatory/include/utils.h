@@ -15,15 +15,24 @@
 
 # include "cub3d.h"
 
+/* vector */
 typedef struct s_vector
 {
 	double	x;
 	double	y;
 }	t_vector;
 
-/*vector*/
 t_vector	vector(double x, double y);
 t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_rotate(t_vector v, double a);
+
+/* point */
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+t_point		point(int x, int y);
 
 #endif

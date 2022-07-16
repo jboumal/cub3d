@@ -12,35 +12,47 @@
 
 #include "cub3d.h"
 
-static void draw_pixel()
+static void	set_start_end(int line_height, int *start, int *end)
 {
-	
+	*start = -line_height / 2 + SCREEN_H / 2;
+	if (*start < 0)
+		*start = 0;
+	*end = line_height / 2 + SCREEN_H / 2;
+	if (*end >= SCREEN_H)
+		*end = SCREEN_H - 1;
+}
+
+static void	draw_pixel(t_data *img, t_point p, t_face face, int line_height)
+{
+	int		draw_start;
+	int		draw_end;
+	double	d;
+
+	(void) face;
+	set_start_end(line_height, &draw_start, &draw_end);
+	d = (double)(p.y - draw_start) / (double)(draw_end - draw_start);
+	my_mlx_pixel_put(img, p.x, p.y, d * 0x00ffffff);
 }
 
 static void	draw_line(int x, double wall_dist, t_face face, t_data *img)
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-	int	y;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_point	p;
 
 	line_height = SCREEN_H / wall_dist;
-	draw_start = -line_height / 2 + SCREEN_H / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + SCREEN_H / 2;
-	if (draw_end >= SCREEN_H)
-		draw_end = SCREEN_H - 1;
-	y = 0;
-	while (y < SCREEN_H)
+	set_start_end(line_height, &draw_start, &draw_end);
+	p = point(x, 0);
+	while (p.y < SCREEN_H)
 	{
-		if (y < draw_start)
-			my_mlx_pixel_put(img, x, y, 0);
-		else if (y > draw_end)
-			my_mlx_pixel_put(img, x, y, 0x00444444);
+		if (p.y < draw_start)
+			my_mlx_pixel_put(img, p.x, p.y, 0);
+		else if (p.y > draw_end)
+			my_mlx_pixel_put(img, p.x, p.y, 0x00444444);
 		else
-			my_mlx_pixel_put(img, x, y, 0x88 + 0x55 * (face.side % 2));
-		y++;
+			draw_pixel(img, p, face, line_height);
+		p.y++;
 	}
 }
 
