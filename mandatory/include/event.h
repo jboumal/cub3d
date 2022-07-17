@@ -20,13 +20,20 @@
 # define DESTROY_NOTIFY_EVENT 17
 
 # define NO_EVENT_MASK 0
-# define K_PRESS_MASK 1
-# define K_RELEASE_MASK 2
+# define K_PRESS_MASK 2
+# define K_RELEASE_MASK 3
 
-# define K_W 13
-# define K_A 0
-# define K_S 1
-# define K_D 2
+# ifdef LINUX
+#  define K_W 119
+#  define K_A 97
+#  define K_S 115
+#  define K_D 100
+# else
+#  define K_W 13
+#  define K_A 0
+#  define K_S 1
+#  define K_D 2
+# endif
 
 /*event*/
 int	key_down(int code, t_game *game);

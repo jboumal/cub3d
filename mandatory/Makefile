@@ -20,9 +20,14 @@ INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
 
-LIB = -lmlx -framework OpenGL -framework AppKit
+ifeq ($(shell uname), Linux)
+	CFLAGS = -Wall -Wextra -Werror -D LINUX
+	LIB = -lmlx -lXext -lX11 -lm
+else
+	CFLAGS = -Wall -Wextra -Werror -D MAC
+	LIB = -lmlx -framework OpenGL -framework AppKit
+endif
 
 CC = gcc
 

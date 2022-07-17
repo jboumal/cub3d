@@ -16,6 +16,10 @@ static void	initialize(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
+	game->state.up = false;
+	game->state.left = false;
+	game->state.down = false;
+	game->state.right = false;
 }
 
 int	quit(void *args)
@@ -31,6 +35,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (0);
+	printf("%d\n", LINUX);
 	initialize(&game);
 	parser(argc, argv, &game);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
