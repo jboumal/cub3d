@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+static double	get_wall_offset(double wall_dist, t_vector *player_pos, double y)
+{
+	printf(", y %f\n", player_pos->y);
+	return (sqrt(wall_dist * wall_dist - (y - player_pos->y) * (y - player_pos->y)) + player_pos->x);
+}
+
 static void	set_start_end(int line_height, int *start, int *end)
 {
 	*start = -line_height / 2 + SCREEN_H / 2;
@@ -22,46 +28,41 @@ static void	set_start_end(int line_height, int *start, int *end)
 		*end = SCREEN_H - 1;
 }
 
-static void	draw_pixel(t_data *img, t_point p, t_face face, double wall_dist, t_game *g)
+static void	draw_line(int x, double wall_dist, t_face *face, t_data *img, t_game *g)
 {
+	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		scaled_y;
 	int		scaled_x;
+	int		scaled_y;
 	int		color;
-	int		line_height;
-
-	line_height = SCREEN_H / wall_dist;
-	(void) face; 	(void) g;
-	set_start_end(line_height, &draw_start, &draw_end);
-	scaled_y = (int) (((double)(p.y - draw_start) / (double)(draw_end - draw_start)) * g->textures.wall.height);
-	scaled_x = (int) (p.x / 3) % g->textures.wall.width;
-	color = g->textures.wall.img[scaled_y * g->textures.wall.height + scaled_x];
-	if (face.cell == 24 && (face.side == N || face.side == S))
-		my_mlx_pixel_put(img, p.x, p.y, color);
-	else
-		my_mlx_pixel_put(img, p.x, p.y, 100);
-}
-
-static void	draw_line(int x, double wall_dist, t_face face, t_data *img, t_game *g)
-{
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	t_point	p;
+	int		y;
 
 	line_height = SCREEN_H / wall_dist;
 	set_start_end(line_height, &draw_start, &draw_end);
-	p = point(x, 0);
-	while (p.y < SCREEN_H)
+	y = 0;
+	scaled_x = 0x00888888;
+	//scaled_x = (int) (get_wall_offset(wall_dist, &(g->player.pos), face->cell % g->map.width) * g->textures.wall.width);
+	if (face->cell == 24 && face->side == N)
+		printf(", printx: %d, offset %f, ", scaled_x, get_wall_offset(wall_dist, &(g->player.pos), face->cell % g->map.width));
+	/* CRITICAL FOR PERFORNANCE */
+	/* Avoid functions calls or heavy operation in loop */
+	while (y < SCREEN_H)
 	{
-		if (p.y < draw_start)
-			my_mlx_pixel_put(img, p.x, p.y, 0);
-		else if (p.y > draw_end)
-			my_mlx_pixel_put(img, p.x, p.y, 0x00444444);
+		if (y < draw_start)
+			my_mlx_pixel_put(img, x, y, 0);
+		else if (y > draw_end)
+			my_mlx_pixel_put(img, x, y, 0x00444444);
 		else
-			draw_pixel(img, p, face, wall_dist, g);
-		p.y++;
+		{
+			scaled_y = (y - draw_start) * g->textures.wall.height / (line_height);
+			color = g->textures.wall.img[scaled_y * g->textures.wall.height + scaled_x];
+			if (face->cell == 24 && (face->side == N || face->side == S))
+				my_mlx_pixel_put(img, x, y, color);
+			else
+				my_mlx_pixel_put(img, x, y, 100);
+		}
+		y++;
 	}
 }
 
@@ -76,7 +77,9 @@ void	raycasting(int x, t_data *img, t_game *g)
 	ray_dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray_dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	wall_dist = dda(ray_dir, &face, g);
-	draw_line(x, wall_dist, face, img, g);
+	if (face.cell == 24 && face.side == N)
+		printf("DIST: %f, cell %d", wall_dist, face.cell);
+	draw_line(x, wall_dist, &face, img, g);
 	if (x + 1 < SCREEN_W)
 		return (raycasting(x + 1, img, g));
 }

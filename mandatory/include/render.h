@@ -28,6 +28,7 @@ enum e_side
 typedef struct s_face
 {
 	int			cell;
+	double		cell_percent;
 	enum e_side	side;
 }	t_face;
 

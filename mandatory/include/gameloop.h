@@ -14,6 +14,7 @@
 # define GAMELOOP_H
 
 # include "cub3d.h"
+# include "sys/time.h"
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05

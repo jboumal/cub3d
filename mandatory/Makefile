@@ -20,7 +20,7 @@ INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 LIB = -lmlx -framework OpenGL -framework AppKit
 
