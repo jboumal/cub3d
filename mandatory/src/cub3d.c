@@ -35,7 +35,6 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (0);
-	printf("%d\n", LINUX);
 	initialize(&game);
 	parser(argc, argv, &game);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
