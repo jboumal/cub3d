@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 09:42:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:08:14 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@
 
 # define TILEMAP_SIZE 12
 
+enum e_side
+{
+	N,
+	E,
+	S,
+	W
+};
+
+typedef struct s_face
+{
+	int			cell;
+	double		cell_percent;
+	enum e_side	side;
+}	t_face;
+
 typedef struct s_rect
 {
 	int	x;
@@ -26,8 +41,11 @@ typedef struct s_rect
 	int	color;
 }	t_rect;
 
+/*init*/
+void	load_textures(t_game *game);
+
 /*dda*/
-double	dda(t_vector ray_dir, int *side, t_game *game);
+double	dda(t_vector ray_dir, t_face *face, t_game *game);
 
 /*minimap*/
 void	render_minimap(t_data *img, t_game *game);

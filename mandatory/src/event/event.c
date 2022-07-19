@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:27 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 12:59:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:08:28 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 
 int	key_down(int code, t_game *game)
 {
-	(void) code;
-	(void) game;
+	if (code == K_W)
+		game->state.up = true;
+	else if (code == K_S)
+		game->state.down = true;
+	else if (code == K_A)
+		game->state.left = true;
+	else if (code == K_D)
+		game->state.right = true;
 	return (0);
 }
 
 int	key_release(int code, t_game *game)
 {
-	(void) code;
-	(void) game;
+	if (code == K_W)
+		game->state.up = false;
+	else if (code == K_S)
+		game->state.down = false;
+	else if (code == K_A)
+		game->state.left = false;
+	else if (code == K_D)
+		game->state.right = false;
 	return (0);
 }

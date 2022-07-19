@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jboumal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 18:06:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/20 00:09:01 by bperraud         ###   ########.fr       */
+/*   Created: 2022/07/16 14:31:33 by jboumal           #+#    #+#             */
+/*   Updated: 2022/07/16 14:31:34 by jboumal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "cub3d.h"
 
-void	render(t_game *game)
+t_point	point(int x, int y)
 {
-	t_data	img;
+	t_point	p;
 
-	img = get_new_img(game);
-	raycasting(0, &img, game);
-	render_minimap(&img, game);
-	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
-	mlx_destroy_image(game->mlx, img.img);
+	p.x = x;
+	p.y = y;
+	return (p);
 }

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameloop.h                                         :+:      :+:    :+:   */
+/*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jboumal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 09:32:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:07:17 by bperraud         ###   ########.fr       */
+/*   Created: 2022/07/16 15:22:37 by jboumal           #+#    #+#             */
+/*   Updated: 2022/07/16 15:22:41 by jboumal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAMELOOP_H
-# define GAMELOOP_H
-
+#ifndef TEXTURES_H
+# define TEXTURES_H
 # include "cub3d.h"
-# include "sys/time.h"
 
-# define MOVE_SPEED 0.1
-# define ROT_SPEED 0.05
+typedef struct s_texture
+{
+	unsigned int	*img;
+	int		width;
+	int		height;
+}	t_texture;
 
-/*gameloop*/
-int		game_loop(t_game *game);
-
-/*update_cam*/
-void	translate_cam(t_game *game);
-void	rotate_cam(t_game *game);
+typedef struct s_textures
+{
+	t_texture	wall;
+}	t_textures;
 
 #endif

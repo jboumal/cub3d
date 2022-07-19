@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 09:44:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:08:06 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define PARSER_H
 
 # include "cub3d.h"
-# include <fcntl.h>
-# include <stdio.h>
+# include "textures.h"
 
 typedef struct s_data
 {
@@ -28,7 +27,7 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	int		*data;	// map
+	int		*data;
 	size_t	width;
 	size_t	height;
 	int		ceil;
@@ -46,17 +45,25 @@ typedef struct s_player
 	t_vector	plane;
 }	t_player;
 
+typedef struct s_state
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+}	t_state;
 
-// pourquoi pas que des pointeurs ?
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
 	t_map		map;
 	t_player	player;
+	t_state		state;
+	t_textures	textures;
 }	t_game;
 
 /*parser*/
-void	parser(t_game *game, char **argv);
+void	parser(int argc, char **argv, t_game *game);
 
 #endif
