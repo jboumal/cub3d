@@ -21,7 +21,6 @@ typedef struct s_data
 {
 	void	*img;
 	char	*addr;
-	char	*texture;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -47,6 +46,8 @@ typedef struct s_player
 	t_vector	plane;
 }	t_player;
 
+
+// pourquoi pas que des pointeurs ?
 typedef struct s_game
 {
 	void		*mlx;

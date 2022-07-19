@@ -57,8 +57,27 @@ static char	*gnl_not_empty(int file_fd)
 static int	parse_direction_and_color(t_game *game, int file_fd)
 {
 	char	*line;
+	int		i;
+	int		strlen;
 
-	line = gnl_not_empty(file_fd);
+	i = 0;
+	while (i++ < 6)
+	{
+		line = gnl_not_empty(file_fd);
+		strlen = ft_strlen(line);
+		if (line[0] == 'N' )
+
+		else if (line[0] == 'S')
+
+		else if (line[0] == 'W')
+
+		else if (line[0] == 'E')
+
+		else if (line[0] == 'F')
+
+		else if (line[0] == 'C')
+	}
+
 	return (0);
 }
 
