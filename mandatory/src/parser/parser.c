@@ -66,16 +66,17 @@ static int	parse_direction_and_color(t_game *game, int file_fd)
 		line = gnl_not_empty(file_fd);
 		strlen = ft_strlen(line);
 		if (line[0] == 'N' )
-
+			;
 		else if (line[0] == 'S')
-
+			;
 		else if (line[0] == 'W')
-
+			;
 		else if (line[0] == 'E')
-
+			;
 		else if (line[0] == 'F')
-
+			;
 		else if (line[0] == 'C')
+			;
 	}
 
 	return (0);
@@ -95,7 +96,7 @@ void	exit_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	parser(t_game *game, char **argv)
+void	parser(int argc, char **argv, t_game *game)
 {
 	int	file_fd;
 

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:08:06 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:10:51 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cub3d.h"
 # include "textures.h"
+# include <fcntl.h>
 
 typedef struct s_data
 {
