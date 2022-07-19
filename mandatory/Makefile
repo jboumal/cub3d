@@ -11,14 +11,17 @@
 # **************************************************************************** #
 
 NAME = cub3d
-SRC = 	$(wildcard src/*/*.c)\
-		src/cub3d.c
+#SRC = 	$(wildcard src/*/*.c)
+#\src/cub3d.c
+
+SRC = 	src/parser/parser.c src/cub3d.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/utils/utils.c
 
 INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
+#CFLAGS = -Wall -Wextra -Werror
 
 LIB = -lmlx -framework OpenGL -framework AppKit
 
@@ -28,7 +31,7 @@ CC = gcc
 	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	$(CC) $(CFLAGS) $(OBJ) -o $@
 
 all: $(NAME)
 

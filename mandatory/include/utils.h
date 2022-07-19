@@ -23,5 +23,6 @@ typedef struct s_vector
 
 /*vector*/
 t_vector	vector(double x, double y);
+size_t		ft_strlen(char *str);
 
 #endif

@@ -14,11 +14,14 @@
 # define PARSER_H
 
 # include "cub3d.h"
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
 	void	*img;
 	char	*addr;
+	char	*texture;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -26,7 +29,7 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	int		*data;
+	int		*data;	// map
 	size_t	width;
 	size_t	height;
 	int		ceil;

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameloop.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/13 21:50:01 by bel-mous         ###   ########.fr       */
+/*   Created: 2022/07/17 22:00:01 by bperraud          #+#    #+#             */
+/*   Updated: 2022/07/17 22:00:01 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+# include "cub3d.h"
 
-void	game_update(t_game *game)
+size_t	ft_strlen(char *str)
 {
-	(void) game;
-}
-
-int	game_loop(t_game *game)
-{
-	game_update(game);
-	render(game);
+	if (str && *str)
+		return (1 + ft_strlen(str + 1));
 	return (0);
 }
