@@ -17,13 +17,14 @@
 typedef struct s_texture
 {
 	unsigned int	*img;
-	int		width;
-	int		height;
+	int				width;
+	int				height;
 }	t_texture;
 
 typedef struct s_textures
 {
 	t_texture	wall;
+	t_texture	wall2;
 }	t_textures;
 
 #endif

@@ -21,4 +21,6 @@ void	load_textures(t_game *game)
 
 	img = mlx_xpm_file_to_image(game->mlx, "img/wall1.xpm", &game->textures.wall.width, &game->textures.wall.height);
 	game->textures.wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	img = mlx_xpm_file_to_image(game->mlx, "img/wall2.xpm", &game->textures.wall2.width, &game->textures.wall2.height);
+	game->textures.wall2.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
 }
