@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+#include <stdio.h>
+
 // Temporary function to be deleted when parsing works.
 void	temp_init_map(t_game *game)
 {
@@ -54,6 +56,77 @@ static char	*gnl_not_empty(int file_fd)
 		return (line);
 }
 
+void	exit_error(char *str)
+{
+	write(2, "Error\n" , ft_strlen("Error\n"));
+	write(2, str, ft_strlen(str));
+	write(2, "\n" , 1);
+	exit(EXIT_FAILURE);
+}
+
+int	ft_atoi(const char *str)
+{
+	int				i;
+	int				neg;
+	long long int	res;
+
+	neg = 1;
+	res = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		if ((res * 10 > INT_MAX) && neg == 1)
+			return (-1);
+		if ((res * 10 - 1 > INT_MAX) && neg == -1)
+			return (-1);
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return ((int)(res * neg));
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+void	parse_color(t_game *game, char *line, int is_floor)
+{
+	char	color[3][4];
+	int		i;
+	int		nb_color;
+
+	nb_color = 0;
+	while (nb_color != 3)
+	{
+		i = 0;
+		while (*line++)
+		{
+			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
+				break;
+			if (i > 3)
+				exit_error("color number too big");
+			if (!isdigit(*line))
+				exit_error("not a valid digit");
+			color[nb_color][i] = *line;
+			i++;
+		}
+		color[nb_color][i] = '\0';
+		nb_color++;
+	}
+	if (is_floor)
+		game->map.floor = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
+	else
+		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
+}
+
 static int	parse_direction_and_color(t_game *game, int file_fd)
 {
 	char	*line;
@@ -61,7 +134,7 @@ static int	parse_direction_and_color(t_game *game, int file_fd)
 	int		strlen;
 
 	i = 0;
-	while (i++ < 6)
+	while (i++ < 6 && game)
 	{
 		line = gnl_not_empty(file_fd);
 		strlen = ft_strlen(line);
@@ -73,27 +146,18 @@ static int	parse_direction_and_color(t_game *game, int file_fd)
 			;
 		else if (line[0] == 'E')
 			;
-		else if (line[0] == 'F')
-			;
-		else if (line[0] == 'C')
-			;
+		else if (line[0] == 'F' && line[1] == ' ')
+			parse_color(game, line + 1, 1);
+		else if (line[0] == 'C' && line[1] == ' ')
+			parse_color(game, line + 1, 0);
+		free(line);
 	}
-
 	return (0);
 }
 
 static int	parse_map(t_game *game, int file_fd)
 {
 	return (0);
-}
-
-
-void	exit_error(char *str)
-{
-	write(2, "Error\n" , ft_strlen("Error\n"));
-	write(2, str, ft_strlen(str));
-	write(2, "\n" , 1);
-	exit(EXIT_FAILURE);
 }
 
 void	parser(int argc, char **argv, t_game *game)
