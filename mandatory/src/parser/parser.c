@@ -111,7 +111,7 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		{
 			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
 				break;
-			if (i > 3)
+			if (i > 2)
 				exit_error("color number too big");
 			if (!isdigit(*line))
 				exit_error("not a valid digit");
