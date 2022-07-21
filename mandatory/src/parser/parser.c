@@ -112,9 +112,9 @@ void	parse_color(t_game *game, char *line, int is_floor)
 			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
 				break;
 			if (i > 2)
-				exit_error("color number too big");
+				exit_error("color : number too big");
 			if (!isdigit(*line))
-				exit_error("not a valid digit");
+				exit_error("color : not a valid digit");
 			color[nb_color][i] = *line;
 			i++;
 		}
@@ -127,19 +127,30 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
+void	load_texture(t_game *game, char *path_to_texture)
+{
+	void	*img;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+
+	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.wall.width, &game->textures.wall.height);
+	if (img == (void *)0)
+		exit_error("texture : file not valid");
+	game->textures.wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+}
+
 static int	parse_direction_and_color(t_game *game, int file_fd)
 {
 	char	*line;
 	int		i;
-	int		strlen;
 
 	i = 0;
 	while (i++ < 6 && game)
 	{
 		line = gnl_not_empty(file_fd);
-		strlen = ft_strlen(line);
 		if (line[0] == 'N' )
-			;
+			load_texture(game, line + 3);
 		else if (line[0] == 'S')
 			;
 		else if (line[0] == 'W')
