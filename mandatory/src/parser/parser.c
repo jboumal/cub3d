@@ -38,6 +38,13 @@ void	temp_init_map(t_game *game)
 	game->player.plane.y = 0.66;
 }
 
+static int	is_line_empty(char *line)
+{
+	while (*line == ' ')
+		line++;
+	return (*line == '\n' || *line == '\r');
+}
+
 static char	*gnl_not_empty(int file_fd)
 {
 	char	*line;
@@ -127,47 +134,80 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
-void	load_texture(t_game *game, char *path_to_texture)
+void	load_texture(t_game *game, char direction, char *path_to_texture)
 {
 	void	*img;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 
+	/*
 	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.wall.width, &game->textures.wall.height);
 	if (img == (void *)0)
 		exit_error("texture : file not valid");
 	game->textures.wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	*/
 }
 
-static int	parse_direction_and_color(t_game *game, int file_fd)
+static void	get_map_size(t_game *game, int file_fd)
+{
+	char	*line;
+	size_t	width;
+	size_t	height;
+	size_t	i;
+
+	i = 0;
+	height = 0;
+	width = 0;
+	line = gnl_not_empty(file_fd);
+	while (line)
+	{
+		i = 0;
+		while (line[i] != '\n' && line[i] != '\r')
+		{
+			if ((line[i] == '0' || line[i] == '1') && i >= width)
+				width = i + 1;
+			i++;
+		}
+		line = get_next_line(file_fd);
+		height++;
+	}
+	game->map.width = width;
+	game->map.height = height;
+	printf("width : %li\n", game->map.width);
+	printf("height : %li\n", game->map.height);
+}
+
+static void	parse_direction_and_color(t_game *game, int file_fd)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
+	// rajouter pour éviter doublons
 	while (i++ < 6 && game)
 	{
 		line = gnl_not_empty(file_fd);
-		if (line[0] == 'N' )
-			load_texture(game, line + 3);
-		else if (line[0] == 'S')
-			;
-		else if (line[0] == 'W')
-			;
-		else if (line[0] == 'E')
-			;
+		if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E') && line[2] == ' ')
+			load_texture(game, line[0], line + 3);
 		else if (line[0] == 'F' && line[1] == ' ')
 			parse_color(game, line + 1, 1);
 		else if (line[0] == 'C' && line[1] == ' ')
 			parse_color(game, line + 1, 0);
+		else
+		{
+			printf("line : %s\n", line);
+			exit_error("unexpected caracter");
+		}
 		free(line);
 	}
-	return (0);
 }
 
 static int	parse_map(t_game *game, int file_fd)
 {
+	int encounter_player;
+
+	encounter_player = 0;
 	return (0);
 }
 
@@ -178,8 +218,13 @@ void	parser(int argc, char **argv, t_game *game)
 	file_fd = open(argv[1], O_RDONLY);
 	if (!file_fd)
 		exit_error("open file");
-	if (parse_direction_and_color(game, file_fd))
-		exit_error("direction_color");
+
+	parse_direction_and_color(game, file_fd);
+	get_map_size(game, file_fd);
+
+	//if (line[0] == '0' || line[0] == '1' || line[0] == ' ')
+			//get_map_size(game, file_fd);
+
 	if (parse_map(game, file_fd))
 		exit_error("map");
 
