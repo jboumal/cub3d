@@ -134,7 +134,7 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
-void	*load_texture(t_game *game, char direction, char *path_to_texture, int size_line)
+void	*load_texture(t_game *game, char direction, char *path_to_texture)
 {
 	int		bits_per_pixel;
 	int		size_line;
