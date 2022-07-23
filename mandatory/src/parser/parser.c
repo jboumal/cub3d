@@ -134,12 +134,12 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
-void	load_texture(t_game *game, char direction, char *path_to_texture)
+void	*load_texture(t_game *game, char direction, char *path_to_texture, int size_line)
 {
-	void	*img;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	void	*img;
 
 	if (direction == 'N')
 	{
@@ -161,8 +161,11 @@ void	load_texture(t_game *game, char direction, char *path_to_texture)
 		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.so_wall.width, &game->textures.so_wall.height);
 		game->textures.so_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
 	}
-	if (img == (void *)0)
-		exit_error("texture : file not valid");
+	return (img);
+}
+
+static void	parse_map(t_game *game, int file_fd)
+{
 
 }
 
@@ -204,7 +207,9 @@ static void	parse_direction_and_color(t_game *game, int file_fd)
 	{
 		line = gnl_not_empty(file_fd);
 		if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E') && line[2] == ' ')
-			load_texture(game, line[0], line + 3);
+			if (load_texture(game, line[0], line + 3) == (void *)0)
+				exit_error("texture : file not valid");
+		}
 		else if (line[0] == 'F' && line[1] == ' ')
 			parse_color(game, line + 1, 1);
 		else if (line[0] == 'C' && line[1] == ' ')
