@@ -141,12 +141,29 @@ void	load_texture(t_game *game, char direction, char *path_to_texture)
 	int		size_line;
 	int		endian;
 
-	/*
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.wall.width, &game->textures.wall.height);
+	if (direction == 'N')
+	{
+		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.no_wall.width, &game->textures.no_wall.height);
+		game->textures.no_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	}
+	else if (direction == 'E')
+	{
+		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.ea_wall.width, &game->textures.ea_wall.height);
+		game->textures.ea_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	}
+	else if (direction == 'W')
+	{
+		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.we_wall.width, &game->textures.we_wall.height);
+		game->textures.we_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	}
+	else if (direction == 'S')
+	{
+		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.so_wall.width, &game->textures.so_wall.height);
+		game->textures.so_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+	}
 	if (img == (void *)0)
 		exit_error("texture : file not valid");
-	game->textures.wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
-	*/
+
 }
 
 static void	get_map_size(t_game *game, int file_fd)
@@ -174,8 +191,6 @@ static void	get_map_size(t_game *game, int file_fd)
 	}
 	game->map.width = width;
 	game->map.height = height;
-	printf("width : %li\n", game->map.width);
-	printf("height : %li\n", game->map.height);
 }
 
 static void	parse_direction_and_color(t_game *game, int file_fd)
@@ -221,6 +236,9 @@ void	parser(int argc, char **argv, t_game *game)
 
 	parse_direction_and_color(game, file_fd);
 	get_map_size(game, file_fd);
+
+	printf("width : %li\n", game->map.width);
+	printf("height : %li\n", game->map.height);
 
 	//if (line[0] == '0' || line[0] == '1' || line[0] == ' ')
 			//get_map_size(game, file_fd);

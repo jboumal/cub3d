@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jboumal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 15:22:37 by jboumal           #+#    #+#             */
-/*   Updated: 2022/07/16 15:22:41 by jboumal          ###   ########.fr       */
+/*   Updated: 2022/07/23 22:10:23 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ typedef struct s_texture
 
 typedef struct s_textures
 {
-	t_texture	wall;
+	t_texture	no_wall;
+	t_texture	ea_wall;
+	t_texture	we_wall;
+	t_texture	so_wall;
 }	t_textures;
 
 #endif
