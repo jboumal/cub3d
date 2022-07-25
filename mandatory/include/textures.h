@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 15:22:37 by jboumal           #+#    #+#             */
-/*   Updated: 2022/07/23 22:10:23 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:45:00 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 typedef struct s_texture
 {
 	unsigned int	*img;
-	int		width;
-	int		height;
+	int				width;
+	int				height;
 }	t_texture;
 
 typedef struct s_textures

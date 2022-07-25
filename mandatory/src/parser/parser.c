@@ -224,6 +224,7 @@ static int	parse_map(t_game *game, int file_fd)
 	return (0);
 }
 
+/*
 void	parser(int argc, char **argv, t_game *game)
 {
 	int	file_fd;
@@ -245,4 +246,37 @@ void	parser(int argc, char **argv, t_game *game)
 		//exit_error("map");
 
 
+}
+*/
+
+void	temp_init_map(t_game *game)
+{
+	static int	map[] = {
+		1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 1, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1,
+	};
+
+	game->map.data = map;
+	game->map.width = 9;
+	game->map.height = 9;
+	game->player.pos.x = 2;
+	game->player.pos.y = 2.3;
+	game->player.dir.x = 0;
+	game->player.dir.y = 1;
+	game->player.plane.x = 0.66;
+	game->player.plane.y = 0;
+}
+
+void	parser(int argc, char **argv, t_game *game)
+{
+	(void) argc;
+	(void) argv;
+	temp_init_map(game);
 }
