@@ -16,7 +16,6 @@ void	initialize(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
-	load_textures(game);
 }
 
 int	quit(void *args)
