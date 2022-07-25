@@ -6,24 +6,30 @@
 #    By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/20 00:09:19 by bperraud         ###   ########.fr        #
+#    Updated: 2022/07/25 15:08:59 by bperraud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-#SRC = 	$(wildcard src/*/*.c)
-#\src/cub3d.c
 
-SRC = 	src/parser/parser.c src/cub3d.c src/gnl/get_next_line.c src/gnl/get_next_line_utils.c src/utils/utils.c
+#!!!! DANGER
+SRC = 	$(wildcard src/*/*.c)\
+		src/cub3d.c
 
 INCLUDES = include
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS =
-#CFLAGS = -Wall -Wextra -Werror
 
-LIB = -lmlx -framework OpenGL -framework AppKit
+ifeq ($(shell uname), Linux)
+#CFLAGS = -Wall -Wextra -Werror -D LINUX
+	CFLAGS = -D LINUX
+#	LIB = -lmlx -lXext -lX11 -lm
+	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+else
+	CFLAGS = -Wall -Wextra -Werror -D MAC
+	LIB = -lmlx -framework OpenGL -framework AppKit
+endif
 
 CC = gcc
 
@@ -31,7 +37,7 @@ CC = gcc
 	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
 
 all: $(NAME)
 

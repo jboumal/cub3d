@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:08:59 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:06:40 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	draw_line(int x, double wall_dist, t_face *face, t_data *img, t_game
 			my_mlx_pixel_put(img, x, y, 0x00444444);
 		else
 		{
-			scaled_y = (y - draw_start) * g->textures.wall.height / (line_height);
-			color = g->textures.wall.img[scaled_y * g->textures.wall.height + scaled_x];
+			scaled_y = (y - draw_start) * g->textures.no_wall.height / (line_height);
+			color = g->textures.no_wall.img[scaled_y * g->textures.no_wall.height + scaled_x];
 			if (face->cell == 24 && (face->side == N || face->side == S))
 				my_mlx_pixel_put(img, x, y, color);
 			else

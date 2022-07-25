@@ -12,13 +12,11 @@
 
 #include "cub3d.h"
 
-/*
 void	initialize(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
 }
-*/
 
 int	quit(void *args)
 {
@@ -33,15 +31,15 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (0);
-	//initialize(&game);
+	initialize(&game);
 	parser(argc, argv, &game);
 
-	/*
+	return 0;
+
 	mlx_hook(game.window, K_RELEASE_EVENT, 1L << 0, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, 1L << 1, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, 1L, quit, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
-	*/
 	return (0);
 }
