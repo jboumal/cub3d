@@ -34,7 +34,6 @@ int	main(int argc, char **argv)
 		return (0);
 	initialize(&game);
 	parser(argc, argv, &game);
-
 	mlx_hook(game.window, K_RELEASE_EVENT, 1L << 0, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, 1L << 1, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, 1L, quit, &game);

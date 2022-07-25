@@ -110,6 +110,14 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	if (n > 1 && *s1 && *s1 == *s2)
+		return (ft_strncmp(s1 + 1, s2 + 1, n - 1));
+	return ((n > 0) * (*(unsigned char *)s1 - *(unsigned char *)s2));
+}
+
+
 void	*load_texture(t_game *game, char direction, char *path_to_texture)
 {
 	int		bits_per_pixel;
@@ -117,7 +125,6 @@ void	*load_texture(t_game *game, char direction, char *path_to_texture)
 	int		endian;
 	void	*img;
 
-	printf("texture : %s\n", path_to_texture);
 	if (direction == 'N')
 		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.no_wall.width, &game->textures.no_wall.height);
 	else if (direction == 'E')
@@ -171,12 +178,13 @@ static void	parse_direction_and_color(t_game *game, int file_fd)
 	int		i;
 
 	i = 0;
-	// rajouter pour éviter doublons
+	// rajouter conditions pour éviter doublons
 	while (i++ < 6 && game)
 	{
 		line = gnl_not_empty(file_fd);
 		if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E') && line[2] == ' ')
 		{
+			line[ft_strlen(line) - 2] = '\0';
 			load_texture(game, line[0], line + 3);
 		}
 		else if (line[0] == 'F' && line[1] == ' ')
@@ -184,23 +192,96 @@ static void	parse_direction_and_color(t_game *game, int file_fd)
 		else if (line[0] == 'C' && line[1] == ' ')
 			parse_color(game, line + 1, 0);
 		else
-		{
-			printf("line : %s\n", line);
 			exit_error("unexpected caracter");
-		}
 		free(line);
 	}
 }
 
-static int	parse_map(t_game *game, int file_fd)
+static char	*first_map_line(int file_fd, char *path_to_map)
 {
-	int encounter_player;
+	char	*line;
+
+	close(file_fd);
+	file_fd = open(path_to_map, O_RDONLY);
+	line = gnl_not_empty(file_fd);
+	while (line[0] != '1' && line[0] != '0' && line[0] != ' ' )
+	{
+		free(line);
+		line = gnl_not_empty(file_fd);
+	}
+	return (line);
+}
+
+static void	place_player(t_game *game, char direction, int x, int y)
+{
+	if (direction == 'N')
+	{
+		game->player.dir.x = 0;
+		game->player.dir.y = 1;
+	}
+	else if (direction == 'E')
+	{
+		game->player.dir.x = 1;
+		game->player.dir.y = 0;
+	}
+	else if (direction == 'W')
+	{
+		game->player.dir.x = -1;
+		game->player.dir.y = 0;
+	}
+	else if (direction == 'S')
+	{
+		game->player.dir.x = 0;
+		game->player.dir.y = -1;
+	}
+	game->player.pos.x = x;
+	game->player.pos.y = y;
+}
+
+static int	parse_map(t_game *game, int file_fd, char *line)
+{
+	int 	encounter_player;
+	int 	*map;
+	int		x;
+	int		y;
 
 	encounter_player = 0;
+	map = malloc(game->map.width * game->map.height * sizeof(int));
+	y = 0;
+	while (y < game->map.height)
+	{
+		x = 0;
+		while (x < game->map.width)
+		{
+			if (x >= ft_strlen(line) -  2)
+				map[x + (game->map.width * y)] = -1;
+			else if (line[x] == ' ')
+				map[x + (game->map.width * y)] = -1;
+			else if (line[x] == 'N' || line[x] == 'E' || line[x] == 'W' || line[x] == 'S')
+			{
+				if (encounter_player)
+					exit_error("double player position");
+				encounter_player = 1;
+				map[x + (game->map.width * y)] = 0;
+				place_player(game, line[x], x, y);
+			}
+			else if (line[x] == '0' || line[x] == '1')
+				map[x + (game->map.width * y)] = line[x] - 48;
+			else
+				exit_error("wrong character in map");
+			x++;
+		}
+		y++;
+		line = get_next_line(file_fd);
+	}
+	if (!encounter_player)
+		exit_error("missing player position in map");
+	game->map.data = map;
+	game->player.plane.x = 0.66;
+	game->player.plane.y = 0;
 	return (0);
 }
 
-/*
 void	parser(int argc, char **argv, t_game *game)
 {
 	int	file_fd;
@@ -208,23 +289,13 @@ void	parser(int argc, char **argv, t_game *game)
 	file_fd = open(argv[1], O_RDONLY);
 	if (!file_fd)
 		exit_error("open file");
-
 	parse_direction_and_color(game, file_fd);
 	get_map_size(game, file_fd);
-
-	printf("width : %li\n", game->map.width);
-	printf("height : %li\n", game->map.height);
-
-	//if (line[0] == '0' || line[0] == '1' || line[0] == ' ')
-			//get_map_size(game, file_fd);
-
-	//if (parse_map(game, file_fd))
-		//exit_error("map");
-
-
+	parse_map(game, file_fd, first_map_line(file_fd, argv[1]));
 }
-*/
 
+
+/*
 void	temp_init_map(t_game *game)
 {
 	static int	map[] = {
@@ -244,7 +315,7 @@ void	temp_init_map(t_game *game)
 	game->map.height = 9;
 	game->player.pos.x = 2;
 	game->player.pos.y = 2.3;
-	game->player.dir.x = 0;
+	game->player.dir.x = 1;
 	game->player.dir.y = 1;
 	game->player.plane.x = 0.66;
 	game->player.plane.y = 0;
@@ -256,3 +327,4 @@ void	parser(int argc, char **argv, t_game *game)
 	(void) argv;
 	temp_init_map(game);
 }
+*/
