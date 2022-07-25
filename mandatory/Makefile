@@ -6,7 +6,7 @@
 #    By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/25 15:08:59 by bperraud         ###   ########.fr        #
+#    Updated: 2022/07/25 17:49:05 by bperraud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,8 @@ OBJ = $(SRC:.c=.o)
 
 
 ifeq ($(shell uname), Linux)
-#CFLAGS = -Wall -Wextra -Werror -D LINUX
-	CFLAGS = -D LINUX
-#	LIB = -lmlx -lXext -lX11 -lm
-	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	CFLAGS = -Wall -Wextra -Werror -D LINUX
+	LIB = -lmlx -lXext -lX11 -lm
 else
 	CFLAGS = -Wall -Wextra -Werror -D MAC
 	LIB = -lmlx -framework OpenGL -framework AppKit
