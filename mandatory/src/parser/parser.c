@@ -16,6 +16,8 @@
 
 static int	is_line_empty(char *line)
 {
+	if (!line)
+		return (0);
 	while (*line == ' ')
 		line++;
 	return (*line == '\n' || *line == '\r');
@@ -47,39 +49,6 @@ void	exit_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_atoi(const char *str)
-{
-	int				i;
-	int				neg;
-	long long int	res;
-
-	neg = 1;
-	res = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (-1);
-		if ((res * 10 > INT_MAX) && neg == 1)
-			return (-1);
-		if ((res * 10 - 1 > INT_MAX) && neg == -1)
-			return (-1);
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return ((int)(res * neg));
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
 void	parse_color(t_game *game, char *line, int is_floor)
 {
 	char	color[3][4];
@@ -94,14 +63,14 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		{
 			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
 				break;
-			if (i > 2)
-				exit_error("color : number too big");
-			if (!isdigit(*line))
+			if (*line < '0' || *line > '9')
 				exit_error("color : not a valid digit");
 			color[nb_color][i] = *line;
 			i++;
 		}
 		color[nb_color][i] = '\0';
+		if (ft_atoi(color[nb_color]) > 255)
+			exit_error("color : number bigger than 255");
 		nb_color++;
 	}
 	if (is_floor)
@@ -110,15 +79,7 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	if (n > 1 && *s1 && *s1 == *s2)
-		return (ft_strncmp(s1 + 1, s2 + 1, n - 1));
-	return ((n > 0) * (*(unsigned char *)s1 - *(unsigned char *)s2));
-}
-
-
-void	*load_texture(t_game *game, char direction, char *path_to_texture)
+void	load_texture(t_game *game, char direction, char *path_to_texture)
 {
 	int		bits_per_pixel;
 	int		size_line;
@@ -242,8 +203,8 @@ static int	parse_map(t_game *game, int file_fd, char *line)
 {
 	int 	encounter_player;
 	int 	*map;
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
 
 	encounter_player = 0;
 	map = malloc(game->map.width * game->map.height * sizeof(int));
@@ -273,6 +234,8 @@ static int	parse_map(t_game *game, int file_fd, char *line)
 		}
 		y++;
 		line = get_next_line(file_fd);
+		if (is_line_empty(line))
+			exit_error("empty line in map");
 	}
 	if (!encounter_player)
 		exit_error("missing player position in map");
@@ -282,7 +245,7 @@ static int	parse_map(t_game *game, int file_fd, char *line)
 	return (0);
 }
 
-void	parser(int argc, char **argv, t_game *game)
+void	parser(char **argv, t_game *game)
 {
 	int	file_fd;
 
@@ -293,38 +256,3 @@ void	parser(int argc, char **argv, t_game *game)
 	get_map_size(game, file_fd);
 	parse_map(game, file_fd, first_map_line(file_fd, argv[1]));
 }
-
-
-/*
-void	temp_init_map(t_game *game)
-{
-	static int	map[] = {
-		1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 1, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1,
-	};
-
-	game->map.data = map;
-	game->map.width = 9;
-	game->map.height = 9;
-	game->player.pos.x = 2;
-	game->player.pos.y = 2.3;
-	game->player.dir.x = 1;
-	game->player.dir.y = 1;
-	game->player.plane.x = 0.66;
-	game->player.plane.y = 0;
-}
-
-void	parser(int argc, char **argv, t_game *game)
-{
-	(void) argc;
-	(void) argv;
-	temp_init_map(game);
-}
-*/

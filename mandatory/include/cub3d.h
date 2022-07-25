@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/25 17:46:58 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:57:19 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include <mlx.h>
+//# include <mlx.h>
+# include <../mlx_linux/mlx.h>
 # include <stdio.h>
 
 # include <stdlib.h>

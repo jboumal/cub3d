@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:05:59 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/25 17:48:56 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/25 19:00:39 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	initialize(&game);
-	parser(argc, argv, &game);
+	parser(argv, &game);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);

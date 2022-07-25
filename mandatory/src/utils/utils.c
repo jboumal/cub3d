@@ -18,3 +18,31 @@ size_t	ft_strlen(char *str)
 		return (1 + ft_strlen(str + 1));
 	return (0);
 }
+
+int	ft_atoi(const char *str)
+{
+	int				i;
+	int				neg;
+	long long int	res;
+
+	neg = 1;
+	res = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		if ((res * 10 > INT_MAX) && neg == 1)
+			return (-1);
+		if ((res * 10 - 1 > INT_MAX) && neg == -1)
+			return (-1);
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return ((int)(res * neg));
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
