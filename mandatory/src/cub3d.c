@@ -16,6 +16,7 @@ void	initialize(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
+	load_textures(game);
 }
 
 int	quit(void *args)
@@ -33,8 +34,6 @@ int	main(int argc, char **argv)
 		return (0);
 	initialize(&game);
 	parser(argc, argv, &game);
-
-	return 0;
 
 	mlx_hook(game.window, K_RELEASE_EVENT, 1L << 0, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, 1L << 1, key_down, &game);
