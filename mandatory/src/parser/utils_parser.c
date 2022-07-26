@@ -6,14 +6,15 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:38:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/07/26 15:23:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:16:23 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	exit_error(char *str)
+void	exit_error(char *str, char *line)
 {
+	free(line);
 	write(2, "Error\n", ft_strlen("Error\n"));
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);

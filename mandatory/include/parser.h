@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/26 15:23:12 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:33:23 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	parser(char **argv, t_game *game);
 
 
 /*parser_map*/
-int		parse_map(t_game *game, int file_fd, char *line);
+int		*parse_map(t_game *game, int file_fd, char *line);
 
 /*utils*/
 int		create_trgb(int t, int r, int g, int b);
 char	*skip_spaces(char *str);
 int		is_line_empty(char *line);
 char	*gnl_not_empty(int file_fd);
-void	exit_error(char *str);
+void	exit_error(char *str, char *line);
 
 #endif

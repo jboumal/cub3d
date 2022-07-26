@@ -46,13 +46,13 @@ void	parse_color(t_game *game, char *line, int is_floor)
 			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
 				break ;
 			if (*line < '0' || *line > '9')
-				exit_error("color : not a valid digit");
+				exit_error("color : not a valid digit", NULL);
 			color[nb_color][i] = *line;
 			i++;
 		}
 		color[nb_color][i] = '\0';
 		if (ft_atoi(color[nb_color]) > 255)
-			exit_error("color : number bigger than 255");
+			exit_error("color : number bigger than 255", NULL);
 		nb_color++;
 	}
 	if (is_floor)
@@ -77,7 +77,7 @@ void	load_texture(t_game *game, char direction, char *path_to_texture)
 	else if (direction == 'S')
 		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.so_wall.width, &game->textures.so_wall.height);
 	if (img == (void *)0)
-		exit_error("texture : file not valid");
+		exit_error("texture : path_to_texture not valid", NULL);
 	if (direction == 'N')
 		game->textures.no_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 	else if (direction == 'E')
@@ -108,6 +108,7 @@ static void	get_map_size(t_game *game, int file_fd)
 				width = i + 1;
 			i++;
 		}
+		free(line);
 		line = get_next_line(file_fd);
 		height++;
 	}
@@ -134,7 +135,7 @@ static void	parse_direction_and_color(t_game *game, int file_fd)
 		else if (line[0] == 'C' && line[1] == ' ')
 			parse_color(game, skip_spaces(line + 1), 0);
 		else
-			exit_error("unexpected caracter");
+			exit_error("direction and color : unexpected caracter", line);
 		free(line);
 	}
 }
@@ -145,8 +146,13 @@ void	parser(char **argv, t_game *game)
 
 	file_fd = open(argv[1], O_RDONLY);
 	if (!file_fd)
-		exit_error("open file");
+		exit_error("open file", NULL);
 	parse_direction_and_color(game, file_fd);
 	get_map_size(game, file_fd);
-	parse_map(game, file_fd, first_map_line(file_fd, argv[1]));
+	game->player.pos.x = 0;
+	game->map.data = parse_map(game, file_fd, first_map_line(file_fd, argv[1]));
+	if (!game->player.pos.x)
+		exit_error("missing player position in map", NULL);
+	game->player.plane.x = 0.66;
+	game->player.plane.y = 0;
 }
