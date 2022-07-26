@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/07/26 16:42:38 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:45:57 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	*parse_map(t_game *game, int file_fd, char *line)
 	size_t	x;
 	size_t	y;
 
-	map = malloc(game->map.width * game->map.height * sizeof(int));
 	y = 0;
+	map = malloc(game->map.width * game->map.height * sizeof(int));
 	while (y < game->map.height)
 	{
 		x = 0;
