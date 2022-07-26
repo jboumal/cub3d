@@ -14,39 +14,21 @@
 
 #include <stdio.h>
 
-static int	is_line_empty(char *line)
-{
-	if (!line)
-		return (0);
-	while (*line == ' ')
-		line++;
-	return (*line == '\n' || *line == '\r');
-}
-
-static char	*gnl_not_empty(int file_fd)
+static char	*first_map_line(int file_fd, char *path_to_map)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	line = get_next_line(file_fd);
-	while (line[i] == ' ')
-		i++;
-	if (line[i] == '\n' || line[i] == '\r')
+	close(file_fd);
+	file_fd = open(path_to_map, O_RDONLY);
+	line = gnl_not_empty(file_fd);
+	while (i++ < 6)
 	{
 		free(line);
-		return (gnl_not_empty(file_fd));
+		line = gnl_not_empty(file_fd);
 	}
-	else
-		return (line);
-}
-
-void	exit_error(char *str)
-{
-	write(2, "Error\n" , ft_strlen("Error\n"));
-	write(2, str, ft_strlen(str));
-	write(2, "\n" , 1);
-	exit(EXIT_FAILURE);
+	return (line);
 }
 
 void	parse_color(t_game *game, char *line, int is_floor)
@@ -62,7 +44,7 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		while (*line++)
 		{
 			if ((*line == ',' && nb_color < 2) || ((*line == '\n' || *line == '\r') && nb_color == 2))
-				break;
+				break ;
 			if (*line < '0' || *line > '9')
 				exit_error("color : not a valid digit");
 			color[nb_color][i] = *line;
@@ -97,13 +79,13 @@ void	load_texture(t_game *game, char direction, char *path_to_texture)
 	if (img == (void *)0)
 		exit_error("texture : file not valid");
 	if (direction == 'N')
-		game->textures.no_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+		game->textures.no_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 	else if (direction == 'E')
-		game->textures.ea_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+		game->textures.ea_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 	else if (direction == 'W')
-		game->textures.we_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+		game->textures.we_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 	else if (direction == 'S')
-		game->textures.so_wall.img = (unsigned int *) mlx_get_data_addr (img, &bits_per_pixel, &size_line, &endian );
+		game->textures.so_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 }
 
 static void	get_map_size(t_game *game, int file_fd)
@@ -139,110 +121,22 @@ static void	parse_direction_and_color(t_game *game, int file_fd)
 	int		i;
 
 	i = 0;
-	// rajouter conditions pour éviter doublons
 	while (i++ < 6 && game)
 	{
 		line = gnl_not_empty(file_fd);
 		if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E') && line[2] == ' ')
 		{
 			line[ft_strlen(line) - 2] = '\0';
-			load_texture(game, line[0], line + 3);
+			load_texture(game, line[0], skip_spaces(line + 2));
 		}
 		else if (line[0] == 'F' && line[1] == ' ')
-			parse_color(game, line + 1, 1);
+			parse_color(game, skip_spaces(line + 1), 1);
 		else if (line[0] == 'C' && line[1] == ' ')
-			parse_color(game, line + 1, 0);
+			parse_color(game, skip_spaces(line + 1), 0);
 		else
 			exit_error("unexpected caracter");
 		free(line);
 	}
-}
-
-static char	*first_map_line(int file_fd, char *path_to_map)
-{
-	char	*line;
-
-	close(file_fd);
-	file_fd = open(path_to_map, O_RDONLY);
-	line = gnl_not_empty(file_fd);
-	while (line[0] != '1' && line[0] != '0' && line[0] != ' ' )
-	{
-		free(line);
-		line = gnl_not_empty(file_fd);
-	}
-	return (line);
-}
-
-static void	place_player(t_game *game, char direction, int x, int y)
-{
-	if (direction == 'N')
-	{
-		game->player.dir.x = 0;
-		game->player.dir.y = 1;
-	}
-	else if (direction == 'E')
-	{
-		game->player.dir.x = 1;
-		game->player.dir.y = 0;
-	}
-	else if (direction == 'W')
-	{
-		game->player.dir.x = -1;
-		game->player.dir.y = 0;
-	}
-	else if (direction == 'S')
-	{
-		game->player.dir.x = 0;
-		game->player.dir.y = -1;
-	}
-	game->player.pos.x = x;
-	game->player.pos.y = y;
-}
-
-static int	parse_map(t_game *game, int file_fd, char *line)
-{
-	int 	encounter_player;
-	int 	*map;
-	size_t	x;
-	size_t	y;
-
-	encounter_player = 0;
-	map = malloc(game->map.width * game->map.height * sizeof(int));
-	y = 0;
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			if (x >= ft_strlen(line) -  2)
-				map[x + (game->map.width * y)] = -1;
-			else if (line[x] == ' ')
-				map[x + (game->map.width * y)] = -1;
-			else if (line[x] == 'N' || line[x] == 'E' || line[x] == 'W' || line[x] == 'S')
-			{
-				if (encounter_player)
-					exit_error("double player position");
-				encounter_player = 1;
-				map[x + (game->map.width * y)] = 0;
-				place_player(game, line[x], x, y);
-			}
-			else if (line[x] == '0' || line[x] == '1')
-				map[x + (game->map.width * y)] = line[x] - 48;
-			else
-				exit_error("wrong character in map");
-			x++;
-		}
-		y++;
-		line = get_next_line(file_fd);
-		if (is_line_empty(line))
-			exit_error("empty line in map");
-	}
-	if (!encounter_player)
-		exit_error("missing player position in map");
-	game->map.data = map;
-	game->player.plane.x = 0.66;
-	game->player.plane.y = 0;
-	return (0);
 }
 
 void	parser(char **argv, t_game *game)

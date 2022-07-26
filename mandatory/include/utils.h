@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/25 19:32:04 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/07/26 14:38:52 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ typedef struct s_point
 t_point		point(int x, int y);
 size_t		ft_strlen(char *str);
 int			ft_atoi(const char *str);
-int			create_trgb(int t, int r, int g, int b);
 
 #endif
