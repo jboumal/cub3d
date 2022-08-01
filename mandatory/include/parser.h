@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/26 16:33:23 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:59:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_game
 
 /*parser*/
 void	parser(char **argv, t_game *game);
-
 
 /*parser_map*/
 int		*parse_map(t_game *game, int file_fd, char *line);

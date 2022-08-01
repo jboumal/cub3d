@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/01 19:35:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/01 20:15:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	set_start_end(int line_height, int *start, int *end)
 	*end = line_height / 2 + SCREEN_H / 2;
 }
 
-static int get_tex_x(t_ray *ray, t_game *g)
+static int	get_tex_x(t_ray *ray, t_game *g)
 {
 	double	wall_x;
 	int		tex_x;
@@ -29,9 +29,9 @@ static int get_tex_x(t_ray *ray, t_game *g)
 		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
 	tex_x = (int)(wall_x * (double)g->textures.ea_wall.width);
-	if((ray->side == W || ray->side == E)  && ray->dir.x > 0)
+	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
 		tex_x = g->textures.ea_wall.width - tex_x - 1;
-	if((ray->side == N || ray->side == S) && ray->dir.y < 0)
+	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
 		tex_x = g->textures.no_wall.width - tex_x - 1;
 	return (tex_x);
 }
@@ -39,8 +39,8 @@ static int get_tex_x(t_ray *ray, t_game *g)
 static void	draw_line(int x, t_ray *ray, t_data *img, t_game *g)
 {
 	int		color;
-	int 	y;
-	int 	text_y;
+	int		y;
+	int		text_y;
 	int		line_height = SCREEN_H / ray->wall_dist;
 	int		draw_start, draw_end;
 	int		tex_x = get_tex_x(ray, g);
@@ -63,7 +63,7 @@ static void	draw_line(int x, t_ray *ray, t_data *img, t_game *g)
 			my_mlx_pixel_put(img, x, y, color);
 		}
 		y++;
-	}	
+	}
 }
 
 void	raycasting(int x, t_data *img, t_game *g)
