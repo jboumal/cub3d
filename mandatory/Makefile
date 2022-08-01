@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+         #
+#    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/25 19:04:07 by bperraud         ###   ########.fr        #
+#    Updated: 2022/08/01 09:42:31 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ ifeq ($(shell uname), Linux)
 #	LIB = -lmlx -lXext -lX11 -lm
 	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
-	CFLAGS = -Wall -Wextra -Werror -D MAC
+	CFLAGS = -Wall -Wextra  -D MAC
 	LIB = -lmlx -framework OpenGL -framework AppKit
 endif
 
@@ -50,6 +50,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	./$(NAME) map.cub
+	./$(NAME) map/minimalist.cub
 
 .PHONY: $(NAME) all clean fclean re run rerun
