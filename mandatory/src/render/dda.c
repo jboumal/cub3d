@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:01:48 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:08:54 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:33:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,30 @@ static t_vector	get_side_dist(
 	return (side_dist);
 }
 
-double	dda(t_vector ray_dir, t_face *face, t_game *g)
+void	dda(t_ray *ray, t_game *g)
 {
 	t_vector	delta_dist;
 	t_vector	side_dist;
 
-	face->cell = (int)g->player.pos.y * g->map.width + (int)g->player.pos.x;
-	delta_dist = vector(1 / fabs(ray_dir.x), 1 / fabs(ray_dir.y));
-	side_dist = get_side_dist(ray_dir, face->cell, delta_dist, g);
-	while (!g->map.data[face->cell])
+	ray->cell = (int)g->player.pos.y * g->map.width + (int)g->player.pos.x;
+	delta_dist = vector(1 / fabs(ray->dir.x), 1 / fabs(ray->dir.y));
+	side_dist = get_side_dist(ray->dir, ray->cell, delta_dist, g);
+	while (!g->map.data[ray->cell])
 	{
 		if (side_dist.x < side_dist.y)
 		{
 			side_dist.x += delta_dist.x;
-			face->cell += -2 * (ray_dir.x < 0) + 1;
-			face->side = W * (ray_dir.x <= 0) + E * (ray_dir.x > 0);
+			ray->cell += -2 * (ray->dir.x < 0) + 1;
+			ray->side = W * (ray->dir.x <= 0) + E * (ray->dir.x > 0);
 		}
 		else
 		{
 			side_dist.y += delta_dist.y;
-			face->cell += -2 * g->map.width * (ray_dir.y < 0) + g->map.width;
-			face->side = N * (ray_dir.y >= 0) + S * (ray_dir.y < 0);
+			ray->cell += -2 * g->map.width * (ray->dir.y < 0) + g->map.width;
+			ray->side = N * (ray->dir.y >= 0) + S * (ray->dir.y < 0);
 		}
 	}
-	if (face->side % 2)
-		return (side_dist.x - delta_dist.x);
-	return (side_dist.y - delta_dist.y);
+	ray->wall_dist = side_dist.y - delta_dist.y;
+	if (ray->side % 2)
+		ray->wall_dist = side_dist.x - delta_dist.x;
 }

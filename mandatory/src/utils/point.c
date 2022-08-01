@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jboumal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 14:31:33 by jboumal           #+#    #+#             */
-/*   Updated: 2022/07/16 14:31:34 by jboumal          ###   ########.fr       */
+/*   Updated: 2022/08/01 16:46:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_point	point(int x, int y)
+t_pair	pair(int x, int y)
 {
-	t_point	p;
+	t_pair	p;
 
 	p.x = x;
 	p.y = y;
