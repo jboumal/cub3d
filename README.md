@@ -2,8 +2,8 @@
 ## Todo
 ### Mandatory
 - Finish parsing
-- Add differents textures for walls
 - Remove fps counter, makefile wildcards
+- Minimap: change dot to arrow
 
 ### Bonus
 - Doors which can open and close.
