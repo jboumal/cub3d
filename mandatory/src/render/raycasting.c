@@ -36,35 +36,38 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 	return (tex_x);
 }
 
-static void	draw_line(int x, t_ray *ray, t_data *img, t_game *g)
+static void	init_draw_line(t_draw_line_var *var, t_ray *ray, t_game *g)
 {
-	int		color;
-	int		y;
-	int		text_y;
-	int		line_height = SCREEN_H / ray->wall_dist;
-	int		draw_start, draw_end;
-	int		tex_x = get_tex_x(ray, g);
+	var->line_height = SCREEN_H / ray->wall_dist;
+	set_start_end(var->line_height, &(var->draw_start), &(var->draw_end));
+	var->tex_x = get_tex_x(ray, g);
+	var->ray = ray;
+}
 
-	set_start_end(line_height, &draw_start, &draw_end);
+static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
+{
+	int		y;
+	int		tex;
+
 	y = 0;
 	while (y < SCREEN_H)
 	{
-		if (y < draw_start)
+		if (y < var->draw_start)
 			my_mlx_pixel_put(img, x, y, 0x0087ceeb);
-		else if (y > draw_end)
+		else if (y > var->draw_end)
 			my_mlx_pixel_put(img, x, y, 0xf5deb3);
 		else
 		{
-			text_y = (y - draw_start) * g->textures.no_wall.height / (line_height);
-			if (ray->side == N)
-				color = g->textures.no_wall.img[text_y * g->textures.no_wall.height + tex_x];
-			else if (ray->side == E)
-				color = g->textures.ea_wall.img[text_y * g->textures.ea_wall.height + tex_x];
-			else if (ray->side == S)
-				color = g->textures.so_wall.img[text_y * g->textures.so_wall.height + tex_x];
-			else if (ray->side == W)
-				color = g->textures.we_wall.img[text_y * g->textures.we_wall.height + tex_x];
-			my_mlx_pixel_put(img, x, y, color);
+			tex = (y - var->draw_start) * H / (var->line_height);
+			if (var->ray->side == N)
+				tex = g->textures.no_wall.img[tex * H + var->tex_x];
+			else if (var->ray->side == E)
+				tex = g->textures.ea_wall.img[tex * H + var->tex_x];
+			else if (var->ray->side == S)
+				tex = g->textures.so_wall.img[tex * H + var->tex_x];
+			else if (var->ray->side == W)
+				tex = g->textures.we_wall.img[tex * H + var->tex_x];
+			my_mlx_pixel_put(img, x, y, tex);
 		}
 		y++;
 	}
@@ -72,14 +75,16 @@ static void	draw_line(int x, t_ray *ray, t_data *img, t_game *g)
 
 void	raycasting(int x, t_data *img, t_game *g)
 {
-	double		camera_x;
-	t_ray		ray;
+	double			camera_x;
+	t_ray			ray;
+	t_draw_line_var	var;
 
 	camera_x = 2 * x / (double) SCREEN_W - 1;
 	ray.dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray.dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	dda(&ray, g);
-	draw_line(x, &ray, img, g);
+	init_draw_line(&var, &ray, g);
+	draw_line(x, &var, img, g);
 	if (x + 1 < SCREEN_W)
 		return (raycasting(x + 1, img, g));
 }

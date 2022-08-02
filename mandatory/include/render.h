@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define TILEMAP_SIZE 12
+# define H 128
 
 enum e_side
 {
@@ -41,6 +42,15 @@ typedef struct s_rect
 	int	height;
 	int	color;
 }	t_rect;
+
+typedef struct s_draw_line_var
+{
+	int		tex_x;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_ray	*ray;
+}	t_draw_line_var;
 
 /*init*/
 void	load_textures(t_game *game);
