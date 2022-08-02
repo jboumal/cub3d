@@ -28,8 +28,8 @@
 # include "event.h"
 # include "render.h"
 
-# define SCREEN_W 1920
-# define SCREEN_H 1080
+# define SCREEN_W 1200
+# define SCREEN_H 800
 # define SCREEN_TITLE "cub3d"
 
 #endif

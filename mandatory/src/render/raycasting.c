@@ -56,10 +56,14 @@ static void	draw_line(int x, t_ray *ray, t_data *img, t_game *g)
 		else
 		{
 			text_y = (y - draw_start) * g->textures.no_wall.height / (line_height);
-			if (ray->side == N || ray->side == S)
+			if (ray->side == N)
 				color = g->textures.no_wall.img[text_y * g->textures.no_wall.height + tex_x];
-			else
+			else if (ray->side == E)
 				color = g->textures.ea_wall.img[text_y * g->textures.ea_wall.height + tex_x];
+			else if (ray->side == S)
+				color = g->textures.so_wall.img[text_y * g->textures.so_wall.height + tex_x];
+			else if (ray->side == W)
+				color = g->textures.we_wall.img[text_y * g->textures.we_wall.height + tex_x];
 			my_mlx_pixel_put(img, x, y, color);
 		}
 		y++;
