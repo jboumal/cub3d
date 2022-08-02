@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 13:07:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:59:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_H
 
 # include "cub3d.h"
+# include "textures.h"
+# include <fcntl.h>
 
 typedef struct s_data
 {
@@ -59,9 +61,20 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
+	t_textures	textures;
 }	t_game;
 
 /*parser*/
-void	parser(int argc, char **argv, t_game *game);
+void	parser(char **argv, t_game *game);
+
+/*parser_map*/
+int		*parse_map(t_game *game, int file_fd, char *line);
+
+/*utils*/
+int		create_trgb(int t, int r, int g, int b);
+char	*skip_spaces(char *str);
+int		is_line_empty(char *line);
+char	*gnl_not_empty(int file_fd);
+void	exit_error(char *str, char *line);
 
 #endif

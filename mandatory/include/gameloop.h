@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/14 14:34:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/07/20 00:07:17 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GAMELOOP_H
 
 # include "cub3d.h"
+# include "sys/time.h"
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05

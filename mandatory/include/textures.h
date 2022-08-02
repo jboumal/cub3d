@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 13:05:46 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:09:04 by bperraud         ###   ########.fr       */
+/*   Created: 2022/07/16 15:22:37 by jboumal           #+#    #+#             */
+/*   Updated: 2022/07/25 15:45:00 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef TEXTURES_H
+# define TEXTURES_H
+# include "cub3d.h"
 
-t_vector	vector(double x, double y)
+typedef struct s_texture
 {
-	t_vector	v;
+	unsigned int	*img;
+	int				width;
+	int				height;
+}	t_texture;
 
-	v.x = x;
-	v.y = y;
-	return (v);
-}
-
-t_vector	vector_add(t_vector v1, t_vector v2)
+typedef struct s_textures
 {
-	return (vector(v1.x + v2.x, v1.y + v2.y));
-}
+	t_texture	no_wall;
+	t_texture	ea_wall;
+	t_texture	we_wall;
+	t_texture	so_wall;
+}	t_textures;
 
-t_vector	vector_rotate(t_vector v, double a)
-{
-	return (vector(v.x * cos(a) - v.y * sin(a), v.x * sin(a) + v.y * cos(a)));
-}
+#endif
