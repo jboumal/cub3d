@@ -14,7 +14,6 @@
 
 int	key_down(int code, t_game *game)
 {
-	printf("%d\n", code);
 	if (code == K_W)
 		game->state.up = true;
 	else if (code == K_S)

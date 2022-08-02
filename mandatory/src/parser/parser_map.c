@@ -34,8 +34,8 @@ static void	place_player(t_game *game, char direction, int x, int y)
 		game->player.dir.x = 0;
 		game->player.dir.y = -1;
 	}
-	game->player.pos.x = x + 0.1;
-	game->player.pos.y = y + 0.1;
+	game->player.pos.x = x + 0.198;
+	game->player.pos.y = y + 0.198;
 }
 
 int	*parse_map(t_game *game, int file_fd, char *line)
