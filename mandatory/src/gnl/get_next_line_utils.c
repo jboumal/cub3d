@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 12:14:20 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/09 15:38:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/03 08:51:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 int64_t	min(int64_t a, int64_t b)
 {
 	return ((a <= b) * a + (b < a) * b);
-}
-
-size_t	str_len(char *str)
-{
-	if (str && *str)
-		return (1 + str_len(str + 1));
-	return (0);
 }
 
 void	*ft_memchr(const void *s, int c, size_t n)

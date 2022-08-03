@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:05:59 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/25 19:00:39 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/03 07:32:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static void	initialize(t_game *game)
 {
+	memset(game, 0, sizeof(t_game));
+	game->map.floor = -1;
+	game->map.ceil = -1;
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
-	game->state.up = false;
-	game->state.left = false;
-	game->state.down = false;
-	game->state.right = false;
 }
 
 int	quit(void *args)

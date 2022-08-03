@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/01 20:15:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/03 08:34:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	tex_x = (int)(wall_x * (double)g->textures.ea_wall.width);
+	tex_x = (int)(wall_x * (double)g->textures[E].width);
 	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
-		tex_x = g->textures.ea_wall.width - tex_x - 1;
+		tex_x = g->textures[E].width - tex_x - 1;
 	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
-		tex_x = g->textures.no_wall.width - tex_x - 1;
+		tex_x = g->textures[N].width - tex_x - 1;
 	return (tex_x);
 }
 
@@ -60,13 +60,13 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 		{
 			tex = (y - var->draw_start) * H / (var->line_height);
 			if (var->ray->side == N)
-				tex = g->textures.no_wall.img[tex * H + var->tex_x];
+				tex = g->textures[N].img[tex * H + var->tex_x];
 			else if (var->ray->side == E)
-				tex = g->textures.ea_wall.img[tex * H + var->tex_x];
+				tex = g->textures[E].img[tex * H + var->tex_x];
 			else if (var->ray->side == S)
-				tex = g->textures.so_wall.img[tex * H + var->tex_x];
+				tex = g->textures[S].img[tex * H + var->tex_x];
 			else if (var->ray->side == W)
-				tex = g->textures.we_wall.img[tex * H + var->tex_x];
+				tex = g->textures[W].img[tex * H + var->tex_x];
 			my_mlx_pixel_put(img, x, y, tex);
 		}
 		y++;

@@ -6,11 +6,12 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 12:10:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/09 16:11:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/03 08:51:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+# include "cub3d.h"
 
 static void	str_append_buff(char **astr, char *buff, size_t n)
 {

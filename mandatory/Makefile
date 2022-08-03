@@ -6,7 +6,7 @@
 #    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/08/01 09:42:31 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/08/03 08:51:02 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = 	cub3d.c \
 		gameloop/update_cam.c gameloop/gameloop.c \
 		parser/parser.c parser/utils_parser.c parser/parser_map.c \
 		render/dda.c render/raycasting.c render/textures.c render/mlx_utils.c render/minimap.c render/render.c \
-		utils/point.c utils/utils.c utils/vector.c
+		utils/str.c utils/utils.c utils/vector.c
 
 SRC		:= $(addprefix src/,$(SRC))
 

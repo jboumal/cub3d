@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/07/26 16:45:57 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/03 08:49:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	*parse_map(t_game *game, int file_fd, char *line)
 		x = 0;
 		while (x < game->map.width)
 		{
-			if (x >= ft_strlen(line) - 2)
+			if (x >= str_len(line) - 2)
 				map[x + (game->map.width * y)] = -1;
 			else if (line[x] == ' ')
 				map[x + (game->map.width * y)] = -1;

@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-#include <stdio.h>
-
 static char	*first_map_line(int file_fd, char *path_to_map)
 {
 	char	*line;
@@ -61,31 +59,31 @@ void	parse_color(t_game *game, char *line, int is_floor)
 		game->map.ceil = create_trgb(0, ft_atoi(color[0]), ft_atoi(color[1]), ft_atoi(color[2]));
 }
 
+static enum e_side	get_direction(char c)
+{
+	if (c == 'N')
+		return (N);
+	if (c == 'E')
+		return (E);
+	if (c == 'S')
+		return (S);
+	return (W);
+}
+
 void	load_texture(t_game *game, char direction, char *path_to_texture)
 {
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
 	void	*img;
+	enum e_side side;
 
-	if (direction == 'N')
-		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.no_wall.width, &game->textures.no_wall.height);
-	else if (direction == 'E')
-		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.ea_wall.width, &game->textures.ea_wall.height);
-	else if (direction == 'W')
-		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.we_wall.width, &game->textures.we_wall.height);
-	else if (direction == 'S')
-		img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures.so_wall.width, &game->textures.so_wall.height);
-	if (img == (void *)0)
+	path_to_texture[str_len(path_to_texture) - 2] = '\0';
+	side = get_direction(direction);
+	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->textures[side].width, &game->textures[side].height);
+	if (!img)
 		exit_error("texture : path_to_texture not valid", NULL);
-	if (direction == 'N')
-		game->textures.no_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
-	else if (direction == 'E')
-		game->textures.ea_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
-	else if (direction == 'W')
-		game->textures.we_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
-	else if (direction == 'S')
-		game->textures.so_wall.img = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
+	game->textures[side].img = mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian );
 }
 
 static void	get_map_size(t_game *game, int file_fd)
@@ -116,23 +114,32 @@ static void	get_map_size(t_game *game, int file_fd)
 	game->map.height = height;
 }
 
+static bool	is_full(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (!game->textures[i].img)
+			return (false);
+		i++;
+	}
+	return (game->map.floor > -1 && game->map.ceil > -1);
+}
+
 static void	parse_direction_and_color(t_game *game, int file_fd)
 {
 	char	*line;
-	int		i;
 
-	i = 0;
-	while (i++ < 6 && game)
+	while (!is_full(game))
 	{
 		line = gnl_not_empty(file_fd);
-		if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E') && line[2] == ' ')
-		{
-			line[ft_strlen(line) - 2] = '\0';
-			load_texture(game, line[0], skip_spaces(line + 2));
-		}
-		else if (line[0] == 'F' && line[1] == ' ')
+		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
+			load_texture(game, line[0], skip_spaces(line + 3));
+		else if (!str_n_cmp("F ", line, 2))
 			parse_color(game, skip_spaces(line + 1), 1);
-		else if (line[0] == 'C' && line[1] == ' ')
+		else if (!str_n_cmp("C ", line, 2))
 			parse_color(game, skip_spaces(line + 1), 0);
 		else
 			exit_error("direction and color : unexpected caracter", line);
@@ -145,7 +152,7 @@ void	parser(char **argv, t_game *game)
 	int	file_fd;
 
 	file_fd = open(argv[1], O_RDONLY);
-	if (!file_fd)
+	if (file_fd < 0)
 		exit_error("open file", NULL);
 	parse_direction_and_color(game, file_fd);
 	get_map_size(game, file_fd);

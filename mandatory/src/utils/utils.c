@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-size_t	ft_strlen(char *str)
-{
-	if (str && *str)
-		return (1 + ft_strlen(str + 1));
-	return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	int				i;
