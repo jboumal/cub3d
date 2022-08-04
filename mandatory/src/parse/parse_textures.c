@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:10:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 00:07:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	load_texture(t_game *game, char direction, char *path_to_texture)
 			&bits_per_pixel,
 			&size_line,
 			&endian);
+	game->textures[side].allocated_img = img;
 }
 
 static bool	is_full(t_game *game)

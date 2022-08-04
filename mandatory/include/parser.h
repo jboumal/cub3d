@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:26:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 00:06:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_texture
 	unsigned int	*img;
 	int				width;
 	int				height;
+	void			*allocated_img;
 }	t_texture;
 
 typedef struct s_game
