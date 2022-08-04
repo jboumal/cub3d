@@ -6,73 +6,96 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/03 08:49:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:30:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
 
-static void	place_player(t_game *game, char direction, int x, int y)
+char	*get_map_str(int fd)
 {
-	if (direction == 'N')
+	t_dy_str	dy_str;
+	char		*line;
+	char		*ptr;
+
+	dy_str = dy_str_new();
+	line = gnl_not_empty(fd);
+	while (line)
 	{
-		game->player.dir.x = 0;
-		game->player.dir.y = 1;
+		ptr = line;
+		while (*ptr)
+		{
+			if (*ptr != '\r')
+				dy_str_append_c(&dy_str, *ptr);
+			ptr++;
+		}
+		free(line);
+		line = get_next_line(fd);
 	}
-	else if (direction == 'E')
+	free(line);
+	close(fd);
+	while (strchr(" \n\t", dy_str.str[dy_str.len - 1]))
 	{
-		game->player.dir.x = 1;
-		game->player.dir.y = 0;
+		dy_str.str[dy_str.len - 1] = '\0';
+		dy_str.len--;
 	}
-	else if (direction == 'W')
-	{
-		game->player.dir.x = -1;
-		game->player.dir.y = 0;
-	}
-	else if (direction == 'S')
-	{
-		game->player.dir.x = 0;
-		game->player.dir.y = -1;
-	}
-	game->player.pos.x = x + 0.1;
-	game->player.pos.y = y + 0.1;
+	return (dy_str.str);
 }
 
-int	*parse_map(t_game *game, int file_fd, char *line)
+void	fill_map_dimensions(char *map_str, t_game *g)
 {
-	int		*map;
-	size_t	x;
-	size_t	y;
+	size_t	width;
 
-	y = 0;
-	map = malloc(game->map.width * game->map.height * sizeof(int));
-	while (y < game->map.height)
+	width = 0;
+	while (*map_str)
 	{
-		x = 0;
-		while (x < game->map.width)
+		if (*map_str == '\n')
 		{
-			if (x >= str_len(line) - 2)
-				map[x + (game->map.width * y)] = -1;
-			else if (line[x] == ' ')
-				map[x + (game->map.width * y)] = -1;
-			else if (line[x] == 'N' || line[x] == 'E' || line[x] == 'W' || line[x] == 'S')
-			{
-				if (game->player.pos.x)
-					exit_error("double player position", line);
-				map[x + (game->map.width * y)] = 0;
-				place_player(game, line[x], x, y);
-			}
-			else if (line[x] == '0' || line[x] == '1')
-				map[x + (game->map.width * y)] = line[x] - 48;
-			else
-				exit_error("wrong character in map", line);
-			x++;
+			if (g->map.width < width)
+				g->map.width = width;
+			width = 0;
+			g->map.height++;
 		}
-		y++;
-		free(line);
-		line = get_next_line(file_fd);
-		if (is_line_empty(line))
-			exit_error("empty line in map", line);
+		else
+			width++;
+		map_str++;
 	}
-	return (map);
+	g->map.height++;
+}
+
+void parse_map(char *map_str, t_game *g)
+{
+	int i = 0;
+	int j;
+	int player_index;
+
+	fill_map_dimensions(map_str, g);
+	g->map.data = malloc(g->map.width * g->map.height * sizeof(int));
+	int *ptr = g->map.data;
+	i = 0;
+	for (int k = 0; k < g->map.width * g->map.height; k++)
+		g->map.data[k] = -1;
+	while (i < g->map.height)
+	{
+		j = 0;
+		while (*map_str != '\n' && *map_str)
+		{
+			if (*map_str == '1')
+				g->map.data[i * g->map.width + j] = 1;
+			else if (*map_str == '0')
+				g->map.data[i * g->map.width + j] = 0;
+			else if (strchr("NSWE", *map_str))
+			{
+				g->map.data[i * g->map.width + j] = 0;
+				g->player.pos = vector(j, i);
+			}
+			else
+				g->map.data[i * g->map.width + j] = -1;
+			j++;
+			*map_str++;
+		}
+			map_str += (*map_str == '\n');
+		i++;
+	}
+	g->player.dir = vector(0, 1);
 }

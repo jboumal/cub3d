@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:07:14 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:02:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #  define K_A 97
 #  define K_S 115
 #  define K_D 100
-//#  define K_ESC ???
+#  define K_ESC 653076563463
 
 # else
 #  define K_W 13

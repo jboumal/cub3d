@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/03 08:36:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:32:07 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_state
 typedef struct s_texture
 {
 	unsigned int	*img;
-	int				width;
-	int				height;
+	int		width;
+	int		height;
 }	t_texture;
 
 typedef struct s_game
@@ -69,17 +69,21 @@ typedef struct s_game
 	t_texture	textures[4];
 }	t_game;
 
+/* parse_textures */
+void	parse_textures(t_game *game, int fd);
+
 /*parser*/
 void	parser(char **argv, t_game *game);
 
 /*parser_map*/
-int		*parse_map(t_game *game, int file_fd, char *line);
+char	*get_map_str(int fd);
+void	parse_map(char *map_str, t_game *g);
 
 /*utils*/
 int		create_trgb(int t, int r, int g, int b);
 char	*skip_spaces(char *str);
 int		is_line_empty(char *line);
-char	*gnl_not_empty(int file_fd);
+char	*gnl_not_empty(int fd);
 void	exit_error(char *str, char *line);
 
 #endif

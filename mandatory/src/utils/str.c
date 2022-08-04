@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 08:46:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/03 09:30:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 15:26:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	str_len(char *str)
+size_t	str_len(const char *str)
 {
 	if (str && *str)
 		return (1 + str_len(str + 1));

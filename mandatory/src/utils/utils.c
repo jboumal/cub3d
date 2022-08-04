@@ -12,25 +12,37 @@
 
 #include "cub3d.h"
 
+char	*ft_strchr(const char *s, int c)
+{
+	if (*s == (char)c)
+		return ((char *)s);
+	if (*s)
+		return (ft_strchr(s + 1, c));
+	return (NULL);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
 int	ft_atoi(const char *str)
 {
-	int				i;
-	int				neg;
-	long long int	res;
+	uint64_t	sum;
+	int			sign;
 
-	neg = 1;
-	res = 0;
-	i = 0;
-	while (str[i])
+	sum = 0;
+	sign = 1;
+	while (ft_strchr(" \t\n\r\v\f", *str))
+		str++;
+	if (*str == '+' || *str == '-')
+		if (*(str++) == '-')
+			sign = -1;
+	while (ft_isdigit(*str))
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (-1);
-		if ((res * 10 > INT_MAX) && neg == 1)
-			return (-1);
-		if ((res * 10 - 1 > INT_MAX) && neg == -1)
-			return (-1);
-		res = res * 10 + str[i] - '0';
-		i++;
+		sum *= 10;
+		sum += *str - '0';
+		str++;
 	}
-	return ((int)(res * neg));
+	return (sum * sign);
 }

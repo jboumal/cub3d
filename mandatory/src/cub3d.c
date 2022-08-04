@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:05:59 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/03 07:32:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:16:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (argc != 2)
-		return (0);
 	initialize(&game);
 	parser(argv, &game);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);

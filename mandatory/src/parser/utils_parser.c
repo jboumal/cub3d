@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:38:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/03 08:49:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 16:13:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	exit_error(char *str, char *line)
 	write(2, str, str_len(str));
 	write(2, "\n", 1);
 	exit(EXIT_FAILURE);
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 char	*skip_spaces(char *str)
@@ -42,19 +37,19 @@ int	is_line_empty(char *line)
 	return (*line == '\n' || *line == '\r');
 }
 
-char	*gnl_not_empty(int file_fd)
+char	*gnl_not_empty(int fd)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	line = get_next_line(file_fd);
+	line = get_next_line(fd);
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == '\n' || line[i] == '\r')
 	{
 		free(line);
-		return (gnl_not_empty(file_fd));
+		return (gnl_not_empty(fd));
 	}
 	else
 		return (line);
