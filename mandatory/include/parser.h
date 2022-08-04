@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 18:32:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:26:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_H
 
 # include "cub3d.h"
+
+# define SPACES " \t"
 
 typedef struct s_data
 {
@@ -55,8 +57,8 @@ typedef struct s_state
 typedef struct s_texture
 {
 	unsigned int	*img;
-	int		width;
-	int		height;
+	int				width;
+	int				height;
 }	t_texture;
 
 typedef struct s_game
@@ -69,21 +71,16 @@ typedef struct s_game
 	t_texture	textures[4];
 }	t_game;
 
+/* get_map_str */
+char	*get_map_str(int fd);
+
+/* parse_map */
+void	parse_map(char *map_str, t_game *g);
+
 /* parse_textures */
 void	parse_textures(t_game *game, int fd);
 
-/*parser*/
+/* parse */
 void	parser(char **argv, t_game *game);
-
-/*parser_map*/
-char	*get_map_str(int fd);
-void	parse_map(char *map_str, t_game *g);
-
-/*utils*/
-int		create_trgb(int t, int r, int g, int b);
-char	*skip_spaces(char *str);
-int		is_line_empty(char *line);
-char	*gnl_not_empty(int fd);
-void	exit_error(char *str, char *line);
 
 #endif

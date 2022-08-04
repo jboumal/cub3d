@@ -6,15 +6,15 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:28:42 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 16:37:45 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:25:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 void	str_arr_free(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

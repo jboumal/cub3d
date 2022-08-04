@@ -12,15 +12,6 @@
 
 #include "cub3d.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	if (*s == (char)c)
-		return ((char *)s);
-	if (*s)
-		return (ft_strchr(s + 1, c));
-	return (NULL);
-}
-
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');

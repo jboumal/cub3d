@@ -6,28 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:23:40 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 15:25:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:24:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
-{
-	size_t	i;
-
-	i = 0;
-	if (dstsize)
-	{
-		while (src[i] && i < dstsize - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (str_len(src));
-}
 
 char	*ft_strdup(const char *s)
 {
@@ -37,6 +20,17 @@ char	*ft_strdup(const char *s)
 	if (!dst)
 		return (NULL);
 	ft_strlcpy(dst, s, str_len(s) + 1);
+	return (dst);
+}
+
+char	*str_n_dup(char *src, size_t n)
+{
+	char	*dst;
+
+	dst = malloc((min(str_len(src), n) + 1) * sizeof(char));
+	if (!dst)
+		return (NULL);
+	str_n_cpy(dst, src, n);
 	return (dst);
 }
 

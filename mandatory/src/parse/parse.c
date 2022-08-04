@@ -18,7 +18,7 @@ void	parser(char **argv, t_game *game)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		exit_error("open file", NULL);
+		exit(EXIT_FAILURE);
 	parse_textures(game, fd);
 	parse_map(get_map_str(fd), game);
 	game->player.plane.x = 0.66;

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   str_copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 12:14:20 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/03 08:51:37 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/04 22:00:37 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/04 22:28:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "cub3d.h"
 
-int64_t	min(int64_t a, int64_t b)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	return ((a <= b) * a + (b < a) * b);
-}
+	size_t	i;
 
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	if (!n || !s)
-		return (NULL);
-	if (*((unsigned char *) s) == (unsigned char) c)
-		return ((void *) s);
-	return (ft_memchr(s + 1, c, n - 1));
+	i = 0;
+	if (dstsize)
+	{
+		while (src[i] && i < dstsize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (str_len(src));
 }
 
 void	str_n_cpy(char *dst, char *src, size_t len)
@@ -40,15 +43,4 @@ void	str_n_cpy(char *dst, char *src, size_t len)
 		}
 		dst[i] = '\0';
 	}
-}
-
-char	*str_n_dup(char *src, size_t n)
-{
-	char	*dst;
-
-	dst = malloc((min(str_len(src), n) + 1) * sizeof(char));
-	if (!dst)
-		return (NULL);
-	str_n_cpy(dst, src, n);
-	return (dst);
 }

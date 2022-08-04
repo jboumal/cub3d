@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_struct.h                                      :+:      :+:    :+:   */
+/*   str_find.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:26:20 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/04 21:46:13 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/04 22:08:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_STRUCT_H
-# define DATA_STRUCT_H
+#include "cub3d.h"
 
-# include "cub3d.h"
-
-typedef struct s_dy_str
+char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
-	size_t	alloc;
-	size_t	len;
-}	t_dy_str;
+	if (*s == (char)c)
+		return ((char *)s);
+	if (*s)
+		return (ft_strchr(s + 1, c));
+	return (NULL);
+}
 
-/* dy_str */
-t_dy_str	dy_str_new(void);
-void		dy_str_destroy(t_dy_str *dy_str);
-void		dy_str_grow(t_dy_str *dy_str);
-void		dy_str_append_c(t_dy_str *dy_str, char c);
-void		dy_str_append_str(t_dy_str *dy_str, char *str);
-
-#endif
+char	*skip_spaces(char *s)
+{
+	if (s && ft_strchr(SPACES, *s))
+		return (skip_spaces(s + 1));
+	return (s);
+}

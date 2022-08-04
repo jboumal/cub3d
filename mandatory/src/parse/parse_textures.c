@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 16:30:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:10:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	load_texture(t_game *game, char direction, char *path_to_texture)
 			&game->textures[side].width,
 			&game->textures[side].height);
 	if (!img)
-		exit_error("texture : path_to_texture not valid", NULL);
+		exit(EXIT_FAILURE);
 	game->textures[side].img = (unsigned int *)mlx_get_data_addr(
 			img,
 			&bits_per_pixel,
@@ -86,7 +86,7 @@ void	parse_textures(t_game *game, int fd)
 
 	while (!is_full(game))
 	{
-		line = gnl_not_empty(fd);
+		line = get_first_non_empty_line(fd);
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
 			load_texture(game, line[0], skip_spaces(line + 3));
 		else if (!str_n_cmp("F ", line, 2))
@@ -94,7 +94,7 @@ void	parse_textures(t_game *game, int fd)
 		else if (!str_n_cmp("C ", line, 2))
 			game->map.ceil = parse_color(game, skip_spaces(line + 1));
 		else
-			exit_error("direction and color : unexpected caracter", line);
+			exit(EXIT_FAILURE);
 		free(line);
 	}
 }

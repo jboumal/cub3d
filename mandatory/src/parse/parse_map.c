@@ -1,48 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map.c                                       :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/04 20:30:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:24:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
-char	*get_map_str(int fd)
-{
-	t_dy_str	dy_str;
-	char		*line;
-	char		*ptr;
-
-	dy_str = dy_str_new();
-	line = gnl_not_empty(fd);
-	while (line)
-	{
-		ptr = line;
-		while (*ptr)
-		{
-			if (*ptr != '\r')
-				dy_str_append_c(&dy_str, *ptr);
-			ptr++;
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-	while (strchr(" \n\t", dy_str.str[dy_str.len - 1]))
-	{
-		dy_str.str[dy_str.len - 1] = '\0';
-		dy_str.len--;
-	}
-	return (dy_str.str);
-}
-
-void	fill_map_dimensions(char *map_str, t_game *g)
+static void	fill_map_dimensions(char *map_str, t_game *g)
 {
 	size_t	width;
 
@@ -63,34 +33,48 @@ void	fill_map_dimensions(char *map_str, t_game *g)
 	g->map.height++;
 }
 
-void parse_map(char *map_str, t_game *g)
+static void	parse_map_char(char map_char, int i, int j, t_game *g)
 {
-	int i = 0;
-	int j;
-	int player_index;
+	if (map_char == '1')
+		g->map.data[i * g->map.width + j] = 1;
+	else if (map_char == '0')
+		g->map.data[i * g->map.width + j] = 0;
+	else if (ft_strchr("NSWE", map_char))
+	{
+		g->map.data[i * g->map.width + j] = 0;
+		g->player.pos = vector(j, i);
+	}
+	else
+		g->map.data[i * g->map.width + j] = -1;
+}
+
+static void	init_map_data(t_game *g)
+{
+	int	i;
+
+	i = 0;
+	while (i < g->map.width * g->map.height)
+	{
+		g->map.data[i] = -1;
+		i++;
+	}
+}
+
+void	parse_map(char *map_str, t_game *g)
+{
+	int	i;
+	int	j;
 
 	fill_map_dimensions(map_str, g);
 	g->map.data = malloc(g->map.width * g->map.height * sizeof(int));
-	int *ptr = g->map.data;
 	i = 0;
-	for (int k = 0; k < g->map.width * g->map.height; k++)
-		g->map.data[k] = -1;
+	init_map_data(g);
 	while (i < g->map.height)
 	{
 		j = 0;
 		while (*map_str != '\n' && *map_str)
 		{
-			if (*map_str == '1')
-				g->map.data[i * g->map.width + j] = 1;
-			else if (*map_str == '0')
-				g->map.data[i * g->map.width + j] = 0;
-			else if (strchr("NSWE", *map_str))
-			{
-				g->map.data[i * g->map.width + j] = 0;
-				g->player.pos = vector(j, i);
-			}
-			else
-				g->map.data[i * g->map.width + j] = -1;
+			parse_map_char(*map_str, i, j, g);
 			j++;
 			*map_str++;
 		}
