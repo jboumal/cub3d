@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:27 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/20 00:08:28 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:57:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_down(int code, t_game *game)
 {
 	printf("%d\n", code);
-	if (code == K_W)
+	if (code == K_S)
 		game->state.up = true;
 	else if (code == K_S)
 		game->state.down = true;
@@ -23,8 +23,11 @@ int	key_down(int code, t_game *game)
 		game->state.left = true;
 	else if (code == K_D)
 		game->state.right = true;
-	else if (code == K_ESC)
+	else if (code == K_W)
+	{
+		free(game->map.data);
 		exit(EXIT_SUCCESS);
+	}
 	return (0);
 }
 

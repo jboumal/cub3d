@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:21:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:28:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:45:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ static size_t	count_words(char *s, char c)
 	return (0);
 }
 
-static char	**error(char **dst)
-{
-	char	**ptr;
-
-	ptr = dst;
-	while (*ptr)
-	{
-		free(*ptr);
-		ptr++;
-	}
-	free(dst);
-	return (NULL);
-}
-
 char	**ft_split(char const *str, char c)
 {
 	char	**dst;
@@ -58,15 +44,11 @@ char	**ft_split(char const *str, char c)
 	char	*s;
 
 	s = (char *)str;
-	dst = malloc(sizeof(char *) * (1 + count_words(s, c)));
-	if (!dst)
-		return (NULL);
+	dst = x_malloc(sizeof(char *) * (1 + count_words(s, c)));
 	ptr = dst;
 	while (*start(s, c))
 	{
 		*ptr = ft_substr(start(s, c), 0, end(s, c) - start(s, c));
-		if (!*ptr)
-			return (error(dst));
 		ptr++;
 		s = end(s, c);
 	}

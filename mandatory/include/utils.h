@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:27:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:42:27 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,8 @@ int			ft_atoi(const char *str);
 t_vector	vector(double x, double y);
 t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_rotate(t_vector v, double a);
+
+/* x_alloc */
+void		*x_malloc(size_t n);
 
 #endif

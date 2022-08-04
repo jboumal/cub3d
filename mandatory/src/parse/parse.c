@@ -21,6 +21,7 @@ void	parser(char **argv, t_game *game)
 		exit(EXIT_FAILURE);
 	parse_textures(game, fd);
 	parse_map(get_map_str(fd), game);
+	close(fd);
 	game->player.plane.x = 0.66;
 	game->player.plane.y = 0;
 }

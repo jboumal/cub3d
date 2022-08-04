@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 12:10:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:28:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:45:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,16 @@ static void	str_append_buff(char **astr, char *buff, size_t n)
 	if (!astr || !buff || !*buff || !n)
 		return ;
 	len = str_len(*astr);
-	dst = malloc((len + n + 1) * sizeof(char));
-	if (dst)
+	dst = x_malloc((len + n + 1) * sizeof(char));
+	if (len)
+		str_n_cpy(dst, *astr, len);
+	i = 0;
+	while (i < n)
 	{
-		if (len)
-			str_n_cpy(dst, *astr, len);
-		i = 0;
-		while (i < n)
-		{
-			dst[len + i] = buff[i];
-			i++;
-		}
-		dst[len + i] = '\0';
+		dst[len + i] = buff[i];
+		i++;
 	}
+		dst[len + i] = '\0';
 	free(*astr);
 	*astr = dst;
 }
@@ -45,9 +42,8 @@ static void	str_n_del_front(char **astr, size_t n)
 	if (!*astr || !n)
 		return ;
 	n = min(str_len(*astr), n);
-	dst = malloc(((str_len(*astr) - n) + 1) * sizeof(char));
-	if (dst)
-		str_n_cpy(dst, (*astr) + n, str_len((*astr + n)));
+	dst = x_malloc(((str_len(*astr) - n) + 1) * sizeof(char));
+	str_n_cpy(dst, (*astr) + n, str_len((*astr + n)));
 	free(*astr);
 	if (!*dst)
 	{
@@ -90,12 +86,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		str_n_del_front(&reminder, str_len(reminder));
-	buff = malloc(sizeof(char) * BUFFER_SIZE);
-	if (!buff)
-	{
-		str_n_del_front(&reminder, str_len(reminder));
-		return (NULL);
-	}
+	buff = x_malloc(sizeof(char) * BUFFER_SIZE);
 	*buff = '\0';
 	while (!memchr(reminder, '\n', str_len(reminder)))
 	{
