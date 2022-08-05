@@ -6,22 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 10:03:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 11:08:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static enum e_side	get_direction(char c)
-{
-	if (c == 'N')
-		return (N);
-	if (c == 'E')
-		return (E);
-	if (c == 'S')
-		return (S);
-	return (W);
-}
 
 static int	parse_color(char *line)
 {

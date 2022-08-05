@@ -20,6 +20,11 @@ void	parsing_error(char *msg)
 	exit(EXIT_FAILURE);
 }
 
+enum e_side	get_direction(char c)
+{
+	return ((c == 'N') * N + (c == 'S') * S + (c == 'W') * W + (c == 'E') * E);
+}
+
 void	parse(int argc, char **argv, t_game *game)
 {
 	int		fd;
@@ -36,6 +41,4 @@ void	parse(int argc, char **argv, t_game *game)
 	check_map(game);
 	free(map_str);
 	close(fd);
-	game->player.plane.x = 0.66;
-	game->player.plane.y = 0;
 }

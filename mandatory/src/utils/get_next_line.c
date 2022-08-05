@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 12:10:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 23:45:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:48:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*get_line(char *str)
 
 	if (!str)
 		return (NULL);
-	ptr = memchr(str, '\n', str_len(str));
+	ptr = ft_memchr(str, '\n', str_len(str));
 	if (!ptr)
 		ptr = str + str_len(str);
 	return (str_n_dup(str, ptr + 1 - str));
@@ -71,7 +71,7 @@ static void	cut_line(char **astr)
 
 	if (!*astr)
 		return ;
-	ptr = memchr(*astr, '\n', str_len(*astr));
+	ptr = ft_memchr(*astr, '\n', str_len(*astr));
 	if (!ptr)
 		ptr = *astr + str_len(*astr);
 	str_n_del_front(astr, ptr + 1 - *astr);
@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 		str_n_del_front(&reminder, str_len(reminder));
 	buff = x_malloc(sizeof(char) * BUFFER_SIZE);
 	*buff = '\0';
-	while (!memchr(reminder, '\n', str_len(reminder)))
+	while (!ft_memchr(reminder, '\n', str_len(reminder)))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		str_append_buff(&reminder, buff, bytes_read);

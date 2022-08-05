@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 09:34:59 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 10:21:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 11:08:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,20 @@ typedef struct s_game
 }	t_game;
 
 /* check_map */
-void	check_map(t_game *g);
+void		check_map(t_game *g);
 
 /* get_map_str */
-char	*get_map_str(int fd);
+char		*get_map_str(int fd);
 
 /* parse_map */
-void	parse_map(char *map_str, t_game *g);
+void		parse_map(char *map_str, t_game *g);
 
 /* parse_textures */
-void	parse_textures(t_game *game, int fd);
+void		parse_textures(t_game *game, int fd);
 
 /* parse */
-void	parsing_error(char *msg);
-void	parse(int argc, char **argv, t_game *game);
+void		parsing_error(char *msg);
+enum e_side	get_direction(char c);
+void		parse(int argc, char **argv, t_game *game);
 
 #endif

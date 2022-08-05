@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/05 10:08:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 11:50:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ static void	fill_map_dimensions(char *map_str, t_game *g)
 	g->map.height++;
 }
 
+static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
+{
+	g->player.pos = vector(j, i);
+	g->player.dir.y = (direction == S) - (direction == N);
+	g->player.dir.x = (direction == E) - (direction == W);
+	g->player.plane.x = 0.66 * g->player.dir.y;
+	g->player.plane.y = -0.66 * g->player.dir.x;
+}
+
 static void	parse_map_char(char map_char, int i, int j, t_game *g)
 {
 	if (map_char == '1')
@@ -42,10 +51,12 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 	else if (ft_strchr("NSWE", map_char))
 	{
 		g->map.data[i * g->map.width + j] = 0;
-		g->player.pos = vector(j, i);
+		set_player(i, j, get_direction(map_char), g);
 	}
-	else
+	else if (ft_strchr(SPACES, map_char))
 		g->map.data[i * g->map.width + j] = -1;
+	else
+		parsing_error("invalid character in map");
 }
 
 static void	init_map_data(t_game *g)
@@ -81,5 +92,4 @@ void	parse_map(char *map_str, t_game *g)
 			map_str += (*map_str == '\n');
 		i++;
 	}
-	g->player.dir = vector(0, 1);
 }

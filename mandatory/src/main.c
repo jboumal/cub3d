@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 08:39:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 09:36:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:49:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	initialize(t_game *game)
 {
-	memset(game, 0, sizeof(t_game));
+	ft_memset(game, 0, sizeof(t_game));
 	game->map.floor = -1;
 	game->map.ceil = -1;
 	game->mlx = mlx_init();

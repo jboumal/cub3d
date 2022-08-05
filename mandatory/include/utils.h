@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 08:49:45 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:47:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ typedef struct s_vector
 }	t_vector;
 
 /* copy */
+void		*ft_memset(void *b, int c, size_t len);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void		str_n_cpy(char *dst, char *src, size_t len);
 
 /* find */
+void		*ft_memchr(const void *s, int c, size_t n);
 char		*ft_strchr(const char *s, int c);
 char		*skip_spaces(char *s);
 

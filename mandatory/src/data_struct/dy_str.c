@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:01:39 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 09:37:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:49:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_dy_str	dy_str_new(void)
 void	dy_str_destroy(t_dy_str *dy_str)
 {
 	free(dy_str->str);
-	memset(dy_str, 0, sizeof(t_dy_str));
+	ft_memset(dy_str, 0, sizeof(t_dy_str));
 }
 
 void	dy_str_grow(t_dy_str *dy_str)

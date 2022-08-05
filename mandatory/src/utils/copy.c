@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_copy.c                                         :+:      :+:    :+:   */
+/*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 22:00:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:28:29 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:46:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	if (len)
+	{
+		*(unsigned char *)b = c;
+		ft_memset(b + 1, c, len - 1);
+	}
+	return (b);
+}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
