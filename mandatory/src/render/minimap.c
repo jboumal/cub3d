@@ -66,8 +66,10 @@ void	render_minimap(t_data *img, t_game *game)
 		rect.y = (i / map.width) * TILEMAP_SIZE;
 		if (map.data[i] == 1)
 			rect.color = 0x4B7A68;
-		if (map.data[i] == 0)
+		else if (map.data[i] == 0)
 			rect.color = 0x7CE7D6;
+		else
+			rect.color = 0;
 		render_rect(img, rect);
 		i++;
 	}
