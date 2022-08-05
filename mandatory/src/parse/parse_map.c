@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/04 23:50:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:08:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 
 static void	init_map_data(t_game *g)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < g->map.width * g->map.height)
@@ -62,8 +62,8 @@ static void	init_map_data(t_game *g)
 
 void	parse_map(char *map_str, t_game *g)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	fill_map_dimensions(map_str, g);
 	g->map.data = x_malloc(g->map.width * g->map.height * sizeof(int));
@@ -76,11 +76,10 @@ void	parse_map(char *map_str, t_game *g)
 		{
 			parse_map_char(*map_str, i, j, g);
 			j++;
-			*map_str++;
+			map_str++;
 		}
 			map_str += (*map_str == '\n');
 		i++;
 	}
 	g->player.dir = vector(0, 1);
-	free(map_str);
 }

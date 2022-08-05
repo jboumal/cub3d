@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 09:32:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 00:06:54 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/05 09:34:59 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/05 10:21:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSE_H
+# define PARSE_H
 
 # include "cub3d.h"
 
@@ -72,6 +72,9 @@ typedef struct s_game
 	t_texture	textures[4];
 }	t_game;
 
+/* check_map */
+void	check_map(t_game *g);
+
 /* get_map_str */
 char	*get_map_str(int fd);
 
@@ -82,6 +85,7 @@ void	parse_map(char *map_str, t_game *g);
 void	parse_textures(t_game *game, int fd);
 
 /* parse */
-void	parser(char **argv, t_game *game);
+void	parsing_error(char *msg);
+void	parse(int argc, char **argv, t_game *game);
 
 #endif

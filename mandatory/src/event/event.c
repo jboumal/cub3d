@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:27 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/05 08:35:50 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:29:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	quit(t_game *game)
 		mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
 		i++;
 	}
-	mlx_destroy_display(game->mlx);
 	free(game->map.data);
 	exit(EXIT_SUCCESS);
 	return (0);

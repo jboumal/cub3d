@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/04 22:06:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:35:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # include "utils.h"
 # include "data_struct.h"
-# include "parser.h"
+# include "parse.h"
 # include "gameloop.h"
 # include "event.h"
 # include "render.h"

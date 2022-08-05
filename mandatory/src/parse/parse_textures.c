@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 08:33:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:03:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static enum e_side	get_direction(char c)
 	return (W);
 }
 
-static int	parse_color(t_game *game, char *line)
+static int	parse_color(char *line)
 {
 	int		color;
 	int		i;
@@ -58,7 +58,7 @@ static void	load_texture(t_game *game, char direction, char *path_to_texture)
 			&game->textures[side].width,
 			&game->textures[side].height);
 	if (!img)
-		exit(EXIT_FAILURE);
+		parsing_error("invalid texture path");
 	game->textures[side].img = (unsigned int *)mlx_get_data_addr(
 			img,
 			&bits_per_pixel,
@@ -91,11 +91,11 @@ void	parse_textures(t_game *game, int fd)
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
 			load_texture(game, line[0], skip_spaces(line + 3));
 		else if (!str_n_cmp("F ", line, 2))
-			game->map.floor = parse_color(game, skip_spaces(line + 1));
+			game->map.floor = parse_color(skip_spaces(line + 1));
 		else if (!str_n_cmp("C ", line, 2))
-			game->map.ceil = parse_color(game, skip_spaces(line + 1));
+			game->map.ceil = parse_color(skip_spaces(line + 1));
 		else
-			exit(EXIT_FAILURE);
+			parsing_error("invalid identifier");
 		free(line);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/08/05 08:49:08 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/08/05 10:09:12 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = cub3d
 SRC = 	main.c \
 		event/event.c \
 		gameloop/update_cam.c gameloop/gameloop.c \
-		parse/parse.c parse/parse_map.c parse/parse_textures.c parse/get_map_str.c\
+		parse/check_map.c parse/parse.c parse/parse_map.c parse/parse_textures.c parse/get_map_str.c\
 		render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
 		utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/utils.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
 		data_struct/dy_str.c
