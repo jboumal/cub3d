@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/05 11:50:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:01:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	fill_map_dimensions(char *map_str, t_game *g)
 
 static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 {
+	if (g->player.pos.x)
+		parsing_error("mutiple player position in map");
 	g->player.pos = vector(j, i);
 	g->player.dir.y = (direction == S) - (direction == N);
 	g->player.dir.x = (direction == E) - (direction == W);
@@ -92,4 +94,6 @@ void	parse_map(char *map_str, t_game *g)
 			map_str += (*map_str == '\n');
 		i++;
 	}
+	if (!g->player.pos.x)
+		parsing_error("no player position given in map");
 }

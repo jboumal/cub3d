@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 10:47:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:16:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 /* str_arr */
 void		str_arr_free(char **str);
+size_t		str_arr_len(char **str);
 
 /* utils */
 int			ft_atoi(const char *str);

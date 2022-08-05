@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 11:08:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:27:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	parse_color(char *line)
 	char	**arr;
 
 	arr = ft_split(line, ',');
+	if (str_arr_len(arr) != 3)
+		parsing_error("invalid color arguments");
 	i = 0;
 	color = 0;
 	while (arr[i])

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:28:42 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 09:37:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:16:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,14 @@ void	str_arr_free(char **str)
 		i++;
 	}
 	free(str);
+}
+
+size_t	str_arr_len(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
