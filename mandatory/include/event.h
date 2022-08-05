@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 15:02:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 08:22:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # endif
 
 /*event*/
+int	quit(t_game *game);
 int	key_down(int code, t_game *game);
 int	key_release(int code, t_game *game);
 

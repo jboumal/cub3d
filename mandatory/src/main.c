@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 16:05:59 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/04 17:16:55 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/05 08:39:14 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/05 08:39:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ static void	initialize(t_game *game)
 	game->map.ceil = -1;
 	game->mlx = mlx_init();
 	game->window = mlx_new_window(game->mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
-}
-
-int	quit(void *args)
-{
-	(void) args;
-	exit(EXIT_SUCCESS);
-	return (0);
 }
 
 int	main(int argc, char **argv)

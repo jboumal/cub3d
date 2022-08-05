@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/04 22:30:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 08:33:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static void	remove_ending_spaces(t_dy_str *dy_str)
 {
 	while (ft_strchr(" \t\n", dy_str->str[dy_str->len - 1]))
-	{
-		dy_str->str[dy_str->len - 1] = '\0';
-		dy_str->len--;
-	}
+		dy_str_pop_back(dy_str);
 }
 
 char	*get_map_str(int fd)
@@ -28,7 +25,7 @@ char	*get_map_str(int fd)
 	char		*ptr;
 
 	dy_str = dy_str_new();
-	line = get_first_non_empty_line(fd);
+	line = get_next_non_empty_line(fd);
 	while (line)
 	{
 		ptr = line;

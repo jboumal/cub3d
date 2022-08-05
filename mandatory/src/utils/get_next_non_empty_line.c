@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_first_non_empty_line.c                         :+:      :+:    :+:   */
+/*   get_next_non_empty_line.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@ static bool	is_empty_line(char *line)
 	return (*line == '\n' || *line == '\r');
 }
 
-char	*get_first_non_empty_line(int fd)
+char	*get_next_non_empty_line(int fd)
 {
 	char	*line;
 
@@ -29,7 +29,7 @@ char	*get_first_non_empty_line(int fd)
 	if (line && is_empty_line(line))
 	{
 		free(line);
-		return (get_first_non_empty_line(fd));
+		return (get_next_non_empty_line(fd));
 	}
 	return (line);
 }

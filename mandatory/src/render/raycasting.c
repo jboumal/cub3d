@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/03 08:34:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 08:44:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	while (y < SCREEN_H)
 	{
 		if (y < var->draw_start)
-			my_mlx_pixel_put(img, x, y, 0x0087ceeb);
+			my_mlx_pixel_put(img, x, y, g->map.ceil);
 		else if (y > var->draw_end)
-			my_mlx_pixel_put(img, x, y, 0xf5deb3);
+			my_mlx_pixel_put(img, x, y, g->map.floor);
 		else
 		{
 			tex = (y - var->draw_start) * H / (var->line_height);

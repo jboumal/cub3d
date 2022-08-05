@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/04 19:59:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 08:47:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ typedef struct s_draw_line_var
 	int		draw_end;
 	t_ray	*ray;
 }	t_draw_line_var;
-
-/*init*/
-void	load_textures(t_game *game);
 
 /*dda*/
 void	dda(t_ray *ray, t_game *game);

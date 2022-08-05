@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 00:07:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 08:33:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	parse_textures(t_game *game, int fd)
 
 	while (!is_full(game))
 	{
-		line = get_first_non_empty_line(fd);
+		line = get_next_non_empty_line(fd);
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
 			load_texture(game, line[0], skip_spaces(line + 3));
 		else if (!str_n_cmp("F ", line, 2))
