@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 12:27:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:50:28 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	parse_color(char *line)
 	int		color;
 	int		i;
 	char	**arr;
+	int		n;
 
 	arr = ft_split(line, ',');
 	if (str_arr_len(arr) != 3)
@@ -26,7 +27,9 @@ static int	parse_color(char *line)
 	while (arr[i])
 	{
 		color <<= 8;
-		color += ft_atoi(arr[i]);
+		if (atoui8_error(arr[i], &n))
+			parsing_error("invalid color value");
+		color += n;
 		i++;
 	}
 	str_arr_free(arr);

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 12:16:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:59:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+/* ato */
+bool		atoui8_error(const char *s, int *n);
 
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);
@@ -62,9 +65,6 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 /* str_arr */
 void		str_arr_free(char **str);
 size_t		str_arr_len(char **str);
-
-/* utils */
-int			ft_atoi(const char *str);
 
 /* vector */
 t_vector	vector(double x, double y);
