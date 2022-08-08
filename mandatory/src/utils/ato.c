@@ -17,7 +17,6 @@ bool	atoui8_error(const char *s, int *n)
 	int			sum;
 
 	sum = 0;
-	printf("%s\n", s);
 	while (ft_strchr(SPACES, *s))
 		s++;
 	while (*s >= '0' && *s <= '9')
