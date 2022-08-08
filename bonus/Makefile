@@ -6,7 +6,7 @@
 #    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/08/08 14:32:48 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/08/08 16:24:40 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CC = gcc
 
 ifeq ($(shell uname), Linux)
 #CFLAGS = -Wall -Wextra -Werror -D LINUX
-	CFLAGS = -I$(INCLUDES) -D LINUX -fsanitize=leak
+	CFLAGS = -I$(INCLUDES) -D LINUX
 #	LIB = -lmlx -lXext -lX11 -lm
 	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else

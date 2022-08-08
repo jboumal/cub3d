@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:05:46 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/07/20 00:09:04 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:28:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ t_vector	vector(double x, double y)
 t_vector	vector_add(t_vector v1, t_vector v2)
 {
 	return (vector(v1.x + v2.x, v1.y + v2.y));
+}
+
+t_vector	vector_scalar_multiplication(t_vector v, double a)
+{
+	return (vector(v.x * a, v.y * a));
 }
 
 t_vector	vector_rotate(t_vector v, double a)

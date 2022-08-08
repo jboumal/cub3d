@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/07 18:59:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:28:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ size_t		str_arr_len(char **str);
 /* vector */
 t_vector	vector(double x, double y);
 t_vector	vector_add(t_vector v1, t_vector v2);
+t_vector	vector_scalar_multiplication(t_vector v, double a);
 t_vector	vector_rotate(t_vector v, double a);
 
 /* x_alloc */
