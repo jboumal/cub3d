@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:47:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/07 18:59:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/08 03:04:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ typedef struct s_map
 	size_t	height;
 	int		ceil;
 	int		floor;
-	t_data	*no;
-	t_data	*so;
-	t_data	*we;
-	t_data	*ea;
 }	t_map;
 
 typedef struct s_player
