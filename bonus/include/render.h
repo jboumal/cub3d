@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/08 16:49:48 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:53:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ enum e_side
 	W
 };
 
-typedef struct s_floor
+typedef struct s_scanline
 {
 	t_vector	step;
-	t_vector	column;
-}	t_floor;
+	t_vector	floor;
+}	t_scanline;
 
 typedef struct s_ray
 {
