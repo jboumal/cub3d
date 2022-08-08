@@ -4,3 +4,4 @@ cub3d
 .DS_Store
 mlx_linux
 *.json
+.clangd*
