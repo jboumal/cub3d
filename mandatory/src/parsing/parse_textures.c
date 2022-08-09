@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/07 18:50:28 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:27:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	parse_color(char *line)
 	int		color;
 	int		i;
 	char	**arr;
-	int		n;
+	uint8_t	n;
 
 	arr = ft_split(line, ',');
 	if (str_arr_len(arr) != 3)

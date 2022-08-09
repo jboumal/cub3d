@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/05 08:47:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:20:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,20 @@ typedef struct s_draw_line_var
 	t_ray	*ray;
 }	t_draw_line_var;
 
-/*dda*/
+/* dda */
 void	dda(t_ray *ray, t_game *game);
 
-/*minimap*/
+/* minimap */
 void	render_minimap(t_data *img, t_game *game);
 
-/*mlx_utils*/
+/* mlx_utils */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_data	get_new_img(t_game *game);
 
-/*raycasting*/
+/* raycasting */
 void	raycasting(int x, t_data *img, t_game *game);
 
-/*render*/
+/* render */
 void	render(t_game *game);
 
 #endif

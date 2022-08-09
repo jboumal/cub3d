@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/07 18:59:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:23:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_vector
 }	t_vector;
 
 /* ato */
-bool		atoui8_error(const char *s, int *n);
+bool		atoui8_error(const char *s, uint8_t *n);
 
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);
@@ -39,14 +39,14 @@ char		*skip_spaces(char *s);
 /* get_next_line */
 char		*get_next_line(int fd);
 
-/*get_next_non_empty_line */
+/* get_next_non_empty_line */
 char		*get_next_non_empty_line(int fd);
 
 /* min_max */
 int64_t		min(int64_t a, int64_t b);
 int64_t		max(int64_t a, int64_t b);
 
-/*put*/
+/* put */
 void		dputstr(int fd, char *s);
 
 /* split */

@@ -38,7 +38,7 @@
 #  define K_ESC 53
 # endif
 
-/*event*/
+/* event */
 int	quit(t_game *game);
 int	key_down(int code, t_game *game);
 int	key_release(int code, t_game *game);
