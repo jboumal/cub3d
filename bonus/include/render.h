@@ -76,5 +76,6 @@ void	raycasting(int x, t_data *img, t_game *game);
 
 /* render */
 void	render(t_game *game);
+void	load_floor_texture(t_game *game);
 
 #endif

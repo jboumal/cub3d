@@ -66,6 +66,7 @@ typedef struct s_game
 	t_player	player;
 	t_state		state;
 	t_texture	textures[4];
+	t_texture	floor;
 }	t_game;
 
 /* check_map */
