@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:39:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/07 18:57:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:26:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	atoui8_error(const char *s, int *n)
+bool	atoui8_error(const char *s, uint8_t *n)
 {
 	int			sum;
 

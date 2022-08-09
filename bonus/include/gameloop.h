@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 14:50:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:22:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 
-/*gameloop*/
+/* gameloop */
 int		game_loop(t_game *game);
 
-/*update_cam*/
+/* update_cam */
 void	translate_cam(t_game *game);
 void	rotate_cam(t_game *game);
 
