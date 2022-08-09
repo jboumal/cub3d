@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 
+void	load_floor_texture(t_game *game)
+{
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	void	*img;
+
+	img = mlx_xpm_file_to_image(game->mlx, "img/floor.xpm",
+			&game->floor.width, &game->floor.height);
+	if (!img)
+		parsing_error("error when loading door texture");
+	game->floor.img = (unsigned int *) mlx_get_data_addr(img,
+			&bits_per_pixel, &size_line, &endian);
+}
+
 static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 {
 	int	x;
@@ -26,7 +41,7 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 		ty = (int)(H * (scanline->floor.y - (int)scanline->floor.y)) & (H - 1);
 		scanline->floor.x += scanline->step.x;
 		scanline->floor.y += scanline->step.y;
-		color = g->textures[0].img[H * ty + tx];
+		color = g->floor.img[H * ty + tx];
 		my_mlx_pixel_put(img, x, y, color);
 		x++;
 	}
