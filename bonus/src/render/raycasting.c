@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/08 14:43:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:54:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	while (y < SCREEN_H)
 	{
 		if (y < var->draw_start)
-			my_mlx_pixel_put(img, x, y, g->map.ceil);
+			;
 		else if (y > var->draw_end)
 			;
 		else

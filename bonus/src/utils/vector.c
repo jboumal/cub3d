@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 13:05:46 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/08 16:28:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:55:48 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ t_vector	vector_scalar_multiplication(t_vector v, double a)
 t_vector	vector_rotate(t_vector v, double a)
 {
 	return (vector(v.x * cos(a) - v.y * sin(a), v.x * sin(a) + v.y * cos(a)));
+}
+
+double	vector_norme(t_vector v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y));
 }

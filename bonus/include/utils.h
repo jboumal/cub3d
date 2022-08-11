@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/09 13:23:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:56:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_vector	vector(double x, double y);
 t_vector	vector_add(t_vector v1, t_vector v2);
 t_vector	vector_scalar_multiplication(t_vector v, double a);
 t_vector	vector_rotate(t_vector v, double a);
+double		vector_norme(t_vector v);
 
 /* x_alloc */
 void		*x_malloc(size_t n);

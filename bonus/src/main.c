@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 08:39:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 12:05:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:04:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	initialize(&game);
 	parse(argc, argv, &game);
 	load_floor_texture(&game);
+	load_sky_texture(&game);
 	game.window = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);

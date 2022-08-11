@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:32:24 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/08 16:54:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:29:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	floorcasting(int y, t_data *img, t_game *g)
 	scanline.floor.x = g->player.pos.x + row_dist * ray_dir_0.x;
 	scanline.floor.y = g->player.pos.y + row_dist * ray_dir_0.y;
 	draw_line(y, &scanline, img, g);
-	if (y < SCREEN_H - 1)
-		return (floorcasting(y + 1, img, g));
+	if (y > SCREEN_H / 2)
+		return (floorcasting(y - 1, img, g));
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:47:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/08 14:31:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:04:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_game
 	t_state		state;
 	t_texture	textures[4];
 	t_texture	floor;
+	t_texture	sky;
 }	t_game;
 
 /* check_map */
