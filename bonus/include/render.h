@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/10 21:06:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:10:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_draw_line_var
 void	dda(t_ray *ray, t_game *game);
 
 /* floorcasting */
-void	floorcasting(int y, t_data *img, t_game *game);
+void	floorcasting(int y0, int y1, t_data *img, t_game *game);
 
 /* minimap */
 void	render_minimap(t_data *img, t_game *game);
@@ -72,7 +72,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_data	get_new_img(t_game *game);
 
 /* raycasting */
-void	raycasting(int x, t_data *img, t_game *game);
+void	raycasting(int x0, int x1, t_data *img, t_game *game);
 
 /* render */
 void	render(t_game *game);
@@ -80,6 +80,6 @@ void	load_floor_texture(t_game *game);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
-void	skycasting(int x, t_data *img, t_game *g);
+void	skycasting(int x0, int x1, t_data *img, t_game *g);
 
 #endif

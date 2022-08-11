@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/11 17:54:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:17:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	}
 }
 
-void	raycasting(int x, t_data *img, t_game *g)
+void	raycasting(int x0, int x1, t_data *img, t_game *g)
 {
 	double			camera_x;
 	t_ray			ray;
 	t_draw_line_var	var;
 
-	camera_x = 2 * x / (double) SCREEN_W - 1;
+	camera_x = 2 * x0 / (double) SCREEN_W - 1;
 	ray.dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray.dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
-	draw_line(x, &var, img, g);
-	if (x + 1 < SCREEN_W)
-		return (raycasting(x + 1, img, g));
+	draw_line(x0, &var, img, g);
+	if (x0 < x1)
+		return (raycasting(x0 + 1, x1, img, g));
 }

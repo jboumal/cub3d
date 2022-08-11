@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:32:24 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/11 01:29:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:17:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 	}
 }
 
-void	floorcasting(int y, t_data *img, t_game *g)
+void	floorcasting(int y0, int y1, t_data *img, t_game *g)
 {
 	t_vector	ray_dir_0;
 	t_vector	ray_dir_1;
@@ -58,12 +58,12 @@ void	floorcasting(int y, t_data *img, t_game *g)
 			g->player.dir,
 			vector_scalar_multiplication(g->player.plane, -1));
 	ray_dir_1 = vector_add(g->player.dir, g->player.plane);
-	row_dist = (0.5 * SCREEN_H) / (y - SCREEN_H / 2);
+	row_dist = (0.5 * SCREEN_H) / (y0 - SCREEN_H / 2);
 	scanline.step.x = row_dist * (ray_dir_1.x - ray_dir_0.x) / SCREEN_W;
 	scanline.step.y = row_dist * (ray_dir_1.y - ray_dir_0.y) / SCREEN_W;
 	scanline.floor.x = g->player.pos.x + row_dist * ray_dir_0.x;
 	scanline.floor.y = g->player.pos.y + row_dist * ray_dir_0.y;
-	draw_line(y, &scanline, img, g);
-	if (y > SCREEN_H / 2)
-		return (floorcasting(y - 1, img, g));
+	draw_line(y0, &scanline, img, g);
+	if (y0 < y1)
+		return (floorcasting(y0 + 1, y1, img, g));
 }
