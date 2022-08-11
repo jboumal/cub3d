@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/11 15:20:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 22:56:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <pthread.h>
 
 # include "utils.h"
 # include "data_struct.h"
@@ -32,8 +33,8 @@
 # include "event.h"
 # include "render.h"
 
-# define SCREEN_W 1280
-# define SCREEN_H 720
+# define SCREEN_W 1600
+# define SCREEN_H 900
 # define SCREEN_TITLE "cub3d"
 
 #endif

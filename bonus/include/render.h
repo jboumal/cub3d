@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/11 21:10:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/11 23:14:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define TILEMAP_SIZE 12
 # define H 128
+
+# define N_THREAD 8
 
 enum e_side
 {
@@ -57,6 +59,13 @@ typedef struct s_draw_line_var
 	int		draw_end;
 	t_ray	*ray;
 }	t_draw_line_var;
+
+typedef struct s_th_arg
+{
+	int		i;
+	t_game	*game;
+	t_data	*img;
+}	t_th_arg;
 
 /* dda */
 void	dda(t_ray *ray, t_game *game);
