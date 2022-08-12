@@ -48,6 +48,10 @@ typedef struct s_state
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	r_left;
+	bool	r_right;
+	int		m_left;
+	int		m_right;
 }	t_state;
 
 typedef struct s_texture

@@ -21,12 +21,14 @@ SRC = 	main.c \
 		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c\
 		render/routines.c render/skycasting.c render/floorcasting.c render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
 		utils/ato.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
+		utils/mlx_mouse.m \
 		data_struct/dy_str.c
 
 SRC		:= $(addprefix src/,$(SRC))
 
 INCLUDES = include
-OBJ = $(SRC:.c=.o)
+OBJ1 = $(SRC:.c=.o)
+OBJ = $(OBJ1:.m=.o)
 CC = gcc
 
 ifeq ($(shell uname), Linux)

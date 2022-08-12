@@ -17,7 +17,7 @@
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
-
+# define MRS 0.003 // Mouse rotation speed
 /* gameloop */
 int		game_loop(t_game *game);
 

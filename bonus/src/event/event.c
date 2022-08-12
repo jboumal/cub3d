@@ -30,14 +30,18 @@ int	quit(t_game *game)
 
 int	key_down(int code, t_game *game)
 {
-	if (code == K_W)
+	if (code == K_W || code == K_UP)
 		game->state.up = true;
-	else if (code == K_S)
+	else if (code == K_S || code == K_DOWN)
 		game->state.down = true;
 	else if (code == K_A)
 		game->state.left = true;
 	else if (code == K_D)
 		game->state.right = true;
+	else if (code == K_LEFT)
+		game->state.r_left = true;
+	else if (code == K_RIGHT)
+		game->state.r_right = true;
 	else if (code == K_ESC)
 		quit(game);
 	return (0);
@@ -45,13 +49,29 @@ int	key_down(int code, t_game *game)
 
 int	key_release(int code, t_game *game)
 {
-	if (code == K_W)
+	printf("code %d\n", code);
+	if (code == K_W || code == K_UP)
 		game->state.up = false;
-	else if (code == K_S)
+	else if (code == K_S || code == K_DOWN)
 		game->state.down = false;
 	else if (code == K_A)
 		game->state.left = false;
 	else if (code == K_D)
 		game->state.right = false;
+	else if (code == K_LEFT)
+		game->state.r_left = false;
+	else if (code == K_RIGHT)
+		game->state.r_right = false;
 	return (0);
+}
+
+int	mouse_hook(int x, int y, t_game *game)
+{
+	(void) y;
+	if (x < 400)
+		game->state.m_left = 400 - x;
+	else if (x > 400)
+		game->state.m_right = x - 400;
+	mouse_move(500, 500);
+	return(0);
 }

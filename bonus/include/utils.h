@@ -14,7 +14,6 @@
 # define UTILS_H
 
 # include "cub3d.h"
-
 # define BUFFER_SIZE 1024
 
 typedef struct s_vector
@@ -75,5 +74,9 @@ double		vector_norme(t_vector v);
 
 /* x_alloc */
 void		*x_malloc(size_t n);
+
+/* mlx mouse */
+int			mouse_hide(void);
+int			mouse_move(int x, int y);
 
 #endif

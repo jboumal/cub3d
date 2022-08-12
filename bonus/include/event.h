@@ -17,6 +17,7 @@
 
 # define K_PRESS_EVENT 2
 # define K_RELEASE_EVENT 3
+# define MOUSE_MOVE 6
 # define DESTROY_NOTIFY_EVENT 17
 
 # define NO_EVENT_MASK 0
@@ -36,11 +37,16 @@
 #  define K_S 1
 #  define K_D 2
 #  define K_ESC 53
+#  define K_RIGHT 124
+#  define K_DOWN 125
+#  define K_LEFT 123
+#  define K_UP 126
 # endif
 
 /* event */
 int	quit(t_game *game);
 int	key_down(int code, t_game *game);
 int	key_release(int code, t_game *game);
+int	mouse_hook(int x, int y, t_game *game);
 
 #endif

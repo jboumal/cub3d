@@ -18,6 +18,8 @@ static void	initialize(t_game *game)
 	game->map.floor = -1;
 	game->map.ceil = -1;
 	game->mlx = mlx_init();
+	game->state.m_left = 0;
+	game->state.m_right = 0;
 }
 
 int	main(int argc, char **argv)
@@ -32,6 +34,11 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);
+	if (MAC)
+	{
+		mlx_hook(game.window, MOUSE_MOVE, NO_EVENT_MASK, mouse_hook, &game);
+		mouse_hide();
+	}
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
