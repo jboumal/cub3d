@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/11 17:56:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/12 16:36:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 /* str_arr */
 void		str_arr_free(char **str);
 size_t		str_arr_len(char **str);
+
+/* swap */
+void		swap_int(int *a, int *b);
 
 /* vector */
 t_vector	vector(double x, double y);

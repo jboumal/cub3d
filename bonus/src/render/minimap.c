@@ -40,13 +40,13 @@ int	render_rect(t_data *img, t_rect rect)
 	return (0);
 }
 
-void	render_miniplayer(t_data *img, t_game *game)
+void	render_miniplayer(t_data *img, t_game *g)
 {
 	t_rect	rect;
 
 	init_rect(&rect, 6);
-	rect.x = game->player.pos.x * TILEMAP_SIZE - 6 / 2;
-	rect.y = game->player.pos.y * TILEMAP_SIZE - 6 / 2;
+	rect.x = g->player.pos.x * TILEMAP_SIZE - 6 / 2;
+	rect.y = (g->map.height - g->player.pos.y) * TILEMAP_SIZE - 6 / 2;
 	rect.color = 0xFF0000;
 	render_rect(img, rect);
 }
@@ -63,7 +63,7 @@ void	render_minimap(t_data *img, t_game *game)
 	while (i < map.height * map.width)
 	{
 		rect.x = (i % map.width) * TILEMAP_SIZE;
-		rect.y = (i / map.width) * TILEMAP_SIZE;
+		rect.y = ((map.height * map.width - 1 - i) / map.width) * TILEMAP_SIZE;
 		if (map.data[i] == 1)
 			rect.color = 0x4B7A68;
 		else if (map.data[i] == 0)

@@ -25,6 +25,27 @@ enum e_side	get_direction(char c)
 	return ((c == 'N') * N + (c == 'S') * S + (c == 'W') * W + (c == 'E') * E);
 }
 
+static void	invert_map_rows(t_game *g)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < g->map.height / 2)
+	{
+		j = 0;
+		while (j < g->map.width)
+		{
+			swap_int(
+				&g->map.data[i * g->map.width + j],
+				&g->map.data[(g->map.height - 1 - i) * g->map.width + j]);
+			j++;
+		}
+		i++;
+	}
+	g->player.pos.y = g->map.height - 1 - g->player.pos.y;
+}
+
 void	parse(int argc, char **argv, t_game *game)
 {
 	int		fd;
@@ -39,6 +60,7 @@ void	parse(int argc, char **argv, t_game *game)
 	map_str = get_map_str(fd);
 	parse_map(map_str, game);
 	check_map(game);
+	invert_map_rows(game);
 	free(map_str);
 	close(fd);
 }
