@@ -67,15 +67,10 @@ int	key_release(int code, t_game *game)
 int	mouse_hook(int x, int y, t_game *game)
 {
 	(void) y;
-	printf("%d\n", x);
-	printf("%p\n", game);
 	if (x < 400)
 		game->state.m_left = 400 - x;
 	else if (x > 400)
 		game->state.m_right = x - 400;
-	if (MAC)
-		mouse_move(game, 500, 500);
-	else
-		mouse_move(game, 400, 400);
+	mouse_move(game, 400, 400);
 	return(0);
 }

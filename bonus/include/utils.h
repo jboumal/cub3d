@@ -78,4 +78,8 @@ double		vector_norme(t_vector v);
 /* x_alloc */
 void		*x_malloc(size_t n);
 
+/* mac mouse functions */
+int	mac_mouse_hide(void);
+int	mac_mouse_move(int x, int y);
+
 #endif
