@@ -1,6 +1,6 @@
 # 42 cub3d
 ## Todo
-- Test parsing
 - Minimap: change dot to arrow
+- Add thin walls for doors
 - Animate doors
-- Rotate the point of view with the mouse
+- Test parsing (especially when doors implemented)
