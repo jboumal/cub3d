@@ -49,7 +49,6 @@ int	key_down(int code, t_game *game)
 
 int	key_release(int code, t_game *game)
 {
-	printf("code %d\n", code);
 	if (code == K_W || code == K_UP)
 		game->state.up = false;
 	else if (code == K_S || code == K_DOWN)
@@ -68,10 +67,15 @@ int	key_release(int code, t_game *game)
 int	mouse_hook(int x, int y, t_game *game)
 {
 	(void) y;
+	printf("%d\n", x);
+	printf("%p\n", game);
 	if (x < 400)
 		game->state.m_left = 400 - x;
 	else if (x > 400)
 		game->state.m_right = x - 400;
-	mouse_move(500, 500);
+	if (MAC)
+		mouse_move(game, 500, 500);
+	else
+		mouse_move(game, 400, 400);
 	return(0);
 }

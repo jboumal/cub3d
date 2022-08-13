@@ -91,4 +91,8 @@ void		parsing_error(char *msg);
 enum e_side	get_direction(char c);
 void		parse(int argc, char **argv, t_game *game);
 
+/* mlx mouse */
+int			mouse_hide(t_game *game);
+int			mouse_move(t_game *game, int x, int y);
+
 #endif

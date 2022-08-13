@@ -78,8 +78,4 @@ double		vector_norme(t_vector v);
 /* x_alloc */
 void		*x_malloc(size_t n);
 
-/* mlx mouse */
-int			mouse_hide(void);
-int			mouse_move(int x, int y);
-
 #endif

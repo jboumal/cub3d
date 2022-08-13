@@ -1,12 +1,12 @@
 #import <Cocoa/Cocoa.h>
 
-int	mouse_hide(void)
+int	mac_mouse_hide(void)
 {
 	[NSCursor hide];
 	return (0);
 }
 
-int	mouse_move(int x, int y)
+int	mac_mouse_move(int x, int y)
 {
 	CGPoint	point;
 
