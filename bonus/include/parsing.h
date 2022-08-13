@@ -95,4 +95,7 @@ void		parse(int argc, char **argv, t_game *game);
 int			mouse_hide(t_game *game);
 int			mouse_move(t_game *game, int x, int y);
 
+/* linux mouse function */
+void    my_mouse_hook(t_game *game);
+
 #endif

@@ -37,6 +37,8 @@ static void	game_update(t_game *game)
 int	game_loop(t_game *game)
 {
 	fps_counter();
+	if (LINUX)
+		my_mouse_hook(game);
 	game_update(game);
 	render(game);
 	return (0);

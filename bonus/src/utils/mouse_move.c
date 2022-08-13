@@ -1,5 +1,18 @@
 #include "cub3d.h"
 
+void    my_mouse_hook(t_game *game)
+{
+    int x;
+    int y;
+
+    mlx_mouse_get_pos(game->mlx, game->window, &x, &y);
+    if (x < 400)
+		game->state.m_left = 400 - x;
+	else if (x > 400)
+		game->state.m_right = x - 400;
+	mouse_move(game, 400, 400);
+}
+
 int	mouse_hide(t_game *game)
 {
     if (LINUX)
@@ -12,7 +25,7 @@ int	mouse_hide(t_game *game)
 int	mouse_move(t_game *game, int x, int y)
 {
     if (LINUX)
-	    mlx_mouse_move(game->mlx, game->window, x, y);
+	    mlx_mouse_move(game->mlx, game->window, x ,y);
     else
         mac_mouse_move(x, y);
 	return (0);

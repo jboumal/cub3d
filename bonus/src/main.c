@@ -34,7 +34,8 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);
-	mlx_hook(game.window, MOUSE_MOVE, NO_EVENT_MASK, mouse_hook, &game);
+	if (MAC)
+		mlx_hook(game.window, MOUSE_MOVE, NO_EVENT_MASK, mouse_hook, &game);
 	mouse_hide(&game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
