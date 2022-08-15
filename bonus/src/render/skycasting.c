@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:00:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/11 20:16:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:26:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	load_sky_texture(t_game *game)
 	int		endian;
 	void	*img;
 
-	img = mlx_xpm_file_to_image(game->mlx, "img/sky.xpm",
+	img = mlx_xpm_file_to_image(game->mlx, "img/sky2.xpm",
 			&game->sky.width, &game->sky.height);
 	if (!img)
 		parsing_error("error when loading door texture");
@@ -53,8 +53,8 @@ void	skycasting(int x0, int x1, t_data *img, t_game *g)
 				vector_scalar_multiplication(
 					g->player.plane,
 					(double)2 * x0 / (double)SCREEN_W - 1)));
-	tx = angle / (2 * M_PI) * g->sky.width;
-	ty_range = get_fov_ratio(g) * g->sky.width / SCREEN_W * (SCREEN_H / 2);
+	tx = 4 * angle / (2 * M_PI) * g->sky.width;
+	ty_range = 4 * get_fov_ratio(g) * g->sky.width / SCREEN_W * (SCREEN_H / 2);
 	y = 0;
 	while (y < SCREEN_H / 2)
 	{

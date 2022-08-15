@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:32:24 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/11 20:17:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:13:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,17 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 	int	color;
 	int	tx;
 	int	ty;
+	int	h;
 
 	x = 0;
+	h = g->floor.height;
 	while (x < SCREEN_W)
 	{
-		tx = (int)(H * (scanline->floor.x - (int)scanline->floor.x)) & (H - 1);
-		ty = (int)(H * (scanline->floor.y - (int)scanline->floor.y)) & (H - 1);
+		tx = (int)(h * (scanline->floor.x - (int)scanline->floor.x)) & (h - 1);
+		ty = (int)(h * (scanline->floor.y - (int)scanline->floor.y)) & (h - 1);
 		scanline->floor.x += scanline->step.x;
 		scanline->floor.y += scanline->step.y;
-		color = g->floor.img[H * ty + tx];
+		color = g->floor.img[h * ty + tx];
 		my_mlx_pixel_put(img, x, y, color);
 		x++;
 	}

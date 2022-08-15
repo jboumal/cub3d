@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/12 16:36:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:14:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void		*x_malloc(size_t n);
 int			mac_mouse_hide(void);
 int			mac_mouse_move(int x, int y);
 
-int	mlx_mouse_move(void *mlx, void *win, int x, int y);
-int	mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
-int	mlx_mouse_hide(void *mlx, void *win);
+int			mlx_mouse_move(void *mlx, void *win, int x, int y);
+int			mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
+int			mlx_mouse_hide(void *mlx, void *win);
 
 #endif

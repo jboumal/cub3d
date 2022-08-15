@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/12 00:42:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:09:09 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "cub3d.h"
 
 # define TILEMAP_SIZE 12
-# define H 128
 
 # define N_THREAD 8
 

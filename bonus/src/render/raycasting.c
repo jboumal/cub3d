@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/12 00:21:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:11:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	int		y;
 	int		tex_y;
 	int		color;
+	int		tex_h;
 
 	y = 0;
+	tex_h = g->textures[var->ray->side].height;
 	while (y < SCREEN_H)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			tex_y = (y - var->draw_start) * H / (var->line_height);
-			color = g->textures[var->ray->side].img[tex_y * H + var->tex_x];
+			tex_y = (y - var->draw_start) * tex_h / (var->line_height);
+			color = g->textures[var->ray->side].img[tex_y * tex_h + var->tex_x];
 			my_mlx_pixel_put(img, x, y, color);
 		}
 		y++;
