@@ -71,6 +71,6 @@ int	mouse_hook(int x, int y, t_game *game)
 		game->state.m_left = 400 - x;
 	else if (x > 400)
 		game->state.m_right = x - 400;
-	mouse_move(game, 400, 400);
+	mouse_move(game, 500, 500);
 	return (0);
 }

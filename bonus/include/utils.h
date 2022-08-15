@@ -82,4 +82,8 @@ void		*x_malloc(size_t n);
 int			mac_mouse_hide(void);
 int			mac_mouse_move(int x, int y);
 
+int	mlx_mouse_move(void *mlx, void *win, int x, int y);
+int	mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
+int	mlx_mouse_hide(void *mlx, void *win);
+
 #endif

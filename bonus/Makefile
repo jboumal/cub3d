@@ -24,7 +24,7 @@ SRC = 	main.c \
 		utils/swap.c utils/mouse_move.c \
 		data_struct/dy_str.c
 
-ifeq ($(shell uname), Mac)
+ifneq ($(shell uname), Linux)
 	SRC +=	utils/mlx_mouse.m
 endif
 
