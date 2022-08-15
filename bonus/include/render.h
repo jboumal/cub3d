@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 20:04:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:44:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	*routine_wall(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
-void	sky_reflection(int x0, int x1, t_data *img);
 void	skycasting(int x0, int x1, t_data *img, t_game *g);
 
 #endif

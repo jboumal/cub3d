@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 20:03:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 22:55:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ static void	init_draw_line(
 			&img->endian);
 }
 
+static inline void	put_sky_reflect_px(
+			int x,
+			int y,
+			t_draw_line_var *var,
+			t_data *img)
+{
+	int	color;
+
+	color = shade(
+			var->arr[y * SCREEN_W + x],
+			var->arr[(SCREEN_H -1 - y) * SCREEN_W + x],
+			0.8, 0.4);
+	my_mlx_pixel_put(img, x, y, color);
+}
+
 static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
 	int		y;
@@ -66,12 +81,13 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 			my_mlx_pixel_put(img, x, y, color);
 			if (y + var->line_height < SCREEN_H)
 			{
-				color = shade(
-						var->arr[(y + var->line_height) * SCREEN_W + x],
+				color = shade(var->arr[(y + var->line_height) * SCREEN_W + x],
 						color, 0.8, 0.6);
 				my_mlx_pixel_put(img, x, y + var->line_height, color);
 			}
 		}
+		else if (y > var->draw_end + var->line_height)
+			put_sky_reflect_px(x, y, var, img);
 		y++;
 	}
 }
