@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:00:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 19:51:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:04:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static double	get_fov_ratio(t_game *g)
 	return (atan(vector_norme(g->player.plane)) / M_PI);
 }
 
-void	sky_reflection(int x0, int x1, t_data *img, t_game *g)
+void	sky_reflection(int x0, int x1, t_data *img)
 {
 	unsigned int	*arr;
 	int				y;
 	int				color;
 	int				x;
 
-	arr = mlx_get_data_addr(
+	arr = (unsigned int *)mlx_get_data_addr(
 			img->img,
 			&img->bits_per_pixel,
 			&img->line_length,

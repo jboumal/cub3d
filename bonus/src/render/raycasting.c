@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 19:54:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:03:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	init_draw_line(
 	var->draw_end = var->line_height / 2 + SCREEN_H / 2;
 	var->tex_x = get_tex_x(ray, g);
 	var->ray = ray;
-	var->arr = mlx_get_data_addr(
+	var->arr = (unsigned int *)mlx_get_data_addr(
 			img->img,
 			&img->bits_per_pixel,
 			&img->line_length,

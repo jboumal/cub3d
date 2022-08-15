@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 00:39:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 19:59:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:04:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*routine_sky(void *arg)
 	start = get_start(i, 0, SCREEN_W - 1);
 	end = get_end(i, 0, SCREEN_W - 1);
 	skycasting(start, end, ((t_th_arg *)arg)->img, g);
-	sky_reflection(start, end, ((t_th_arg *)arg)->img, g);
+	sky_reflection(start, end, ((t_th_arg *)arg)->img);
 	return (arg);
 }
 
