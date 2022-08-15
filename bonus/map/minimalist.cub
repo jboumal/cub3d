@@ -1,11 +1,11 @@
 
 
-NO img/wall00.xpm
+NO img/wall_black.xpm
 
-SO img/wall03.xpm
+SO img/wall_black.xpm
 
-WE img/wall02.xpm
-EA img/wall04.xpm
+WE img/wall_black.xpm
+EA img/wall_black.xpm
 
 
 F 222, 218, 180

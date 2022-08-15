@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/09 13:27:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:58:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static int	parse_color(char *line)
 
 	arr = ft_split(line, ',');
 	if (str_arr_len(arr) != 3)
-		parsing_error("invalid color arguments");
+		exit_error("invalid color arguments");
 	i = 0;
 	color = 0;
 	while (arr[i])
 	{
 		color <<= 8;
 		if (atoui8_error(arr[i], &n))
-			parsing_error("invalid color value");
+			exit_error("invalid color value");
 		color += n;
 		i++;
 	}
@@ -52,7 +52,7 @@ static void	load_texture(t_game *game, char direction, char *path_to_texture)
 			&game->textures[side].width,
 			&game->textures[side].height);
 	if (!img)
-		parsing_error("invalid texture path");
+		exit_error("invalid texture path");
 	game->textures[side].img = (unsigned int *)mlx_get_data_addr(
 			img,
 			&bits_per_pixel,
@@ -89,7 +89,7 @@ void	parse_textures(t_game *game, int fd)
 		else if (!str_n_cmp("C ", line, 2))
 			game->map.ceil = parse_color(skip_spaces(line + 1));
 		else
-			parsing_error("invalid identifier");
+			exit_error("invalid identifier");
 		free(line);
 	}
 }

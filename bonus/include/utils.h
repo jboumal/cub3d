@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:14:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:56:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ bool		atoui8_error(const char *s, uint8_t *n);
 void		*ft_memset(void *b, int c, size_t len);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void		str_n_cpy(char *dst, char *src, size_t len);
+
+/* error */
+void		exit_error(char *e);
 
 /* find */
 void		*ft_memchr(const void *s, int c, size_t n);

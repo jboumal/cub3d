@@ -12,14 +12,6 @@
 
 #include "cub3d.h"
 
-void	parsing_error(char *msg)
-{
-	dputstr(STDERR_FILENO, "Error\n");
-	dputstr(STDERR_FILENO, msg);
-	dputstr(STDERR_FILENO, "\n");
-	exit(EXIT_FAILURE);
-}
-
 enum e_side	get_direction(char c)
 {
 	return ((c == 'N') * N + (c == 'S') * S + (c == 'W') * W + (c == 'E') * E);
@@ -52,7 +44,7 @@ void	parse(int argc, char **argv, t_game *game)
 	char	*map_str;
 
 	if (argc != 2)
-		parsing_error("invalid number of arguments");
+		exit_error("invalid number of arguments");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit(EXIT_FAILURE);

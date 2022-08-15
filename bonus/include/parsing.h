@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:47:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/10 21:04:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:58:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void		parse_map(char *map_str, t_game *g);
 void		parse_textures(t_game *game, int fd);
 
 /* parse */
-void		parsing_error(char *msg);
 enum e_side	get_direction(char c);
 void		parse(int argc, char **argv, t_game *game);
 

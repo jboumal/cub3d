@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 10:09:17 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 10:45:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:58:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_map(t_game *g)
 		while (j < map.width)
 		{
 			if (check_cell(i, j, map))
-				parsing_error("invalid map formating");
+				exit_error("invalid map formating");
 			j++;
 		}
 		i++;

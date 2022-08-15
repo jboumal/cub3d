@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:32:24 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:13:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 15:00:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	load_floor_texture(t_game *game)
 	int		endian;
 	void	*img;
 
-	img = mlx_xpm_file_to_image(game->mlx, "img/floor.xpm",
+	img = mlx_xpm_file_to_image(game->mlx, "img/floor2.xpm",
 			&game->floor.width, &game->floor.height);
 	if (!img)
-		parsing_error("error when loading door texture");
+		exit_error("error when loading door texture");
 	game->floor.img = (unsigned int *) mlx_get_data_addr(img,
 			&bits_per_pixel, &size_line, &endian);
 }
