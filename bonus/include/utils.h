@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:56:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 15:51:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ typedef struct s_vector
 
 /* ato */
 bool		atoui8_error(const char *s, uint8_t *n);
+
+/* rgb */
+int			get_r(int c);
+int			get_g(int c);
+int			get_b(int c);
+int			rgb(uint8_t r, uint8_t g, uint8_t b);
+int			shade(int cf, int cb, double af, double ab);
 
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);

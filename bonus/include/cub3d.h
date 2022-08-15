@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 14:33:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:53:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "event.h"
 # include "render.h"
 
-# define SCREEN_W 1920
-# define SCREEN_H 1080
+# define SCREEN_W 1280
+# define SCREEN_H 720
 # define SCREEN_TITLE "cub3d"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 15:13:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:59:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ typedef struct s_rect
 
 typedef struct s_draw_line_var
 {
-	int		tex_x;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	t_ray	*ray;
+	int				tex_x;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	unsigned int	*arr;
+	t_ray			*ray;
 }	t_draw_line_var;
 
 typedef struct s_th_arg
@@ -87,11 +88,15 @@ void	render(t_game *game);
 void	load_floor_texture(t_game *game);
 
 /* routines */
-void	*routine1(void *arg);
-void	*routine2(void *arg);
+int		get_start(int i, int start, int end);
+int		get_end(int i, int start, int end);
+void	*routine_floor(void *arg);
+void	*routine_sky(void *arg);
+void	*routine_wall(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
+void	sky_reflection(int x0, int x1, t_data *img, t_game *g);
 void	skycasting(int x0, int x1, t_data *img, t_game *g);
 
 #endif

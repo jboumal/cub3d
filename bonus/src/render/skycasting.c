@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:00:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 15:16:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:51:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	load_sky_texture(t_game *game)
 			&bits_per_pixel, &size_line, &endian);
 }
 
-double	get_angle(t_vector v1, t_vector v2)
+static double	get_angle(t_vector v1, t_vector v2)
 {
 	double	angle;
 
@@ -35,9 +35,38 @@ double	get_angle(t_vector v1, t_vector v2)
 	return (angle + 2 * M_PI * (angle < 0));
 }
 
-double	get_fov_ratio(t_game *g)
+static double	get_fov_ratio(t_game *g)
 {
 	return (atan(vector_norme(g->player.plane)) / M_PI);
+}
+
+void	sky_reflection(int x0, int x1, t_data *img, t_game *g)
+{
+	unsigned int	*arr;
+	int				y;
+	int				color;
+	int				x;
+
+	arr = mlx_get_data_addr(
+			img->img,
+			&img->bits_per_pixel,
+			&img->line_length,
+			&img->endian);
+	x = x0;
+	while (x <= x1)
+	{
+		y = 0;
+		while (y < SCREEN_H / 2)
+		{
+			color = shade(
+					arr[(SCREEN_H - 1 - y) * SCREEN_W + x],
+					arr[y * SCREEN_W + x],
+					0.8, 0.4);
+			my_mlx_pixel_put(img, x, SCREEN_H - 1 - y, color);
+			y++;
+		}
+		x++;
+	}
 }
 
 void	skycasting(int x0, int x1, t_data *img, t_game *g)

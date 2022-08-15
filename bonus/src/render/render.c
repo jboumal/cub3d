@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:06:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 15:16:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:12:34 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ void	render(t_game *game)
 	t_data		img;
 
 	img = get_new_img(game);
-	compute_pixels(&img, game, routine1);
-	compute_pixels(&img, game, routine2);
+	compute_pixels(&img, game, routine_floor);
+	compute_pixels(&img, game, routine_sky);
+	compute_pixels(&img, game, routine_wall);
 	render_minimap(&img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
 	mlx_destroy_image(game->mlx, img.img);
