@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 00:39:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 22:28:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:39:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_end(int i, int start, int end)
 	int	res;
 
 	res = (i + 1) * ((end - start) / N_THREAD) + start - 1;
-	if (end - res <= (end - start) / N_THREAD)
+	if (i == N_THREAD - 1)
 		res += end - res;
 	return (res);
 }

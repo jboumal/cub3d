@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:06:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 20:00:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:40:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 		arg->game = g;
 		arg->i = i;
 		arg->img = img;
-		pthread_create(&th[i], NULL, routine, arg);
+		if (pthread_create(&th[i], NULL, routine, arg))
+			exit_error("unable to create thread");
 		i++;
 	}
 	i = 0;
