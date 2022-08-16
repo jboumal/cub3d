@@ -12,7 +12,7 @@
 
 #include "render.h"
 
-void	init_rect(t_rect *rect, int size)
+static void	init_rect(t_rect *rect, int size)
 {
 	rect->x = 0;
 	rect->y = 0;
@@ -21,7 +21,7 @@ void	init_rect(t_rect *rect, int size)
 	rect->color = 0;
 }
 
-int	render_rect(t_data *img, t_rect rect)
+static int	render_rect(t_data *img, t_rect rect)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ int	render_rect(t_data *img, t_rect rect)
 	return (0);
 }
 
-void	drawline(t_data *img, t_vector p0, t_vector p1)
+static void	drawline(t_data *img, t_vector p0, t_vector p1, t_game *g)
 {
 	double	delta_x;
 	double	delta_y;
@@ -57,14 +57,18 @@ void	drawline(t_data *img, t_vector p0, t_vector p1)
 	pixel_y = p0.y;
 	while (pixels)
 	{
-		my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
+		if (
+			pixel_x >= 0 && pixel_y >= 0
+			&& pixel_x < g->map.width * TILEMAP_SIZE
+			&& pixel_y < g->map.height * TILEMAP_SIZE)
+			my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;
 	}
 }
 
-void	render_miniplayer(t_data *img, t_game *g)
+static void	render_miniplayer(t_data *img, t_game *g)
 {
 	t_rect		rect;
 	t_vector	position0;
@@ -84,9 +88,9 @@ void	render_miniplayer(t_data *img, t_game *g)
 	position2 = vector((p.pos.x + (p.dir.x * 1 + p.plane.x) * 2) * TILEMAP_SIZE,
 			((g->map.height - p.pos.y) - (p.dir.y + p.plane.y) * 2)
 			* TILEMAP_SIZE);
-	drawline(img, position0, position1);
-	drawline(img, position0, position2);
-	drawline(img, position1, position2);
+	drawline(img, position0, position1, g);
+	drawline(img, position0, position2, g);
+	drawline(img, position1, position2, g);
 	render_rect(img, rect);
 }
 

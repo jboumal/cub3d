@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:08:12 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 19:53:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/16 19:43:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUB3D_H
 
 # define SCREEN_TITLE "cub3d"
-# define SCREEN_W 1280
-# define SCREEN_H 720
-# define N_THREAD 4
+# define SCREEN_W 1600
+# define SCREEN_H 900
+# define N_THREAD 12
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define MRS 0.003 // Mouse rotation speed
