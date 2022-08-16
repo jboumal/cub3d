@@ -31,6 +31,10 @@ int	main(int argc, char **argv)
 	load_floor_texture(&game);
 	load_sky_texture(&game);
 	game.window = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
+	if (LINUX)
+		mouse_move(&game, 400, 400);
+	else
+		mouse_move(&game, 500, 500);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);

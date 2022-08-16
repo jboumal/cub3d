@@ -15,10 +15,6 @@
 
 # include "cub3d.h"
 
-# define TILEMAP_SIZE 12
-
-# define N_THREAD 4
-
 enum e_side
 {
 	N,
