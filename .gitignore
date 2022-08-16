@@ -2,3 +2,5 @@
 **.o
 cub3d
 .DS_Store
+mandatory/mlx_linux/
+bonus/mlx_linux/
