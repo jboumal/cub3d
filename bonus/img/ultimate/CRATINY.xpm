@@ -1,0 +1,30 @@
+/* XPM */
+static char *CRATINY[] = {
+/* columns rows colors chars-per-pixel */
+"64 16 8 1 ",
+"  c gray34",
+". c #5B5B5B",
+"X c gray31",
+"o c #474F33",
+"O c #3F472B",
+"+ c gray39",
+"@ c #53573B",
+"# c gray42",
+/* pixels */
+"................................................................",
+"..+           + ..+           + ..+           + ..+           + ",
+". XXXXXXXXXXXX. . XXXXXXXXXXXX. . XXXXXXXXXXXX. . XXXXXXXXXXXX. ",
+". XoO@Oo.  . .. . XoO@Oo.  . .. . XoO@Oo.  . .. . XoO@Oo.  . .. ",
+". XOo oO . . .. . XOo oO . . .. . XOo oO . . .. . XOo oO . . .. ",
+". XoO@Oo. . . . . XoO@Oo. . . . . XoO@Oo. . . . . XoO@Oo. . . . ",
+". Xooooo  . ... . Xooooo  . ... . Xooooo  . ... . Xooooo  . ... ",
+". Xooooo .    . . Xooooo .    . . Xooooo .    . . Xooooo .    . ",
+". X. .  .  .. . . X. .  .  .. . . X. .  .  .. . . X. .  .  .. . ",
+". X . . ..   o. . X . . ..   o. . X . . ..   o. . X . . ..   o. ",
+". X. . .  . oO. . X. . .  . oO. . X. . .  . oO. . X. . .  . oO. ",
+". X . . .  oOO. . X . . .  oOO. . X . . .  oOO. . X . . .  oOO. ",
+". X . . . oOOO. . X . . . oOOO. . X . . . oOOO. . X . . . oOOO. ",
+". X.   . oOOOO. . X.   . oOOOO. . X.   . oOOOO. . X.   . oOOOO. ",
+". #+++++++++++# . #+++++++++++# . #+++++++++++# . #+++++++++++# ",
+"                                                                "
+};

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
+#    By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/08/12 16:30:46 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/08/16 11:47:51 by bperraud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,8 @@ CC = gcc
 ifeq ($(shell uname), Linux)
 #CFLAGS = -Wall -Wextra -Werror -D LINUX
 	CFLAGS = -I$(INCLUDES) -D LINUX
-	LIB = -lpthread -lmlx -lXext -lX11 -lm
-	#LIB			= -lpthread -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+#LIB = -lpthread -lmlx -lXext -lX11 -lm
+	LIB			= -lpthread -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
 	CFLAGS = -Wall -Wextra -I$(INCLUDES) -D MAC
 	LIB = -lmlx -framework OpenGL -framework AppKit

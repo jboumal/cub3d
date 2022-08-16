@@ -3,38 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/09 13:27:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 01:42:09 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	parse_color(char *line)
+static int	parse_ceiling(t_game *game, char *path_to_texture)
 {
-	int		color;
-	int		i;
-	char	**arr;
-	uint8_t	n;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	void		*img;
 
-	arr = ft_split(line, ',');
-	if (str_arr_len(arr) != 3)
-		parsing_error("invalid color arguments");
-	i = 0;
-	color = 0;
-	while (arr[i])
-	{
-		color <<= 8;
-		if (atoui8_error(arr[i], &n))
-			parsing_error("invalid color value");
-		color += n;
-		i++;
-	}
-	str_arr_free(arr);
-	return (color);
+	path_to_texture[str_len(path_to_texture) - 2] = '\0';
+	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
+			&game->sky.width, &game->sky.height);
+	if (!img)
+		parsing_error("error when loading door texture");
+	game->sky.img = (unsigned int *)mlx_get_data_addr(img,
+			&bits_per_pixel,
+			&size_line,
+			&endian);
+	game->sky.allocated_img = img;
+	game->map.ceil = 1;
 }
+
+static int	parse_floor(t_game *game, char *path_to_texture)
+{
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	void		*img;
+
+	path_to_texture[str_len(path_to_texture) - 2] = '\0';
+	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
+			&game->floor.width, &game->floor.height);
+	if (!img)
+		parsing_error("error when loading door texture");
+	game->floor.img = (unsigned int *)mlx_get_data_addr(img,
+			&bits_per_pixel,
+			&size_line,
+			&endian);
+	game->floor.allocated_img = img;
+	game->map.floor = 1;
+}
+
 
 static void	load_texture(t_game *game, char direction, char *path_to_texture)
 {
@@ -85,9 +102,9 @@ void	parse_textures(t_game *game, int fd)
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
 			load_texture(game, line[0], skip_spaces(line + 3));
 		else if (!str_n_cmp("F ", line, 2))
-			game->map.floor = parse_color(skip_spaces(line + 1));
+			parse_floor(game, skip_spaces(line + 2));
 		else if (!str_n_cmp("C ", line, 2))
-			game->map.ceil = parse_color(skip_spaces(line + 1));
+			parse_ceiling(game, skip_spaces(line + 2));
 		else
 			parsing_error("invalid identifier");
 		free(line);
