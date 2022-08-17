@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/17 16:05:53 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:06:14 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,6 @@ static int	parse_floor(t_game *game, char *path_to_texture)
 	game->floor.allocated_img = img;
 	game->map.floor = 1;
 }
-
-/*
-static void	load_texture(t_game *game, char direction, char *path_to_texture)
-{
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-	enum e_side	side;
-
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	side = get_direction(direction);
-	img = mlx_xpm_file_to_image(
-			game->mlx,
-			path_to_texture,
-			&game->textures[side].width,
-			&game->textures[side].height);
-	if (!img)
-		parsing_error("invalid texture path");
-	game->textures[side].img = (unsigned int *)mlx_get_data_addr(
-			img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->textures[side].allocated_img = img;
-}
-*/
 
 static void	load_texture(t_game *game, int digit, char *path_to_texture)
 {
