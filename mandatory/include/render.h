@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 14:34:30 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:20:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define TILEMAP_SIZE 12
+# define H 128
 
 enum e_side
 {
@@ -25,11 +26,13 @@ enum e_side
 	W
 };
 
-typedef struct s_face
+typedef struct s_ray
 {
+	double		wall_dist;
+	t_vector	dir;
 	int			cell;
 	enum e_side	side;
-}	t_face;
+}	t_ray;
 
 typedef struct s_rect
 {
@@ -40,20 +43,29 @@ typedef struct s_rect
 	int	color;
 }	t_rect;
 
-/*dda*/
-double	dda(t_vector ray_dir, t_face *face, t_game *game);
+typedef struct s_draw_line_var
+{
+	int		tex_x;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_ray	*ray;
+}	t_draw_line_var;
 
-/*minimap*/
+/* dda */
+void	dda(t_ray *ray, t_game *game);
+
+/* minimap */
 void	render_minimap(t_data *img, t_game *game);
 
-/*mlx_utils*/
+/* mlx_utils */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_data	get_new_img(t_game *game);
 
-/*raycasting*/
+/* raycasting */
 void	raycasting(int x, t_data *img, t_game *game);
 
-/*render*/
+/* render */
 void	render(t_game *game);
 
 #endif

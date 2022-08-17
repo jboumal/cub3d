@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:27 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/05 09:29:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:11:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	key_down(int code, t_game *game)
 		game->state.r_left = true;
 	else if (code == K_RIGHT)
 		game->state.r_right = true;
-	else if (code == K_ESC)
-		quit(game);
 	return (0);
 }
 
@@ -61,6 +59,8 @@ int	key_release(int code, t_game *game)
 		game->state.r_left = false;
 	else if (code == K_RIGHT)
 		game->state.r_right = false;
+	else if (code == K_ESC)
+		quit(game);
 	return (0);
 }
 

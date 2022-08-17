@@ -6,36 +6,42 @@
 #    By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/07/14 13:25:14 by vrogiste         ###   ########.fr        #
+#    Updated: 2022/08/15 14:00:14 by vrogiste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
-
+NAME = cub3D
 #!!!! DANGER
-SRC = 	$(wildcard src/*/*.c)\
+#SRC = 	$(wildcard src/*/*.c)\
 		src/cub3d.c
 
+SRC = 	main.c \
+		event/event.c \
+		gameloop/update_cam.c gameloop/gameloop.c \
+		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c\
+		render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
+		utils/error.c utils/swap.c utils/ato.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
+		data_struct/dy_str.c
+
+SRC		:= $(addprefix src/,$(SRC))
+
 INCLUDES = include
-
 OBJ = $(SRC:.c=.o)
-
+CC = gcc
 
 ifeq ($(shell uname), Linux)
-	CFLAGS = -Wall -Wextra -Werror -D LINUX
-	LIB = -lmlx -lXext -lX11 -lm
+#CFLAGS = -Wall -Wextra -Werror -D LINUX
+	CFLAGS = -I$(INCLUDES) -D LINUX -fsanitize=leak
+#	LIB = -lmlx -lXext -lX11 -lm
+	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
-	CFLAGS = -Wall -Wextra -Werror -D MAC
+	CFLAGS = -Wall -Wextra -I$(INCLUDES) -D MAC
 	LIB = -lmlx -framework OpenGL -framework AppKit
 endif
 
-CC = gcc
-
-.c.o: $(SRC)
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
 
 all: $(NAME)
 
@@ -48,6 +54,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	./$(NAME) map.cub
+	./$(NAME) map/minimalist.cub
 
-.PHONY: $(NAME) all clean fclean re run rerun
+.PHONY: all clean fclean re

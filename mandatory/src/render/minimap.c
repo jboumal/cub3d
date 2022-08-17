@@ -40,14 +40,53 @@ int	render_rect(t_data *img, t_rect rect)
 	return (0);
 }
 
-void	render_miniplayer(t_data *img, t_game *game)
+void	drawline(t_data *img, t_vector p0, t_vector p1)
 {
-	t_rect	rect;
+	double	delta_x;
+	double	delta_y;
+	int		pixels;
+	double	pixel_x;
+	double	pixel_y;
 
+	delta_x = p1.x - p0.x;
+	delta_y = p1.y - p0.y;
+	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+	delta_x /= pixels;
+	delta_y /= pixels;
+	pixel_x = p0.x;
+	pixel_y = p0.y;
+	while (pixels)
+	{
+		my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
+		pixel_x += delta_x;
+		pixel_y += delta_y;
+		--pixels;
+	}
+}
+
+void	render_miniplayer(t_data *img, t_game *g)
+{
+	t_rect		rect;
+	t_vector	position0;
+	t_vector	position1;
+	t_vector	position2;
+	t_player	p;
+
+	p = g->player;
 	init_rect(&rect, 6);
-	rect.x = game->player.pos.x * TILEMAP_SIZE - 6 / 2;
-	rect.y = game->player.pos.y * TILEMAP_SIZE - 6 / 2;
+	rect.x = g->player.pos.x * TILEMAP_SIZE - 6 / 2;
+	rect.y = (g->map.height - g->player.pos.y) * TILEMAP_SIZE - 6 / 2;
 	rect.color = 0xFF0000;
+	position0 = vector(rect.x + 3, rect.y + 3);
+	position1 = vector((p.pos.x + (p.dir.x * 1 - p.plane.x) * 2) * TILEMAP_SIZE,
+			((g->map.height - p.pos.y) - (p.dir.y - p.plane.y) * 2)
+			* TILEMAP_SIZE);
+	position2 = vector((p.pos.x + (p.dir.x * 1 + p.plane.x) * 2) * TILEMAP_SIZE,
+			((g->map.height - p.pos.y) - (p.dir.y + p.plane.y) * 2)
+			* TILEMAP_SIZE);
+	drawline(img, position0, position1);
+	drawline(img, position0, position2);
+	drawline(img, position1, position2);
 	render_rect(img, rect);
 }
 
@@ -63,11 +102,13 @@ void	render_minimap(t_data *img, t_game *game)
 	while (i < map.height * map.width)
 	{
 		rect.x = (i % map.width) * TILEMAP_SIZE;
-		rect.y = (i / map.width) * TILEMAP_SIZE;
+		rect.y = ((map.height * map.width - 1 - i) / map.width) * TILEMAP_SIZE;
 		if (map.data[i] == 1)
 			rect.color = 0x4B7A68;
-		if (map.data[i] == 0)
+		else if (map.data[i] == 0)
 			rect.color = 0x7CE7D6;
+		else
+			rect.color = 0;
 		render_rect(img, rect);
 		i++;
 	}

@@ -6,11 +6,27 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:27 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/07/14 10:30:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:29:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	quit(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	mlx_destroy_window(game->mlx, game->window);
+	while (i < 4)
+	{
+		mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
+		i++;
+	}
+	free(game->map.data);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
 
 int	key_down(int code, t_game *game)
 {
@@ -22,6 +38,8 @@ int	key_down(int code, t_game *game)
 		game->state.left = true;
 	else if (code == K_D)
 		game->state.right = true;
+	else if (code == K_ESC)
+		quit(game);
 	return (0);
 }
 

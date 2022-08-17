@@ -1,6 +1,8 @@
+<<<<<<< HEAD
 .vscode
-**.o
-cub3d
+*.o
+cub3D
 .DS_Store
-mandatory/mlx_linux
-bonus/mlx_linux
+mlx_linux
+*.json
+.clangd

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 13:09:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:46:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define RENDER_H
 
 # include "cub3d.h"
-
-# define TILEMAP_SIZE 12
-
-# define N_THREAD 8
 
 enum e_side
 {
@@ -36,9 +32,11 @@ typedef struct s_scanline
 typedef struct s_ray
 {
 	double		wall_dist;
+	double		door_dist;
 	t_vector	dir;
 	int			cell;
 	enum e_side	side;
+	enum e_side	door_side;
 }	t_ray;
 
 typedef struct s_rect
@@ -52,11 +50,12 @@ typedef struct s_rect
 
 typedef struct s_draw_line_var
 {
-	int		tex_x;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	t_ray	*ray;
+	int				tex_x;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	unsigned int	*arr;
+	t_ray			*ray;
 }	t_draw_line_var;
 
 typedef struct s_th_arg
@@ -87,8 +86,11 @@ void	render(t_game *game);
 void	load_floor_texture(t_game *game);
 
 /* routines */
-void	*routine1(void *arg);
-void	*routine2(void *arg);
+int		get_start(int i, int start, int end);
+int		get_end(int i, int start, int end);
+void	*routine_floor(void *arg);
+void	*routine_sky(void *arg);
+void	*routine_wall(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
