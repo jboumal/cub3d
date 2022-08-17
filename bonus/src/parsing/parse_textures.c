@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/17 18:31:39 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:50:06 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,6 @@ static void	load_texture(t_game *game, int chara, char *path_to_texture)
 	game->textures[chara].allocated_img = img;
 }
 
-/*
-static bool	is_full(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (!game->textures[i].img)
-			return (false);
-		i++;
-	}
-	return (game->map.floor > -1 && game->map.ceil > -1);
-}
-*/
-
 void	parse_textures(t_game *game, int fd)
 {
 	char	*line;
@@ -99,7 +83,6 @@ void	parse_textures(t_game *game, int fd)
 	{
 		line = get_next_non_empty_line(fd);
 		if (isascii_48(line[0]) && line[0] != 'F' && line[0] != 'C')
-		//if (isdigit(line[0]) && line[0] != 'F' && line[0] != 'C')
 			load_texture(game, line[0] - 49, skip_spaces(line + 2));
 		else if (!str_n_cmp("F ", line, 2))
 			parse_floor(game, skip_spaces(line + 2));

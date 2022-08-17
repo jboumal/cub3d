@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/17 18:45:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:49:57 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 {
 	if (g->player.pos.x)
 		parsing_error("mutiple player position in map");
-	//g->player.pos = vector(j, i);
 	g->player.pos = vector((double)j + 0.5, i - 0.1);
 	g->player.dir.y = (direction == N) - (direction == S);
 	g->player.dir.x = (direction == E) - (direction == W);

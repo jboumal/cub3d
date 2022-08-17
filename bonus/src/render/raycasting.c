@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/17 18:03:46 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:50:43 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
 	tex_x = (int)(wall_x * (double)g->textures[E].width);
-
-
 	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
 		tex_x = g->textures[E].width - tex_x - 1;
 	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
 		tex_x = g->textures[N].width - tex_x - 1;
-
 	return (tex_x);
 }
 
@@ -61,8 +58,9 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
 			tex_y = (y - var->draw_start) * tex_h / (var->line_height);
-			color = g->textures[g->map.data[var->ray->cell] - 1].img[tex_y * tex_h + var->tex_x];
-			if (var->ray->side == N || var->ray->side == S )
+			color = g->textures[g->map.data[var->ray->cell] - 1]
+				.img[tex_y * tex_h + var->tex_x];
+			if (var->ray->side == N || var->ray->side == S)
 				color = shade_color(color, 1.5);
 			if (var->ray->side == E)
 				color = shade_color(color, 1.2);
