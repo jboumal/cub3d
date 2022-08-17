@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:04:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/17 16:06:14 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:31:39 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	parse_floor(t_game *game, char *path_to_texture)
 	game->map.floor = 1;
 }
 
-static void	load_texture(t_game *game, int digit, char *path_to_texture)
+static void	load_texture(t_game *game, int chara, char *path_to_texture)
 {
 	int			bits_per_pixel;
 	int			size_line;
@@ -63,18 +63,19 @@ static void	load_texture(t_game *game, int digit, char *path_to_texture)
 	img = mlx_xpm_file_to_image(
 			game->mlx,
 			path_to_texture,
-			&game->textures[digit].width,
-			&game->textures[digit].height);
+			&game->textures[chara].width,
+			&game->textures[chara].height);
 	if (!img)
 		parsing_error("invalid texture path");
-	game->textures[digit].img = (unsigned int *)mlx_get_data_addr(
+	game->textures[chara].img = (unsigned int *)mlx_get_data_addr(
 			img,
 			&bits_per_pixel,
 			&size_line,
 			&endian);
-	game->textures[digit].allocated_img = img;
+	game->textures[chara].allocated_img = img;
 }
 
+/*
 static bool	is_full(t_game *game)
 {
 	int	i;
@@ -88,15 +89,17 @@ static bool	is_full(t_game *game)
 	}
 	return (game->map.floor > -1 && game->map.ceil > -1);
 }
+*/
 
 void	parse_textures(t_game *game, int fd)
 {
 	char	*line;
 
-	while (!is_full(game))
+	while (game->map.ceil == -1)
 	{
 		line = get_next_non_empty_line(fd);
-		if (isdigit(line[0]))
+		if (isascii_48(line[0]) && line[0] != 'F' && line[0] != 'C')
+		//if (isdigit(line[0]) && line[0] != 'F' && line[0] != 'C')
 			load_texture(game, line[0] - 49, skip_spaces(line + 2));
 		else if (!str_n_cmp("F ", line, 2))
 			parse_floor(game, skip_spaces(line + 2));

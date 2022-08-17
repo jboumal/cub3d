@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/17 15:58:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:11:46 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
-/* libft */
+/* utils */
 bool		atoui8_error(const char *s, uint8_t *n);
 int			isdigit(int c);
+int			isascii_48(int c);
+int			shade_color(int color, double divide);
 
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);

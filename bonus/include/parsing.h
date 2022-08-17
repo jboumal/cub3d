@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:47:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/10 21:04:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:10:24 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_texture	textures[4];
+	t_texture	textures[79];
 	t_texture	floor;
 	t_texture	sky;
 }	t_game;

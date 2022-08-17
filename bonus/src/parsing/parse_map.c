@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/17 15:58:56 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:45:42 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 
 static void	parse_map_char(char map_char, int i, int j, t_game *g)
 {
-	if (isdigit(map_char))
+	if (map_char == '0')
+		g->map.data[i * g->map.width + j] = 0;
+	else if (isascii_48(map_char) && g->textures[map_char - 49].img)
 		g->map.data[i * g->map.width + j] = map_char - 48;
 	else if (ft_strchr("NSWE", map_char))
 	{

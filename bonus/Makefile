@@ -6,7 +6,7 @@
 #    By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 16:10:01 by bel-mous          #+#    #+#              #
-#    Updated: 2022/08/16 11:47:51 by bperraud         ###   ########.fr        #
+#    Updated: 2022/08/17 18:05:46 by bperraud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = 	main.c \
 		gameloop/update_cam.c gameloop/gameloop.c \
 		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c\
 		render/routines.c render/skycasting.c render/floorcasting.c render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
-		utils/ato.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
+		utils/utils.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
 		utils/swap.c utils/mouse_move.c \
 		data_struct/dy_str.c
 
