@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:19:48 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/15 22:44:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:46:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ typedef struct s_scanline
 typedef struct s_ray
 {
 	double		wall_dist;
+	double		door_dist;
 	t_vector	dir;
 	int			cell;
 	enum e_side	side;
+	enum e_side	door_side;
 }	t_ray;
 
 typedef struct s_rect

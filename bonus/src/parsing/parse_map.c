@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/15 13:58:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 11:12:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 		g->map.data[i * g->map.width + j] = 1;
 	else if (map_char == '0')
 		g->map.data[i * g->map.width + j] = 0;
+	else if (map_char == '2')
+		g->map.data[i * g->map.width + j] = 2;
 	else if (ft_strchr("NSWE", map_char))
 	{
 		g->map.data[i * g->map.width + j] = 0;

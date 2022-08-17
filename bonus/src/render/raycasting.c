@@ -6,11 +6,23 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 22:55:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:55:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	get_door_tex_x(t_ray *ray, t_game *g)
+{
+	double	wall_x;
+
+	if (ray->door_side == W || ray->door_side == E)
+		wall_x = g->player.pos.y + ray->door_dist * ray->dir.y;
+	else
+		wall_x = g->player.pos.x + ray->door_dist * ray->dir.x;
+	wall_x -= floor((wall_x));
+	return ((int)(wall_x * (double)g->textures[E].width));
+}
 
 static int	get_tex_x(t_ray *ray, t_game *g)
 {
@@ -36,10 +48,18 @@ static void	init_draw_line(
 			t_data *img,
 			t_game *g)
 {
-	var->line_height = SCREEN_H / ray->wall_dist;
+	if (ray->door_dist && ray->door_dist < ray->wall_dist)
+	{
+		var->line_height = SCREEN_H / ray->door_dist;
+		var->tex_x = get_door_tex_x(ray, g);
+	}
+	else
+	{
+		var->line_height = SCREEN_H / ray->wall_dist;
+		var->tex_x = get_tex_x(ray, g);
+	}
 	var->draw_start = -var->line_height / 2 + SCREEN_H / 2;
 	var->draw_end = var->line_height / 2 + SCREEN_H / 2;
-	var->tex_x = get_tex_x(ray, g);
 	var->ray = ray;
 	var->arr = (unsigned int *)mlx_get_data_addr(
 			img->img,
