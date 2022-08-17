@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   skycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 21:00:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:26:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:15:31 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	load_sky_texture(t_game *game)
-{
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	void	*img;
-
-	img = mlx_xpm_file_to_image(game->mlx, "img/sky2.xpm",
-			&game->sky.width, &game->sky.height);
-	if (!img)
-		parsing_error("error when loading door texture");
-	game->sky.img = (unsigned int *) mlx_get_data_addr(img,
-			&bits_per_pixel, &size_line, &endian);
-}
 
 double	get_angle(t_vector v1, t_vector v2)
 {

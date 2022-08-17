@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:18:46 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/15 17:00:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:58:56 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 
 static void	parse_map_char(char map_char, int i, int j, t_game *g)
 {
-	if (map_char == '1')
-		g->map.data[i * g->map.width + j] = 1;
-	else if (map_char == '0')
-		g->map.data[i * g->map.width + j] = 0;
+	if (isdigit(map_char))
+		g->map.data[i * g->map.width + j] = map_char - 48;
 	else if (ft_strchr("NSWE", map_char))
 	{
 		g->map.data[i * g->map.width + j] = 0;

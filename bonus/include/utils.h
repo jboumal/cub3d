@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:32:21 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:14:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:58:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
-/* ato */
+/* libft */
 bool		atoui8_error(const char *s, uint8_t *n);
+int			isdigit(int c);
 
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);

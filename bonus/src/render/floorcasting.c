@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:32:24 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:13:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:15:27 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	load_floor_texture(t_game *game)
-{
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	void	*img;
-
-	img = mlx_xpm_file_to_image(game->mlx, "img/floor.xpm",
-			&game->floor.width, &game->floor.height);
-	if (!img)
-		parsing_error("error when loading door texture");
-	game->floor.img = (unsigned int *) mlx_get_data_addr(img,
-			&bits_per_pixel, &size_line, &endian);
-}
 
 static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 {

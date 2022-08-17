@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ato.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:39:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/09 13:26:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:58:17 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ bool	atoui8_error(const char *s, uint8_t *n)
 	if (n)
 		*n = sum;
 	return (!ft_strchr(" \t\n\r\v\f", *s) && *s);
+}
+
+int	isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:39:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/15 13:11:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:51:43 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 		tex_x = g->textures[E].width - tex_x - 1;
 	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
 		tex_x = g->textures[N].width - tex_x - 1;
+
+	tex_x = g->textures[g->map.data[ray->cell] - 1].width - tex_x - 1;
 	return (tex_x);
 }
 
