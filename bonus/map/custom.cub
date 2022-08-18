@@ -1,5 +1,5 @@
 
-1 img/scifi.xpm
+1 img/doom2/ZZWOLF1.xpm
 2 img/doom2/ZZWOLF2.xpm
 3 img/doom2/ZZWOLF3.xpm
 4 img/doom2/ZZWOLF4.xpm
@@ -9,7 +9,7 @@
 : img/doom2/ZDOORB1.xpm
 
 F img/mobile/WALL013.xpm
-C img/sky2.xpm
+C img/sky/sky2.xpm
 
 11111111111111111111111111111111
 10000000000000000000000000000011

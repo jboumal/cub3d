@@ -71,14 +71,12 @@ size_t		str_arr_len(char **str);
 /* swap */
 void		swap_int(int *a, int *b);
 
-
 /* x_alloc */
 void		*x_malloc(size_t n);
 
 /* mac mouse functions */
 int			mac_mouse_hide(void);
 int			mac_mouse_move(int x, int y);
-
 int			mlx_mouse_move(void *mlx, void *win, int x, int y);
 int			mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
 int			mlx_mouse_hide(void *mlx, void *win);

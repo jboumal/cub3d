@@ -54,14 +54,6 @@ typedef struct s_state
 	int		m_right;
 }	t_state;
 
-typedef struct s_texture
-{
-	unsigned int	*img;
-	int				width;
-	int				height;
-	void			*allocated_img;
-}	t_texture;
-
 typedef struct s_game
 {
 	void		*mlx;
@@ -72,6 +64,7 @@ typedef struct s_game
 	t_texture	textures[79];
 	t_texture	floor;
 	t_texture	sky;
+	t_object	list_object[10];
 }	t_game;
 
 /* check_map */

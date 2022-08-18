@@ -41,9 +41,10 @@
 # include <pthread.h>
 
 # include "vector.h"
+# include "object.h"
+# include "parsing.h"
 # include "utils.h"
 # include "data_struct.h"
-# include "parsing.h"
 # include "gameloop.h"
 # include "event.h"
 # include "render.h"
