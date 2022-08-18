@@ -22,8 +22,13 @@
 # define MRS 0.003 // Mouse rotation speed
 # define TILEMAP_SIZE 12
 
-# include <unistd.h>
+# ifdef LINUX
+# include <../mlx_linux/mlx.h>
+# else
 # include <mlx.h>
+#endif
+
+# include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
 # include <fcntl.h>
