@@ -23,7 +23,7 @@
 # define TILEMAP_SIZE 12
 
 # include <unistd.h>
-# include <../mlx_linux/mlx.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <sys/time.h>
 # include <fcntl.h>
