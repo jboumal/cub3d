@@ -1,3 +1,4 @@
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -21,7 +22,9 @@ SRC = 	main.c \
 		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c\
 		render/routines.c render/skycasting.c render/floorcasting.c render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
 		utils/utils.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
-		utils/swap.c utils/mouse_move.c utils/error.c utils/color.c\
+		utils/swap.c utils/mouse_move.c utils/error.c utils/color.c \
+		data_struct/dy_str.c
+
 ifneq ($(shell uname), Linux)
 	SRC +=	utils/mlx_mouse.m
 endif
