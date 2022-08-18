@@ -21,7 +21,7 @@ static int	get_door_tex_x(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->door_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	return ((int)(wall_x * (double)g->textures[E].width));
+	return ((int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width));
 }
 
 static int	get_tex_x(t_ray *ray, t_game *g)
@@ -34,11 +34,11 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	tex_x = (int)(wall_x * (double)g->textures[E].width);
+	tex_x = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
 	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
-		tex_x = g->textures[E].width - tex_x - 1;
+		tex_x = g->textures[g->map.data[ray->cell] - 1].width - tex_x - 1;
 	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
-		tex_x = g->textures[N].width - tex_x - 1;
+		tex_x = g->textures[g->map.data[ray->cell] - 1].width - tex_x - 1;
 	return (tex_x);
 }
 
@@ -91,7 +91,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	int		color;
 
 	y = 0;
-	tex_h = g->textures[var->ray->side].height;
+	tex_h = g->textures[g->map.data[var->ray->cell] - 1].height;
 	while (y < SCREEN_H)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)

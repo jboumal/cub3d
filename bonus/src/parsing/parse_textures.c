@@ -23,7 +23,7 @@ static int	parse_ceiling(t_game *game, char *path_to_texture)
 	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
 			&game->sky.width, &game->sky.height);
 	if (!img)
-		parsing_error("error when loading door texture");
+		parsing_error("error when loading ceiling texture");
 	game->sky.img = (unsigned int *)mlx_get_data_addr(img,
 			&bits_per_pixel,
 			&size_line,
@@ -43,7 +43,7 @@ static int	parse_floor(t_game *game, char *path_to_texture)
 	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
 			&game->floor.width, &game->floor.height);
 	if (!img)
-		parsing_error("error when loading door texture");
+		parsing_error("error when loading floor texture");
 	game->floor.img = (unsigned int *)mlx_get_data_addr(img,
 			&bits_per_pixel,
 			&size_line,

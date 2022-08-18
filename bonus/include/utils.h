@@ -16,12 +16,6 @@
 # include "cub3d.h"
 # define BUFFER_SIZE 1024
 
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
-
 /* utils */
 bool		atoui8_error(const char *s, uint8_t *n);
 int			isdigit(int c);
@@ -77,12 +71,6 @@ size_t		str_arr_len(char **str);
 /* swap */
 void		swap_int(int *a, int *b);
 
-/* vector */
-t_vector	vector(double x, double y);
-t_vector	vector_add(t_vector v1, t_vector v2);
-t_vector	vector_scalar_multiplication(t_vector v, double a);
-t_vector	vector_rotate(t_vector v, double a);
-double		vector_norme(t_vector v);
 
 /* x_alloc */
 void		*x_malloc(size_t n);
