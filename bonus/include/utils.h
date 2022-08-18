@@ -28,10 +28,16 @@ int			isdigit(int c);
 int			isascii_48(int c);
 int			shade_color(int color, double divide);
 
+/* color */
+int			shade(int cf, int cb, double af, double ab);
+
 /* copy */
 void		*ft_memset(void *b, int c, size_t len);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void		str_n_cpy(char *dst, char *src, size_t len);
+
+/* error */
+void		exit_error(char *e);
 
 /* find */
 void		*ft_memchr(const void *s, int c, size_t n);

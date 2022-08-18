@@ -97,7 +97,12 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
 			tex_y = (y - var->draw_start) * tex_h / (var->line_height);
-			color = g->textures[var->ray->side].img[tex_y * tex_h + var->tex_x];
+			color = g->textures[g->map.data[var->ray->cell] - 1]
+				.img[tex_y * tex_h + var->tex_x];
+			if (var->ray->side == N || var->ray->side == S)
+				color = shade_color(color, 1.5);
+			if (var->ray->side == E)
+				color = shade_color(color, 1.2);
 			my_mlx_pixel_put(img, x, y, color);
 			if (y + var->line_height < SCREEN_H)
 			{
