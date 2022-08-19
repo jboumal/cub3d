@@ -60,6 +60,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	./$(NAME) map/minimalist.cub
+	./$(NAME) map/custom.cub
 
 .PHONY: all clean fclean re
