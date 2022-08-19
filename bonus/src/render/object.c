@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/19 23:15:01 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/19 23:42:14 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,44 @@ void	init_object(t_game *game)
 	load_object_t(game, 0, "img/object/tree.xpm");
 }
 
+static void draw_object(void *img, double fObjectCeiling, double fMiddleOfObject)
+{
+
+}
+
+static void	init_draw_object(void *img, t_object obj, double f_object_angle, double dist)
+{
+	double fObjectCeiling;
+	double fObjectHeight;
+	double fObjectWidth;
+	double fMiddleOfObject;
+	double lx;
+	double ly;
+
+	fObjectCeiling = (((double) SCREEN_H / 2.0) - ((double) SCREEN_H / ((double) dist / obj.size)));
+	fObjectHeight = (double) SCREEN_H - 2.0 * fObjectCeiling;
+	fObjectWidth = fObjectHeight / ((double) obj.obj_t.height  / (double) obj.obj_t.width);
+	fMiddleOfObject = (0.5 * (f_object_angle / (FOV / 2.0)) + 0.5) * (double) SCREEN_W;
+
+	for (lx = 0; lx < fObjectWidth; lx++)
+	{
+		for (ly = 0; ly < fObjectHeight; ly++)
+		{
+			int tex = ((int) (ly / fObjectHeight * obj.obj_t.height)
+			 * obj.obj_t.height + (int) (lx / fObjectWidth * obj.obj_t.width));
+
+			int color = obj.obj_t.img[tex];
+			int nObjectColumn = (fMiddleOfObject + lx - (fObjectWidth / 2.0));
+
+			if (nObjectColumn >= 0 && nObjectColumn < SCREEN_W)
+			{
+				if (color > 0)
+					my_mlx_pixel_put(img, nObjectColumn, (int) fObjectCeiling + ly, color);
+			}
+		}
+	}
+}
+
 void	render_objects(void	*img, t_game *g)
 {
 	t_object	obj;
@@ -63,7 +101,7 @@ void	render_objects(void	*img, t_game *g)
 		fvec_y = obj.y - g->player.pos.y;
 		dist = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
 
-		fObjectAngle = atan2(fvec_x, fvec_y) - atan2( g->player.dir.x , g->player.dir.y);
+		fObjectAngle = atan2(fvec_x, fvec_y) - atan2(g->player.dir.x , g->player.dir.y);
 		if (fObjectAngle < -M_PI)
 			fObjectAngle += 2.0 * M_PI;
 		if (fObjectAngle > M_PI)
@@ -71,30 +109,7 @@ void	render_objects(void	*img, t_game *g)
 
 		if (fabs(fObjectAngle) < FOV / 2.0 && sqrt(fvec_x * fvec_x + fvec_y * fvec_y) >= 1.0)
 		{
-			double fObjectCeiling = (((double) SCREEN_H / 2.0) - ((double) SCREEN_H / ((double) dist / obj.size)));
-			double fObjectHeight = (double) SCREEN_H - 2.0 * fObjectCeiling;
-			double fObjectAspectRatio = (double) obj.obj_t.height  / (double) obj.obj_t.width ;
-			double fObjectWidth = fObjectHeight / fObjectAspectRatio;
-			double fMiddleOfObject = (0.5 * (fObjectAngle / (FOV / 2.0)) + 0.5) * (double) SCREEN_W;
-
-			// Draw tree
-			for (double lx = 0; lx < fObjectWidth; lx++)
-			{
-				for (double ly = 0; ly < fObjectHeight; ly++)
-				{
-					double fSampleX = lx / fObjectWidth * (double) obj.obj_t.width;
-					double fSampleY = ly / fObjectHeight * (double) obj.obj_t.height;
-					int tex = ((int) fSampleY * obj.obj_t.height + (int) fSampleX);
-					int color = obj.obj_t.img[tex];
-					int nObjectColumn = (int)(fMiddleOfObject + lx - (fObjectWidth / 2.0));
-
-					if (nObjectColumn >= 0 && nObjectColumn < SCREEN_W)
-					{
-						if (color > 0)
-							my_mlx_pixel_put(img, (int) nObjectColumn, (int) fObjectCeiling + ly, color);
-					}
-				}
-			}
+			init_draw_object(img, obj, fObjectAngle, dist);
 		}
 		i++;
 	}
