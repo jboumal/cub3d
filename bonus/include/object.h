@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:09:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/19 23:11:56 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 01:48:30 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ typedef struct s_object
 	double		x;
 	double		y;
 	double		size;
-	t_texture	obj_t;
+	double		height;
+	double		width;
+	double		angle;
+	double		ceil;
+	double		dist_to_p;
+	t_texture	t;
 }	t_object;
 
 void	init_object(t_game *game);
