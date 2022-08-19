@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
+# define FOV 0.7854
 
 typedef struct s_data
 {
