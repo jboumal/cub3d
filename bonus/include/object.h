@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:09:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/18 22:32:35 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/19 22:45:24 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_object
 {
 	double		x;
 	double		y;
+	double		size;
 	t_texture	obj;
 }	t_object;
 

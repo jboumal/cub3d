@@ -68,6 +68,32 @@ static void	drawline(t_data *img, t_vector p0, t_vector p1, t_game *g)
 	}
 }
 
+static void	render_obj(t_data *img, t_game *g)
+{
+	t_rect		rect;
+	t_vector	position0;
+	t_vector	position1;
+	t_vector	position2;
+	t_player	p;
+
+	p = g->player;
+	init_rect(&rect, 6);
+	rect.x = 3.5 * TILEMAP_SIZE - 6 / 2;
+	rect.y = (g->map.height - 7.5) * TILEMAP_SIZE - 6 / 2;
+	rect.color = 0xFF0000;
+	position0 = vector(rect.x + 3, rect.y + 3);
+	position1 = vector((p.pos.x + (p.dir.x * 1 - p.plane.x) * 2) * TILEMAP_SIZE,
+			((g->map.height - p.pos.y) - (p.dir.y - p.plane.y) * 2)
+			* TILEMAP_SIZE);
+	position2 = vector((p.pos.x + (p.dir.x * 1 + p.plane.x) * 2) * TILEMAP_SIZE,
+			((g->map.height - p.pos.y) - (p.dir.y + p.plane.y) * 2)
+			* TILEMAP_SIZE);
+	drawline(img, position0, position1, g);
+	drawline(img, position0, position2, g);
+	drawline(img, position1, position2, g);
+	render_rect(img, rect);
+}
+
 static void	render_miniplayer(t_data *img, t_game *g)
 {
 	t_rect		rect;
@@ -117,4 +143,5 @@ void	render_minimap(t_data *img, t_game *game)
 		i++;
 	}
 	render_miniplayer(img, game);
+	render_obj(img, game);
 }
