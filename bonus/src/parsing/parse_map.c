@@ -40,8 +40,8 @@ static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 	g->player.pos = vector((double)j + 0.5, i - 0.1);
 	g->player.dir.y = (direction == N) - (direction == S);
 	g->player.dir.x = (direction == E) - (direction == W);
-	g->player.plane.x = 0.66 * g->player.dir.y;
-	g->player.plane.y = -0.66 * g->player.dir.x;
+	g->player.plane.x = PLANE_LENGTH * g->player.dir.y;
+	g->player.plane.y = -PLANE_LENGTH * g->player.dir.x;
 }
 
 static void	parse_map_char(char map_char, int i, int j, t_game *g)
