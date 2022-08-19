@@ -66,6 +66,7 @@ typedef struct s_game
 	t_texture	floor;
 	t_texture	sky;
 	t_object	list_object[10];
+	double		depth_buffer[SCREEN_W + 1];
 }	t_game;
 
 /* check_map */
