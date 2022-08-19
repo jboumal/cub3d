@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static t_vector	get_side_dist(t_vector delta_dist, t_ray *ray, t_game *g)
+static t_vector	get_init_side_dist(t_vector delta_dist, t_ray *ray, t_game *g)
 {
 	t_vector	pos;
 	t_vector	side_dist;
@@ -29,49 +29,80 @@ static t_vector	get_side_dist(t_vector delta_dist, t_ray *ray, t_game *g)
 	return (side_dist);
 }
 
-static bool	compute_cell(
-	t_ray *ray,
-	t_vector delta_dist,
+static bool	compute_cell_we(
 	t_vector *side_dist,
+	t_vector delta_dist,
+	t_ray *ray,
 	t_game *g)
 {
-	if (side_dist->x < side_dist->y)
+	double	wall_x;
+
+	side_dist->x += delta_dist.x;
+	ray->cell += -2 * (ray->dir.x < 0) + 1;
+	ray->side = W * (ray->dir.x <= 0) + E * (ray->dir.x > 0);
+	if (g->map.data[ray->cell] == 10)
 	{
-		side_dist->x += delta_dist.x;
-		ray->cell += -2 * (ray->dir.x < 0) + 1;
-		ray->side = W * (ray->dir.x <= 0) + E * (ray->dir.x > 0);
-		if (g->map.data[ray->cell] == 2
-			&& side_dist->x - delta_dist.x / 2 < side_dist->y)
+		if (side_dist->x - delta_dist.x / 2 < side_dist->y)
 		{
-			side_dist->x += delta_dist.x / 2;
-			return (true);
+			wall_x = g->player.pos.y
+				+ (side_dist->x - delta_dist.x + delta_dist.x / 2) * ray->dir.y;
+			wall_x -= floor((wall_x));
+			if (wall_x < g->state.door_ratio)
+			{
+				side_dist->x += delta_dist.x / 2;
+				return (true);
+			}
 		}
 	}
-	else
+	return (false);
+}
+
+static bool	compute_cell_ns(
+	t_vector *side_dist,
+	t_vector delta_dist,
+	t_ray *ray,
+	t_game *g)
+{
+	double	wall_x;
+
+	side_dist->y += delta_dist.y;
+	ray->cell += -2 * g->map.width * (ray->dir.y < 0) + g->map.width;
+	ray->side = N * (ray->dir.y >= 0) + S * (ray->dir.y < 0);
+	if (g->map.data[ray->cell] == 10)
 	{
-		side_dist->y += delta_dist.y;
-		ray->cell += -2 * g->map.width * (ray->dir.y < 0) + g->map.width;
-		ray->side = N * (ray->dir.y >= 0) + S * (ray->dir.y < 0);
-		if (g->map.data[ray->cell] == 2
-			&& side_dist->y - delta_dist.y / 2 < side_dist->x)
+		if (side_dist->y - delta_dist.y / 2 < side_dist->x)
 		{
-			side_dist->y += delta_dist.y / 2;
-			return (true);
+			wall_x = g->player.pos.x
+				+ (side_dist->y - delta_dist.y + delta_dist.y / 2) * ray->dir.x;
+			wall_x -= floor((wall_x));
+			if (wall_x < g->state.door_ratio)
+			{
+				side_dist->y += delta_dist.y / 2;
+				return (true);
+			}
 		}
 	}
-	return (g->map.data[ray->cell] && g->map.data[ray->cell] != 2);
+	return (false);
 }
 
 void	dda(t_ray *ray, t_game *g)
 {
 	t_vector	delta_dist;
 	t_vector	side_dist;
+	bool		hit;
 
 	ray->cell = (int)g->player.pos.y * g->map.width + (int)g->player.pos.x;
 	delta_dist = vector(1 / fabs(ray->dir.x), 1 / fabs(ray->dir.y));
-	side_dist = get_side_dist(delta_dist, ray, g);
-	while (!compute_cell(ray, delta_dist, &side_dist, g))
-		;
+	side_dist = get_init_side_dist(delta_dist, ray, g);
+	hit = false;
+	while (!hit)
+	{
+		if (side_dist.x < side_dist.y)
+			hit = compute_cell_we(&side_dist, delta_dist, ray, g);
+		else
+			hit = compute_cell_ns(&side_dist, delta_dist, ray, g);
+		hit |= (g->map.data[ray->cell] && g->map.data[ray->cell] != 10);
+	}
 	ray->dist = side_dist.y - delta_dist.y;
 	if (ray->side % 2)
 		ray->dist = side_dist.x - delta_dist.x;

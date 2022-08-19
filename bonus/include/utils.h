@@ -71,7 +71,6 @@ size_t		str_arr_len(char **str);
 /* swap */
 void		swap_int(int *a, int *b);
 
-
 /* x_alloc */
 void		*x_malloc(size_t n);
 

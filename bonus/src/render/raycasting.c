@@ -22,11 +22,15 @@ static int	get_tx(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
+	wall_x -= g->state.door_ratio * (g->map.data[ray->cell] == 10);
 	tx = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
-	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
-		tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
-	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
-		tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+	if (g->map.data[ray->cell] != 10)
+	{
+		if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
+			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+		if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
+			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+	}
 	return (tx);
 }
 
