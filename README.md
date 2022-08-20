@@ -4,3 +4,7 @@
 - Add thin walls for doors
 - Animate doors
 - Test parsing (especially when doors implemented)
+
+Ben :
+- Parsing objects with coordinate
+  
