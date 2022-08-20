@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/19 23:53:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/20 12:49:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ static void	fps_counter(void)
 
 static void	update_door(t_game *g)
 {
-	if (!g->state.door_opened && g->state.door_ratio < 1)
-		g->state.door_ratio += 0.01;
-	if (g->state.door_opened && g->state.door_ratio > 0)
-		g->state.door_ratio -= 0.01;
+	t_vector	pos;
+
+	pos = g->player.pos;
+	if (g->map.data[(int)pos.y * g->map.width + (int)pos.x] != 10)
+	{
+		if (!g->state.door_opened && g->state.door_ratio < 1)
+			g->state.door_ratio += 0.01;
+		if (g->state.door_opened && g->state.door_ratio > 0)
+			g->state.door_ratio -= 0.01;
+	}
 }
 
 static void	game_update(t_game *game)
