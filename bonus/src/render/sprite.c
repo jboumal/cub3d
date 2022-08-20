@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 15:27:06 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:39:31 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	compute_field_sprite(t_game *g)
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
 		obj->is_in_fov = (fabs(obj->angle) < FOV / 2.0 && obj->dist_to_p >= 1.0);
-		sort_sprite(g, obj, i);
+		if (i != 0)
+			sort_sprite(g, obj, i);
 	}
 }
 
@@ -77,6 +78,12 @@ void	init_sprite(t_game *game)
 	obj->size = 0.4;
 	game->list_sprite[1] = obj;
 	load_sprite_t(game, 1, "img/sprite/armor.xpm");
+	obj = malloc(sizeof(t_sprite));
+	obj->x = 2.5;
+	obj->y = 7.5;
+	obj->size = 0.4;
+	game->list_sprite[2] = obj;
+	load_sprite_t(game, 2, "img/sprite/tree.xpm");
 }
 
 static void	draw_sprite(t_game *game, void *img, t_sprite obj)
