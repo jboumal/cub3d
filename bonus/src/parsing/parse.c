@@ -61,6 +61,7 @@ void	parse(int argc, char **argv, t_game *game)
 	parse_map(map_str, game);
 	check_map(game);
 	invert_map_rows(game);
+	//parse_sprite(game, fd);
 	free(map_str);
 	close(fd);
 }

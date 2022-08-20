@@ -42,7 +42,7 @@
 # include <pthread.h>
 
 # include "vector.h"
-# include "object.h"
+# include "sprite.h"
 # include "parsing.h"
 # include "utils.h"
 # include "data_struct.h"

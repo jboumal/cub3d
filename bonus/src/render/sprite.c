@@ -1,61 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.c                                           :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 02:54:30 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:24:36 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	load_object_t(t_game *game, int index, char *path_to_texture)
+static void	load_sprite_t(t_game *game, int index, char *path_to_texture)
 {
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
 	void		*img;
 
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->list_object
-		[index]->t.width, &game->list_object[index]->t.height);
+	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->list_sprite
+		[index]->t.width, &game->list_sprite[index]->t.height);
 	if (!img)
-		parsing_error("error when loading object texture");
-	game->list_object[index]->t.img = (unsigned int *)mlx_get_data_addr(img,
+		parsing_error("error when loading sprite texture");
+	game->list_sprite[index]->t.img = (unsigned int *)mlx_get_data_addr(img,
 			&bits_per_pixel,
 			&size_line,
 			&endian);
-	game->list_object[index]->t.allocated_img = img;
+	game->list_sprite[index]->t.allocated_img = img;
 }
 
-void	init_object(t_game *game)
+void	init_sprite(t_game *game)
 {
-	t_object	*obj;
+	t_sprite	*obj;
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
 	void		*img;
 
-	obj = malloc(sizeof(t_object));
+	obj = malloc(sizeof(t_sprite));
 	obj->x = 3.5;
 	obj->y = 7.5;
 	obj->size = 0.5;
-	game->list_object[0] = obj;
-	load_object_t(game, 0, "img/object/tree.xpm");
-	obj = malloc(sizeof(t_object));
+	game->list_sprite[0] = obj;
+	load_sprite_t(game, 0, "img/sprite/tree.xpm");
+	obj = malloc(sizeof(t_sprite));
 	obj->x = 6.5;
 	obj->y = 12.5;
 	obj->size = 0.4;
-	game->list_object[1] = obj;
-	load_object_t(game, 1, "img/object/armor.xpm");
+	game->list_sprite[1] = obj;
+	load_sprite_t(game, 1, "img/sprite/armor.xpm");
 }
 
-static void	draw_object(t_game *game, void *img, t_object obj)
+static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 {
 	int		color;
-	int		n_object_col;
+	int		n_sprite_col;
 	int		lx;
 	int		ly;
 
@@ -70,28 +70,28 @@ static void	draw_object(t_game *game, void *img, t_object obj)
 		{
 			color = obj.t.img[(int)(ly / obj.height * obj.t.height)
 				*obj.t.width + (int)(lx / obj.width * obj.t.width)];
-			n_object_col = ((0.5 * (obj.angle / (FOV / 2.0)) + 0.5)
+			n_sprite_col = ((0.5 * (obj.angle / (FOV / 2.0)) + 0.5)
 					* SCREEN_W + lx - (obj.width / 2.0));
-			if (n_object_col >= 0 && n_object_col < SCREEN_W)
+			if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
 			{
-				if (color > 0 && game->depth_buf[n_object_col] >= obj.dist_to_p)
-					my_mlx_pixel_put(img, n_object_col, obj.ceil + ly, color);
+				if (color > 0 && game->depth_buf[n_sprite_col] >= obj.dist_to_p)
+					my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
 			}
 		}
 	}
 }
 
-void	render_objects(void	*img, t_game *g)
+void	render_sprites(void	*img, t_game *g)
 {
-	t_object	*obj;
+	t_sprite	*obj;
 	int			i;
 	double		fvec_x;
 	double		fvec_y;
 
-	i = -1;
+	i = 0;
 	while (i++ < 10)
 	{
-		obj = g->list_object[i];
+		obj = g->list_sprite[i - 1];
 		if (!obj)
 			continue ;
 		fvec_x = obj->x - g->player.pos.x;
@@ -104,6 +104,6 @@ void	render_objects(void	*img, t_game *g)
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
 		if (fabs(obj->angle) < FOV / 2.0 && obj->dist_to_p >= 1.0)
-			draw_object(g, img, *obj);
+			draw_sprite(g, img, *obj);
 	}
 }

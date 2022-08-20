@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 19:09:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 01:48:30 by bperraud         ###   ########.fr       */
+/*   Created: 2022/08/20 13:50:28 by bperraud          #+#    #+#             */
+/*   Updated: 2022/08/20 14:24:52 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
 
-typedef struct s_game	t_game;
 
-typedef struct s_texture
+static void	create_sprite(t_game *game)
 {
-	unsigned int	*img;
-	int				width;
-	int				height;
-	void			*allocated_img;
-}	t_texture;
+	;
+}
 
-typedef struct s_object
+void	parse_sprite(t_game *game, int fd)
 {
-	double		x;
-	double		y;
-	double		size;
-	double		height;
-	double		width;
-	double		angle;
-	double		ceil;
-	double		dist_to_p;
-	t_texture	t;
-}	t_object;
+	char	*line;
 
-void	init_object(t_game *game);
-void	render_objects(void	*img, t_game *game);
+	line = get_next_non_empty_line(fd);
+	while (line)
+	{
+		;
+	}
+}

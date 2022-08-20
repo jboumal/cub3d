@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	initialize(&game);
 	parse(argc, argv, &game);
 
-	init_object(&game);
+	init_sprite(&game);
 
 	game.window = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);

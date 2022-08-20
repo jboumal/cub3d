@@ -65,7 +65,7 @@ typedef struct s_game
 	t_texture	textures[79];
 	t_texture	floor;
 	t_texture	sky;
-	t_object	*list_object[10];
+	t_sprite	*list_sprite[10];
 	double		depth_buf[SCREEN_W];
 }	t_game;
 
@@ -80,6 +80,9 @@ void		parse_map(char *map_str, t_game *g);
 
 /* parse_textures */
 void		parse_textures(t_game *game, int fd);
+
+/* parse_sprite */
+void		parse_sprite(t_game *game, int fd);
 
 /* parse */
 void		parsing_error(char *msg);
