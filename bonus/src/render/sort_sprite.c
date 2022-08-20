@@ -6,11 +6,11 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:25:45 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 15:38:15 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:41:59 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 static void	swap_sprite(t_game *g, int i, int j)
 {
