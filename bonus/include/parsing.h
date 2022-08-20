@@ -65,7 +65,7 @@ typedef struct s_game
 	t_texture	textures[79];
 	t_texture	floor;
 	t_texture	sky;
-	t_object	list_object[10];
+	t_object	*list_object[10];
 	double		depth_buf[SCREEN_W];
 }	t_game;
 
