@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/19 14:47:19 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:37:59 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static void	game_update(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	//fps_counter();
-
+	fps_counter();
 	if (LINUX)
 		my_mouse_hook(game);
 	game_update(game);

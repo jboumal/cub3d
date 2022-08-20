@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:09:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 14:13:25 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:26:54 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ typedef struct s_sprite
 	double		angle;
 	double		ceil;
 	double		dist_to_p;
+	bool		is_in_fov;
 	t_texture	t;
 }	t_sprite;
 
 void	init_sprite(t_game *game);
 void	render_sprites(void	*img, t_game *game);
+
+/* sort sprite */
+void	sort_sprite(t_game *g, t_sprite *obj, int i);

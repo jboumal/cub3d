@@ -6,11 +6,38 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 14:24:36 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:27:06 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	compute_field_sprite(t_game *g)
+{
+	t_sprite	*obj;
+	double		fvec_x;
+	double		fvec_y;
+	int			i;
+
+	i = -1;
+	while (i++ < 9)
+	{
+		obj = g->list_sprite[i];
+		if (!obj)
+			continue ;
+		fvec_x = obj->x - g->player.pos.x;
+		fvec_y = obj->y - g->player.pos.y;
+		obj->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
+		obj->angle = atan2(fvec_x, fvec_y)
+			- atan2(g->player.dir.x, g->player.dir.y);
+		if (obj->angle < -M_PI)
+			obj->angle += 2.0 * M_PI;
+		if (obj->angle > M_PI)
+			obj->angle -= 2.0 * M_PI;
+		obj->is_in_fov = (fabs(obj->angle) < FOV / 2.0 && obj->dist_to_p >= 1.0);
+		sort_sprite(g, obj, i);
+	}
+}
 
 static void	load_sprite_t(t_game *game, int index, char *path_to_texture)
 {
@@ -85,25 +112,13 @@ void	render_sprites(void	*img, t_game *g)
 {
 	t_sprite	*obj;
 	int			i;
-	double		fvec_x;
-	double		fvec_y;
 
+	compute_field_sprite(g);
 	i = 0;
 	while (i++ < 10)
 	{
 		obj = g->list_sprite[i - 1];
-		if (!obj)
-			continue ;
-		fvec_x = obj->x - g->player.pos.x;
-		fvec_y = obj->y - g->player.pos.y;
-		obj->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
-		obj->angle = atan2(fvec_x, fvec_y)
-			- atan2(g->player.dir.x, g->player.dir.y);
-		if (obj->angle < -M_PI)
-			obj->angle += 2.0 * M_PI;
-		if (obj->angle > M_PI)
-			obj->angle -= 2.0 * M_PI;
-		if (fabs(obj->angle) < FOV / 2.0 && obj->dist_to_p >= 1.0)
+		if (obj && obj->is_in_fov)
 			draw_sprite(g, img, *obj);
 	}
 }
