@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:25:45 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 15:41:59 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:55:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ void	sort_sprite(t_game *g, t_sprite *obj, int i)
 {
 	int		j;
 
-	if (obj->is_in_fov)
+	j = 0;
+	while (i >= 1 && obj->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
 	{
-		j = 0;
-		while (i >= 1 && obj->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
-		{
-			swap_sprite(g, i, i - 1);
-			i--;
-		}
+		swap_sprite(g, i, i - 1);
+		i--;
 	}
 }
