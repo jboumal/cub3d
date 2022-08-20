@@ -31,12 +31,10 @@ typedef struct s_scanline
 
 typedef struct s_ray
 {
-	double		wall_dist;
-	double		door_dist;
+	double		dist;
 	t_vector	dir;
 	int			cell;
 	enum e_side	side;
-	enum e_side	door_side;
 }	t_ray;
 
 typedef struct s_rect
@@ -50,10 +48,11 @@ typedef struct s_rect
 
 typedef struct s_draw_line_var
 {
-	int				tex_x;
+	int				tx;
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
+	t_texture		*texture;
 	unsigned int	*arr;
 	t_ray			*ray;
 }	t_draw_line_var;

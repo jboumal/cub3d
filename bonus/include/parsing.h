@@ -53,6 +53,8 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
+	bool	door_opened;
+	double	door_ratio;
 }	t_state;
 
 typedef struct s_game

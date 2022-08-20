@@ -20,6 +20,7 @@ static void	initialize(t_game *game)
 	game->mlx = mlx_init();
 	game->state.m_left = 0;
 	game->state.m_right = 0;
+	game->state.door_ratio = 1;
 }
 
 int	main(int argc, char **argv)

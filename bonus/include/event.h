@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/09 13:22:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/19 23:38:34 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 #  define K_DOWN 65364
 #  define K_LEFT 65361
 #  define K_UP 65362
+#  define K_E 101
 
 # else
 #  define LINUX 0
@@ -47,6 +48,7 @@
 #  define K_DOWN 125
 #  define K_LEFT 123
 #  define K_UP 126
+#  define K_E "idk"
 # endif
 
 /* event */

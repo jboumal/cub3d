@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/20 14:37:59 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:50:44 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,25 @@ static void	fps_counter(void)
 	}
 }
 
+static void	update_door(t_game *g)
+{
+	t_vector	pos;
+
+	pos = g->player.pos;
+	if (g->map.data[(int)pos.y * g->map.width + (int)pos.x] != 10)
+	{
+		if (!g->state.door_opened && g->state.door_ratio < 1)
+			g->state.door_ratio += 0.01;
+		if (g->state.door_opened && g->state.door_ratio > 0)
+			g->state.door_ratio -= 0.01;
+	}
+}
+
 static void	game_update(t_game *game)
 {
 	translate_cam(game);
 	rotate_cam(game);
+	update_door(game);
 }
 
 int	game_loop(t_game *game)

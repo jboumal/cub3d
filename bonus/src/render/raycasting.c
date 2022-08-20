@@ -12,34 +12,26 @@
 
 #include "cub3d.h"
 
-static int	get_door_tex_x(t_ray *ray, t_game *g)
+static int	get_tx(t_ray *ray, t_game *g)
 {
 	double	wall_x;
-
-	if (ray->door_side == W || ray->door_side == E)
-		wall_x = g->player.pos.y + ray->door_dist * ray->dir.y;
-	else
-		wall_x = g->player.pos.x + ray->door_dist * ray->dir.x;
-	wall_x -= floor((wall_x));
-	return ((int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width));
-}
-
-static int	get_tex_x(t_ray *ray, t_game *g)
-{
-	double	wall_x;
-	int		tex_x;
+	int		tx;
 
 	if (ray->side == W || ray->side == E)
-		wall_x = g->player.pos.y + ray->wall_dist * ray->dir.y;
+		wall_x = g->player.pos.y + ray->dist * ray->dir.y;
 	else
-		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
+		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	tex_x = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
-	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
-		tex_x = g->textures[g->map.data[ray->cell] - 1].width - tex_x - 1;
-	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
-		tex_x = g->textures[g->map.data[ray->cell] - 1].width - tex_x - 1;
-	return (tex_x);
+	wall_x -= g->state.door_ratio * (g->map.data[ray->cell] == 10);
+	tx = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
+	if (g->map.data[ray->cell] != 10)
+	{
+		if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
+			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+		if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
+			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+	}
+	return (tx);
 }
 
 static void	init_draw_line(
@@ -48,16 +40,8 @@ static void	init_draw_line(
 			t_data *img,
 			t_game *g)
 {
-	if (ray->door_dist && ray->door_dist < ray->wall_dist)
-	{
-		var->line_height = SCREEN_H / ray->door_dist;
-		var->tex_x = get_door_tex_x(ray, g);
-	}
-	else
-	{
-		var->line_height = SCREEN_H / ray->wall_dist;
-		var->tex_x = get_tex_x(ray, g);
-	}
+	var->line_height = SCREEN_H / ray->dist;
+	var->tx = get_tx(ray, g);
 	var->draw_start = -var->line_height / 2 + SCREEN_H / 2;
 	var->draw_end = var->line_height / 2 + SCREEN_H / 2;
 	var->ray = ray;
@@ -86,7 +70,7 @@ static inline void	put_sky_reflect_px(
 static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
 	int		y;
-	int		tex_y;
+	int		ty;
 	int		tex_h;
 	int		color;
 
@@ -96,9 +80,9 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			tex_y = (y - var->draw_start) * tex_h / (var->line_height);
+			ty = (y - var->draw_start) * tex_h / (var->line_height);
 			color = g->textures[g->map.data[var->ray->cell] - 1]
-				.img[tex_y * tex_h + var->tex_x];
+				.img[ty * tex_h + var->tx];
 			if (var->ray->side == N || var->ray->side == S)
 				color = shade_color(color, 1.8);
 			if (var->ray->side == E)

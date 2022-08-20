@@ -42,6 +42,8 @@ int	key_down(int code, t_game *game)
 		game->state.r_left = true;
 	else if (code == K_RIGHT)
 		game->state.r_right = true;
+	else if (code == K_E)
+		game->state.door_opened = !game->state.door_opened;
 	return (0);
 }
 
