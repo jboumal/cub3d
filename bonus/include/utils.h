@@ -48,6 +48,11 @@ char		*get_next_non_empty_line(int fd);
 int64_t		min(int64_t a, int64_t b);
 int64_t		max(int64_t a, int64_t b);
 
+/* mlx_utils */
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_data		get_new_img(t_game *game);
+t_texture	load_texture(void *mlx, char *path);
+
 /* put */
 void		dputstr(int fd, char *s);
 

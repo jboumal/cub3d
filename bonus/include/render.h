@@ -73,10 +73,6 @@ void	floorcasting(int y0, int y1, t_data *img, t_game *game);
 /* minimap */
 void	render_minimap(t_data *img, t_game *game);
 
-/* mlx_utils */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data	get_new_img(t_game *game);
-
 /* raycasting */
 void	raycasting(int x0, int x1, t_data *img, t_game *game);
 

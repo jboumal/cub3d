@@ -33,3 +33,4 @@ t_data	get_new_img(t_game *game)
 			&img.endian);
 	return (img);
 }
+
