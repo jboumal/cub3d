@@ -24,8 +24,20 @@ int	quit(t_game *game)
 		i++;
 	}
 	free(game->map.data);
+	lst_clear(&game->state.doors, free);
 	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+static void	update_door_opened(t_game *g)
+{
+	t_vector	v;
+	t_door	*door;
+
+	v = vector_add(g->player.pos, g->player.dir);
+	door = get_door((int)v.y * g->map.width + (int)v.x, g);
+	if (door)
+		door->opened = !door->opened;
 }
 
 int	key_down(int code, t_game *game)
@@ -43,7 +55,7 @@ int	key_down(int code, t_game *game)
 	else if (code == K_RIGHT)
 		game->state.r_right = true;
 	else if (code == K_E)
-		game->state.door_opened = !game->state.door_opened;
+		update_door_opened(game);
 	return (0);
 }
 

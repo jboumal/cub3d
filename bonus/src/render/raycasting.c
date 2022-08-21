@@ -22,7 +22,8 @@ static int	get_tx(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	wall_x -= g->state.door_ratio * (g->map.data[ray->cell] == 10);
+	if ((g->map.data[ray->cell] == 10))
+		wall_x -= get_door(ray->cell, g)->ratio;
 	tx = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
 	if (g->map.data[ray->cell] != 10)
 	{

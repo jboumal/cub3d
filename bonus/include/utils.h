@@ -73,6 +73,7 @@ void		swap_int(int *a, int *b);
 
 /* x_alloc */
 void		*x_malloc(size_t n);
+void		*x_calloc(size_t count, size_t size);
 
 /* mac mouse functions */
 int			mac_mouse_hide(void);

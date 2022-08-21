@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_cam.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:16:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/20 15:50:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:16:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static void	update_pos(t_game *g, t_vector *pos, t_vector *np)
 {
 	if (!g->map.data[(int)pos->y * g->map.width + (int)np->x]
-		|| (g->map.data[(int)pos->y * g->map.width + (int)np->x] == 10
-			&& g->state.door_ratio < 0.2))
+		|| can_pass_door((int)pos->y * g->map.width + (int)np->x, g))
 		pos->x = np->x;
 	if (!g->map.data[(int)np->y * g->map.width + (int)pos->x]
-		|| (g->map.data[(int)np->y * g->map.width + (int)pos->x] == 10
-			&& g->state.door_ratio < 0.2))
+		|| can_pass_door((int)np->y * g->map.width + (int)pos->x, g))
 		pos->y = np->y;
 }
 

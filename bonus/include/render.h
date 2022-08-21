@@ -95,4 +95,11 @@ void	*routine_wall(void *arg);
 void	load_sky_texture(t_game *game);
 void	skycasting(int x0, int x1, t_data *img, t_game *g);
 
+/* sort sprite */
+void	sort_sprite(t_game *g, t_sprite *obj, int i);
+
+/* sprite */
+void	init_sprite(t_game *game);
+void	render_sprites(void	*img, t_game *game);
+
 #endif

@@ -43,6 +43,13 @@ typedef struct s_player
 	t_vector	plane;
 }	t_player;
 
+typedef struct s_door
+{
+	int		cell;
+	bool	opened;
+	double	ratio;
+}	t_door;
+
 typedef struct s_state
 {
 	bool	up;
@@ -53,9 +60,30 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
-	bool	door_opened;
-	double	door_ratio;
+	t_list	doors;
 }	t_state;
+
+typedef struct s_texture
+{
+	unsigned int	*img;
+	int				width;
+	int				height;
+	void			*allocated_img;
+}	t_texture;
+
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	double		size;
+	double		height;
+	double		width;
+	double		angle;
+	double		ceil;
+	double		dist_to_p;
+	bool		is_in_fov;
+	t_texture	t;
+}	t_sprite;
 
 typedef struct s_game
 {
