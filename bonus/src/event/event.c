@@ -31,13 +31,23 @@ int	quit(t_game *game)
 
 static void	update_door_opened(t_game *g)
 {
-	t_vector	v;
-	t_door	*door;
+	int			x;
+	int			y;
+	t_vector	dir;
+	size_t		w;
+	uintptr_t	door;
 
-	v = vector_add(g->player.pos, g->player.dir);
-	door = get_door((int)v.y * g->map.width + (int)v.x, g);
+	x = g->player.pos.x;
+	y = g->player.pos.y;
+	dir = g->player.dir;
+	w = g->map.width;
+	door = 0;
+	door |= (uintptr_t)get_door((y + 1) * w + x, g) * !door * (dir.y > 0);
+	door |= (uintptr_t)get_door((y - 1) * w + x, g) * !door * (dir.y < 0);
+	door |= (uintptr_t)get_door(y * w + (x - 1), g) * !door * (dir.x < 0);
+	door |= (uintptr_t)get_door(y * w + (x + 1), g) * !door * (dir.x > 0);
 	if (door)
-		door->opened = !door->opened;
+		((t_door *)door)->opened = !((t_door *)door)->opened;
 }
 
 int	key_down(int code, t_game *game)
