@@ -22,7 +22,7 @@ double	get_angle(t_vector v1, t_vector v2)
 
 double	get_fov_ratio(t_game *g)
 {
-	return (atan(vector_norme(g->player.plane)) / M_PI);
+	return (g->player.fov / (2 * M_PI));
 }
 
 void	skycasting(int x0, int x1, t_data *img, t_game *g)

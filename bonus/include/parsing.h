@@ -16,7 +16,6 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
-# define FOV 1.151917
 
 typedef struct s_data
 {
@@ -41,6 +40,7 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	double		fov;
 }	t_player;
 
 typedef struct s_door

@@ -34,18 +34,18 @@ static void	update_door_opened(t_game *g)
 	int			x;
 	int			y;
 	t_vector	dir;
-	size_t		w;
+	size_t		width;
 	uintptr_t	door;
 
 	x = g->player.pos.x;
 	y = g->player.pos.y;
 	dir = g->player.dir;
-	w = g->map.width;
+	width = g->map.width;
 	door = 0;
-	door |= (uintptr_t)get_door((y + 1) * w + x, g) * !door * (dir.y > 0);
-	door |= (uintptr_t)get_door((y - 1) * w + x, g) * !door * (dir.y < 0);
-	door |= (uintptr_t)get_door(y * w + (x - 1), g) * !door * (dir.x < 0);
-	door |= (uintptr_t)get_door(y * w + (x + 1), g) * !door * (dir.x > 0);
+	door |= (uintptr_t)get_door((y + 1) * width + x, g) * !door * (dir.y > 0);
+	door |= (uintptr_t)get_door((y - 1) * width + x, g) * !door * (dir.y < 0);
+	door |= (uintptr_t)get_door(y * width + (x - 1), g) * !door * (dir.x < 0);
+	door |= (uintptr_t)get_door(y * width + (x + 1), g) * !door * (dir.x > 0);
 	if (door)
 		((t_door *)door)->opened = !((t_door *)door)->opened;
 }
