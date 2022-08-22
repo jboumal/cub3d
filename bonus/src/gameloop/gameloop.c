@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/20 15:50:44 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/21 17:57:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ static void	fps_counter(void)
 	}
 }
 
-static void	update_door(t_game *g)
+static void	update_doors(t_game *g)
 {
 	t_vector	pos;
+	t_node		*node;
+	t_door		*door;
 
 	pos = g->player.pos;
-	if (g->map.data[(int)pos.y * g->map.width + (int)pos.x] != 10)
+	node = g->state.doors.head;
+	while (node)
 	{
-		if (!g->state.door_opened && g->state.door_ratio < 1)
-			g->state.door_ratio += 0.01;
-		if (g->state.door_opened && g->state.door_ratio > 0)
-			g->state.door_ratio -= 0.01;
+		door = node->content;
+		if (!door->opened && door->ratio < 1)
+			door->ratio += 0.01;
+		if (door->opened && door->ratio > 0.1)
+			door->ratio -= 0.01;
+		node = node->next;
 	}
 }
 
@@ -46,7 +51,7 @@ static void	game_update(t_game *game)
 {
 	translate_cam(game);
 	rotate_cam(game);
-	update_door(game);
+	update_doors(game);
 }
 
 int	game_loop(t_game *game)

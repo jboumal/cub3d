@@ -28,7 +28,7 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 		ty = (int)(h * (scanline->floor.y - (int)scanline->floor.y)) & (h - 1);
 		scanline->floor.x += scanline->step.x;
 		scanline->floor.y += scanline->step.y;
-		color = g->floor.img[h * ty + tx];
+		color = mlx_get_pixel(&g->floor.data, tx, ty);
 		my_mlx_pixel_put(img, x, y, color);
 		x++;
 	}

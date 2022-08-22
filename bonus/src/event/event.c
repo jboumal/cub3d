@@ -20,12 +20,34 @@ int	quit(t_game *game)
 	mlx_destroy_window(game->mlx, game->window);
 	while (i < 4)
 	{
-		mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
+		//mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
 		i++;
 	}
 	free(game->map.data);
+	lst_clear(&game->state.doors, free);
 	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+static void	update_door_opened(t_game *g)
+{
+	int			x;
+	int			y;
+	t_vector	dir;
+	size_t		width;
+	uintptr_t	door;
+
+	x = g->player.pos.x;
+	y = g->player.pos.y;
+	dir = g->player.dir;
+	width = g->map.width;
+	door = 0;
+	door |= (uintptr_t)get_door((y + 1) * width + x, g) * !door * (dir.y > 0);
+	door |= (uintptr_t)get_door((y - 1) * width + x, g) * !door * (dir.y < 0);
+	door |= (uintptr_t)get_door(y * width + (x - 1), g) * !door * (dir.x < 0);
+	door |= (uintptr_t)get_door(y * width + (x + 1), g) * !door * (dir.x > 0);
+	if (door)
+		((t_door *)door)->opened = !((t_door *)door)->opened;
 }
 
 int	key_down(int code, t_game *game)
@@ -43,7 +65,9 @@ int	key_down(int code, t_game *game)
 	else if (code == K_RIGHT)
 		game->state.r_right = true;
 	else if (code == K_E)
-		game->state.door_opened = !game->state.door_opened;
+		update_door_opened(game);
+	else if (code == 15)
+		game->state.rain = !game->state.rain;
 	return (0);
 }
 

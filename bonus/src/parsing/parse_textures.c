@@ -12,84 +12,30 @@
 
 #include "cub3d.h"
 
-static void	load_ceiling_t(t_game *game, char *path_to_texture)
+void	parse_textures(t_game *g, int fd)
 {
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
+	t_dy_str	line;
 
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
-			&game->sky.width, &game->sky.height);
-	if (!img)
-		parsing_error("error when loading ceiling texture");
-	game->sky.img = (unsigned int *)mlx_get_data_addr(img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->sky.allocated_img = img;
-	game->map.ceil = 1;
-}
-
-static void	load_floor_t(t_game *game, char *path_to_texture)
-{
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
-			&game->floor.width, &game->floor.height);
-	if (!img)
-		parsing_error("error when loading floor texture");
-	game->floor.img = (unsigned int *)mlx_get_data_addr(img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->floor.allocated_img = img;
-	game->map.floor = 1;
-}
-
-static void	load_wall_t(t_game *game, int chara, char *path_to_texture)
-{
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(
-			game->mlx,
-			path_to_texture,
-			&game->textures[chara].width,
-			&game->textures[chara].height);
-	if (!img)
-		parsing_error("invalid texture path");
-	game->textures[chara].img = (unsigned int *)mlx_get_data_addr(
-			img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->textures[chara].allocated_img = img;
-}
-
-void	parse_textures(t_game *game, int fd)
-{
-	char	*line;
-
-	while (game->map.ceil == -1)
+	while (g->map.ceil == -1)
 	{
-		line = get_next_non_empty_line(fd);
-		if (isascii_48(line[0]) && line[0] != 'F' && line[0] != 'C')
-			load_wall_t(game, line[0] - 49, skip_spaces(line + 2));
-		else if (!str_n_cmp("F ", line, 2))
-			load_floor_t(game, skip_spaces(line + 2));
-		else if (!str_n_cmp("C ", line, 2))
-			load_ceiling_t(game, skip_spaces(line + 2));
+		line = dy_str_new();
+		dy_str_append_str(&line, get_next_non_empty_line(fd));
+		while (ft_strchr(" \t\n\r", line.str[line.len - 1]))
+			dy_str_pop_back(&line);
+		if (isascii_48(line.str[0]) && line.str[0] != 'F' && line.str[0] != 'C')
+			load_texture(
+				g->mlx, skip_spaces(line.str + 2),
+				&g->textures[line.str[0] - 49]);
+		else if (!str_n_cmp("F ", line.str, 2))
+			load_texture(g->mlx, skip_spaces(line.str + 2), &g->floor);
+		else if (!str_n_cmp("C ", line.str, 2))
+		{
+			load_texture(g->mlx, skip_spaces(line.str + 2), &g->sky);
+			g->map.ceil = 1;
+		}
 		else
-			parsing_error("invalid identifier");
-		free(line);
+			exit_error("invalid identifier");
+		dy_str_destroy(&line);
 	}
+	load_texture(g->mlx, "img/rain.xpm", &g->rain);
 }

@@ -15,6 +15,10 @@
 
 # include "cub3d.h"
 
+/* door */
+t_door	*get_door(int cell, t_game *g);
+bool	can_pass_door(int cell, t_game *g);
+
 /* gameloop */
 int		game_loop(t_game *game);
 

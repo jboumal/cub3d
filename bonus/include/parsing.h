@@ -16,7 +16,6 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
-# define FOV 1.151917
 
 typedef struct s_data
 {
@@ -41,7 +40,15 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	double		fov;
 }	t_player;
+
+typedef struct s_door
+{
+	int		cell;
+	bool	opened;
+	double	ratio;
+}	t_door;
 
 typedef struct s_state
 {
@@ -53,9 +60,30 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
-	bool	door_opened;
-	double	door_ratio;
+	bool	rain;
+	t_list	doors;
 }	t_state;
+
+typedef struct s_texture
+{
+	t_data	data;
+	int		width;
+	int		height;
+}	t_texture;
+
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	double		size;
+	double		height;
+	double		width;
+	double		angle;
+	double		ceil;
+	double		dist_to_p;
+	bool		is_in_fov;
+	t_texture	t;
+}	t_sprite;
 
 typedef struct s_game
 {
@@ -67,6 +95,7 @@ typedef struct s_game
 	t_texture	textures[79];
 	t_texture	floor;
 	t_texture	sky;
+	t_texture	rain;
 	t_sprite	*list_sprite[10];
 	double		depth_buf[SCREEN_W];
 }	t_game;
@@ -87,7 +116,6 @@ void		parse_textures(t_game *game, int fd);
 void		parse_sprite(t_game *game, int fd);
 
 /* parse */
-void		parsing_error(char *msg);
 enum e_side	get_direction(char c);
 void		parse(int argc, char **argv, t_game *game);
 

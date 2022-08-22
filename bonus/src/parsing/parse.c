@@ -12,14 +12,6 @@
 
 #include "cub3d.h"
 
-void	parsing_error(char *msg)
-{
-	dputstr(STDERR_FILENO, "Error\n");
-	dputstr(STDERR_FILENO, msg);
-	dputstr(STDERR_FILENO, "\n");
-	exit(EXIT_FAILURE);
-}
-
 enum e_side	get_direction(char c)
 {
 	return ((c == 'N') * N + (c == 'S') * S + (c == 'W') * W + (c == 'E') * E);
@@ -27,8 +19,8 @@ enum e_side	get_direction(char c)
 
 static void	invert_map_rows(t_game *g)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (i < g->map.height / 2)
@@ -52,7 +44,7 @@ void	parse(int argc, char **argv, t_game *game)
 	char	*map_str;
 
 	if (argc != 2)
-		parsing_error("invalid number of arguments");
+		exit_error("invalid number of arguments");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit(EXIT_FAILURE);
@@ -61,7 +53,7 @@ void	parse(int argc, char **argv, t_game *game)
 	parse_map(map_str, game);
 	check_map(game);
 	invert_map_rows(game);
-	//parse_sprite(game, fd);
+	parse_sprite(game, fd);
 	free(map_str);
 	close(fd);
 }

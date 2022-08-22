@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_str.c                                      :+:      :+:    :+:   */
+/*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/22 09:59:15 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/21 16:43:00 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/21 18:29:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*get_map_str(int fd)
+t_door	*get_door(int cell, t_game *g)
 {
-	t_dy_str	dy_str;
-	char		*line;
-	char		*ptr;
+	t_node	*node;
 
-	dy_str = dy_str_new();
-	line = get_next_non_empty_line(fd);
-	while (line)
+	node = g->state.doors.head;
+	while (node)
 	{
-		ptr = line;
-		while (*ptr)
-		{
-			if (*ptr != '\r')
-				dy_str_append_c(&dy_str, *ptr);
-			ptr++;
-		}
-		free(line);
-		line = get_next_line(fd);
+		if (((t_door *)node->content)->cell == cell)
+			return (node->content);
+		node = node->next;
 	}
-	free(line);
-	close(fd);
-	while (ft_strchr(" \t\n\r", dy_str.str[dy_str.len - 1]))
-		dy_str_pop_back(&dy_str);
-	return (dy_str.str);
+	return (NULL);
+}
+
+bool	can_pass_door(int cell, t_game *g)
+{
+	t_door	*door;
+
+	door = get_door(cell, g);
+	if (door)
+		return (door->opened && door->ratio < 0.2);
+	return (false);
 }

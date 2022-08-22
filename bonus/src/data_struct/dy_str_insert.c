@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_str.c                                      :+:      :+:    :+:   */
+/*   dy_str_insert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/22 09:59:15 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/08/22 04:19:57 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/08/22 04:22:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*get_map_str(int fd)
+void	dy_str_append_str(t_dy_str *dy_str, char *s)
 {
-	t_dy_str	dy_str;
-	char		*line;
-	char		*ptr;
-
-	dy_str = dy_str_new();
-	line = get_next_non_empty_line(fd);
-	while (line)
+	if (s && *s)
 	{
-		ptr = line;
-		while (*ptr)
-		{
-			if (*ptr != '\r')
-				dy_str_append_c(&dy_str, *ptr);
-			ptr++;
-		}
-		free(line);
-		line = get_next_line(fd);
+		dy_str_append_c(dy_str, *s);
+		dy_str_append_str(dy_str, s + 1);
 	}
-	free(line);
-	close(fd);
-	while (ft_strchr(" \t\n\r", dy_str.str[dy_str.len - 1]))
-		dy_str_pop_back(&dy_str);
-	return (dy_str.str);
 }

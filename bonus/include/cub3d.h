@@ -21,7 +21,7 @@
 # define ROT_SPEED 0.05
 # define MRS 0.003 // Mouse rotation speed
 # define TILEMAP_SIZE 12
-# define PLANE_LENGTH 0.66
+# define PLANE_LENGTH 0.7
 
 # include <mlx.h>
 # include <unistd.h>
@@ -36,11 +36,9 @@
 # include <stdint.h>
 # include <pthread.h>
 
-# include "vector.h"
-# include "sprite.h"
+# include "data_struct.h"
 # include "parsing.h"
 # include "utils.h"
-# include "data_struct.h"
 # include "gameloop.h"
 # include "event.h"
 # include "render.h"

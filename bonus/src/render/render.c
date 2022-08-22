@@ -47,6 +47,8 @@ void	render(t_game *game)
 	compute_pixels(&img, game, routine_sky);
 	compute_pixels(&img, game, routine_wall);
 	render_sprites(&img, game);
+	if (game->state.rain)
+		compute_pixels(&img, game, routine_rain);
 	render_minimap(&img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
 	mlx_destroy_image(game->mlx, img.img);

@@ -20,7 +20,6 @@ static void	initialize(t_game *game)
 	game->mlx = mlx_init();
 	game->state.m_left = 0;
 	game->state.m_right = 0;
-	game->state.door_ratio = 1;
 }
 
 int	main(int argc, char **argv)
@@ -29,9 +28,7 @@ int	main(int argc, char **argv)
 
 	initialize(&game);
 	parse(argc, argv, &game);
-
 	init_sprite(&game);
-
 	game.window = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);

@@ -47,7 +47,7 @@ static bool	compute_cell_we(
 			wall_x = g->player.pos.y
 				+ (side_dist->x - delta_dist.x + delta_dist.x / 2) * ray->dir.y;
 			wall_x -= floor((wall_x));
-			if (wall_x < g->state.door_ratio)
+			if (wall_x < get_door(ray->cell, g)->ratio)
 			{
 				side_dist->x += delta_dist.x / 2;
 				return (true);
@@ -75,7 +75,7 @@ static bool	compute_cell_ns(
 			wall_x = g->player.pos.x
 				+ (side_dist->y - delta_dist.y + delta_dist.y / 2) * ray->dir.x;
 			wall_x -= floor((wall_x));
-			if (wall_x < g->state.door_ratio)
+			if (wall_x < get_door(ray->cell, g)->ratio)
 			{
 				side_dist->y += delta_dist.y / 2;
 				return (true);

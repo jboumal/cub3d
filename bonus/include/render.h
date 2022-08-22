@@ -53,7 +53,6 @@ typedef struct s_draw_line_var
 	int				draw_start;
 	int				draw_end;
 	t_texture		*texture;
-	unsigned int	*arr;
 	t_ray			*ray;
 }	t_draw_line_var;
 
@@ -73,9 +72,8 @@ void	floorcasting(int y0, int y1, t_data *img, t_game *game);
 /* minimap */
 void	render_minimap(t_data *img, t_game *game);
 
-/* mlx_utils */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data	get_new_img(t_game *game);
+/* raincasting */
+void	raincasting(int x0, int x1, t_data *img, t_game *g);
 
 /* raycasting */
 void	raycasting(int x0, int x1, t_data *img, t_game *game);
@@ -90,9 +88,17 @@ int		get_end(int i, int start, int end);
 void	*routine_floor(void *arg);
 void	*routine_sky(void *arg);
 void	*routine_wall(void *arg);
+void	*routine_rain(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
 void	skycasting(int x0, int x1, t_data *img, t_game *g);
+
+/* sort sprite */
+void	sort_sprite(t_game *g, t_sprite *obj, int i);
+
+/* sprite */
+void	init_sprite(t_game *game);
+void	render_sprites(void	*img, t_game *game);
 
 #endif

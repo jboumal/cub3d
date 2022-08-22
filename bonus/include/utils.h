@@ -17,68 +17,79 @@
 # define BUFFER_SIZE 1024
 
 /* utils */
-bool		atoui8_error(const char *s, uint8_t *n);
-int			isdigit(int c);
-int			isascii_48(int c);
-int			shade_color(int color, double divide);
+bool			atoui8_error(const char *s, uint8_t *n);
+int				isdigit(int c);
+int				isascii_48(int c);
+int				shade_color(int color, double divide);
 
 /* color */
-int			shade(int cf, int cb, double af, double ab);
+int				get_r(int c);
+int				get_g(int c);
+int				get_b(int c);
+int				rgb(uint8_t r, uint8_t g, uint8_t b);
+int				shade(int cf, int cb, double af, double ab);
 
 /* copy */
-void		*ft_memset(void *b, int c, size_t len);
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
-void		str_n_cpy(char *dst, char *src, size_t len);
+void			*ft_memset(void *b, int c, size_t len);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void			str_n_cpy(char *dst, char *src, size_t len);
 
 /* error */
-void		exit_error(char *e);
+void			exit_error(char *e);
 
 /* find */
-void		*ft_memchr(const void *s, int c, size_t n);
-char		*ft_strchr(const char *s, int c);
-char		*skip_spaces(char *s);
+void			*ft_memchr(const void *s, int c, size_t n);
+char			*ft_strchr(const char *s, int c);
+char			*skip_spaces(char *s);
 
 /* get_next_line */
-char		*get_next_line(int fd);
+char			*get_next_line(int fd);
 
 /* get_next_non_empty_line */
-char		*get_next_non_empty_line(int fd);
+char			*get_next_non_empty_line(int fd);
 
 /* min_max */
-int64_t		min(int64_t a, int64_t b);
-int64_t		max(int64_t a, int64_t b);
+int64_t			min(int64_t a, int64_t b);
+int64_t			max(int64_t a, int64_t b);
+
+/* mlx_utils */
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_data			get_new_img(t_game *game);
+unsigned int	mlx_get_pixel(t_data *data, int x, int y);
+void			load_texture(void *mlx, char *path, t_texture *texture);
 
 /* put */
-void		dputstr(int fd, char *s);
+void			dputstr(int fd, char *s);
 
 /* split */
-char		**ft_split(char const *str, char c);
+char			**ft_split(char const *str, char c);
 
 /* str */
-size_t		str_len(const char *str);
-int			str_n_cmp(const char *s1, const char *s2, size_t n);
-bool		is_token(char *str, char *tokens, char sep, size_t n);
+size_t			str_len(const char *str);
+int				str_n_cmp(const char *s1, const char *s2, size_t n);
+bool			is_token(char *str, char *tokens, char sep, size_t n);
 
 /* str_alloc */
-char		*ft_strdup(const char *s);
-char		*str_n_dup(char *src, size_t n);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strdup(const char *s);
+char			*str_n_dup(char *src, size_t n);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
 /* str_arr */
-void		str_arr_free(char **str);
-size_t		str_arr_len(char **str);
+void			str_arr_free(char **str);
+size_t			str_arr_len(char **str);
 
 /* swap */
-void		swap_int(int *a, int *b);
+void			swap_int(int *a, int *b);
 
 /* x_alloc */
-void		*x_malloc(size_t n);
+void			*x_malloc(size_t n);
+void			*x_calloc(size_t count, size_t size);
 
 /* mac mouse functions */
-int			mac_mouse_hide(void);
-int			mac_mouse_move(int x, int y);
-int			mlx_mouse_move(void *mlx, void *win, int x, int y);
-int			mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
-int			mlx_mouse_hide(void *mlx, void *win);
+int				mac_mouse_hide(void);
+int				mac_mouse_move(int x, int y);
+int				mlx_mouse_move(void *mlx, void *win, int x, int y);
+int				mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
+int				mlx_mouse_hide(void *mlx, void *win);
 
 #endif
