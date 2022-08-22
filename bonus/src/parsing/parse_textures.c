@@ -37,4 +37,5 @@ void	parse_textures(t_game *g, int fd)
 			exit_error("invalid identifier");
 		dy_str_destroy(&line);
 	}
+	load_texture(g->mlx, "img/rain.xpm", &g->rain);
 }

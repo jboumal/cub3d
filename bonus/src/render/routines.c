@@ -71,3 +71,18 @@ void	*routine_wall(void *arg)
 	raycasting(start, end, ((t_th_arg *)arg)->img, g);
 	return (arg);
 }
+
+void	*routine_rain(void *arg)
+{
+	t_game	*g;
+	int		i;
+	int		start;
+	int		end;
+
+	g = ((t_th_arg *)arg)->game;
+	i = ((t_th_arg *)arg)->i;
+	start = get_start(i, 0, SCREEN_W - 1);
+	end = get_end(i, 0, SCREEN_W - 1);
+	raincasting(start, end, ((t_th_arg *)arg)->img, g);
+	return (arg);
+}

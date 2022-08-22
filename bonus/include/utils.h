@@ -23,6 +23,10 @@ int				isascii_48(int c);
 int				shade_color(int color, double divide);
 
 /* color */
+int				get_r(int c);
+int				get_g(int c);
+int				get_b(int c);
+int				rgb(uint8_t r, uint8_t g, uint8_t b);
 int				shade(int cf, int cb, double af, double ab);
 
 /* copy */

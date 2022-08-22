@@ -72,6 +72,9 @@ void	floorcasting(int y0, int y1, t_data *img, t_game *game);
 /* minimap */
 void	render_minimap(t_data *img, t_game *game);
 
+/* raincasting */
+void	raincasting(int x0, int x1, t_data *img, t_game *g);
+
 /* raycasting */
 void	raycasting(int x0, int x1, t_data *img, t_game *game);
 
@@ -85,6 +88,7 @@ int		get_end(int i, int start, int end);
 void	*routine_floor(void *arg);
 void	*routine_sky(void *arg);
 void	*routine_wall(void *arg);
+void	*routine_rain(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);
