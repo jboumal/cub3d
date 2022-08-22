@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 20:05:21 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:57:37 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	init_sprite(t_game *game)
 	obj = malloc(sizeof(t_sprite));
 	obj->x = 29.5;
 	obj->y = 2.5;
-	obj->size = 0.4;
+	obj->size = 0.6;
 	game->list_sprite[3] = obj;
 	load_sprite_t(game, 3, "img/sprite/barrel.xpm");
 
@@ -104,10 +104,8 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 	int		ly;
 
 	obj.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (obj.dist_to_p / obj.size)));
-	obj.height = SCREEN_H - 2.0 * obj.ceil;
+	obj.height = (SCREEN_H - 2.0 * obj.ceil);
 	obj.width = obj.height / (obj.t.height / obj.t.width);
-
-	// pb : toujours au centre de l'image (mais bonne taille)
 	lx = 0;
 	while (lx++ < obj.width)
 	{
