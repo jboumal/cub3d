@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 15:45:57 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:05:21 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	compute_field_sprite(t_game *g)
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
 		obj->is_in_fov = fabs(obj->angle) < FOV / 2.0 && obj->dist_to_p >= 1.0;
-		if (i != 0)
+		if (i != 0 && obj->is_in_fov)
 			sort_sprite(g, obj, i);
 	}
 }
@@ -72,18 +72,28 @@ void	init_sprite(t_game *game)
 	obj->size = 0.5;
 	game->list_sprite[0] = obj;
 	load_sprite_t(game, 0, "img/sprite/tree.xpm");
-	obj = malloc(sizeof(t_sprite));
-	obj->x = 6.5;
-	obj->y = 12.5;
-	obj->size = 0.4;
-	game->list_sprite[1] = obj;
-	load_sprite_t(game, 1, "img/sprite/armor.xpm");
+
 	obj = malloc(sizeof(t_sprite));
 	obj->x = 2.5;
 	obj->y = 6.5;
-	obj->size = 0.4;
+	obj->size = 0.5;
+	game->list_sprite[1] = obj;
+	load_sprite_t(game, 1, "img/sprite/tree.xpm");
+
+	obj = malloc(sizeof(t_sprite));
+	obj->x = 6.5;
+	obj->y = 12.5;
+	obj->size = 0.5;
 	game->list_sprite[2] = obj;
-	load_sprite_t(game, 2, "img/sprite/tree.xpm");
+	load_sprite_t(game, 2, "img/sprite/armor.xpm");
+
+	obj = malloc(sizeof(t_sprite));
+	obj->x = 29.5;
+	obj->y = 2.5;
+	obj->size = 0.4;
+	game->list_sprite[3] = obj;
+	load_sprite_t(game, 3, "img/sprite/barrel.xpm");
+
 }
 
 static void	draw_sprite(t_game *game, void *img, t_sprite obj)
@@ -96,6 +106,8 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 	obj.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (obj.dist_to_p / obj.size)));
 	obj.height = SCREEN_H - 2.0 * obj.ceil;
 	obj.width = obj.height / (obj.t.height / obj.t.width);
+
+	// pb : toujours au centre de l'image (mais bonne taille)
 	lx = 0;
 	while (lx++ < obj.width)
 	{

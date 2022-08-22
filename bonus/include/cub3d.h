@@ -23,12 +23,7 @@
 # define TILEMAP_SIZE 12
 # define PLANE_LENGTH 0.66
 
-# ifdef LINUX
-# include <../mlx_linux/mlx.h>
-# else
 # include <mlx.h>
-#endif
-
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
