@@ -102,6 +102,7 @@ typedef struct s_game
 void		check_map(t_game *g);
 
 /* get_map_str */
+void		remove_ending_spaces(t_dy_str *dy_str);
 char		*get_map_str(int fd);
 
 /* parse_map */

@@ -12,40 +12,28 @@
 
 #include "cub3d.h"
 
-static void	load_ceiling_t(t_game *game, char *path_to_texture)
+void	parse_textures(t_game *g, int fd)
 {
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	load_texture(game->mlx, path_to_texture, &game->sky);
-	game->map.ceil = 1;
-}
+	t_dy_str	line;
 
-static void	load_floor_t(t_game *game, char *path_to_texture)
-{
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	load_texture(game->mlx, path_to_texture, &game->floor);
-}
-
-static void	load_wall_t(t_game *game, int chara, char *path_to_texture)
-{
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	load_texture(game->mlx, path_to_texture, &game->textures[chara]);
-}
-
-void	parse_textures(t_game *game, int fd)
-{
-	char	*line;
-
-	while (game->map.ceil == -1)
+	while (g->map.ceil == -1)
 	{
-		line = get_next_non_empty_line(fd);
-		if (isascii_48(line[0]) && line[0] != 'F' && line[0] != 'C')
-			load_wall_t(game, line[0] - 49, skip_spaces(line + 2));
-		else if (!str_n_cmp("F ", line, 2))
-			load_floor_t(game, skip_spaces(line + 2));
-		else if (!str_n_cmp("C ", line, 2))
-			load_ceiling_t(game, skip_spaces(line + 2));
+		line = dy_str_new();
+		dy_str_append_str(&line, get_next_non_empty_line(fd));
+		remove_ending_spaces(&line);
+		if (isascii_48(line.str[0]) && line.str[0] != 'F' && line.str[0] != 'C')
+			load_texture(
+				g->mlx, skip_spaces(line.str + 2),
+				&g->textures[line.str[0] - 49]);
+		else if (!str_n_cmp("F ", line.str, 2))
+			load_texture(g->mlx, skip_spaces(line.str + 2), &g->floor);
+		else if (!str_n_cmp("C ", line.str, 2))
+		{
+			load_texture(g->mlx, skip_spaces(line.str + 2), &g->sky);
+			g->map.ceil = 1;
+		}
 		else
 			exit_error("invalid identifier");
-		free(line);
+		dy_str_destroy(&line);
 	}
 }

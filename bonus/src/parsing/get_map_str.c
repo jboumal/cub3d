@@ -6,15 +6,15 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/05 09:41:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/22 04:36:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	remove_ending_spaces(t_dy_str *dy_str)
+void	remove_ending_spaces(t_dy_str *dy_str)
 {
-	while (ft_strchr(" \t\n", dy_str->str[dy_str->len - 1]))
+	while (ft_strchr(" \t\n\r", dy_str->str[dy_str->len - 1]))
 		dy_str_pop_back(dy_str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/21 18:21:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/22 04:23:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+/* dy_str_insert */
+void		dy_str_append_str(t_dy_str *dy_str, char *s);
 
 /* dy_str */
 t_dy_str	dy_str_new(void);
