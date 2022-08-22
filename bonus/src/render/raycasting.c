@@ -22,7 +22,7 @@ static int	get_tx(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	if ((g->map.data[ray->cell] == 10))
+	if (g->map.data[ray->cell] == 10)
 		wall_x -= get_door(ray->cell, g)->ratio;
 	tx = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
 	if (g->map.data[ray->cell] != 10)
@@ -38,7 +38,6 @@ static int	get_tx(t_ray *ray, t_game *g)
 static void	init_draw_line(
 			t_draw_line_var *var,
 			t_ray *ray,
-			t_data *img,
 			t_game *g)
 {
 	var->line_height = SCREEN_H / ray->dist;
@@ -51,7 +50,6 @@ static void	init_draw_line(
 static inline void	put_sky_reflect_px(
 			int x,
 			int y,
-			t_draw_line_var *var,
 			t_data *img)
 {
 	int	color;
@@ -91,7 +89,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 			}
 		}
 		else if (y > var->draw_end + var->line_height)
-			put_sky_reflect_px(x, y, var, img);
+			put_sky_reflect_px(x, y, img);
 		y++;
 	}
 }
@@ -106,7 +104,7 @@ void	raycasting(int x0, int x1, t_data *img, t_game *g)
 	ray.dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray.dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	dda(&ray, g);
-	init_draw_line(&var, &ray, img, g);
+	init_draw_line(&var, &ray, g);
 	draw_line(x0, &var, img, g);
 	g->depth_buf[x0] = ray.dist;
 	if (x0 < x1)

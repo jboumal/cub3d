@@ -20,7 +20,8 @@ void	parse_textures(t_game *g, int fd)
 	{
 		line = dy_str_new();
 		dy_str_append_str(&line, get_next_non_empty_line(fd));
-		remove_ending_spaces(&line);
+		while (ft_strchr(" \t\n\r", line.str[line.len - 1]))
+			dy_str_pop_back(&line);
 		if (isascii_48(line.str[0]) && line.str[0] != 'F' && line.str[0] != 'C')
 			load_texture(
 				g->mlx, skip_spaces(line.str + 2),

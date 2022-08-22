@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/19 23:38:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:40:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 #  define K_DOWN 125
 #  define K_LEFT 123
 #  define K_UP 126
-#  define K_E "idk"
+#  define K_E 14
 # endif
 
 /* event */

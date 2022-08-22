@@ -6,17 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/22 04:36:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/22 09:59:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	remove_ending_spaces(t_dy_str *dy_str)
-{
-	while (ft_strchr(" \t\n\r", dy_str->str[dy_str->len - 1]))
-		dy_str_pop_back(dy_str);
-}
 
 char	*get_map_str(int fd)
 {
@@ -40,6 +34,7 @@ char	*get_map_str(int fd)
 	}
 	free(line);
 	close(fd);
-	remove_ending_spaces(&dy_str);
+	while (ft_strchr(" \t\n\r", dy_str.str[dy_str.len - 1]))
+		dy_str_pop_back(&dy_str);
 	return (dy_str.str);
 }
