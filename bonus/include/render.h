@@ -53,7 +53,6 @@ typedef struct s_draw_line_var
 	int				draw_start;
 	int				draw_end;
 	t_texture		*texture;
-	unsigned int	*arr;
 	t_ray			*ray;
 }	t_draw_line_var;
 

@@ -42,7 +42,7 @@ void	check_map(t_game *g)
 		while (j < map.width)
 		{
 			if (check_cell(i, j, map))
-				parsing_error("invalid map formating");
+				exit_error("invalid map formating");
 			j++;
 		}
 		i++;

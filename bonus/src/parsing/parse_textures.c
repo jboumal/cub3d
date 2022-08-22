@@ -14,65 +14,21 @@
 
 static void	load_ceiling_t(t_game *game, char *path_to_texture)
 {
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
 	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
-			&game->sky.width, &game->sky.height);
-	if (!img)
-		parsing_error("error when loading ceiling texture");
-	game->sky.img = (unsigned int *)mlx_get_data_addr(img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->sky.allocated_img = img;
+	load_texture(game->mlx, path_to_texture, &game->sky);
 	game->map.ceil = 1;
 }
 
 static void	load_floor_t(t_game *game, char *path_to_texture)
 {
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
 	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture,
-			&game->floor.width, &game->floor.height);
-	if (!img)
-		parsing_error("error when loading floor texture");
-	game->floor.img = (unsigned int *)mlx_get_data_addr(img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->floor.allocated_img = img;
-	game->map.floor = 1;
+	load_texture(game->mlx, path_to_texture, &game->floor);
 }
 
 static void	load_wall_t(t_game *game, int chara, char *path_to_texture)
 {
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
 	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	img = mlx_xpm_file_to_image(
-			game->mlx,
-			path_to_texture,
-			&game->textures[chara].width,
-			&game->textures[chara].height);
-	if (!img)
-		parsing_error("invalid texture path");
-	game->textures[chara].img = (unsigned int *)mlx_get_data_addr(
-			img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->textures[chara].allocated_img = img;
+	load_texture(game->mlx, path_to_texture, &game->textures[chara]);
 }
 
 void	parse_textures(t_game *game, int fd)
@@ -89,7 +45,7 @@ void	parse_textures(t_game *game, int fd)
 		else if (!str_n_cmp("C ", line, 2))
 			load_ceiling_t(game, skip_spaces(line + 2));
 		else
-			parsing_error("invalid identifier");
+			exit_error("invalid identifier");
 		free(line);
 	}
 }

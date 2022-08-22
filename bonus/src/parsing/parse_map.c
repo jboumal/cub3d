@@ -36,7 +36,7 @@ static void	fill_map_dimensions(char *map_str, t_game *g)
 static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
 {
 	if (g->player.pos.x)
-		parsing_error("mutiple player position in map");
+		exit_error("mutiple player position in map");
 	g->player.pos = vector((double)j + 0.5, i - 0.1);
 	g->player.dir.y = (direction == N) - (direction == S);
 	g->player.dir.x = (direction == E) - (direction == W);
@@ -51,7 +51,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 
 	if (map_char == '0')
 		g->map.data[i * g->map.width + j] = 0;
-	else if (isascii_48(map_char) && g->textures[map_char - 49].img)
+	else if (isascii_48(map_char) && g->textures[map_char - 49].data.addr)
 		g->map.data[i * g->map.width + j] = map_char - 48;
 	else if (ft_strchr("NSWE", map_char))
 	{
@@ -61,7 +61,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 	else if (ft_strchr(SPACES, map_char))
 		g->map.data[i * g->map.width + j] = -1;
 	else
-		parsing_error("invalid character in map");
+		exit_error("invalid character in map");
 	if (map_char == ':')
 	{
 		door = x_calloc(1, sizeof(t_door));
@@ -105,5 +105,5 @@ void	parse_map(char *map_str, t_game *g)
 		i++;
 	}
 	if (!g->player.pos.x)
-		parsing_error("no player position given in map");
+		exit_error("no player position given in map");
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/21 22:08:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/22 03:52:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,6 @@ static void	compute_field_sprite(t_game *g)
 	}
 }
 
-static void	load_sprite_t(t_game *game, int index, char *path_to_texture)
-{
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
-	img = mlx_xpm_file_to_image(game->mlx, path_to_texture, &game->list_sprite
-		[index]->t.width, &game->list_sprite[index]->t.height);
-	if (!img)
-		parsing_error("error when loading sprite texture");
-	game->list_sprite[index]->t.img = (unsigned int *)mlx_get_data_addr(img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->list_sprite[index]->t.allocated_img = img;
-}
-
 void	init_sprite(t_game *game)
 {
 	t_sprite	*obj;
@@ -71,19 +53,19 @@ void	init_sprite(t_game *game)
 	obj->y = 7.5;
 	obj->size = 0.5;
 	game->list_sprite[0] = obj;
-	load_sprite_t(game, 0, "img/sprite/tree.xpm");
+	load_texture(game->mlx, "img/sprite/tree.xpm", &game->list_sprite[0]->t);
 	obj = malloc(sizeof(t_sprite));
 	obj->x = 6.5;
 	obj->y = 12.5;
 	obj->size = 0.4;
 	game->list_sprite[1] = obj;
-	load_sprite_t(game, 1, "img/sprite/armor.xpm");
+	load_texture(game->mlx, "img/sprite/armor.xpm", &game->list_sprite[1]->t);
 	obj = malloc(sizeof(t_sprite));
 	obj->x = 2.5;
 	obj->y = 6.5;
 	obj->size = 0.4;
 	game->list_sprite[2] = obj;
-	load_sprite_t(game, 2, "img/sprite/tree.xpm");
+	load_texture(game->mlx, "img/sprite/tree.xpm", &game->list_sprite[2]->t);
 }
 
 static void	draw_sprite(t_game *game, void *img, t_sprite obj)
@@ -102,8 +84,7 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 		ly = 0;
 		while (ly++ < obj.height)
 		{
-			color = obj.t.img[(int)(ly / obj.height * obj.t.height)
-				*obj.t.width + (int)(lx / obj.width * obj.t.width)];
+			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width, ly / obj.height * obj.t.height);
 			n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
 					* SCREEN_W + lx - (obj.width / 2.0));
 			if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)

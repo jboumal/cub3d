@@ -65,10 +65,9 @@ typedef struct s_state
 
 typedef struct s_texture
 {
-	unsigned int	*img;
-	int				width;
-	int				height;
-	void			*allocated_img;
+	t_data	data;
+	int		width;
+	int		height;
 }	t_texture;
 
 typedef struct s_sprite
@@ -115,7 +114,6 @@ void		parse_textures(t_game *game, int fd);
 void		parse_sprite(t_game *game, int fd);
 
 /* parse */
-void		parsing_error(char *msg);
 enum e_side	get_direction(char c);
 void		parse(int argc, char **argv, t_game *game);
 

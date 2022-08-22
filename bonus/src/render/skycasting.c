@@ -45,7 +45,7 @@ void	skycasting(int x0, int x1, t_data *img, t_game *g)
 	{
 		ty = y * (double)ty_range / (double)(SCREEN_H / 2);
 		ty += (g->sky.height - ty_range) / 2;
-		my_mlx_pixel_put(img, x0, y, g->sky.img[ty * g->sky.width + tx]);
+		my_mlx_pixel_put(img, x0, y, mlx_get_pixel(&g->sky.data, tx, ty));
 		y++;
 	}
 	if (x0 < x1)

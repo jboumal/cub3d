@@ -34,3 +34,25 @@ t_data	get_new_img(t_game *game)
 	return (img);
 }
 
+unsigned int	mlx_get_pixel(t_data *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr
+		+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
+
+void	load_texture(void *mlx, char *path, t_texture *texture)
+{
+	texture->data.img = mlx_xpm_file_to_image(
+			mlx,
+			path,
+			&texture->width,
+			&texture->height);
+	texture->data.addr = mlx_get_data_addr(
+			texture->data.img,
+			&texture->data.bits_per_pixel,
+			&texture->data.line_length,
+			&texture->data.endian);
+}
