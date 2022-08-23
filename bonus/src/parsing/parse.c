@@ -45,6 +45,9 @@ void	parse(int argc, char **argv, t_game *game)
 
 	if (argc != 2)
 		exit_error("invalid number of arguments");
+	fd = open(argv[1], O_DIRECTORY);
+	if (fd != -1)
+		exit_error("the map is a folder");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit(EXIT_FAILURE);
