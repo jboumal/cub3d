@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/22 03:52:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/23 13:32:35 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	compute_field_sprite(t_game *g)
 			obj->angle += 2.0 * M_PI;
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
-		obj->is_in_fov = fabs(obj->angle) < g->player.fov / 2.0 && obj->dist_to_p >= 1.0;
+		obj->is_in_fov = fabs(obj->angle) < g->player.fov / 2.0
+			&& obj->dist_to_p >= 1.0;
 		if (i != 0 && obj->is_in_fov)
 			sort_sprite(g, obj, i);
 	}
@@ -84,7 +85,8 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 		ly = 0;
 		while (ly++ < obj.height)
 		{
-			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width, ly / obj.height * obj.t.height);
+			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width,
+					ly / obj.height * obj.t.height);
 			n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
 					* SCREEN_W + lx - (obj.width / 2.0));
 			if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
