@@ -66,8 +66,6 @@ int	key_down(int code, t_game *game)
 		game->state.r_right = true;
 	else if (code == K_E)
 		update_door_opened(game);
-	else if (code == 15)
-		game->state.rain = !game->state.rain;
 	return (0);
 }
 
