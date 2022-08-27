@@ -47,6 +47,7 @@ static void	init_draw_line(
 	var->draw_start = -var->line_height / 2 + SCREEN_H / 2;
 	var->draw_end = var->line_height / 2 + SCREEN_H / 2;
 	var->ray = ray;
+	var->tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
 }
 
 static inline void	put_sky_reflect_px(
@@ -69,20 +70,14 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	int			ty;
 	int			color;
 	int			reflect_y;
-	t_texture	*tex;
 
 	y = 0;
-	tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
 	while (y < SCREEN_H)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			ty = (y - var->draw_start) * tex->height / (var->line_height);
-			color = mlx_get_pixel(&tex->data, var->tx, ty);
-			if (var->ray->side == N || var->ray->side == S)
-				color = shade_color(color, 1.8);
-			if (var->ray->side == E)
-				color = shade_color(color, 1.2);
+			ty = (y - var->draw_start) * var->tex->height / (var->line_height);
+			color = mlx_get_pixel(&var->tex->data, var->tx, ty);
 			my_mlx_pixel_put(img, x, y, color);
 			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;
 			if (reflect_y < SCREEN_H)

@@ -52,7 +52,7 @@ typedef struct s_draw_line_var
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
-	t_texture		*texture;
+	t_texture		*tex;
 	t_ray			*ray;
 }	t_draw_line_var;
 
