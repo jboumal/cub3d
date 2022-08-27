@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
+# define TEXTURES_MAX 79
 
 typedef struct s_data
 {
@@ -60,7 +61,6 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
-	bool	rain;
 	t_list	doors;
 }	t_state;
 
@@ -92,10 +92,9 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_texture	textures[79];
+	t_list		textures[TEXTURES_MAX];
 	t_texture	floor;
 	t_texture	sky;
-	t_texture	rain;
 	t_sprite	*list_sprite[10];
 	double		depth_buf[SCREEN_W];
 }	t_game;

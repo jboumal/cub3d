@@ -51,7 +51,7 @@ void	load_texture(void *mlx, char *path, t_texture *texture)
 			&texture->width,
 			&texture->height);
 	if (!texture->data.img)
-		exit_error("error when loading texture");
+		exit_error("unable to load texture");
 	texture->data.addr = mlx_get_data_addr(
 			texture->data.img,
 			&texture->data.bits_per_pixel,

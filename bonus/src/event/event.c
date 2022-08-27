@@ -12,23 +12,6 @@
 
 #include "cub3d.h"
 
-int	quit(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	mlx_destroy_window(game->mlx, game->window);
-	while (i < 4)
-	{
-		//mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
-		i++;
-	}
-	free(game->map.data);
-	lst_clear(&game->state.doors, free);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
 static void	update_door_opened(t_game *g)
 {
 	int			x;
@@ -66,8 +49,6 @@ int	key_down(int code, t_game *game)
 		game->state.r_right = true;
 	else if (code == K_E)
 		update_door_opened(game);
-	else if (code == 15)
-		game->state.rain = !game->state.rain;
 	return (0);
 }
 

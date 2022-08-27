@@ -15,6 +15,7 @@
 void	parse_textures(t_game *g, int fd)
 {
 	t_dy_str	line;
+	t_node		*node;
 
 	while (g->map.ceil == -1)
 	{
@@ -23,9 +24,15 @@ void	parse_textures(t_game *g, int fd)
 		while (ft_strchr(" \t\n\r", line.str[line.len - 1]))
 			dy_str_pop_back(&line);
 		if (isascii_48(line.str[0]) && line.str[0] != 'F' && line.str[0] != 'C')
-			load_texture(
-				g->mlx, skip_spaces(line.str + 2),
-				&g->textures[line.str[0] - 49]);
+		{
+			char **arr = ft_split(line.str, ',');
+			for (int i = 0; arr[i]; i++)
+			{
+				node = new_node(x_calloc(1, sizeof(t_texture)));
+				load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
+				clst_add_back(&g->textures[line.str[0] - 49], node);
+			}
+		}
 		else if (!str_n_cmp("F ", line.str, 2))
 			load_texture(g->mlx, skip_spaces(line.str + 2), &g->floor);
 		else if (!str_n_cmp("C ", line.str, 2))
@@ -37,5 +44,4 @@ void	parse_textures(t_game *g, int fd)
 			exit_error("invalid identifier");
 		dy_str_destroy(&line);
 	}
-	load_texture(g->mlx, "img/rain.xpm", &g->rain);
 }

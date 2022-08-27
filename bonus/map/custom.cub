@@ -1,15 +1,15 @@
 
 1 img/doom2/ZZWOLF1.xpm
 2 img/doom2/ZZWOLF2.xpm
-3 img/doom2/ZZWOLF3.xpm
-4 img/doom2/ZZWOLF4.xpm
+3 img/mobile/WALL008.xpm,3 img/mobile/WALL009.xpm
+4 img/mobile/WALL002.xpm,4 img/mobile/WALL003.xpm,4 img/mobile/WALL004.xpm,4 img/mobile/WALL005.xpm
 5 img/doom2/ZELDOOR.xpm
 6 img/doom2/PLAT1.xpm
 : img/doom2/ZDOORB1.xpm
 d img/doom2/ZZWOLF10.xpm
 
 F img/mobile/WALL013.xpm
-C img/sky/sky2.xpm
+C img/sky/sky3.xpm
 
 11111111111111111111111111111111
 10000000000000000000000000000011

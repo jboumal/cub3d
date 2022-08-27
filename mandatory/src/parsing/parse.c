@@ -19,8 +19,8 @@ enum e_side	get_direction(char c)
 
 static void	invert_map_rows(t_game *g)
 {
-	int	i;
-	int	j;
+	unsigned long	i;
+	unsigned long	j;
 
 	i = 0;
 	while (i < g->map.height / 2)
@@ -45,6 +45,9 @@ void	parse(int argc, char **argv, t_game *game)
 
 	if (argc != 2)
 		exit_error("invalid number of arguments");
+	fd = open(argv[1], O_DIRECTORY);
+	if (fd != -1)
+		exit_error("the map is a folder");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit(EXIT_FAILURE);

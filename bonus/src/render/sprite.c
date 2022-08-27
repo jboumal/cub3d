@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/27 15:09:50 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:03:01 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	compute_field_sprite(t_game *g)
 			obj->angle += 2.0 * M_PI;
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
-		obj->is_in_fov = fabs(obj->angle) < g->player.fov / 2.0 && obj->dist_to_p >= 1.0;
+		obj->is_in_fov = (fabs(obj->angle) < g->player.fov / 2.0
+				&& obj->dist_to_p >= 1.0);
 		if (i != 0 && obj->is_in_fov)
 			sort_sprite(g, obj, i);
 	}
@@ -62,10 +63,15 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 			{
 				n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
 						* SCREEN_W + lx - (obj.width / 2.0));
-				if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W && obj.ceil + ly
-					>= 0 && obj.ceil + ly < SCREEN_H
-					&& game->depth_buf[n_sprite_col] >= obj.dist_to_p)
-					my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
+				if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
+				{
+					n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
+							* SCREEN_W + lx - (obj.width / 2.0));
+					if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W && obj.ceil + ly
+						>= 0 && obj.ceil + ly < SCREEN_H
+						&& game->depth_buf[n_sprite_col] >= obj.dist_to_p)
+						my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
+				}
 			}
 		}
 	}

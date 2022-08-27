@@ -14,9 +14,9 @@
 # define CUB3D_H
 
 # define SCREEN_TITLE "cub3d"
-# define SCREEN_W 1600
-# define SCREEN_H 900
-# define N_THREAD 12
+# define SCREEN_W 1500
+# define SCREEN_H 800
+# define N_THREAD 4
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define MRS 0.003 // Mouse rotation speed
