@@ -91,6 +91,8 @@ typedef struct s_game
 	void		*window;
 	int			img_w;
 	int			img_h;
+	t_data		small_buffer;
+	t_data		full_buffer;
 	t_map		map;
 	t_player	player;
 	t_state		state;

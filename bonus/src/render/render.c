@@ -40,16 +40,18 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 
 void	render(t_game *game)
 {
-	t_data		img;
+	t_data	*img;
 
-	img = get_new_img(game->mlx, game->img_w, game->img_h);
-	compute_pixels(&img, game, routine_floor);
-	compute_pixels(&img, game, routine_sky);
-	compute_pixels(&img, game, routine_wall);
-	render_sprites(&img, game);
+	img = &game->small_buffer;
+	compute_pixels(img, game, routine_floor);
+	compute_pixels(img, game, routine_sky);
+	compute_pixels(img, game, routine_wall);
+	render_sprites(img, game);
 	if (SCALE != 1)
-		img = rescale(img, game);
-	render_minimap(&img, game);
-	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
-	mlx_destroy_image(game->mlx, img.img);
+	{
+		compute_pixels(img, game, routine_rescale);
+		img = &game->full_buffer;
+	}
+	render_minimap(img, game);
+	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 }

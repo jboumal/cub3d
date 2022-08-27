@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/27 04:12:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/27 23:49:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	quit(t_game *g)
 	}
 	mlx_destroy_image(g->mlx, g->sky.data.img);
 	mlx_destroy_image(g->mlx, g->floor.data.img);
+	mlx_destroy_image(g->mlx, g->small_buffer.img);
+	mlx_destroy_image(g->mlx, g->full_buffer.img);
 	free(g->map.data);
 	lst_clear(&g->state.doors, free);
 	exit(EXIT_SUCCESS);

@@ -81,16 +81,13 @@ void	raycasting(int x0, int x1, t_data *img, t_game *game);
 void	render(t_game *game);
 void	load_floor_texture(t_game *game);
 
-/* rescale */
-t_data	rescale(t_data img, t_game *g);
-
 /* routines */
 int		get_start(int i, int start, int end);
 int		get_end(int i, int start, int end);
 void	*routine_floor(void *arg);
 void	*routine_sky(void *arg);
 void	*routine_wall(void *arg);
-void	*routine_rain(void *arg);
+void	*routine_rescale(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);

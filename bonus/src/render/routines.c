@@ -77,3 +77,32 @@ void	*routine_wall(void *arg)
 	raycasting(start, end, img, g);
 	return (arg);
 }
+
+void	*routine_rescale(void *arg)
+{
+	int			i;
+	int			j;
+	int			end;
+	t_data		*img;
+	t_game		*g;
+
+	i = get_start(((t_th_arg *)arg)->i, 0, SCREEN_H - 1);
+	end = get_end(((t_th_arg *)arg)->i, 0, SCREEN_H - 1);
+	img = ((t_th_arg *)arg)->data[0];
+	g = ((t_th_arg *)arg)->data[1];
+	while (i <= end)
+	{
+		j = 0;
+		while (j < SCREEN_W)
+		{
+			my_mlx_pixel_put(
+				&g->full_buffer,
+				j,
+				i,
+				mlx_get_pixel(img, j * SCALE, i * SCALE));
+			j++;
+		}
+		i++;
+	}
+	return (arg);
+}
