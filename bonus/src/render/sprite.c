@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/22 15:59:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:09:50 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,6 @@ static void	compute_field_sprite(t_game *g)
 	}
 }
 
-void	init_sprite(t_game *game)
-{
-	t_sprite	*obj;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-
-	obj = malloc(sizeof(t_sprite));
-	obj->x = 3.5;
-	obj->y = 7.5;
-	obj->size = 0.5;
-	game->list_sprite[0] = obj;
-	load_texture(game->mlx, "img/sprite/tree.xpm", &game->list_sprite[0]->t);
-	obj = malloc(sizeof(t_sprite));
-	obj->x = 6.5;
-	obj->y = 12.5;
-	obj->size = 0.4;
-	game->list_sprite[1] = obj;
-	load_texture(game->mlx, "img/sprite/armor.xpm", &game->list_sprite[1]->t);
-	obj = malloc(sizeof(t_sprite));
-	obj->x = 2.5;
-	obj->y = 6.5;
-	obj->size = 0.4;
-	game->list_sprite[2] = obj;
-	load_texture(game->mlx, "img/sprite/tree.xpm", &game->list_sprite[2]->t);
-}
-
 static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 {
 	int		color;
@@ -84,12 +56,15 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 		ly = 0;
 		while (ly++ < obj.height)
 		{
-			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width, ly / obj.height * obj.t.height);
-			n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
-					* SCREEN_W + lx - (obj.width / 2.0));
-			if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
+			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width,
+					ly / obj.height * obj.t.height);
+			if (color > 0)
 			{
-				if (color > 0 && game->depth_buf[n_sprite_col] >= obj.dist_to_p)
+				n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
+						* SCREEN_W + lx - (obj.width / 2.0));
+				if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W && obj.ceil + ly
+					>= 0 && obj.ceil + ly < SCREEN_H
+					&& game->depth_buf[n_sprite_col] >= obj.dist_to_p)
 					my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:35:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/22 09:59:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:55:37 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_map_str(int fd)
 
 	dy_str = dy_str_new();
 	line = get_next_non_empty_line(fd);
-	while (line)
+	while (!is_empty_line(line))
 	{
 		ptr = line;
 		while (*ptr)

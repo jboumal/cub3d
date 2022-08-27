@@ -21,6 +21,7 @@ bool			atoui8_error(const char *s, uint8_t *n);
 int				isdigit(int c);
 int				isascii_48(int c);
 int				shade_color(int color, double divide);
+int				ft_atoi(const char *str);
 
 /* color */
 int				get_r(int c);
@@ -47,6 +48,7 @@ char			*get_next_line(int fd);
 
 /* get_next_non_empty_line */
 char			*get_next_non_empty_line(int fd);
+bool			is_empty_line(char *line);
 
 /* min_max */
 int64_t			min(int64_t a, int64_t b);
