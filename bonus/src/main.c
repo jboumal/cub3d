@@ -20,6 +20,8 @@ static void	initialize(t_game *game)
 	game->mlx = mlx_init();
 	game->state.m_left = 0;
 	game->state.m_right = 0;
+	game->img_h = SCALE * SCREEN_H;
+	game->img_w = SCALE * SCREEN_W;
 }
 
 int	main(int argc, char **argv)

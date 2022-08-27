@@ -21,11 +21,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-t_data	get_new_img(t_game *game)
+t_data	get_new_img(void *mlx, int width, int height)
 {
 	t_data	img;
 
-	img.img = mlx_new_image(game->mlx, SCREEN_W, SCREEN_H);
+	img.img = mlx_new_image(mlx, width, height);
 	img.addr = mlx_get_data_addr(
 			img.img,
 			&img.bits_per_pixel,

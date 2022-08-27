@@ -23,7 +23,7 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 	x = 0;
 	h = 1 << ((sizeof(unsigned int) << 3) - __builtin_clz(g->floor.height));
 	w = 1 << ((sizeof(unsigned int) << 3) - __builtin_clz(g->floor.width));
-	while (x < SCREEN_W)
+	while (x < g->img_w)
 	{
 		tx = (int)(w * (scanline->floor.x - (int)scanline->floor.x)) & (w - 1);
 		ty = (int)(h * (scanline->floor.y - (int)scanline->floor.y)) & (h - 1);
@@ -47,9 +47,9 @@ void	floorcasting(int y0, int y1, t_data *img, t_game *g)
 			g->player.dir,
 			vector_scalar_multiplication(g->player.plane, -1));
 	ray_dir_1 = vector_add(g->player.dir, g->player.plane);
-	row_dist = (0.5 * SCREEN_H) / (y0 - SCREEN_H / 2);
-	scanline.step.x = row_dist * (ray_dir_1.x - ray_dir_0.x) / SCREEN_W;
-	scanline.step.y = row_dist * (ray_dir_1.y - ray_dir_0.y) / SCREEN_W;
+	row_dist = (0.5 * g->img_h) / (y0 - g->img_h / 2);
+	scanline.step.x = row_dist * (ray_dir_1.x - ray_dir_0.x) / g->img_w;
+	scanline.step.y = row_dist * (ray_dir_1.y - ray_dir_0.y) / g->img_w;
 	scanline.floor.x = g->player.pos.x + row_dist * ray_dir_0.x;
 	scanline.floor.y = g->player.pos.y + row_dist * ray_dir_0.y;
 	draw_line(y0, &scanline, img, g);

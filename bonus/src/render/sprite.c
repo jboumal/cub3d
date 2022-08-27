@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/27 18:08:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/27 22:25:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ static void	compute_field_sprite(t_game *g)
 	}
 }
 
-static void	draw_sprite(t_game *game, void *img, t_sprite obj)
+static void	draw_sprite(t_game *g, void *img, t_sprite obj)
 {
 	int		color;
 	int		n_sprite_col;
 	int		lx;
 	int		ly;
 
-	obj.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (obj.dist_to_p / obj.size)));
-	obj.height = (SCREEN_H - 2.0 * obj.ceil);
+	obj.ceil = ((g->img_h / 2.0) - (g->img_h / (obj.dist_to_p / obj.size)));
+	obj.height = (g->img_h - 2.0 * obj.ceil);
 	obj.width = obj.height / (obj.t.height / obj.t.width);
 	lx = 0;
 	while (lx++ < obj.width)
@@ -61,15 +61,15 @@ static void	draw_sprite(t_game *game, void *img, t_sprite obj)
 					ly / obj.height * obj.t.height);
 			if (color > 0)
 			{
-				n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
-						* SCREEN_W + lx - (obj.width / 2.0));
-				if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
+				n_sprite_col = ((0.5 * (obj.angle / (g->player.fov / 2.0)) + 0.5)
+						* g->img_w + lx - (obj.width / 2.0));
+				if (n_sprite_col >= 0 && n_sprite_col < g->img_w)
 				{
-					n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
-							* SCREEN_W + lx - (obj.width / 2.0));
-					if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W && obj.ceil + ly
-						>= 0 && obj.ceil + ly < SCREEN_H
-						&& game->depth_buf[n_sprite_col] >= obj.dist_to_p)
+					n_sprite_col = ((0.5 * (obj.angle / (g->player.fov / 2.0)) + 0.5)
+							* g->img_w + lx - (obj.width / 2.0));
+					if (n_sprite_col >= 0 && n_sprite_col < g->img_w && obj.ceil + ly
+						>= 0 && obj.ceil + ly < g->img_h
+						&& g->depth_buf[n_sprite_col] >= obj.dist_to_p)
 						my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
 				}
 			}

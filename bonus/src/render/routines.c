@@ -29,45 +29,51 @@ int	get_end(int i, int start, int end)
 
 void	*routine_floor(void *arg)
 {
+	t_data	*img;
 	t_game	*g;
 	int		i;
 	int		start;
 	int		end;
 
-	g = ((t_th_arg *)arg)->game;
 	i = ((t_th_arg *)arg)->i;
-	start = get_start(i, SCREEN_H / 2, SCREEN_H - 1);
-	end = get_end(i, SCREEN_H / 2, SCREEN_H - 1);
-	floorcasting(start, end, ((t_th_arg *)arg)->img, g);
+	img = ((t_th_arg *)arg)->data[0];
+	g = ((t_th_arg *)arg)->data[1];
+	start = get_start(i, g->img_h / 2, g->img_h - 1);
+	end = get_end(i, g->img_h / 2, g->img_h - 1);
+	floorcasting(start, end, img, g);
 	return (arg);
 }
 
 void	*routine_sky(void *arg)
 {
+	t_data	*img;
 	t_game	*g;
 	int		i;
 	int		start;
 	int		end;
 
-	g = ((t_th_arg *)arg)->game;
 	i = ((t_th_arg *)arg)->i;
-	start = get_start(i, 0, SCREEN_W - 1);
-	end = get_end(i, 0, SCREEN_W - 1);
-	skycasting(start, end, ((t_th_arg *)arg)->img, g);
+	img = ((t_th_arg *)arg)->data[0];
+	g = ((t_th_arg *)arg)->data[1];
+	start = get_start(i, 0, g->img_w - 1);
+	end = get_end(i, 0, g->img_w - 1);
+	skycasting(start, end, img, g);
 	return (arg);
 }
 
 void	*routine_wall(void *arg)
 {
+	t_data	*img;
 	t_game	*g;
 	int		i;
 	int		start;
 	int		end;
 
-	g = ((t_th_arg *)arg)->game;
 	i = ((t_th_arg *)arg)->i;
-	start = get_start(i, 0, SCREEN_W - 1);
-	end = get_end(i, 0, SCREEN_W - 1);
-	raycasting(start, end, ((t_th_arg *)arg)->img, g);
+	img = ((t_th_arg *)arg)->data[0];
+	g = ((t_th_arg *)arg)->data[1];
+	start = get_start(i, 0, g->img_w - 1);
+	end = get_end(i, 0, g->img_w - 1);
+	raycasting(start, end, img, g);
 	return (arg);
 }

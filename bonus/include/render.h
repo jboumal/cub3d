@@ -59,8 +59,7 @@ typedef struct s_draw_line_var
 typedef struct s_th_arg
 {
 	int		i;
-	t_game	*game;
-	t_data	*img;
+	void	*data[3];
 }	t_th_arg;
 
 /* dda */
@@ -81,6 +80,9 @@ void	raycasting(int x0, int x1, t_data *img, t_game *game);
 /* render */
 void	render(t_game *game);
 void	load_floor_texture(t_game *game);
+
+/* rescale */
+t_data	rescale(t_data img, t_game *g);
 
 /* routines */
 int		get_start(int i, int start, int end);
