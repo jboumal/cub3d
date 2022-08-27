@@ -67,29 +67,29 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
 	int			y;
 	int			ty;
-	int			tex_h;
 	int			color;
-	t_texture	*texture;
+	int			reflect_y;
+	t_texture	*tex;
 
 	y = 0;
-	texture = g->textures[g->map.data[var->ray->cell] - 1].head->content;
-	tex_h = texture->height;
+	tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
 	while (y < SCREEN_H)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			ty = (y - var->draw_start) * tex_h / (var->line_height);
-			color = mlx_get_pixel(&texture->data, var->tx, ty);
+			ty = (y - var->draw_start) * tex->height / (var->line_height);
+			color = mlx_get_pixel(&tex->data, var->tx, ty);
 			if (var->ray->side == N || var->ray->side == S)
 				color = shade_color(color, 1.8);
 			if (var->ray->side == E)
 				color = shade_color(color, 1.2);
 			my_mlx_pixel_put(img, x, y, color);
-			if (y + var->line_height < SCREEN_H)
+			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;
+			if (reflect_y < SCREEN_H)
 			{
-				color = shade(mlx_get_pixel(img, x, y + var->line_height),
+				color = shade(mlx_get_pixel(img, x, reflect_y),
 						color, 0.8, 0.6);
-				my_mlx_pixel_put(img, x, y + var->line_height, color);
+				my_mlx_pixel_put(img, x, reflect_y, color);
 			}
 		}
 		else if (y > var->draw_end + var->line_height)

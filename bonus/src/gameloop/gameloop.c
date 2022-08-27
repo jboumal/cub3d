@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/27 03:23:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:25:46 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void	update_doors(t_game *g)
 	}
 }
 
-static void update_textures(t_game *g)
+static void	update_textures(t_game *g)
 {
-	static int accu;
-	int	i;
+	static int	accu;
+	int			i;
 
 	if (!(accu % 10))
 	{
