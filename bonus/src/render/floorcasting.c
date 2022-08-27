@@ -14,22 +14,24 @@
 
 static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 {
-	int	x;
-	int	color;
-	int	tx;
-	int	ty;
-	int	h;
+	int				x;
+	int				tx;
+	int				ty;
+	unsigned int	h;
+	unsigned int	w;
 
 	x = 0;
-	h = g->floor.height;
+	h = 1 << ((sizeof(unsigned int) << 3) - __builtin_clz(g->floor.height));
+	w = 1 << ((sizeof(unsigned int) << 3) - __builtin_clz(g->floor.width));
 	while (x < SCREEN_W)
 	{
-		tx = (int)(h * (scanline->floor.x - (int)scanline->floor.x)) & (h - 1);
+		tx = (int)(w * (scanline->floor.x - (int)scanline->floor.x)) & (w - 1);
 		ty = (int)(h * (scanline->floor.y - (int)scanline->floor.y)) & (h - 1);
+		tx *= (double)g->floor.height / w;
+		ty *= (double)g->floor.height / h;
 		scanline->floor.x += scanline->step.x;
 		scanline->floor.y += scanline->step.y;
-		color = mlx_get_pixel(&g->floor.data, tx, ty);
-		my_mlx_pixel_put(img, x, y, color);
+		my_mlx_pixel_put(img, x, y, mlx_get_pixel(&g->floor.data, tx, ty));
 		x++;
 	}
 }
