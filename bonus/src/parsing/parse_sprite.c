@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:50:28 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/20 14:24:52 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:22:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
-
+#include "cub3d.h"
 
 static void	create_sprite(t_game *game)
 {
-	;
+	(void)game;
 }
 
 void	parse_sprite(t_game *game, int fd)
 {
-	char	*line;
-
-	line = get_next_non_empty_line(fd);
-	while (line)
-	{
-		;
-	}
+	(void)game;
+	(void)fd;
+	(void)create_sprite;
 }

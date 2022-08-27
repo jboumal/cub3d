@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/23 13:32:35 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:20:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ static void	compute_field_sprite(t_game *g)
 void	init_sprite(t_game *game)
 {
 	t_sprite	*obj;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
 
 	obj = malloc(sizeof(t_sprite));
 	obj->x = 3.5;
