@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/22 04:23:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/27 02:41:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+/* circular_lst */
+void		clst_add_back(t_list *lst, t_node *node);
+void		clst_rotate(t_list *lst);
+
 /* dy_str_insert */
 void		dy_str_append_str(t_dy_str *dy_str, char *s);
 
@@ -51,7 +55,7 @@ void		dy_str_append_c(t_dy_str *dy_str, char c);
 void		dy_str_pop_back(t_dy_str *dy_str);
 
 /* node */
-t_node		*node_new(void *content);
+t_node		*new_node(void *content);
 
 /* circular lst */
 void		lst_add_front(t_list *lst, t_node *new_node);

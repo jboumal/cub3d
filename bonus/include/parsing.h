@@ -91,7 +91,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_texture	textures[79];
+	t_list		textures[79];
 	t_texture	floor;
 	t_texture	sky;
 	t_sprite	*list_sprite[10];

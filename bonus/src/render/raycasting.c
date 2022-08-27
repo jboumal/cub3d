@@ -14,9 +14,11 @@
 
 static int	get_tx(t_ray *ray, t_game *g)
 {
-	double	wall_x;
-	int		tx;
+	double		wall_x;
+	int			tx;
+	t_texture	*texture;
 
+	texture = g->textures[g->map.data[ray->cell] - 1].head->content;
 	if (ray->side == W || ray->side == E)
 		wall_x = g->player.pos.y + ray->dist * ray->dir.y;
 	else
@@ -24,13 +26,13 @@ static int	get_tx(t_ray *ray, t_game *g)
 	wall_x -= floor((wall_x));
 	if (g->map.data[ray->cell] == 10)
 		wall_x -= get_door(ray->cell, g)->ratio;
-	tx = (int)(wall_x * (double)g->textures[g->map.data[ray->cell] - 1].width);
+	tx = (int)(wall_x * (double)texture->width);
 	if (g->map.data[ray->cell] != 10)
 	{
 		if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
-			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+			tx = texture->width - tx - 1;
 		if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
-			tx = g->textures[g->map.data[ray->cell] - 1].width - tx - 1;
+			tx = texture->width - tx - 1;
 	}
 	return (tx);
 }
@@ -63,19 +65,21 @@ static inline void	put_sky_reflect_px(
 
 static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
-	int		y;
-	int		ty;
-	int		tex_h;
-	int		color;
+	int			y;
+	int			ty;
+	int			tex_h;
+	int			color;
+	t_texture	*texture;
 
 	y = 0;
-	tex_h = g->textures[g->map.data[var->ray->cell] - 1].height;
+	texture = g->textures[g->map.data[var->ray->cell] - 1].head->content;
+	tex_h = texture->height;
 	while (y < SCREEN_H)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
 			ty = (y - var->draw_start) * tex_h / (var->line_height);
-			color = mlx_get_pixel(&g->textures[g->map.data[var->ray->cell] - 1].data, var->tx, ty);
+			color = mlx_get_pixel(&texture->data, var->tx, ty);
 			if (var->ray->side == N || var->ray->side == S)
 				color = shade_color(color, 1.8);
 			if (var->ray->side == E)
