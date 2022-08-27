@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/27 03:16:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/27 03:23:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void update_textures(t_game *g)
 	if (!(accu % 10))
 	{
 		i = 0;
-		while (i < 79)
+		while (i < TEXTURES_MAX)
 		{
 			clst_rotate(&g->textures[i]);
 			i++;

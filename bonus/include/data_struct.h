@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/27 02:41:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:02:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_vector
 /* circular_lst */
 void		clst_add_back(t_list *lst, t_node *node);
 void		clst_rotate(t_list *lst);
+size_t		clst_size(t_list lst);
+void		clst_clear(t_list *lst, void (*del)(void*));
 
 /* dy_str_insert */
 void		dy_str_append_str(t_dy_str *dy_str, char *s);

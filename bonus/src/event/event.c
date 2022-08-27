@@ -12,23 +12,6 @@
 
 #include "cub3d.h"
 
-int	quit(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	mlx_destroy_window(game->mlx, game->window);
-	while (i < 4)
-	{
-		//mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
-		i++;
-	}
-	free(game->map.data);
-	lst_clear(&game->state.doors, free);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
 static void	update_door_opened(t_game *g)
 {
 	int			x;

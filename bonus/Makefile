@@ -16,7 +16,7 @@ NAME = cub3D
 		src/cub3d.c
 
 SRC = 	main.c \
-		event/event.c \
+		event/quit.c event/event.c \
 		gameloop/door.c gameloop/update_cam.c gameloop/gameloop.c \
 		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c parsing/parse_sprite.c\
 		render/routines.c render/skycasting.c render/floorcasting.c render/dda.c render/raycasting.c render/minimap.c render/render.c render/sort_sprite.c\
