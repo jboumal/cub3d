@@ -78,8 +78,8 @@ typedef struct s_sprite
 	double		size;
 	double		height;
 	double		width;
-	double		angle;
 	double		ceil;
+	double		angle;
 	double		dist_to_p;
 	bool		is_in_fov;
 	t_texture	t;

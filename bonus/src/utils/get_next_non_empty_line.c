@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static bool	is_empty_line(char *line)
+bool	is_empty_line(char *line)
 {
 	if (!line)
 		return (0);
