@@ -6,11 +6,11 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/27 18:03:52 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/27 18:11:32 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 static int	create_sprite(t_game *game, char **line_split, int obj_index)
 {
@@ -27,7 +27,8 @@ static int	create_sprite(t_game *game, char **line_split, int obj_index)
 		if (obj->x >= game->map.width || obj->y >= game->map.height)
 			return (obj_index);
 		game->list_sprite[obj_index] = obj;
-		load_texture(game->mlx, line_split[0], &game->list_sprite[obj_index]->t);
+		load_texture(game->mlx, line_split[0],
+			&game->list_sprite[obj_index]->t);
 		index += 2;
 		obj_index++;
 	}
@@ -39,7 +40,7 @@ static void	free_split(char **split)
 	int	i;
 
 	i = -1;
-	while(split[++i])
+	while (split[++i])
 		free(split[i]);
 	free(split);
 }
