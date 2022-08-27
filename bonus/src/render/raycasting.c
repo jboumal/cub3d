@@ -64,7 +64,7 @@ static inline void	put_sky_reflect_px(
 	my_mlx_pixel_put(img, x, y, color);
 }
 
-static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
+static void	draw_line(int x, t_draw_line_var *var, t_data *img)
 {
 	int			y;
 	int			ty;
@@ -104,7 +104,7 @@ void	raycasting(int x0, int x1, t_data *img, t_game *g)
 	ray.dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
-	draw_line(x0, &var, img, g);
+	draw_line(x0, &var, img);
 	g->depth_buf[x0] = ray.dist;
 	if (x0 < x1)
 		return (raycasting(x0 + 1, x1, img, g));
