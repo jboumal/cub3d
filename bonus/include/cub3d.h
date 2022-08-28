@@ -43,5 +43,6 @@
 # include "gameloop.h"
 # include "event.h"
 # include "render.h"
+# include "sprite.h"
 
 #endif

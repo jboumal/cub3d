@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/27 19:03:34 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:28:09 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static int	create_sprite(t_game *game, char **line_split, int obj_index)
 	while (line_split[index])
 	{
 		obj = x_malloc(sizeof(t_sprite));
-		obj->size = 1 / (double) ft_atoi(line_split[1]);
+		obj->size = 0.5;
 		obj->x = ft_atoi(line_split[index]) + 0.5;
+		obj->is_collect = ft_atoi(line_split[1]);
 		if (!line_split[index + 1])
 			return (obj_index);
 		obj->y = ft_atoi(line_split[index + 1]) + 0.5;

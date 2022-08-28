@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_sprite.c                                      :+:      :+:    :+:   */
+/*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 15:25:45 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/22 15:59:59 by bperraud         ###   ########.fr       */
+/*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
+/*   Updated: 2022/08/28 18:14:58 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	sort_sprite(t_game *g, t_sprite *obj, int i)
+typedef struct s_sprite
 {
-	t_sprite	*sprite;
-	int			j;
+	double		x;
+	double		y;
+	double		size;
+	double		height;
+	double		width;
+	double		ceil;
+	double		angle;
+	double		dist_to_p;
+	bool		is_collect;
+	bool		is_in_fov;
+	t_texture	t;
+}	t_sprite;
 
-	while (i >= 1 && obj->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
-	{
-		sprite = g->list_sprite[i];
-		g->list_sprite[i] = g->list_sprite[i - 1];
-		g->list_sprite[i - 1] = sprite;
-		i--;
-	}
-}
+/* sort sprite */
+void	sort_sprite(t_game *g, t_sprite *obj, int i);
+
+/* sprite */
+void	render_sprites(void	*img, t_game *game);
