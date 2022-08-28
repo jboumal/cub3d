@@ -22,9 +22,9 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 	while (i < N_THREAD)
 	{
 		arg = x_malloc(sizeof(t_th_arg));
-		arg->game = g;
 		arg->i = i;
-		arg->img = img;
+		arg->data[0] = img;
+		arg->data[1] = g;
 		if (pthread_create(&th[i], NULL, routine, arg))
 			exit_error("unable to create thread");
 		i++;
@@ -40,14 +40,18 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 
 void	render(t_game *game)
 {
-	t_data		img;
+	t_data	*img;
 
-	img = get_new_img(game);
-	compute_pixels(&img, game, routine_floor);
-	compute_pixels(&img, game, routine_sky);
-	compute_pixels(&img, game, routine_wall);
-	render_sprites(&img, game);
-	render_minimap(&img, game);
-	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
-	mlx_destroy_image(game->mlx, img.img);
+	img = &game->small_buffer;
+	compute_pixels(img, game, routine_floor);
+	compute_pixels(img, game, routine_sky);
+	compute_pixels(img, game, routine_wall);
+	render_sprites(img, game);
+	if (SCALE != 1)
+	{
+		compute_pixels(img, game, routine_rescale);
+		img = &game->full_buffer;
+	}
+	render_minimap(img, game);
+	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 }

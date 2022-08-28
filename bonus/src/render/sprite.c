@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/28 00:12:25 by bperraud         ###   ########.fr       */
+/*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
+/*   Updated: 2022/08/28 17:15:44 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void	draw_sprite(t_game *g, void *img, t_sprite s)
 	int		lx;
 	int		ly;
 
-	s.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (s.dist_to_p / s.size)));
-	s.height = (SCREEN_H - 2.0 * s.ceil);
+	s.ceil = ((g->img_h / 2.0) - (g->img_h / (s.dist_to_p / s.size)));
+	s.height = (g->img_h - 2.0 * s.ceil);
 	s.width = s.height / (s.t.height / s.t.width);
 	lx = 0;
 	while (lx++ < s.width)
@@ -62,9 +62,9 @@ static void	draw_sprite(t_game *g, void *img, t_sprite s)
 			if (color > 0)
 			{
 				col = (0.5 * (s.angle / (g->player.fov / 2) + 1))
-					* SCREEN_W + lx - (s.width / 2);
-				if (col >= 0 && col < SCREEN_W && s.ceil + ly >= 0 && s.ceil
-					+ ly < SCREEN_H && g->depth_buf[col] >= s.dist_to_p)
+					* g->img_w + lx - (s.width / 2);
+				if (col >= 0 && col < g->img_w && s.ceil + ly >= 0 && s.ceil
+					+ ly < g->img_h && g->depth_buf[col] >= s.dist_to_p)
 					my_mlx_pixel_put(img, col, s.ceil + ly, color);
 			}
 		}

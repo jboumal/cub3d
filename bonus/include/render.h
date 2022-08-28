@@ -59,8 +59,7 @@ typedef struct s_draw_line_var
 typedef struct s_th_arg
 {
 	int		i;
-	t_game	*game;
-	t_data	*img;
+	void	*data[3];
 }	t_th_arg;
 
 /* dda */
@@ -88,7 +87,7 @@ int		get_end(int i, int start, int end);
 void	*routine_floor(void *arg);
 void	*routine_sky(void *arg);
 void	*routine_wall(void *arg);
-void	*routine_rain(void *arg);
+void	*routine_rescale(void *arg);
 
 /* skycasting */
 void	load_sky_texture(t_game *game);

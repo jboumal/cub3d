@@ -42,10 +42,10 @@ static void	init_draw_line(
 			t_ray *ray,
 			t_game *g)
 {
-	var->line_height = SCREEN_H / ray->dist;
+	var->line_height = g->img_h / ray->dist;
 	var->tx = get_tx(ray, g);
-	var->draw_start = -var->line_height / 2 + SCREEN_H / 2;
-	var->draw_end = var->line_height / 2 + SCREEN_H / 2;
+	var->draw_start = -var->line_height / 2 + g->img_h / 2;
+	var->draw_end = var->line_height / 2 + g->img_h / 2;
 	var->ray = ray;
 	var->tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
 }
@@ -53,18 +53,19 @@ static void	init_draw_line(
 static inline void	put_sky_reflect_px(
 			int x,
 			int y,
-			t_data *img)
+			t_data *img,
+			t_game *g)
 {
 	int	color;
 
 	color = shade(
 			mlx_get_pixel(img, x, y),
-			mlx_get_pixel(img, x, SCREEN_H - 1 - y),
+			mlx_get_pixel(img, x, g->img_h - 1 - y),
 			0.8, 0.4);
 	my_mlx_pixel_put(img, x, y, color);
 }
 
-static void	draw_line(int x, t_draw_line_var *var, t_data *img)
+static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
 	int			y;
 	int			ty;
@@ -72,7 +73,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img)
 	int			reflect_y;
 
 	y = 0;
-	while (y < SCREEN_H)
+	while (y < g->img_h)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
@@ -80,7 +81,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img)
 			color = mlx_get_pixel(&var->tex->data, var->tx, ty);
 			my_mlx_pixel_put(img, x, y, color);
 			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;
-			if (reflect_y < SCREEN_H)
+			if (reflect_y < g->img_h)
 			{
 				color = shade(mlx_get_pixel(img, x, reflect_y),
 						color, 0.8, 0.6);
@@ -88,7 +89,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img)
 			}
 		}
 		else if (y > var->draw_end + var->line_height)
-			put_sky_reflect_px(x, y, img);
+			put_sky_reflect_px(x, y, img, g);
 		y++;
 	}
 }
@@ -99,12 +100,12 @@ void	raycasting(int x0, int x1, t_data *img, t_game *g)
 	t_ray			ray;
 	t_draw_line_var	var;
 
-	camera_x = 2 * x0 / (double) SCREEN_W - 1;
+	camera_x = 2 * x0 / (double) g->img_w - 1;
 	ray.dir.x = g->player.dir.x + g->player.plane.x * camera_x;
 	ray.dir.y = g->player.dir.y + g->player.plane.y * camera_x;
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
-	draw_line(x0, &var, img);
+	draw_line(x0, &var, img, g);
 	g->depth_buf[x0] = ray.dist;
 	if (x0 < x1)
 		return (raycasting(x0 + 1, x1, img, g));

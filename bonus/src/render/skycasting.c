@@ -37,13 +37,13 @@ void	skycasting(int x0, int x1, t_data *img, t_game *g)
 				g->player.dir,
 				vector_scalar_multiplication(
 					g->player.plane,
-					(double)2 * x0 / (double)SCREEN_W - 1)));
+					(double)2 * x0 / (double)g->img_w - 1)));
 	tx = 4 * angle / (2 * M_PI) * g->sky.width;
-	ty_range = 4 * get_fov_ratio(g) * g->sky.width / SCREEN_W * (SCREEN_H / 2);
+	ty_range = 4 * get_fov_ratio(g) * g->sky.width / g->img_w * (g->img_h / 2);
 	y = 0;
-	while (y < SCREEN_H / 2)
+	while (y < g->img_h / 2)
 	{
-		ty = y * (double)ty_range / (double)(SCREEN_H / 2);
+		ty = y * (double)ty_range / (double)(g->img_h / 2);
 		ty += (g->sky.height - ty_range) / 2;
 		my_mlx_pixel_put(img, x0, y, mlx_get_pixel(&g->sky.data, tx, ty));
 		y++;
