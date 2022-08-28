@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 19:35:19 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/27 18:08:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/28 00:12:25 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,31 @@ static void	compute_field_sprite(t_game *g)
 	}
 }
 
-static void	draw_sprite(t_game *game, void *img, t_sprite obj)
+static void	draw_sprite(t_game *g, void *img, t_sprite s)
 {
 	int		color;
-	int		n_sprite_col;
+	int		col;
 	int		lx;
 	int		ly;
 
-	obj.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (obj.dist_to_p / obj.size)));
-	obj.height = (SCREEN_H - 2.0 * obj.ceil);
-	obj.width = obj.height / (obj.t.height / obj.t.width);
+	s.ceil = ((SCREEN_H / 2.0) - (SCREEN_H / (s.dist_to_p / s.size)));
+	s.height = (SCREEN_H - 2.0 * s.ceil);
+	s.width = s.height / (s.t.height / s.t.width);
 	lx = 0;
-	while (lx++ < obj.width)
+	while (lx++ < s.width)
 	{
 		ly = 0;
-		while (ly++ < obj.height)
+		while (ly++ < s.height)
 		{
-			color = mlx_get_pixel(&obj.t.data, lx / obj.width * obj.t.width,
-					ly / obj.height * obj.t.height);
+			color = mlx_get_pixel(&s.t.data, lx / s.width * s.t.width,
+					ly / s.height * s.t.height);
 			if (color > 0)
 			{
-				n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
-						* SCREEN_W + lx - (obj.width / 2.0));
-				if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W)
-				{
-					n_sprite_col = ((0.5 * (obj.angle / (game->player.fov / 2.0)) + 0.5)
-							* SCREEN_W + lx - (obj.width / 2.0));
-					if (n_sprite_col >= 0 && n_sprite_col < SCREEN_W && obj.ceil + ly
-						>= 0 && obj.ceil + ly < SCREEN_H
-						&& game->depth_buf[n_sprite_col] >= obj.dist_to_p)
-						my_mlx_pixel_put(img, n_sprite_col, obj.ceil + ly, color);
-				}
+				col = (0.5 * (s.angle / (g->player.fov / 2) + 1))
+					* SCREEN_W + lx - (s.width / 2);
+				if (col >= 0 && col < SCREEN_W && s.ceil + ly >= 0 && s.ceil
+					+ ly < SCREEN_H && g->depth_buf[col] >= s.dist_to_p)
+					my_mlx_pixel_put(img, col, s.ceil + ly, color);
 			}
 		}
 	}
