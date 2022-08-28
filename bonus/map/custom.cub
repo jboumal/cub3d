@@ -29,5 +29,7 @@ C img/sky/sky3.xpm
 11111111111100011111110001100011
 11111111111111111111111111111111
 
-img/sprite/tree.xpm 1 3 7 2 6
-img/sprite/skeleton.xpm 0 6 12
+img/sprite/tree.xpm 0 3 7 2 6
+img/sprite/skeleton.xpm 1 6 12
+img/sprite/machgun.xpm 1 9 13
+img/sprite/crown.xpm 1 7 13
