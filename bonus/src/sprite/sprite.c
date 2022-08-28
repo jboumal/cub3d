@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/28 19:10:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:45:38 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	compute_field_sprite(t_game *g)
 	int			i;
 
 	i = -1;
-	while (i++ < 9)
+	while (i++ < SPRITE_MAX - 1)
 	{
 		obj = g->list_sprite[i];
 		if (!obj)
@@ -77,7 +77,7 @@ void	remove_sprite(t_game *g, int sprite_index)
 	free(g->list_sprite[sprite_index]);
 	g->list_sprite[sprite_index] = NULL;
 	i = sprite_index;
-	while (i < 9)
+	while (i < SPRITE_MAX - 1)
 	{
 		if (g->list_sprite[i + 1])
 		{
@@ -94,8 +94,8 @@ void	render_sprites(void	*img, t_game *g)
 	int			sprite_index;
 
 	compute_field_sprite(g);
-	sprite_index = -1;
-	while (sprite_index++ < 9)
+	sprite_index = 0;
+	while (sprite_index < SPRITE_MAX - 1)
 	{
 		obj = g->list_sprite[sprite_index];
 		if (obj && obj->is_in_fov)
@@ -105,5 +105,6 @@ void	render_sprites(void	*img, t_game *g)
 			else if (obj->is_collect)
 				remove_sprite(g, sprite_index);
 		}
+		sprite_index++;
 	}
 }

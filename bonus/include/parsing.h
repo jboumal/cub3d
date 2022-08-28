@@ -17,6 +17,7 @@
 
 # define SPACES " \t"
 # define TEXTURES_MAX 79
+# define SPRITE_MAX 20
 
 typedef struct s_sprite t_sprite;
 
@@ -87,7 +88,7 @@ typedef struct s_game
 	t_list		textures[TEXTURES_MAX];
 	t_texture	floor;
 	t_texture	sky;
-	t_sprite	*list_sprite[10];
+	t_sprite	*list_sprite[SPRITE_MAX];
 	double		depth_buf[SCREEN_W];
 }	t_game;
 
