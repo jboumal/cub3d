@@ -43,9 +43,7 @@ void	floorcasting(int y0, int y1, t_data *img, t_game *g)
 	double		row_dist;
 	t_scanline	scanline;
 
-	ray_dir_0 = vector_add(
-			g->player.dir,
-			vector_scalar_multiplication(g->player.plane, -1));
+	ray_dir_0 = vector_sub(g->player.dir, g->player.plane);
 	ray_dir_1 = vector_add(g->player.dir, g->player.plane);
 	row_dist = (0.5 * g->img_h) / (y0 - g->img_h / 2);
 	scanline.step.x = row_dist * (ray_dir_1.x - ray_dir_0.x) / g->img_w;
