@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 14:04:30 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:17:54 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	compute_field_sprite(t_game *g)
 		if (obj->angle > M_PI)
 			obj->angle -= 2.0 * M_PI;
 		obj->is_in_fov = fabs(obj->angle) < g->player.fov / 2.0;
-		if (i != 0 && obj->is_in_fov)
+		if (i != 0)
 			sort_sprite(g, obj, i);
 	}
 }
@@ -47,7 +47,7 @@ static void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	lx = s->width - (s->width * s->x_start);
+	lx = s->width * s->x_start;
 	while (lx++ < s->width)
 	{
 		ly = s->height * s->y_start;
