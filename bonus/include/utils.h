@@ -14,7 +14,7 @@
 # define UTILS_H
 
 # include "cub3d.h"
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 2048
 
 /* utils */
 bool			atoui8_error(const char *s, uint8_t *n);

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 13:54:14 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:51:04 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ typedef struct s_sprite
 	t_texture	t;
 }	t_sprite;
 
-/* sort sprite */
-void	sort_sprite(t_game *g, t_sprite *obj, int i);
-
 /* sprite */
 void	render_sprites(void	*img, t_game *game);
+
+/* draw sprite */
+void	compute_field_sprite(t_game *g);
+void	draw_sprite(t_game *g, void *img, t_sprite *s);
