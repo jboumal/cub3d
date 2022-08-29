@@ -19,6 +19,8 @@
 # define TEXTURES_MAX 79
 # define SPRITE_MAX 20
 
+typedef struct s_sprite t_sprite;
+
 typedef struct s_data
 {
 	void	*img;
@@ -71,21 +73,6 @@ typedef struct s_texture
 	int		width;
 	int		height;
 }	t_texture;
-
-typedef struct s_sprite
-{
-	double		x;
-	double		y;
-	double		size;
-	double		height;
-	double		width;
-	double		ceil;
-	double		angle;
-	double		dist_to_p;
-	bool		is_collect;
-	bool		is_in_fov;
-	t_texture	t;
-}	t_sprite;
 
 typedef struct s_game
 {

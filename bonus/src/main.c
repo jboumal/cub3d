@@ -27,7 +27,7 @@ static void	initialize(t_game *game)
 	if (MAC)
 		mouse_move(game, 500, 500);
 	else
-		mouse_move(game, 400, 400);
+		;//mouse_move(game, 400, 400);
 }
 
 int	main(int argc, char **argv)
