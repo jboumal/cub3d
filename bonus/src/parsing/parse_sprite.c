@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 16:34:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:38:25 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	bound_start(t_sprite *s)
 
 	lx = 0;
 	y_start = s->t.height;
+	s->x_start = 0;
 	while (lx++ < s->t.width)
 	{
 		ly = 0;
@@ -48,21 +49,18 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 	while (line_split[index])
 	{
 		s = x_malloc(sizeof(t_sprite));
-		s->x = ft_atoi(line_split[index]);
+		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
-		if (!line_split[index + 1])
-			return (s_index);
+		s->x = ft_atoi(line_split[index]);
 		s->y = ft_atoi(line_split[index + 1]);
 		if (s->x >= game->map.width || s->y >= game->map.height
-			|| game->map.data[(int) (s->y * game->map.width + s->x)] != 0)
+			|| game->map.data[(int)(s->y * game->map.width + s->x)] != 0)
 		{
 			index += 2;
-			continue;
+			continue ;
 		}
 		s->x += 0.5;
 		s->y += 0.5;
-		load_texture(game->mlx, line_split[0], &s->t);
-		s->x_start = 0;
 		bound_start(s);
 		game->list_sprite[s_index] = s;
 		index += 2;
@@ -81,7 +79,6 @@ void	parse_sprite(t_game *game, int fd)
 	s_index = 0;
 	while (line)
 	{
-		printf("line : %s\n", line);
 		line_split = ft_split(line, ' ');
 		s_index = create_sprite(game, line_split, s_index);
 		free(line);
