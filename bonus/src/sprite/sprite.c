@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 02:55:36 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 14:04:30 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	lx = 0;
+	lx = s->width - (s->width * s->x_start);
 	while (lx++ < s->width)
 	{
-		ly = 0;
+		ly = s->height * s->y_start;
 		while (ly++ < s->height)
 		{
 			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,
@@ -87,24 +87,24 @@ void	remove_sprite(t_game *g, int sprite_index)
 
 void	render_sprites(void	*img, t_game *g)
 {
-	t_sprite	*obj;
+	t_sprite	*s;
 	int			sprite_index;
 
 	compute_field_sprite(g);
 	sprite_index = 0;
 	while (sprite_index < SPRITE_MAX - 1)
 	{
-		obj = g->list_sprite[sprite_index];
-		if (obj && obj->is_in_fov)
+		s = g->list_sprite[sprite_index];
+		if (s && s->is_in_fov)
 		{
-			if (obj->dist_to_p >= MIN_SPRITE_DIST)
+			if (s->dist_to_p >= MIN_SPRITE_DIST)
 			{
-				obj->ceil = (g->img_h / 2.0 - (g->img_h / (obj->dist_to_p * 2.0)));
-				obj->height = g->img_h - 2.0 * obj->ceil;
-				obj->width = obj->height / (obj->t.height / obj->t.width);
-				draw_sprite(g, img, obj);
+				s->ceil = (g->img_h / 2.0 - (g->img_h / (s->dist_to_p * 2.0)));
+				s->height = g->img_h - 2.0 * s->ceil;
+				s->width = s->height / (s->t.height / s->t.width);
+				draw_sprite(g, img, s);
 			}
-			else if (obj->is_collect)
+			else if (s->is_collect)
 				remove_sprite(g, sprite_index);
 		}
 		sprite_index++;

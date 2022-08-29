@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/28 22:22:56 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:54:14 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
-	double		size;
 	double		height;
 	double		width;
 	double		ceil;
 	double		angle;
 	double		dist_to_p;
+	double		x_start;
+
+	double		y_start;
+
 	bool		is_collect;
 	bool		is_in_fov;
 	t_texture	t;
