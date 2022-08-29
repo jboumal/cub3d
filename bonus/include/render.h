@@ -82,8 +82,6 @@ void	render(t_game *game);
 void	load_floor_texture(t_game *game);
 
 /* routines */
-int		get_start(int i, int start, int end);
-int		get_end(int i, int start, int end);
 void	*routine_floor(void *arg);
 void	*routine_sky(void *arg);
 void	*routine_wall(void *arg);

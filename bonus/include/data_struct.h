@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/27 04:02:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:13:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		lst_clear(t_list *lst, void (*del)(void*));
 /* vector */
 t_vector	vector(double x, double y);
 t_vector	vector_add(t_vector v1, t_vector v2);
+t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_scalar_multiplication(t_vector v, double a);
 t_vector	vector_rotate(t_vector v, double a);
 double		vector_norme(t_vector v);

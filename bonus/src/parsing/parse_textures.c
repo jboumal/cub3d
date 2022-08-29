@@ -16,6 +16,8 @@ void	parse_textures(t_game *g, int fd)
 {
 	t_dy_str	line;
 	t_node		*node;
+	char		**arr;
+	int			i;
 
 	while (g->map.ceil == -1)
 	{
@@ -25,12 +27,14 @@ void	parse_textures(t_game *g, int fd)
 			dy_str_pop_back(&line);
 		if (isascii_48(line.str[0]) && line.str[0] != 'F' && line.str[0] != 'C')
 		{
-			char **arr = ft_split(line.str, ',');
-			for (int i = 0; arr[i]; i++)
+			arr = ft_split(line.str, ',');
+			i = 0;
+			while (arr[i])
 			{
 				node = new_node(x_calloc(1, sizeof(t_texture)));
 				load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
 				clst_add_back(&g->textures[line.str[0] - 49], node);
+				i++;
 			}
 		}
 		else if (!str_n_cmp("F ", line.str, 2))

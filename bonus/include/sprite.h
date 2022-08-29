@@ -6,11 +6,14 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 22:53:19 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:57:07 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef SPRITE_H
+# define SPRITE_H
+
+# include "cub3d.h"
 
 # define NOT_PIXEL 9961608
 # define MIN_SPRITE_DIST 0.7
@@ -33,9 +36,13 @@ typedef struct s_sprite
 	t_texture	t;
 }	t_sprite;
 
+
 /* sprite */
 void	render_sprites(void	*img, t_game *game);
 
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
 void	draw_sprite(t_game *g, void *img, t_sprite *s);
+
+#endif
+
