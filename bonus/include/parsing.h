@@ -20,6 +20,7 @@
 # define SPRITE_MAX 20
 
 typedef struct s_sprite t_sprite;
+typedef struct s_gun	t_gun;
 
 typedef struct s_data
 {
@@ -82,6 +83,7 @@ typedef struct s_game
 	int			img_h;
 	t_data		small_buffer;
 	t_data		full_buffer;
+	int			active_gun;
 	t_map		map;
 	t_player	player;
 	t_state		state;
@@ -89,6 +91,8 @@ typedef struct s_game
 	t_texture	floor;
 	t_texture	sky;
 	t_sprite	*list_sprite[SPRITE_MAX];
+	t_gun		*list_guns[10];
+	t_gun		*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 }	t_game;
 

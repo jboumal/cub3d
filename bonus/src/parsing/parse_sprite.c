@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 21:27:58 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 00:09:47 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 	return (s_index);
 }
 
+static void	init_gun(t_game *game)
+{
+	t_gun	*gun;
+
+	gun = x_malloc(sizeof(t_gun));
+	gun->is_active = 1;
+	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->t);
+	game->list_guns[0] = gun;
+	game->list_active_gun[0] = gun;
+}
+
 void	parse_sprite(t_game *game, int fd)
 {
 	char	*line;
@@ -85,4 +96,5 @@ void	parse_sprite(t_game *game, int fd)
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);
 	}
+	init_gun(game);
 }

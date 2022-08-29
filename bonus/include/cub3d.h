@@ -44,5 +44,6 @@
 # include "event.h"
 # include "render.h"
 # include "sprite.h"
+# include "gun.h"
 
 #endif

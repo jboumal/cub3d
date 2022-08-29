@@ -47,6 +47,7 @@ void	render(t_game *game)
 	compute_pixels(img, game, routine_sky);
 	compute_pixels(img, game, routine_wall);
 	render_sprites(img, game);
+	render_gun(img, game);
 	if (SCALE != 1)
 	{
 		compute_pixels(img, game, routine_rescale);
