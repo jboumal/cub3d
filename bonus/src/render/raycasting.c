@@ -106,7 +106,7 @@ void	raycasting(int x0, int x1, t_data *img, t_game *g)
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
 	draw_line(x0, &var, img, g);
-	g->depth_buf[x0] = ray.dist;
+	g->depth_buf[x0] = ray.dist + 1;
 	if (x0 < x1)
 		return (raycasting(x0 + 1, x1, img, g));
 }
