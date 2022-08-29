@@ -6,13 +6,13 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 22:49:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:55:32 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	remove_sprite(t_game *g, int sprite_index)
+void	remove_sprite(t_game *g, int sprite_index)
 {
 	int	i;
 
