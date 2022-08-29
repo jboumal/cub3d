@@ -83,6 +83,10 @@ size_t			str_arr_len(char **str);
 /* swap */
 void			swap_int(int *a, int *b);
 
+/* thread */
+int				get_start(int i, int start, int end, int n_thread);
+int				get_end(int i, int start, int end, int n_thread);
+
 /* x_alloc */
 void			*x_malloc(size_t n);
 void			*x_calloc(size_t count, size_t size);
