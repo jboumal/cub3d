@@ -6,5 +6,6 @@
 - Test parsing (especially when doors implemented)
 
 Ben :
-- Parsing sprites with coordinate
-- Sort sprites to draw in right order
+- make object obstacle
+- opti gun sprite
+- animate + switch gun
