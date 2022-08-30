@@ -21,24 +21,6 @@ char	*mlx_get_pixel_pointer(t_data *data, int x, int y)
 	return (dst);
 }
 
-static void	put_big_pixel(void *img, t_gun *gun, int color, int col, int ly)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < gun->pixel_size)
-	{
-		j = 0;
-		while (j < gun->pixel_size)
-		{
-			my_mlx_pixel_put(img, col + i, gun->ceil + ly + j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
 static void	draw_gun(t_game *g, void *img, t_gun *gun)
 {
 	int		color;

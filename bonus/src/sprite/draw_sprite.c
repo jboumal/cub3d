@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 12:57:44 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 14:57:20 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,43 @@ void	compute_field_sprite(t_game *g)
 	}
 }
 
-// gros pixel pour sprite = opti possible
+void	put_big_pixel(void *img, t_gun *gun, int color, int col, int ly)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < gun->pixel_size)
+	{
+		j = 0;
+		while (j < gun->pixel_size)
+		{
+			my_mlx_pixel_put(img, col + i, gun->ceil + ly + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	put_big_pixel_s(void *img, t_game *g, t_sprite *s, int color, int col, int ly)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < s->pixel_size)
+	{
+		j = 0;
+		while (j < s->pixel_size)
+		{
+			if (g->depth_buf[col] >= s->dist_to_p)
+				my_mlx_pixel_put(img, col + i, s->ceil + ly + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_sprite(t_game *g, void *img, t_sprite *s)
 {
 	int		color;
@@ -62,11 +98,13 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	lx = s->width * s->x_start - 1;
-	while (lx++ < s->width - 1)
+	//lx = s->width * s->x_start;
+	lx = 0;
+	while (lx < s->width)
 	{
-		ly = s->height * s->y_start - 1;
-		while (ly++ < s->height - 1)
+		//ly = s->height * s->y_start;
+		ly = 0;
+		while (ly < s->height)
 		{
 			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,
 					ly / s->height * s->t.height);
@@ -75,9 +113,12 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 				col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0);
 				if (col >= 0 && col <= g->img_w && s->ceil + ly >= 0 && s->ceil
-					+ ly <= g->img_h && g->depth_buf[col] >= s->dist_to_p)
-					my_mlx_pixel_put(img, col, s->ceil + ly, color);
+					+ ly <= g->img_h)
+					//my_mlx_pixel_put(img, col, s->ceil + ly, color);
+					put_big_pixel_s(img, g, s, color, col, ly);
 			}
+			ly += s->pixel_size;
 		}
+		lx += s->pixel_size;
 	}
 }
