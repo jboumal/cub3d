@@ -6,5 +6,6 @@
 - Test parsing (especially when doors implemented)
 
 Ben :
+- make object obstacle
 - opti gun sprite
 - animate + switch gun
