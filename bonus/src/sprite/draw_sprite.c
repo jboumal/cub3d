@@ -6,18 +6,18 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 15:34:40 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:34:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	sort_sprite(t_game *g, t_sprite *obj, int i)
+static void	sort_sprite(t_game *g, t_sprite *s, int i)
 {
 	t_sprite	*sprite;
 	int			j;
 
-	while (i >= 1 && obj->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
+	while (i >= 1 && s->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
 	{
 		sprite = g->list_sprite[i];
 		g->list_sprite[i] = g->list_sprite[i - 1];
@@ -28,7 +28,7 @@ static void	sort_sprite(t_game *g, t_sprite *obj, int i)
 
 void	compute_field_sprite(t_game *g)
 {
-	t_sprite	*obj;
+	t_sprite	*s;
 	double		fvec_x;
 	double		fvec_y;
 	int			i;
@@ -36,21 +36,21 @@ void	compute_field_sprite(t_game *g)
 	i = -1;
 	while (i++ < SPRITE_MAX - 1)
 	{
-		obj = g->list_sprite[i];
-		if (!obj)
+		s = g->list_sprite[i];
+		if (!s)
 			continue ;
-		fvec_x = obj->x - g->player.pos.x;
-		fvec_y = obj->y - g->player.pos.y;
-		obj->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
-		obj->angle = atan2(fvec_x, fvec_y)
+		fvec_x = s->x - g->player.pos.x;
+		fvec_y = s->y - g->player.pos.y;
+		s->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
+		s->angle = atan2(fvec_x, fvec_y)
 			- atan2(g->player.dir.x, g->player.dir.y);
-		if (obj->angle < -M_PI)
-			obj->angle += 2.0 * M_PI;
-		if (obj->angle > M_PI)
-			obj->angle -= 2.0 * M_PI;
-		obj->is_in_fov = fabs(obj->angle) < (g->player.fov / 2.0);
+		if (s->angle < -M_PI)
+			s->angle += 2.0 * M_PI;
+		if (s->angle > M_PI)
+			s->angle -= 2.0 * M_PI;
+		s->is_in_fov = fabs(s->angle) < (g->player.fov / 2.0);
 		if (i != 0)
-			sort_sprite(g, obj, i);
+			sort_sprite(g, s, i);
 	}
 }
 
@@ -67,7 +67,7 @@ static void	put_big_pixel_s(t_game *g, t_sprite *s, int color, int ly)
 		j = 0;
 		while (j < s->pixel_size)
 		{
-			if (g->depth_buf[s->col] >= s->dist_to_p)
+			if (s->is_gun || g->depth_buf[s->col] >= s->dist_to_p)
 				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
 			j++;
 		}
@@ -91,7 +91,10 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 					ly / s->height * s->t.height);
 			if (color != NOT_PIXEL)
 			{
-				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
+				if (s->is_gun)
+					s->col = ((g->img_w / 2.0) + lx - (s->width / 2.0));
+				else
+					s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0);
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)

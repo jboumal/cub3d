@@ -6,13 +6,41 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 02:40:00 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:32:21 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	bound_start(t_sprite *s)
+static void	bound_start(t_sprite *s, t_texture text)
+{
+	int		lx;
+	int		ly;
+	int		color;
+	int		y_start;
+
+	lx = -1;
+	y_start = text.height;
+	s->x_start = 0;
+	while (lx++ < text.width - 1)
+	{
+		ly = -1;
+		while (ly++ < text.height - 1)
+		{
+			color = mlx_get_pixel(&text.data, lx, ly);
+			if (color != NOT_PIXEL && color > 0)
+			{
+				if (!s->x_start)
+					s->x_start = lx / (double) text.width;
+				if (ly < y_start)
+					y_start = ly;
+			}
+		}
+	}
+	s->y_start = y_start / (double) text.height;
+}
+
+static void	bound_start_sprite(t_sprite *s)
 {
 	int		lx;
 	int		ly;
@@ -61,7 +89,8 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		}
 		s->x += 0.5;
 		s->y += 0.5;
-		bound_start(s);
+		s->is_gun = 0;
+		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
 		s_index++;
@@ -71,12 +100,14 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 
 static void	init_gun(t_game *game)
 {
-	t_gun	*gun;
+	t_sprite	*gun;
 
-	gun = x_malloc(sizeof(t_gun));
-	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->hold);
-	game->list_guns[0] = gun;
+	gun = x_malloc(sizeof(t_sprite));
+	gun->is_gun = 1;
+	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->t);
+	game->list_sprites[0] = gun;
 	game->list_active_gun[0] = gun;
+	bound_start_sprite(gun);
 }
 
 void	parse_sprite(t_game *game, int fd)

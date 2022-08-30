@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gun.h                                              :+:      :+:    :+:   */
+/*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 23:19:13 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 15:29:57 by bperraud         ###   ########.fr       */
+/*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
+/*   Updated: 2022/08/30 19:34:53 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-typedef struct s_gun
+void	render_gun(void *img, t_game *game)
 {
-	double		height;
-	double		width;
-	double		ceil;
-	int			pixel_size;
-	int			col;
-	t_texture	hold;
-}	t_gun;
+	t_sprite	*gun;
 
-void	render_gun(void *img, t_game *game);
+	gun = game->list_active_gun[game->active_gun];
+	if (gun)
+	{
+		gun->ceil = (game->img_h / 200.0) - 10;
+		gun->height = (game->img_h - 2.0 * gun->ceil);
+		gun->width = gun->height / (gun->t.height / gun->t.width);
+		gun->pixel_size = (int) gun->height / gun->t.height;
+		draw_sprite(game, img, gun);
+	}
+}
