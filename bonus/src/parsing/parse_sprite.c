@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:44:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/31 01:31:44 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	bound_start(t_sprite *s, t_texture text)
 	int		color;
 	int		y_start;
 
-	lx = -1;
+	lx = 0;
 	y_start = text.height;
 	s->x_start = 0;
-	while (lx++ < text.width - 1)
+	while (lx <= text.width)
 	{
-		ly = -1;
-		while (ly++ < text.height - 1)
+		ly = 0;
+		while (ly++ <= text.height)
 		{
 			color = mlx_get_pixel(&text.data, lx, ly);
 			if (color != NOT_PIXEL && color > 0)
@@ -35,7 +35,9 @@ static void	bound_start(t_sprite *s, t_texture text)
 				if (ly < y_start)
 					y_start = ly;
 			}
+			ly++;
 		}
+		lx++;
 	}
 	s->y_start = y_start / (double) text.height;
 }
@@ -76,7 +78,7 @@ static void	init_gun(t_game *game)
 	gun = x_malloc(sizeof(t_sprite));
 	gun->dist_to_p = 0;
 	gun->angle = 0;
-	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->t);
+	load_texture(game->mlx, "img/sprite/gun/pistol0.xpm", &gun->t);
 	game->list_sprites[0] = gun;
 	game->list_active_gun[0] = gun;
 	bound_start(gun, gun->t);

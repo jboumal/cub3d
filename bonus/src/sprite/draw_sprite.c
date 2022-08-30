@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:44:35 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/31 01:26:41 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 		j = 0;
 		while (j < s->pixel_size)
 		{
-			if (g->depth_buf[s->col] >= s->dist_to_p)
+			if (g->depth_buf[s->col + i] > s->dist_to_p)
 				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
 			j++;
 		}
@@ -91,8 +91,9 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 					ly / s->height * s->t.height);
 			if (color != NOT_PIXEL)
 			{
+				//col change trop quand l'angle augmente
 				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
-					* g->img_w + lx - (s->width / 2.0);
+					* (double) g->img_w + (double) lx - (s->width / 2.0);
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
 					put_big_pixel(g, s, color, ly);
