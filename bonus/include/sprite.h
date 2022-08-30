@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:28:06 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:44:45 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_sprite
 	int			col;
 	bool		is_collect;
 	bool		is_in_fov;
-	bool		is_gun;
 	t_texture	t;
 }	t_sprite;
 
