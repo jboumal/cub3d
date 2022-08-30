@@ -32,6 +32,7 @@ C img/sky/sky.xpm
 img/sprite/skeleton.xpm 0 2 6 28 1
 img/sprite/armor.xpm 0 30 9 27 9
 img/sprite/machinegun.xpm 1 9 7
+img/sprite/bullet.xpm 1 7 7 7 5
 img/sprite/rubis.xpm 1 0 0
 img/sprite/chicken.xpm 1 30 6
 img/sprite/silver_key.xpm 1 13 1
