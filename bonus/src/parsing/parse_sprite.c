@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 00:09:47 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 02:04:20 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	bound_start(t_sprite *s)
 	int		color;
 	int		y_start;
 
-	lx = 0;
+	lx = -1;
 	y_start = s->t.height;
 	s->x_start = 0;
-	while (lx++ < s->t.width)
+	while (lx++ < s->t.width - 1)
 	{
-		ly = 0;
-		while (ly++ < s->t.height)
+		ly = -1;
+		while (ly++ < s->t.height - 1)
 		{
 			color = mlx_get_pixel(&s->t.data, lx, ly);
 			if (color != NOT_PIXEL && color > 0)

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/29 22:51:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 02:02:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	compute_field_sprite(t_game *g)
 	}
 }
 
+// gros pixel pour sprite = opti possible
 void	draw_sprite(t_game *g, void *img, t_sprite *s)
 {
 	int		color;
@@ -61,15 +62,17 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	lx = s->width * s->x_start;
-	while (lx++ < s->width)
+	//lx = s->width * s->x_start - 1;
+	lx = -1;
+	while (lx++ < s->width - 1)
 	{
-		ly = s->height * s->y_start;
-		while (ly++ < s->height)
+		//ly = s->height * s->y_start - 1;
+		ly = -1;
+		while (ly++ < s->height - 1)
 		{
 			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,
 					ly / s->height * s->t.height);
-			if (color > 0 && color != NOT_PIXEL)
+			if (color != NOT_PIXEL)
 			{
 				col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0);

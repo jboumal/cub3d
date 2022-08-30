@@ -20,10 +20,10 @@ static void	draw_gun(t_game *g, void *img, t_gun *gun)
 	int		ly;
 
 	lx = 0;
-	while (lx++ < gun->width)
+	while (lx++ < gun->width - 1)
 	{
 		ly = 0;
-		while (ly++ < gun->height)
+		while (ly++ < gun->height - 1)
 		{
 			color = mlx_get_pixel(&gun->t.data, lx / gun->width * gun->t.width,
 					ly / gun->height * gun->t.height);
@@ -50,7 +50,5 @@ void	render_gun(void *img, t_game *game)
 		gun->width = gun->height / (gun->t.height / gun->t.width);
 		draw_gun(game, img, gun);
 	}
-	else
-		printf("null\n");
 	return;
 }
