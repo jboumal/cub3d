@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:32:21 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:39:30 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,6 @@ static void	bound_start(t_sprite *s, t_texture text)
 		}
 	}
 	s->y_start = y_start / (double) text.height;
-}
-
-static void	bound_start_sprite(t_sprite *s)
-{
-	int		lx;
-	int		ly;
-	int		color;
-	int		y_start;
-
-	lx = -1;
-	y_start = s->t.height;
-	s->x_start = 0;
-	while (lx++ < s->t.width - 1)
-	{
-		ly = -1;
-		while (ly++ < s->t.height - 1)
-		{
-			color = mlx_get_pixel(&s->t.data, lx, ly);
-			if (color != NOT_PIXEL && color > 0)
-			{
-				if (!s->x_start)
-					s->x_start = lx / (double) s->t.width;
-				if (ly < y_start)
-					y_start = ly;
-			}
-		}
-	}
-	s->y_start = y_start / (double) s->t.height;
 }
 
 static int	create_sprite(t_game *game, char **line_split, int s_index)
@@ -107,7 +79,7 @@ static void	init_gun(t_game *game)
 	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->t);
 	game->list_sprites[0] = gun;
 	game->list_active_gun[0] = gun;
-	bound_start_sprite(gun);
+	bound_start(gun, gun->t);
 }
 
 void	parse_sprite(t_game *game, int fd)
