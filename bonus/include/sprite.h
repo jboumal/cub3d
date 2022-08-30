@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 14:43:56 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:28:05 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_sprite
 	double		x_start;
 	double		y_start;
 	int			pixel_size;
+	int			col;
 	bool		is_collect;
 	bool		is_in_fov;
 	t_texture	t;
@@ -41,7 +42,6 @@ void	render_sprites(void	*img, t_game *game);
 
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
-void	put_big_pixel(void *img, t_gun *gun, int color, int col, int ly);
 void	draw_sprite(t_game *g, void *img, t_sprite *s);
 
 #endif

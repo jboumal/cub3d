@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:19:13 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 14:10:20 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:29:57 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_gun
 	double		width;
 	double		ceil;
 	int			pixel_size;
+	int			col;
 	t_texture	hold;
 }	t_gun;
 

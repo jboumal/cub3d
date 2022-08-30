@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 15:21:19 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:34:40 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,21 @@ void	compute_field_sprite(t_game *g)
 	}
 }
 
-void	put_big_pixel(void *img, t_gun *gun, int color, int col, int ly)
+static void	put_big_pixel_s(t_game *g, t_sprite *s, int color, int ly)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_data	*img;
 
-	i = 0;
-	while (i < gun->pixel_size)
-	{
-		j = 0;
-		while (j < gun->pixel_size)
-		{
-			my_mlx_pixel_put(img, col + i, gun->ceil + ly + j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	put_big_pixel_s(void *img, t_game *g, t_sprite *s, int color, int col, int ly)
-{
-	int	i;
-	int	j;
-
+	img = &g->small_buffer;
 	i = 0;
 	while (i < s->pixel_size)
 	{
 		j = 0;
 		while (j < s->pixel_size)
 		{
-			if (g->depth_buf[col] >= s->dist_to_p)
-				my_mlx_pixel_put(img, col + i, s->ceil + ly + j, color);
+			if (g->depth_buf[s->col] >= s->dist_to_p)
+				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
 			j++;
 		}
 		i++;
@@ -94,7 +78,6 @@ void	put_big_pixel_s(void *img, t_game *g, t_sprite *s, int color, int col, int 
 void	draw_sprite(t_game *g, void *img, t_sprite *s)
 {
 	int		color;
-	int		col;
 	int		lx;
 	int		ly;
 
@@ -108,11 +91,11 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 					ly / s->height * s->t.height);
 			if (color != NOT_PIXEL)
 			{
-				col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
+				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0);
-				if (col >= 0 && col <= g->img_w && s->ceil + ly >= 0 && s->ceil
-					+ ly <= g->img_h)
-					put_big_pixel_s(img, g, s, color, col, ly);
+				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
+					&& s->ceil + ly <= g->img_h)
+					put_big_pixel_s(g, s, color, ly);
 			}
 			ly += s->pixel_size;
 		}

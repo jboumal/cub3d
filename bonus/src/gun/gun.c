@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@guntudent.gun19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 00:05:32 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:34:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*mlx_get_pixel_pointer(t_data *data, int x, int y)
+static void	put_big_pixel(void *img, t_gun *gun, int color, int ly)
 {
-	char	*dst;
+	int	i;
+	int	j;
 
-	dst = data->addr
-		+ (y * data->line_length + x * (data->bits_per_pixel / 8));
-	return (dst);
+	i = 0;
+	while (i < gun->pixel_size)
+	{
+		j = 0;
+		while (j < gun->pixel_size)
+		{
+			my_mlx_pixel_put(img, gun->col + i, gun->ceil + ly + j, color);
+			j++;
+		}
+		i++;
+	}
 }
 
 static void	draw_gun(t_game *g, void *img, t_gun *gun)
@@ -34,14 +43,14 @@ static void	draw_gun(t_game *g, void *img, t_gun *gun)
 		ly = 0;
 		while (ly < gun->height)
 		{
-			color = mlx_get_pixel(&gun->hold.data, lx / gun->width * gun->hold.width,
-					ly / gun->height * gun->hold.height);
+			color = mlx_get_pixel(&gun->hold.data, lx / gun->width
+					* gun->hold.width, ly / gun->height * gun->hold.height);
 			if (color != NOT_PIXEL)
 			{
-				col = ((g->img_w / 2.0) + lx - (gun->width / 2.0)) ;
-				if (col >= 0 && col <= g->img_w && gun->ceil + ly >= 0 && gun->ceil
-					+ ly <= g->img_h)
-					put_big_pixel(img, gun, color, col, ly);
+				gun->col = ((g->img_w / 2.0) + lx - (gun->width / 2.0));
+				if (gun->col >= 0 && gun->col <= g->img_w && gun->ceil + ly >= 0
+					&& gun->ceil + ly <= g->img_h)
+					put_big_pixel(img, gun, color, ly);
 			}
 			ly += gun->pixel_size;
 		}
