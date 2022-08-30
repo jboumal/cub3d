@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 14:57:20 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:21:19 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,10 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	//lx = s->width * s->x_start;
-	lx = 0;
+	lx = s->width * s->x_start;
 	while (lx < s->width)
 	{
-		//ly = s->height * s->y_start;
-		ly = 0;
+		ly = s->height * s->y_start;
 		while (ly < s->height)
 		{
 			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,
@@ -114,7 +112,6 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 					* g->img_w + lx - (s->width / 2.0);
 				if (col >= 0 && col <= g->img_w && s->ceil + ly >= 0 && s->ceil
 					+ ly <= g->img_h)
-					//my_mlx_pixel_put(img, col, s->ceil + ly, color);
 					put_big_pixel_s(img, g, s, color, col, ly);
 			}
 			ly += s->pixel_size;
