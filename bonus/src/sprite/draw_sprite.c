@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 02:02:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/08/30 12:57:44 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 	int		lx;
 	int		ly;
 
-	//lx = s->width * s->x_start - 1;
-	lx = -1;
+	lx = s->width * s->x_start - 1;
 	while (lx++ < s->width - 1)
 	{
-		//ly = s->height * s->y_start - 1;
-		ly = -1;
+		ly = s->height * s->y_start - 1;
 		while (ly++ < s->height - 1)
 		{
 			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,

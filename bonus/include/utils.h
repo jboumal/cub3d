@@ -31,6 +31,7 @@ int				rgb(uint8_t r, uint8_t g, uint8_t b);
 int				shade(int cf, int cb, double af, double ab);
 
 /* copy */
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void			str_n_cpy(char *dst, char *src, size_t len);

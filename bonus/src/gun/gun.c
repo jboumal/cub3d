@@ -12,6 +12,33 @@
 
 #include "cub3d.h"
 
+char	*mlx_get_pixel_pointer(t_data *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr
+		+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+	return (dst);
+}
+
+static void	put_big_pixel(void *img, t_gun *gun, int color, int col, int ly)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < gun->pixel_size)
+	{
+		j = 0;
+		while (j < gun->pixel_size)
+		{
+			my_mlx_pixel_put(img, col + i, gun->ceil + ly + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 static void	draw_gun(t_game *g, void *img, t_gun *gun)
 {
 	int		color;
@@ -20,21 +47,23 @@ static void	draw_gun(t_game *g, void *img, t_gun *gun)
 	int		ly;
 
 	lx = 0;
-	while (lx++ < gun->width - 1)
+	while (lx < gun->width)
 	{
 		ly = 0;
-		while (ly++ < gun->height - 1)
+		while (ly < gun->height)
 		{
-			color = mlx_get_pixel(&gun->t.data, lx / gun->width * gun->t.width,
-					ly / gun->height * gun->t.height);
+			color = mlx_get_pixel(&gun->hold.data, lx / gun->width * gun->hold.width,
+					ly / gun->height * gun->hold.height);
 			if (color != NOT_PIXEL)
 			{
 				col = ((g->img_w / 2.0) + lx - (gun->width / 2.0)) ;
 				if (col >= 0 && col <= g->img_w && gun->ceil + ly >= 0 && gun->ceil
 					+ ly <= g->img_h)
-					my_mlx_pixel_put(img, col, gun->ceil + ly, color);
+					put_big_pixel(img, gun, color, col, ly);
 			}
+			ly += gun->pixel_size;
 		}
+		lx += gun->pixel_size;
 	}
 }
 
@@ -47,8 +76,9 @@ void	render_gun(void *img, t_game *game)
 	{
 		gun->ceil = (game->img_h / 200.0) - 10;
 		gun->height = (game->img_h - 2.0 * gun->ceil);
-		gun->width = gun->height / (gun->t.height / gun->t.width);
+		gun->width = gun->height / (gun->hold.height / gun->hold.width);
+		gun->pixel_size = (int) gun->height / gun->hold.height;
 		draw_gun(game, img, gun);
 	}
-	return;
+	return ;
 }
