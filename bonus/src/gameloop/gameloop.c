@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/29 10:18:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:21:33 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,25 @@ static void	game_update(t_game *game)
 	update_textures(game);
 }
 
+void update_title(t_game *game)
+{
+	static test = 0;
+	if (test == 0)
+	mlx_string_put(game->mlx, game->window, SCREEN_W / 2, SCREEN_H / 2, 0xffffff, "New Game");
+	test = 1;
+	
+}
+
 int	game_loop(t_game *game)
 {
 	fps_counter();
 	if (LINUX)
 		my_mouse_hook(game);
-	game_update(game);
-	render(game);
+	if (!str_n_cmp(game->scene, "title", 5))
+	 	update_title(game);
+	else {
+		game_update(game);
+		render(game);
+	}
 	return (0);
 }

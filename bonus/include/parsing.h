@@ -93,6 +93,7 @@ typedef struct s_game
 	t_sprite	*list_sprites[10];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
+	char		*scene;
 }	t_game;
 
 /* check_map */

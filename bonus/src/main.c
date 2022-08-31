@@ -25,10 +25,27 @@ static void	initialize(t_game *game)
 	game->img_w = SCALE * SCREEN_W;
 	game->small_buffer = get_new_img(game->mlx, game->img_w, game->img_h);
 	game->full_buffer = get_new_img(game->mlx, SCREEN_W, SCREEN_H);
+	game->scene = "title";
 	if (MAC)
 		mouse_move(game, 500, 500);
 	else
 		;//mouse_move(game, 400, 400);
+}
+
+int mouse_click(int code, int x, int y, t_game *game)
+{
+	(void) game;
+	if (code == 1 && x > 0 && y > 0)
+	{
+		game->scene = "game";
+		if (MAC)
+		{
+			mlx_hook(game->window, MOUSE_MOVE, NO_EVENT_MASK, mouse_hook, game);
+			mouse_move(game, 500, 500);
+		}
+		mouse_hide(game);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -41,10 +58,8 @@ int	main(int argc, char **argv)
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, K_PRESS_EVENT, K_PRESS_EVENT, key_down, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);
-	if (MAC)
-		mlx_hook(game.window, MOUSE_MOVE, NO_EVENT_MASK, mouse_hook, &game);
-	mouse_hide(&game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
+	mlx_mouse_hook(game.window, mouse_click, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
