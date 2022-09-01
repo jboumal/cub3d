@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:44:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:07:18 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		s = x_malloc(sizeof(t_sprite));
 		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
-		s->x = ft_atoi(line_split[index]);
-		s->y = ft_atoi(line_split[index + 1]);
-		if (s->x >= game->map.width || s->y >= game->map.height
-			|| game->map.data[(int)(s->y * game->map.width + s->x)] != 0)
+		s->x = ft_atoi(line_split[index]) + 0.5;
+		s->y = ft_atoi(line_split[index + 1]) + 0.5;
+		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
+		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
 		{
 			index += 2;
 			continue ;
 		}
-		s->x += 0.5;
-		s->y += 0.5;
+		s->x_start = 0;
+		s->y_start = 0;
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
