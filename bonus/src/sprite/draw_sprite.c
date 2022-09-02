@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/01 21:16:34 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:08:47 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	compute_field_sprite(t_game *g)
 			s->angle += 2.0 * M_PI;
 		if (s->angle > M_PI)
 			s->angle -= 2.0 * M_PI;
-		s->is_in_fov = fabs(s->angle) < (g->player.fov / 2.0);
+		s->is_in_fov = fabs(s->angle) - 0.06 < (g->player.fov / 2.0);
 		if (i != 0)
 			sort_sprite(g, s, i);
 	}
@@ -67,7 +67,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 		j = 0;
 		while (j < s->pixel_size)
 		{
-			if (g->depth_buf[s->col + i] != 0 && g->depth_buf[s->col + i] >= s->dist_to_p)
+			if (g->depth_buf[s->col + i] >= s->dist_to_p)
 				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
 			j++;
 		}
@@ -91,8 +91,8 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 					ly / s->height * s->t.height);
 			if (color != NOT_PIXEL)
 			{
-				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
-					* g->img_w + lx - (s->width / 2.0);
+				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)
+					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
 					put_big_pixel(g, s, color, ly);
