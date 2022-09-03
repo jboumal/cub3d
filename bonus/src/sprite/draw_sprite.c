@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 13:11:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:04:02 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 
 	img = &g->small_buffer;
 	i = 0;
-	while (i < s->pixel_size)
+	while (i <= s->pixel_size)
 	{
 		j = 0;
-		while (j < s->pixel_size)
+		while (j <= s->pixel_size)
 		{
 			if (g->depth_buf[s->col + i] >= s->dist_to_p)
 				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
@@ -81,11 +81,11 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
 	int		lx;
 	int		ly;
 
-	lx = s->width * s->x_start;
-	while (lx <= s->width)
+	lx = s->width * s->x_end;
+	while (lx < s->width)
 	{
-		ly = s->height * s->y_start;
-		while (ly <= s->height)
+		ly = s->height * s->y_end;
+		while (ly < s->height)
 		{
 			color = mlx_get_pixel(&t->data, lx / s->width * t->width,
 					ly / s->height * t->height);

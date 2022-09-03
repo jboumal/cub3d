@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 13:12:06 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:58:38 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,28 @@ static void	bound_start(t_sprite *s, t_texture text)
 {
 	int		lx;
 	int		ly;
-	int		color;
-	int		y_start;
+	int		y_end;
+	int		x_end;
 
-	lx = 0;
-	y_start = text.height;
-	s->x_start = 0;
-	while (lx <= text.width)
+	y_end = text.height;
+	x_end = text.width;
+	lx = -1;
+	while (++lx < text.width)
 	{
-		ly = 0;
-		while (ly++ <= text.height)
+		ly = -1;
+		while (++ly < text.height)
 		{
-			color = mlx_get_pixel(&text.data, lx, ly);
-			if (color != NOT_PIXEL && color > 0)
+			if (mlx_get_pixel(&text.data, lx, ly) != NOT_PIXEL)
 			{
-				if (!s->x_start)
-					s->x_start = lx / (double) text.width;
-				if (ly < y_start)
-					y_start = ly;
+				if (lx < x_end)
+					x_end = lx + 1;
+				if (ly < y_end)
+					y_end = ly + 1;
 			}
-			ly++;
 		}
-		lx++;
 	}
-	s->y_start = y_start / (double) text.height;
+	s->y_end = y_end / (double) text.height;
+	s->x_end = x_end / (double) text.width;
 }
 
 static int	create_sprite(t_game *game, char **line_split, int s_index)
@@ -61,8 +59,8 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 			index += 2;
 			continue ;
 		}
-		s->x_start = 0;
-		s->y_start = 0;
+		s->x_end = 0;
+		s->y_end = 0;
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
@@ -78,9 +76,9 @@ static void	init_gun(t_game *game)
 	gun = x_malloc(sizeof(t_sprite));
 	gun->dist_to_p = 0;
 	gun->angle = 0;
-	gun->x_start = 0;
-	gun->y_start = 0;
-	load_texture(game->mlx, "img/sprite/pistol.xpm", &gun->t);
+	gun->x_end = 0;
+	gun->y_end = 0;
+	load_texture(game->mlx, "img/sprite/gun/pistol0.xpm", &gun->t);
 	game->list_sprites[0] = gun;
 	game->list_active_gun[0] = gun;
 	bound_start(gun, gun->t);

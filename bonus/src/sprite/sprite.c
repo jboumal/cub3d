@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 13:11:19 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:15:18 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_sprites(void	*img, t_game *g)
 				s->ceil = (g->img_h / 2.0 - (g->img_h / (s->dist_to_p * 2.0)));
 				s->height = (g->img_h - 2.0 * s->ceil);
 				s->width = s->height / (s->t.height / s->t.width);
-				s->ceil += fabs(s->angle) * 12;
+				s->ceil += fabs(s->angle) * 12.0;
 				s->pixel_size = (int) s->height / s->t.height;
 				if (s->pixel_size < 1)
 					s->pixel_size = 1;

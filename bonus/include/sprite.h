@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 13:03:02 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:15:18 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_sprite
 	double		ceil;
 	double		angle;
 	double		dist_to_p;
-	double		x_start;
-	double		y_start;
+	double		x_end;
+	double		y_end;
 	int			pixel_size;
 	int			col;
 	bool		is_collect;
