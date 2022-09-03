@@ -4,5 +4,5 @@
 
 Ben :
 - make object obstacle
-- opti gun sprite
 - animate + switch gun
+- switch from is_in_fov to visible tiles for sprites
