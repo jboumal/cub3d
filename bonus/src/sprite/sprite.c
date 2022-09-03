@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/02 17:50:11 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:02:30 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render_sprites(void	*img, t_game *g)
 				s->pixel_size = (int) s->height / s->t.height;
 				if (s->pixel_size < 1)
 					s->pixel_size = 1;
-				draw_sprite(g, img, s);
+				draw_sprite(g, img, s, &s->t);
 			}
 			else if (s->is_collect)
 				remove_sprite(g, sprite_index);

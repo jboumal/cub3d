@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/02 19:08:47 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 12:54:58 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	compute_field_sprite(t_game *g)
 			s->angle += 2.0 * M_PI;
 		if (s->angle > M_PI)
 			s->angle -= 2.0 * M_PI;
-		s->is_in_fov = fabs(s->angle) - 0.06 < (g->player.fov / 2.0);
+		s->is_in_fov = fabs(s->angle) - 0.07 < (g->player.fov / 2.0);
 		if (i != 0)
 			sort_sprite(g, s, i);
 	}
@@ -75,7 +75,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 	}
 }
 
-void	draw_sprite(t_game *g, void *img, t_sprite *s)
+void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
 {
 	int		color;
 	int		lx;
@@ -87,8 +87,8 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s)
 		ly = s->height * s->y_start;
 		while (ly <= s->height)
 		{
-			color = mlx_get_pixel(&s->t.data, lx / s->width * s->t.width,
-					ly / s->height * s->t.height);
+			color = mlx_get_pixel(&t->data, lx / s->width * t->width,
+					ly / s->height * t->height);
 			if (color != NOT_PIXEL)
 			{
 				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)

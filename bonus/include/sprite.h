@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/30 19:44:45 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:03:02 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_sprite
 	bool		is_collect;
 	bool		is_in_fov;
 	t_texture	t;
+	t_texture	anim[5];
 }	t_sprite;
 
 /* sprite */
@@ -41,7 +42,7 @@ void	render_sprites(void	*img, t_game *game);
 
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
-void	draw_sprite(t_game *g, void *img, t_sprite *s);
+void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t);
 
 /* gun */
 void	render_gun(void *img, t_game *game);
