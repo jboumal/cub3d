@@ -5,4 +5,4 @@
 Ben :
 - make object obstacle
 - animate + switch gun
-- switch from is_in_fov to visible tiles for sprites
+- option : switch from is_in_fov to visible tiles for sprites
