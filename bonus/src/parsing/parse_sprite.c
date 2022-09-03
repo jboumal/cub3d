@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 13:10:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:12:06 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	bound_start(t_sprite *s, t_texture text)
 	int		color;
 	int		y_start;
 
-	lx = -1;
+	lx = 0;
 	y_start = text.height;
 	s->x_start = 0;
-	while (lx++ < text.width - 1)
+	while (lx <= text.width)
 	{
-		ly = -1;
-		while (ly++ < text.height - 1)
+		ly = 0;
+		while (ly++ <= text.height)
 		{
 			color = mlx_get_pixel(&text.data, lx, ly);
 			if (color != NOT_PIXEL && color > 0)
@@ -35,7 +35,9 @@ static void	bound_start(t_sprite *s, t_texture text)
 				if (ly < y_start)
 					y_start = ly;
 			}
+			ly++;
 		}
+		lx++;
 	}
 	s->y_start = y_start / (double) text.height;
 }
