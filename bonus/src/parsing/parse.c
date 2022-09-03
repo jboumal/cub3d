@@ -38,6 +38,19 @@ static void	invert_map_rows(t_game *g)
 	g->player.pos.y = g->map.height - 1 - g->player.pos.y;
 }
 
+static void	init_visible_tiles(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	game->visible_tiles = x_malloc(game->map.height * sizeof(bool));
+	while (i < game->map.height)
+	{
+		game->visible_tiles[i] = x_malloc(game->map.width * sizeof(bool));
+		i++;
+	}
+}
+
 void	parse(int argc, char **argv, t_game *game)
 {
 	int		fd;
@@ -56,6 +69,7 @@ void	parse(int argc, char **argv, t_game *game)
 	parse_map(map_str, game);
 	check_map(game);
 	invert_map_rows(game);
+	init_visible_tiles(game);
 	parse_sprite(game, fd);
 	free(map_str);
 	close(fd);
