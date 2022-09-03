@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 15:15:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:20:51 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	render_sprites(void	*img, t_game *g)
 		s = g->list_sprite[sprite_index];
 		if (s && s->is_in_fov)
 		{
-			if (s->dist_to_p >= MIN_SPRITE_DIST)
+			if (s->dist_to_p >= MIN_DIST)
 			{
 				s->ceil = (g->img_h / 2.0 - (g->img_h / (s->dist_to_p * 2.0)));
 				s->height = (g->img_h - 2.0 * s->ceil);

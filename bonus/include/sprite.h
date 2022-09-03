@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 15:15:18 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:15:29 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "cub3d.h"
 
 # define NOT_PIXEL 9961608
-# define MIN_SPRITE_DIST 0.7
+# define MIN_DIST 0.7
+# define MAX_DIST 20
 
 typedef struct s_sprite
 {
