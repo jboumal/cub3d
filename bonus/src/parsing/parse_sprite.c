@@ -6,13 +6,13 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 16:12:28 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:24:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	bound_start(t_sprite *s, t_texture text)
+void	bound_start(t_sprite *s, t_texture text)
 {
 	int		lx;
 	int		ly;
@@ -51,6 +51,8 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		s = x_malloc(sizeof(t_sprite));
 		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
+		if (s->is_collect)
+
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
 		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
@@ -67,21 +69,6 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		s_index++;
 	}
 	return (s_index);
-}
-
-static void	init_gun(t_game *game)
-{
-	t_sprite	*gun;
-
-	gun = x_malloc(sizeof(t_sprite));
-	gun->dist_to_p = 0;
-	gun->angle = 0;
-	gun->x_end = 0;
-	gun->y_end = 0;
-	load_texture(game->mlx, "img/sprite/gun/pistol0.xpm", &gun->t);
-	game->list_sprites[0] = gun;
-	game->list_active_gun[0] = gun;
-	bound_start(gun, gun->t);
 }
 
 void	parse_sprite(t_game *game, int fd)

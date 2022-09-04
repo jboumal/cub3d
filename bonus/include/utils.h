@@ -69,6 +69,8 @@ char			**ft_split(char const *str, char c);
 
 /* str */
 size_t			str_len(const char *str);
+char			*ft_strncpy(char *dest, const char *src, unsigned int n);
+char			*strjoin(char const *s1, char const *s2);
 int				str_n_cmp(const char *s1, const char *s2, size_t n);
 bool			is_token(char *str, char *tokens, char sep, size_t n);
 

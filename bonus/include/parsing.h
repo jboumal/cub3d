@@ -90,7 +90,7 @@ typedef struct s_game
 	t_texture	floor;
 	t_texture	sky;
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_sprites[10];
+	t_sprite	*list_gun[10];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 }	t_game;
@@ -108,6 +108,7 @@ void		parse_map(char *map_str, t_game *g);
 void		parse_textures(t_game *game, int fd);
 
 /* parse_sprite */
+void		bound_start(t_sprite *s, t_texture text);
 void		parse_sprite(t_game *game, int fd);
 
 /* parse */
