@@ -90,7 +90,7 @@ typedef struct s_game
 	t_texture	floor;
 	t_texture	sky;
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_gun[10];
+	t_sprite	*list_gun[4];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 }	t_game;

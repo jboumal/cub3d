@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:45:27 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:54:39 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "cub3d.h"
 
 # define NOT_PIXEL 9961608
+# define STILL_NOT_PIXEL 10158219
 # define MIN_DIST 0.7
 # define MAX_DIST 20
 # define GUN_PATH "img/sprite/gun/"
@@ -25,10 +26,10 @@ typedef   void (*spr_action)(t_game *game, t_sprite *gun);
 
 enum e_gun
 {
-	pistol,
-	mach,
-	sulf,
-	knife
+	PISTOL,
+	MACH,
+	SULF,
+	KNIFE
 };
 
 typedef struct s_sprite
@@ -47,6 +48,7 @@ typedef struct s_sprite
 	bool		is_collect;
 	bool		is_in_fov;
 	spr_action  collect_action;
+	enum e_gun  enum_gun;
 	t_texture	t;
 	t_texture	anim[5];
 }	t_sprite;
@@ -59,6 +61,8 @@ void	compute_field_sprite(t_game *g);
 void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t);
 
 /* gun */
+void	switch_gun(t_game *game);
+void	replace_gun(t_game *game, t_sprite *gun);
 void	init_gun(t_game *game);
 void	render_gun(void *img, t_game *game);
 

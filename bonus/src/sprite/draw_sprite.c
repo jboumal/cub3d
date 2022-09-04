@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 16:12:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:54:50 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
 		{
 			color = mlx_get_pixel(&t->data, lx / s->width * t->width,
 					ly / s->height * t->height);
-			if (color != NOT_PIXEL)
+			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{
 				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;

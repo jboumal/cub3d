@@ -6,11 +6,29 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:25:48 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:51:12 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	switch_gun(t_game *game)
+{
+	if (game->list_active_gun[1])
+		game->active_gun = !game->active_gun;
+}
+
+void	replace_gun(t_game *game, t_sprite *gun)
+{
+	if (!game->list_active_gun[1])
+		game->list_active_gun[1] = game->list_gun[gun->enum_gun];
+	else
+	{
+		free(game->list_active_gun[game->active_gun]);
+		game->list_active_gun[game->active_gun] = game->list_gun[gun->enum_gun];
+	}
+	printf("machinegun taken\n");
+}
 
 static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *gun_name)
 {
@@ -46,7 +64,7 @@ static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *
 void	init_gun(t_game *game)
 {
 	t_sprite	*gun;
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i <= 3)
@@ -58,15 +76,15 @@ void	init_gun(t_game *game)
 		gun->y_end = 0;
 		if (i == 0)
 		{
-			init_gun_anim_texture(game, gun , i, "pistol");
+			init_gun_anim_texture(game, gun, i, "pistol");
 			game->list_active_gun[0] = gun;
 		}
 		else if (i == 1)
-			init_gun_anim_texture(game, gun , i, "mach");
+			init_gun_anim_texture(game, gun, i, "mach");
 		else if (i == 2)
-			init_gun_anim_texture(game, gun , i, "sulf");
+			init_gun_anim_texture(game, gun, i, "sulf");
 		else if (i == 3)
-			init_gun_anim_texture(game, gun , i, "knife");
+			init_gun_anim_texture(game, gun, i, "knife");
 		i++;
 	}
 }

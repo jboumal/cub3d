@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:50:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:39:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ void	bound_start(t_sprite *s, t_texture text)
 	s->x_end = x_end / (double) text.width;
 }
 
-void	test(t_game *game, t_sprite *gun)
-{
-	printf("machinegun taken\n");
-}
-
 static void	add_action_sprite(t_game *game, t_sprite *s, char *sprite_name)
 {
 	printf("sprite : %s\n", sprite_name);
 	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
-		s->collect_action = test;
+	{
+		s->collect_action = replace_gun;
+		s->enum_gun = MACH;
+	}
 }
 
 static int	create_sprite(t_game *game, char **line_split, int s_index)
