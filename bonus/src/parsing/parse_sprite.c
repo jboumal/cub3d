@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:24:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:50:42 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ void	bound_start(t_sprite *s, t_texture text)
 	s->x_end = x_end / (double) text.width;
 }
 
+void	test(t_game *game, t_sprite *gun)
+{
+	printf("machinegun taken\n");
+}
+
+static void	add_action_sprite(t_game *game, t_sprite *s, char *sprite_name)
+{
+	printf("sprite : %s\n", sprite_name);
+	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
+		s->collect_action = test;
+}
+
 static int	create_sprite(t_game *game, char **line_split, int s_index)
 {
 	t_sprite	*s;
@@ -52,7 +64,7 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
 		if (s->is_collect)
-
+			add_action_sprite(game, s, line_split[0] + 11);
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
 		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]

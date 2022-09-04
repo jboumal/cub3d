@@ -6,20 +6,21 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 16:20:51 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:53:17 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	remove_sprite(t_game *g, int sprite_index)
+void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 {
 	int	i;
 
+	if (s->collect_action)
+		s->collect_action(g, s);
 	free(g->list_sprite[sprite_index]);
 	g->list_sprite[sprite_index] = NULL;
 	i = sprite_index;
-	printf("sprite taken !\n");
 	while (i < SPRITE_MAX - 1)
 	{
 		if (g->list_sprite[i + 1])
@@ -55,7 +56,7 @@ void	render_sprites(void	*img, t_game *g)
 				draw_sprite(g, img, s, &s->t);
 			}
 			else if (s->is_collect)
-				remove_sprite(g, sprite_index);
+				remove_sprite(g, s, sprite_index);
 		}
 		sprite_index++;
 	}

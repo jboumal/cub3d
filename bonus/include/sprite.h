@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:16:57 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:45:27 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_sprite
 	int			col;
 	bool		is_collect;
 	bool		is_in_fov;
-	spr_action  action;
+	spr_action  collect_action;
 	t_texture	t;
 	t_texture	anim[5];
 }	t_sprite;

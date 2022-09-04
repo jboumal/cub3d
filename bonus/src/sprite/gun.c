@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:23:36 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:25:48 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *
 	ft_strncpy(xpm_path, EXTENSION, 5);
 	while (i <= 4)
 	{
-		path = strjoin(GUN_PATH,  gun_name);
+		path = strjoin(GUN_PATH, gun_name);
 		xpm_path[0] = i + 48;
 		path_2 = strjoin(path, xpm_path);
 		if (i == 0)
