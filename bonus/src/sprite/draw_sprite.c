@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 19:54:50 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:52:37 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	sort_sprite(t_game *g, t_sprite *s, int i)
 {
 	t_sprite	*sprite;
-	int			j;
 
 	while (i >= 1 && s->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
 	{
@@ -75,7 +74,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 	}
 }
 
-void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
+void	draw_sprite(t_game *g,t_sprite *s, t_texture *t)
 {
 	int		color;
 	int		lx;
@@ -92,7 +91,7 @@ void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
 			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{
 				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)
-					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;
+					* g->img_w + (double) lx - (s->width / 2.0) - s->pixel_size;
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
 					put_big_pixel(g, s, color, ly);

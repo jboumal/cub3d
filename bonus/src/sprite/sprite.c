@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 18:53:17 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:53:54 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 	}
 }
 
-void	render_sprites(void	*img, t_game *g)
+void	render_sprites(t_game *g)
 {
 	t_sprite	*s;
 	int			sprite_index;
@@ -53,7 +53,7 @@ void	render_sprites(void	*img, t_game *g)
 				s->pixel_size = (int) s->height / s->t.height;
 				if (s->pixel_size < 1)
 					s->pixel_size = 1;
-				draw_sprite(g, img, s, &s->t);
+				draw_sprite(g, s, &s->t);
 			}
 			else if (s->is_collect)
 				remove_sprite(g, s, sprite_index);

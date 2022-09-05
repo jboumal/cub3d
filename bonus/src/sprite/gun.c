@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 19:51:12 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:52:54 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	init_gun(t_game *game)
 	}
 }
 
-void	render_gun(void *img, t_game *game)
+void	render_gun(t_game *game)
 {
 	t_sprite	*gun;
 
@@ -100,6 +100,6 @@ void	render_gun(void *img, t_game *game)
 		gun->height = game->img_h - gun->ceil;
 		gun->width = gun->height / (gun->t.height / gun->t.width);
 		gun->pixel_size = (int) gun->height / gun->t.height;
-		draw_sprite(game, img, gun, &gun->t);
+		draw_sprite(game, gun, &gun->t);
 	}
 }

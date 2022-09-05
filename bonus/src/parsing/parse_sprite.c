@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 19:39:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:54:20 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	bound_start(t_sprite *s, t_texture text)
 	s->x_end = x_end / (double) text.width;
 }
 
-static void	add_action_sprite(t_game *game, t_sprite *s, char *sprite_name)
+static void	add_action_sprite(t_sprite *s, char *sprite_name)
 {
-	printf("sprite : %s\n", sprite_name);
 	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
 	{
 		s->collect_action = replace_gun;
@@ -61,8 +60,9 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		s = x_malloc(sizeof(t_sprite));
 		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
+		s->collect_action = NULL;
 		if (s->is_collect)
-			add_action_sprite(game, s, line_split[0] + 11);
+			add_action_sprite(s, line_split[0] + 11);
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
 		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
@@ -71,8 +71,6 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 			index += 2;
 			continue ;
 		}
-		s->x_end = 0;
-		s->y_end = 0;
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;

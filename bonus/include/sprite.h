@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/04 19:54:39 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:53:41 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ typedef struct s_sprite
 }	t_sprite;
 
 /* sprite */
-void	render_sprites(void	*img, t_game *game);
+void	render_sprites(t_game *game);
 
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
-void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t);
+void	draw_sprite(t_game *g, t_sprite *s, t_texture *t);
 
 /* gun */
 void	switch_gun(t_game *game);
 void	replace_gun(t_game *game, t_sprite *gun);
 void	init_gun(t_game *game);
-void	render_gun(void *img, t_game *game);
+void	render_gun(t_game *game);
 
 #endif
 
