@@ -60,4 +60,5 @@ void	load_texture(void *mlx, char *path, t_texture *texture)
 			&texture->data.bits_per_pixel,
 			&texture->data.line_length,
 			&texture->data.endian);
+	texture->n_image = texture->width / texture->height;
 }

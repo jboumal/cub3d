@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 15:41:20 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 20:17:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ void	render_gun(t_game *game)
 		gun->height = game->img_h - gun->ceil;
 		gun->width = gun->height / (gun->t.height / gun->t.width);
 		gun->pixel_size = (int) gun->height / gun->t.height;
-		draw_sprite(game, gun, &gun->t);
+		draw_sprite(game, gun, &gun->t, 0);
 	}
 }

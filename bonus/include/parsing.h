@@ -73,6 +73,7 @@ typedef struct s_texture
 	t_data	data;
 	int		width;
 	int		height;
+	int		n_image;
 }	t_texture;
 
 typedef struct s_game
