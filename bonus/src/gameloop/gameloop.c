@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/06 21:53:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:46:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	update_doors(t_game *g)
 	t_node		*node;
 	t_door		*door;
 
-	node = g->state.doors.head;
+	node = g->doors.head;
 	while (node)
 	{
 		door = node->content;

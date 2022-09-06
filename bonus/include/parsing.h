@@ -65,7 +65,6 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
-	t_list	doors;
 }	t_state;
 
 typedef struct s_texture
@@ -92,6 +91,7 @@ typedef struct s_game
 	t_list		textures[TEXTURES_MAX];
 	t_texture	floor;
 	t_texture	sky;
+	t_list		doors;
 	t_sprite	*list_sprite[SPRITE_MAX];
 	t_sprite	*list_gun[4];
 	t_sprite	*list_active_gun[2];

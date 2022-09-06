@@ -67,7 +67,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 		door = x_calloc(1, sizeof(t_door));
 		door->cell = (g->map.height - 1 - i) * g->map.width + j;
 		door->ratio = 1;
-		lst_add_front(&g->state.doors, new_node(door));
+		lst_add_front(&g->doors, new_node(door));
 	}
 }
 
