@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:49:22 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:56:00 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_sprite
 	bool		is_in_fov;
 	spr_action  collect_action;
 	enum e_gun  enum_gun;
-	int			n_image;
+	int			image;
 	t_texture	t;
 	t_texture	anim;
 }	t_sprite;
