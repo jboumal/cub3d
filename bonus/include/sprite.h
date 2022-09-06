@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 20:16:53 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:09:54 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "cub3d.h"
 
 # define NOT_PIXEL 9961608
-# define STILL_NOT_PIXEL 10158219
+# define STILL_NOT_PIXEL -16777216
+# define STILL_NOT_PIXEL_2 10158219
 # define MIN_DIST 0.5
 # define MAX_DIST 20
 # define GUN_PATH "img/sprite/gun/"
@@ -28,7 +29,7 @@ enum e_gun
 {
 	PISTOL,
 	MACH,
-	SULF,
+	GATLING,
 	KNIFE
 };
 

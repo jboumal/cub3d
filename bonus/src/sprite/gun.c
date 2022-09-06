@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 20:17:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:10:07 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,6 @@ void	replace_gun(t_game *game, t_sprite *gun)
 	printf("machinegun taken\n");
 }
 
-static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *gun_name)
-{
-	int		i;
-	char	*path;
-	char	*path_2;
-	char	xpm_path[6];
-
-	i = 0;
-	ft_strncpy(xpm_path, EXTENSION, 5);
-	/*
-	while (i <= 4)
-	{
-		path = strjoin(GUN_PATH, gun_name);
-		xpm_path[0] = i + 48;
-		path_2 = strjoin(path, xpm_path);
-		if (i == 0)
-		{
-			load_texture(game->mlx, path_2, &gun->t);
-			bound_start(gun, gun->t);
-		}
-		else
-		{
-			load_texture(game->mlx, path_2, &gun->anim[i]);
-			bound_start(gun, gun->anim[i]);
-		}
-		game->list_gun[index] = gun;
-		free(path_2);
-		free(path);
-		i++;
-	}
-	*/
-}
-
 void	init_gun(t_game *game)
 {
 	t_sprite	*gun;
@@ -78,15 +45,16 @@ void	init_gun(t_game *game)
 		gun->y_end = 0;
 		if (i == 0)
 		{
-			init_gun_anim_texture(game, gun, i, "pistol");
+			load_texture(game->mlx, "img/sprite/gun/pistol.xpm", &gun->t);
 			game->list_active_gun[0] = gun;
 		}
 		else if (i == 1)
-			init_gun_anim_texture(game, gun, i, "mach");
+			load_texture(game->mlx, "img/sprite/gun/mach.xpm", &gun->t);
 		else if (i == 2)
-			init_gun_anim_texture(game, gun, i, "sulf");
+			load_texture(game->mlx, "img/sprite/gun/gatling.xpm", &gun->t);
 		else if (i == 3)
-			init_gun_anim_texture(game, gun, i, "knife");
+			load_texture(game->mlx, "img/sprite/gun/knife.xpm", &gun->t);
+		game->list_gun[i] = gun;
 		i++;
 	}
 }
@@ -100,8 +68,8 @@ void	render_gun(t_game *game)
 	{
 		gun->ceil = game->img_h / 6.0;
 		gun->height = game->img_h - gun->ceil;
-		gun->width = gun->height / (gun->t.height / gun->t.width);
-		gun->pixel_size = (int) gun->height / gun->t.height;
+		gun->width = gun->height;
+		gun->pixel_size = 4;
 		draw_sprite(game, gun, &gun->t, 0);
 	}
 }

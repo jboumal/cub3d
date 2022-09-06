@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 20:21:49 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 20:31:46 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ void	parse_sprite(t_game *game, int fd)
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);
 	}
-	//init_gun(game);
+	init_gun(game);
 }
