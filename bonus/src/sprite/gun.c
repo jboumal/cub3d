@@ -6,11 +6,22 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:30:27 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:49:04 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	anim_gun(t_game *game)
+{
+	int			i;
+	t_sprite	*gun;
+
+	i = 0;
+	gun = game->list_active_gun[game->active_gun];
+	if (!gun->n_image)
+		gun->n_image += 1;
+}
 
 void	switch_gun(t_game *game)
 {
@@ -71,6 +82,14 @@ void	render_gun(t_game *game)
 		gun->height = game->img_h - gun->ceil;
 		gun->width = gun->height;
 		gun->pixel_size = (int) gun->height / gun->t.height;
-		draw_sprite(game, gun, &gun->t, 0);
+		if (!gun->n_image)
+			draw_sprite(game, gun, &gun->t, 0);
+		else if (gun->n_image == gun->t.n_image)
+			gun->n_image = 0;
+		else
+		{
+			gun->n_image += 1;
+			draw_sprite(game, gun, &gun->t, gun->n_image);
+		}
 	}
 }

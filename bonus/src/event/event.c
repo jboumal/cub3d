@@ -49,8 +49,10 @@ int	key_down(int code, t_game *game)
 		game->state.r_right = true;
 	else if (code == K_E)
 		update_door_opened(game);
-	else if (code == K_CTRL)
+	else if (code == K_SPACE)
 		switch_gun(game);
+	else if (code == K_CTRL)
+		anim_gun(game);
 	return (0);
 }
 

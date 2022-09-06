@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/05 14:38:02 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:36:33 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 #  define K_UP 65362
 #  define K_E 101
 #  define K_CTRL 65507
+#  define K_SPACE 32
 
 # else
 #  define LINUX 0
