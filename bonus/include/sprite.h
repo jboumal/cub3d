@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/05 15:53:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:34:07 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_sprite
 	double		ceil;
 	double		angle;
 	double		dist_to_p;
+	double		dist_to_plane;
 	double		x_end;
 	double		y_end;
 	int			pixel_size;
@@ -50,7 +51,7 @@ typedef struct s_sprite
 	spr_action  collect_action;
 	enum e_gun  enum_gun;
 	t_texture	t;
-	t_texture	anim[5];
+	t_texture	anim;
 }	t_sprite;
 
 /* sprite */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/05 15:52:54 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:41:20 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *
 
 	i = 0;
 	ft_strncpy(xpm_path, EXTENSION, 5);
+	/*
 	while (i <= 4)
 	{
 		path = strjoin(GUN_PATH, gun_name);
@@ -59,6 +60,7 @@ static void	init_gun_anim_texture(t_game *game, t_sprite *gun, int index, char *
 		free(path);
 		i++;
 	}
+	*/
 }
 
 void	init_gun(t_game *game)

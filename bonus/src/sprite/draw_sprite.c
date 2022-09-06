@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/05 15:52:37 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 18:54:27 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	compute_field_sprite(t_game *g)
 			continue ;
 		fvec_x = s->x - g->player.pos.x;
 		fvec_y = s->y - g->player.pos.y;
-		s->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
+		s->dist_to_p = hypot(fvec_x, fvec_y);
 		s->angle = atan2(fvec_x, fvec_y)
 			- atan2(g->player.dir.x, g->player.dir.y);
+		s->dist_to_plane = g->player.dir.x * fvec_x + g->player.dir.y * fvec_y;
 		if (s->angle < -M_PI)
 			s->angle += 2.0 * M_PI;
 		if (s->angle > M_PI)
@@ -74,7 +75,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 	}
 }
 
-void	draw_sprite(t_game *g,t_sprite *s, t_texture *t)
+void	draw_sprite(t_game *g, t_sprite *s, t_texture *t)
 {
 	int		color;
 	int		lx;
@@ -90,8 +91,8 @@ void	draw_sprite(t_game *g,t_sprite *s, t_texture *t)
 					ly / s->height * t->height);
 			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{
-				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)
-					* g->img_w + (double) lx - (s->width / 2.0) - s->pixel_size;
+				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
+					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
 					put_big_pixel(g, s, color, ly);
