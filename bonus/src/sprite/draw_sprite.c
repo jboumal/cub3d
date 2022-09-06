@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/03 16:12:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:57:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	sort_sprite(t_game *g, t_sprite *s, int i)
 {
 	t_sprite	*sprite;
-	int			j;
 
 	while (i >= 1 && s->dist_to_p > g->list_sprite[i - 1]->dist_to_p)
 	{
@@ -41,9 +40,10 @@ void	compute_field_sprite(t_game *g)
 			continue ;
 		fvec_x = s->x - g->player.pos.x;
 		fvec_y = s->y - g->player.pos.y;
-		s->dist_to_p = sqrt(fvec_x * fvec_x + fvec_y * fvec_y);
+		s->dist_to_p = hypot(fvec_x, fvec_y);
 		s->angle = atan2(fvec_x, fvec_y)
 			- atan2(g->player.dir.x, g->player.dir.y);
+		s->dist_to_plane = g->player.dir.x * fvec_x + g->player.dir.y * fvec_y;
 		if (s->angle < -M_PI)
 			s->angle += 2.0 * M_PI;
 		if (s->angle > M_PI)
@@ -62,10 +62,10 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 
 	img = &g->small_buffer;
 	i = 0;
-	while (i <= s->pixel_size)
+	while (i < s->pixel_size)
 	{
 		j = 0;
-		while (j <= s->pixel_size)
+		while (j < s->pixel_size)
 		{
 			if (g->depth_buf[s->col + i] >= s->dist_to_p)
 				my_mlx_pixel_put(img, s->col + i, s->ceil + ly + j, color);
@@ -75,23 +75,23 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 	}
 }
 
-void	draw_sprite(t_game *g, void *img, t_sprite *s, t_texture *t)
+void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image)
 {
 	int		color;
 	int		lx;
 	int		ly;
 
 	lx = s->width * s->x_end;
-	while (lx < s->width)
+	while (lx < s->height)
 	{
 		ly = s->height * s->y_end;
 		while (ly < s->height)
 		{
-			color = mlx_get_pixel(&t->data, lx / s->width * t->width,
-					ly / s->height * t->height);
-			if (color != NOT_PIXEL)
+			color = mlx_get_pixel(&t->data, (lx + n_image * (s->width))
+			/ s->width * (t->width / t->n_image), ly / s->height * t->height);
+			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{
-				s->col = (0.5 * (s->angle * 0.95 / (g->player.fov / 2.0)) + 0.5)
+				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;
 				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
