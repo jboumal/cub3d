@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:12:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:30:27 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_gun(t_game *game)
 			load_texture(game->mlx, "img/sprite/gun/gatling.xpm", &gun->t);
 		else if (i == 3)
 			load_texture(game->mlx, "img/sprite/gun/knife.xpm", &gun->t);
+		bound_start(gun, gun->t);
 		game->list_gun[i] = gun;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:11:58 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:15:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define STILL_NOT_PIXEL -16777216
 # define MIN_DIST 0.5
 # define MAX_DIST 20
-# define GUN_PATH "img/sprite/gun/"
-# define EXTENSION "x.xpm"
 
 typedef   void (*spr_action)(t_game *game, t_sprite *gun);
 

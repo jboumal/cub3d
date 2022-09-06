@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 20:31:46 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:20:36 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	bound_start(t_sprite *s, t_texture text)
 		ly = -1;
 		while (++ly < text.height)
 		{
-			if (mlx_get_pixel(&text.data, lx, ly) != NOT_PIXEL)
+			if (mlx_get_pixel(&text.data, lx, ly)
+			!= NOT_PIXEL && mlx_get_pixel(&text.data, lx, ly) != STILL_NOT_PIXEL)
 			{
 				if (lx < x_end)
 					x_end = lx + 1;
