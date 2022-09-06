@@ -6,23 +6,23 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/08/29 10:18:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:53:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	fps_counter(void)
+static void	fps_counter(t_game *g)
 {
 	static int		n_frame = 0;
 	static int		second = 0;
 	struct timeval	t;
 
-	n_frame ++;
+	n_frame++;
 	gettimeofday(&t, NULL);
 	if (t.tv_sec > second)
 	{
-		printf ("%d fps\n", n_frame);
+		g->fps = n_frame;
 		n_frame = 0;
 		second = t.tv_sec;
 	}
@@ -75,7 +75,7 @@ static void	game_update(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	fps_counter();
+	fps_counter(game);
 	if (LINUX)
 		my_mouse_hook(game);
 	game_update(game);

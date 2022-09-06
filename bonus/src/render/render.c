@@ -38,6 +38,20 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 	}
 }
 
+static void	put_fps(t_game *g)
+{
+	char	buffer[100];
+
+	sprintf(buffer, "%d fps", g->fps);
+	mlx_string_put(
+		g->mlx,
+		g->window,
+		10,
+		(TILEMAP_SIZE + 1) * g->map.height,
+		0x00FFFFFF,
+		buffer);
+}
+
 void	render(t_game *game)
 {
 	t_data	*img;
@@ -55,4 +69,5 @@ void	render(t_game *game)
 	}
 	render_minimap(img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
+	put_fps(game);
 }

@@ -82,6 +82,7 @@ typedef struct s_game
 	int			img_h;
 	t_data		small_buffer;
 	t_data		full_buffer;
+	int			fps;
 	int			active_gun;
 	t_map		map;
 	t_player	player;
