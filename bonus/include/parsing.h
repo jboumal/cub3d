@@ -33,6 +33,7 @@ typedef struct s_data
 typedef struct s_map
 {
 	int		*data;
+	int		*object_map;
 	size_t	width;
 	size_t	height;
 	int		ceil;

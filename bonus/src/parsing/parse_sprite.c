@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 15:41:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:40:35 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 		load_texture(game->mlx, line_split[0], &s->t);
 		s->is_collect = ft_atoi(line_split[1]);
 		s->collect_action = NULL;
-		if (s->is_collect)
-			add_action_sprite(s, line_split[0] + 11);
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
 		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
@@ -71,6 +69,10 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 			index += 2;
 			continue ;
 		}
+		if (s->is_collect)
+			add_action_sprite(s, line_split[0] + 11);
+		else
+			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 1;
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
