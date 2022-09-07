@@ -7,3 +7,4 @@
 - Ben : animation de mort (pixels rouges qui remplissent l'écran dans la version originale)
 - Sons ? musique et/ou bruitages
 - bonus : ascenseur et porte secrete
+- reflet des sprites
