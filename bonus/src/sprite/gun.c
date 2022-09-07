@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:56:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:30:05 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_gun(t_game *game)
 		gun->angle = 0;
 		gun->x_end = 0;
 		gun->y_end = 0;
+		gun->image = 0;
 		if (i == 0)
 		{
 			load_texture(game->mlx, "img/sprite/gun/pistol.xpm", &gun->t);

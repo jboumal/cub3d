@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/07 00:45:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:34:15 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	quit(t_game *g)
 	mlx_destroy_image(g->mlx, g->small_buffer.img);
 	mlx_destroy_image(g->mlx, g->full_buffer.img);
 	free(g->map.data);
+	free(g->map.object_map);
 	lst_clear(&g->doors, free);
 	exit(EXIT_SUCCESS);
 	return (0);
