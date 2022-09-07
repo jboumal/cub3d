@@ -57,7 +57,8 @@ void	render(t_game *game)
 	t_data	*img;
 
 	img = &game->small_buffer;
-	ft_memset(game->map.visible_tiles, 0, game->map.width * game->map.height * sizeof(bool));
+	ft_memset(game->map.visible_tiles, 0,
+		game->map.width * game->map.height * sizeof(bool));
 	compute_pixels(img, game, routine_floor);
 	compute_pixels(img, game, routine_sky);
 	compute_pixels(img, game, routine_wall);

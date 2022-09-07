@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:16:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/07 19:17:28 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:29:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	update_pos(t_game *g, t_vector *pos, t_vector *np)
 {
 	if ((!g->map.data[(int)pos->y * g->map.width + (int)np->x]
-		&& g->map.object_map[(int)pos->y * g->map.width + (int)np->x] != 1)
+			&& g->map.object_map[(int)pos->y * g->map.width + (int)np->x] != 1)
 		|| can_pass_door((int)pos->y * g->map.width + (int)np->x, g))
 		pos->x = np->x;
 	if ((!g->map.data[(int)np->y * g->map.width + (int)pos->x]
-		&& g->map.object_map[(int)np->y * g->map.width + (int)pos->x] != 1)
+			&& g->map.object_map[(int)np->y * g->map.width + (int)pos->x] != 1)
 		|| can_pass_door((int)np->y * g->map.width + (int)pos->x, g))
 		pos->y = np->y;
 }

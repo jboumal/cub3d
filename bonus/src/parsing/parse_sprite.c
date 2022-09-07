@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 19:04:55 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:32:34 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	add_action_sprite(t_sprite *s, char *sprite_name)
 	}
 }
 
-static int	create_sprite(t_game *game, char **line_split, int s_index)
+static int	init_sprite(t_game *game, char **line_split, int s_index)
 {
 	t_sprite	*s;
 	int			index;
@@ -95,7 +95,7 @@ void	parse_sprite(t_game *game, int fd)
 	while (line)
 	{
 		line_split = ft_split(line, ' ');
-		s_index = create_sprite(game, line_split, s_index);
+		s_index = init_sprite(game, line_split, s_index);
 		free(line);
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);

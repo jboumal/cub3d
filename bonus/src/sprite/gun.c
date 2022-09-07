@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 14:41:24 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:22:59 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ void	init_gun(t_game *game)
 		gun->y_end = 0;
 		gun->image = 0;
 		if (i == 0)
-		{
 			load_texture(game->mlx, "img/sprite/gun/pistol.xpm", &gun->t);
-			game->list_active_gun[0] = gun;
-		}
 		else if (i == 1)
 			load_texture(game->mlx, "img/sprite/gun/mach.xpm", &gun->t);
 		else if (i == 2)
@@ -69,6 +66,7 @@ void	init_gun(t_game *game)
 		game->list_gun[i] = gun;
 		i++;
 	}
+	game->list_active_gun[0] = game->list_gun[0];
 }
 
 void	render_gun(t_game *game)
