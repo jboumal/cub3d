@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 20:22:59 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:58:07 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_gun(t_game *game)
 	int			i;
 
 	i = 0;
-	while (i <= 3)
+	while (i < GUN_MAX)
 	{
 		gun = x_malloc(sizeof(t_sprite));
 		gun->dist_to_p = 0;

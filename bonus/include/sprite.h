@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 14:43:22 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 21:48:40 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,15 @@ typedef struct s_sprite
 	enum e_gun		enum_gun;
 	double			image;
 	t_texture		t;
-	t_texture		anim;
 }	t_sprite;
+
+typedef struct s_gun
+{
+	t_sprite		sprite;
+	double			image;
+	enum e_gun		enum_gun;
+}	t_gun;
+
 
 /* sprite */
 void	render_sprites(t_game *game);
