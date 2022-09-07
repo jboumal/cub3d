@@ -25,7 +25,7 @@ static int	get_tx(t_ray *ray, t_game *g)
 		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
 	if (g->map.data[ray->cell] == 10)
-		wall_x -= get_door(ray->cell, g)->ratio;
+		wall_x += 1 - get_door(ray->cell, g)->ratio;
 	tx = (int)(wall_x * (double)texture->width);
 	if (g->map.data[ray->cell] != 10)
 	{
@@ -48,6 +48,8 @@ static void	init_draw_line(
 	var->draw_end = var->line_height / 2 + g->img_h / 2;
 	var->ray = ray;
 	var->tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
+	var->ty_mask = 1 << ((sizeof(unsigned int) << 3)
+			- __builtin_clz(var->tex->height));
 }
 
 static inline void	put_sky_reflect_px(
@@ -77,7 +79,8 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			ty = (y - var->draw_start) * var->tex->height / (var->line_height);
+			ty = ((y - var->draw_start) * var->ty_mask / var->line_height) & (var->ty_mask - 1);
+			ty *= ((double)var->tex->height / (double)var->ty_mask);
 			color = mlx_get_pixel(&var->tex->data, var->tx, ty);
 			my_mlx_pixel_put(img, x, y, color);
 			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;

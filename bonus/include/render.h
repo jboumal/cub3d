@@ -54,6 +54,7 @@ typedef struct s_draw_line_var
 	int				draw_end;
 	t_texture		*tex;
 	t_ray			*ray;
+	unsigned int	ty_mask;
 }	t_draw_line_var;
 
 typedef struct s_th_arg
