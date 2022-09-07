@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 13:44:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:04:55 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 			continue ;
 		}
 		if (s->is_collect)
+		{
 			add_action_sprite(s, line_split[0] + 11);
+			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 2;
+		}
 		else
 			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 1;
 		bound_start(s, s->t);

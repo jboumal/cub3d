@@ -85,13 +85,17 @@ static void	init_map_data(t_game *g)
 
 void	parse_map(char *map_str, t_game *g)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
+	size_t	map_size;
 
 	fill_map_dimensions(map_str, g);
-	g->map.data = x_malloc(g->map.width * g->map.height * sizeof(int));
-	g->map.object_map = x_malloc(g->map.width * g->map.height * sizeof(int));
-	memset(g->map.object_map, 0, g->map.width * g->map.height * sizeof(int));
+	map_size = g->map.width * g->map.height * sizeof(int);
+	g->map.data = x_malloc(map_size);
+	g->map.object_map = x_malloc(map_size);
+	g->map.visible_tiles = x_malloc(map_size);
+	ft_memset(g->map.object_map, 0, map_size);
+	ft_memset(g->map.visible_tiles, 0, g->map.width * g->map.height * sizeof(bool));
 	i = 0;
 	init_map_data(g);
 	while (i < g->map.height)
