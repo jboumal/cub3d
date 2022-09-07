@@ -91,6 +91,7 @@ void	parse_map(char *map_str, t_game *g)
 	fill_map_dimensions(map_str, g);
 	g->map.data = x_malloc(g->map.width * g->map.height * sizeof(int));
 	g->map.object_map = x_malloc(g->map.width * g->map.height * sizeof(int));
+	memset(g->map.object_map, 0, g->map.width * g->map.height * sizeof(int));
 	i = 0;
 	init_map_data(g);
 	while (i < g->map.height)
