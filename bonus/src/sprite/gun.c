@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 12:30:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:41:24 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	replace_gun(t_game *game, t_sprite *gun)
 		free(game->list_active_gun[game->active_gun]);
 		game->list_active_gun[game->active_gun] = game->list_gun[gun->enum_gun];
 	}
-	printf("machinegun taken\n");
 }
 
 void	init_gun(t_game *game)
@@ -79,17 +78,17 @@ void	render_gun(t_game *game)
 	gun = game->list_active_gun[game->active_gun];
 	if (gun)
 	{
-		gun->ceil = game->img_h / 6.0;
-		gun->height = game->img_h - gun->ceil;
+		gun->height = (game->img_h / gun->t.height - 1) * gun->t.height;
+		gun->ceil = game->img_h - gun->height;
 		gun->width = gun->height;
 		gun->pixel_size = (int) gun->height / gun->t.height;
 		if (gun->image == gun->t.n_image)
 			gun->image = 0;
 		else
 		{
-			if (gun->image)
-				gun->image += 1;
 			draw_sprite(game, gun, &gun->t, gun->image);
+			if (gun->image)
+				gun->image += 0.5;
 		}
 	}
 }

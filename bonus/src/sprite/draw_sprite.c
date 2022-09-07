@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:57:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:13:08 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image)
 		ly = s->height * s->y_end;
 		while (ly < s->height)
 		{
-			color = mlx_get_pixel(&t->data, (lx + n_image * (s->width))
+			color = mlx_get_pixel(&t->data, (lx + n_image * s->width)
 			/ s->width * (t->width / t->n_image), ly / s->height * t->height);
 			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{
 				s->col = (0.5 * (s->angle / (g->player.fov / 2.0)) + 0.5)
 					* g->img_w + lx - (s->width / 2.0) - s->pixel_size;
-				if (s->col >= 0 && s->col <= g->img_w && s->ceil + ly >= 0
+				if (s->col >= 0 && (s->col) <= g->img_w && s->ceil + ly >= 0
 					&& s->ceil + ly <= g->img_h)
 					put_big_pixel(g, s, color, ly);
 			}
