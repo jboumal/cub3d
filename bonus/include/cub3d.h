@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # define SCREEN_TITLE "cub3d"
-# define SCREEN_W 1200
+# define SCREEN_W 1350
 # define SCREEN_H 800
 # define SCALE 0.8
 # define N_THREAD 4
