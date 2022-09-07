@@ -14,7 +14,7 @@
 
 static void	fill_map_dimensions(char *map_str, t_game *g)
 {
-	size_t	width;
+	int	width;
 
 	width = 0;
 	while (*map_str)
@@ -33,7 +33,7 @@ static void	fill_map_dimensions(char *map_str, t_game *g)
 	g->map.height++;
 }
 
-static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
+static void	set_player(int i, int j, enum e_side direction, t_game *g)
 {
 	if (g->player.pos.x)
 		exit_error("mutiple player position in map");
@@ -63,7 +63,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 
 static void	init_map_data(t_game *g)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < g->map.width * g->map.height)
@@ -75,8 +75,8 @@ static void	init_map_data(t_game *g)
 
 void	parse_map(char *map_str, t_game *g)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	fill_map_dimensions(map_str, g);
 	g->map.data = x_malloc(g->map.width * g->map.height * sizeof(int));

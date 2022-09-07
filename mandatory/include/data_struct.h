@@ -22,6 +22,12 @@ typedef struct s_dy_str
 	size_t	len;
 }	t_dy_str;
 
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
+
 /* dy_str */
 t_dy_str	dy_str_new(void);
 void		dy_str_destroy(t_dy_str *dy_str);

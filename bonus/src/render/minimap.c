@@ -96,7 +96,7 @@ static void	render_miniplayer(t_data *img, t_game *g)
 
 void	render_minimap(t_data *img, t_game *game)
 {
-	size_t	i;
+	int		i;
 	t_rect	rect;
 	t_map	map;
 

@@ -12,12 +12,12 @@
 
 #include "cub3d.h"
 
-static bool	is_border(size_t i, size_t j, t_map	map)
+static bool	is_border(int i, int j, t_map	map)
 {
 	return (!i || !j || i == map.height - 1 || j == map.width - 1);
 }
 
-static bool	check_cell(size_t i, size_t j, t_map map)
+static bool	check_cell(int i, int j, t_map map)
 {
 	if (is_border(i, j, map) && !map.data[i * map.width + j])
 		return (true);
@@ -30,8 +30,8 @@ static bool	check_cell(size_t i, size_t j, t_map map)
 
 void	check_map(t_game *g)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 	t_map	map;
 
 	map = g->map;

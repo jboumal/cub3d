@@ -55,13 +55,6 @@ typedef struct s_draw_line_var
 /* dda */
 void	dda(t_ray *ray, t_game *game);
 
-/* minimap */
-void	render_minimap(t_data *img, t_game *game);
-
-/* mlx_utils */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data	get_new_img(t_game *game);
-
 /* raycasting */
 void	raycasting(int x, t_data *img, t_game *game);
 

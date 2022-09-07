@@ -20,9 +20,10 @@ int	quit(t_game *game)
 	mlx_destroy_window(game->mlx, game->window);
 	while (i < 4)
 	{
-		mlx_destroy_image(game->mlx, game->textures[i].allocated_img);
+		mlx_destroy_image(game->mlx, game->textures[i].data.img);
 		i++;
 	}
+	mlx_destroy_image(game->mlx, game->img.img);
 	free(game->map.data);
 	exit(EXIT_SUCCESS);
 	return (0);

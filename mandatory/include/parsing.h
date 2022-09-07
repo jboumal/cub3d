@@ -29,8 +29,8 @@ typedef struct s_data
 typedef struct s_map
 {
 	int		*data;
-	size_t	width;
-	size_t	height;
+	int		width;
+	int		height;
 	int		ceil;
 	int		floor;
 }	t_map;
@@ -52,16 +52,17 @@ typedef struct s_state
 
 typedef struct s_texture
 {
-	unsigned int	*img;
-	int				width;
-	int				height;
-	void			*allocated_img;
+	t_data	data;
+	int		width;
+	int		height;
+	int		n_image;
 }	t_texture;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
+	t_data		img;
 	t_map		map;
 	t_player	player;
 	t_state		state;

@@ -36,31 +36,6 @@ static int	parse_color(char *line)
 	return (color);
 }
 
-static void	load_texture(t_game *game, char direction, char *path_to_texture)
-{
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	void		*img;
-	enum e_side	side;
-
-	path_to_texture[str_len(path_to_texture) - 2] = '\0';
-	side = get_direction(direction);
-	img = mlx_xpm_file_to_image(
-			game->mlx,
-			path_to_texture,
-			&game->textures[side].width,
-			&game->textures[side].height);
-	if (!img)
-		exit_error("invalid texture path");
-	game->textures[side].img = (unsigned int *)mlx_get_data_addr(
-			img,
-			&bits_per_pixel,
-			&size_line,
-			&endian);
-	game->textures[side].allocated_img = img;
-}
-
 static bool	is_full(t_game *game)
 {
 	int	i;
@@ -68,7 +43,7 @@ static bool	is_full(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (!game->textures[i].img)
+		if (!game->textures[i].data.img)
 			return (false);
 		i++;
 	}
@@ -82,8 +57,12 @@ void	parse_textures(t_game *game, int fd)
 	while (!is_full(game))
 	{
 		line = get_next_non_empty_line(fd);
+		line[strlen(line) - 2] = '\0';
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
-			load_texture(game, line[0], skip_spaces(line + 3));
+			load_texture(
+				game->mlx,
+				skip_spaces(line + 2),
+				&game->textures[get_direction(line[0])]);
 		else if (!str_n_cmp("F ", line, 2))
 			game->map.floor = parse_color(skip_spaces(line + 1));
 		else if (!str_n_cmp("C ", line, 2))
