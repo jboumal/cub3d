@@ -34,6 +34,7 @@ typedef struct s_map
 {
 	int		*data;
 	int		*object_map;
+	bool	*visible_tiles;
 	size_t	width;
 	size_t	height;
 	int		ceil;
