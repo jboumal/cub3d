@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:20:36 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:44:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	bound_start(t_sprite *s, t_texture text)
 		ly = -1;
 		while (++ly < text.height)
 		{
-			if (mlx_get_pixel(&text.data, lx, ly)
-			!= NOT_PIXEL && mlx_get_pixel(&text.data, lx, ly) != STILL_NOT_PIXEL)
+			if (mlx_get_pixel(&text.data, lx, ly) != NOT_PIXEL)
 			{
 				if (lx < x_end)
 					x_end = lx + 1;

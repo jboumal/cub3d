@@ -12,13 +12,28 @@
 
 #include "cub3d.h"
 
+static void	add_wall(char *str, t_game *g)
+{
+	int		i;
+	char	**arr;
+	t_node	*node;
+
+	arr = ft_split(str, ',');
+	i = 0;
+	while (arr[i])
+	{
+		node = new_node(x_calloc(1, sizeof(t_texture)));
+		load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
+		clst_add_back(&g->textures[str[0] - 49], node);
+		i++;
+	}
+	str_arr_free(arr);
+}
+
 void	parse_textures(t_game *g, int fd)
 {
 	char		*line;
 	t_dy_str	s;
-	t_node		*node;
-	char		**arr;
-	int			i;
 
 	while (g->map.ceil == -1)
 	{
@@ -29,18 +44,7 @@ void	parse_textures(t_game *g, int fd)
 		while (ft_strchr(" \t\n\r", s.str[s.len - 1]))
 			dy_str_pop_back(&s);
 		if (isascii_48(s.str[0]) && s.str[0] != 'F' && s.str[0] != 'C')
-		{
-			arr = ft_split(s.str, ',');
-			i = 0;
-			while (arr[i])
-			{
-				node = new_node(x_calloc(1, sizeof(t_texture)));
-				load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
-				clst_add_back(&g->textures[s.str[0] - 49], node);
-				i++;
-			}
-			str_arr_free(arr);
-		}
+			add_wall(s.str, g);
 		else if (!str_n_cmp("F ", s.str, 2))
 			load_texture(g->mlx, skip_spaces(s.str + 2), &g->floor);
 		else if (!str_n_cmp("C ", s.str, 2))

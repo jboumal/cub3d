@@ -19,7 +19,7 @@
 # define TEXTURES_MAX 79
 # define SPRITE_MAX 20
 
-typedef struct s_sprite t_sprite;
+typedef struct s_sprite	t_sprite;
 
 typedef struct s_data
 {

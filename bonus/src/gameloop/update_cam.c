@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_cam.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:16:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/06 19:38:23 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:54:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	update_pos(t_game *g, t_vector *pos, t_vector *np)
 {
 	if ((!g->map.data[(int)pos->y * g->map.width + (int)np->x]
-		&& !g->map.object_map[(int)pos->y * g->map.width + (int)np->x])
+			&& !g->map.object_map[(int)pos->y * g->map.width + (int)np->x])
 		|| can_pass_door((int)pos->y * g->map.width + (int)np->x, g))
 		pos->x = np->x;
 	if ((!g->map.data[(int)np->y * g->map.width + (int)pos->x]
-		&& !g->map.object_map[(int)np->y * g->map.width + (int)pos->x])
+			&& !g->map.object_map[(int)np->y * g->map.width + (int)pos->x])
 		|| can_pass_door((int)np->y * g->map.width + (int)pos->x, g))
 		pos->y = np->y;
 }
