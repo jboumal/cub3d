@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/07 12:31:17 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:34:15 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	quit(t_game *g)
 	mlx_destroy_image(g->mlx, g->full_buffer.img);
 	free(g->map.data);
 	free(g->map.object_map);
-	lst_clear(&g->state.doors, free);
+	lst_clear(&g->doors, free);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
