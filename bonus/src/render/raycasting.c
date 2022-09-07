@@ -48,7 +48,7 @@ static void	init_draw_line(
 	var->draw_end = var->line_height / 2 + g->img_h / 2;
 	var->ray = ray;
 	var->tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
-	var->ty_mask = 1 << ((sizeof(unsigned int) << 3)
+	var->mask = 1 << ((sizeof(unsigned int) << 3)
 			- __builtin_clz(var->tex->height));
 }
 
@@ -72,23 +72,22 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	int			y;
 	int			ty;
 	int			color;
-	int			reflect_y;
+	int			y_down;
 
 	y = 0;
 	while (y < g->img_h)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			ty = ((y - var->draw_start) * var->ty_mask / var->line_height) & (var->ty_mask - 1);
-			ty *= ((double)var->tex->height / (double)var->ty_mask);
+			ty = (((y - var->draw_start) * var->mask / var->line_height)
+					& (var->mask -1)) * ((double)var->tex->height / var->mask);
 			color = mlx_get_pixel(&var->tex->data, var->tx, ty);
 			my_mlx_pixel_put(img, x, y, color);
-			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;
-			if (reflect_y < g->img_h)
+			y_down = 2 * var->line_height + 2 * var->draw_start - y;
+			if (y_down < g->img_h)
 			{
-				color = shade(mlx_get_pixel(img, x, reflect_y),
-						color, 0.8, 0.6);
-				my_mlx_pixel_put(img, x, reflect_y, color);
+				color = shade(mlx_get_pixel(img, x, y_down), color, 0.8, 0.6);
+				my_mlx_pixel_put(img, x, y_down, color);
 			}
 		}
 		else if (y > var->draw_end + var->line_height)

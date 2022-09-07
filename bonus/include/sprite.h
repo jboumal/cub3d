@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/06 21:56:00 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:51:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MIN_DIST 0.5
 # define MAX_DIST 20
 
-typedef   void (*spr_action)(t_game *game, t_sprite *gun);
+typedef void	(*t_spr_action)(t_game *game, t_sprite *gun);
 
 enum e_gun
 {
@@ -32,25 +32,25 @@ enum e_gun
 
 typedef struct s_sprite
 {
-	double		x;
-	double		y;
-	double		height;
-	double		width;
-	double		ceil;
-	double		angle;
-	double		dist_to_p;
-	double		dist_to_plane;
-	double		x_end;
-	double		y_end;
-	int			pixel_size;
-	int			col;
-	bool		is_collect;
-	bool		is_in_fov;
-	spr_action  collect_action;
-	enum e_gun  enum_gun;
-	int			image;
-	t_texture	t;
-	t_texture	anim;
+	double			x;
+	double			y;
+	double			height;
+	double			width;
+	double			ceil;
+	double			angle;
+	double			dist_to_p;
+	double			dist_to_plane;
+	double			x_end;
+	double			y_end;
+	int				pixel_size;
+	int				col;
+	bool			is_collect;
+	bool			is_in_fov;
+	t_spr_action	collect_action;
+	enum e_gun		enum_gun;
+	int				image;
+	t_texture		t;
+	t_texture		anim;
 }	t_sprite;
 
 /* sprite */
