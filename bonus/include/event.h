@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/07 22:13:42 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/10 00:01:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,5 @@ int	mouse_hook(int x, int y, t_game *game);
 
 /* quit */
 int	quit(t_game *game);
-
-/* death */
-void	anim_death(t_game *game);
 
 #endif

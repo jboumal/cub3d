@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/07 22:17:25 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/10 00:02:32 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	quit(t_game *g)
 {
 	int		i;
 
-	anim_death(g);
 	mlx_destroy_window(g->mlx, g->window);
 	i = 0;
 	while (i < TEXTURES_MAX)

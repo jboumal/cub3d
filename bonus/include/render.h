@@ -92,4 +92,7 @@ void	*routine_rescale(void *arg);
 void	load_sky_texture(t_game *game);
 void	skycasting(int x0, int x1, t_data *img, t_game *g);
 
+/* death */
+void	anim_death(t_game *game);
+
 #endif
