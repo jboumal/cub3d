@@ -14,7 +14,7 @@
 
 static void	fill_map_dimensions(char *map_str, t_game *g)
 {
-	size_t	width;
+	int	width;
 
 	width = 0;
 	while (*map_str)
@@ -85,9 +85,9 @@ static void	init_map_data(t_game *g)
 
 void	parse_map(char *map_str, t_game *g)
 {
-	size_t	i;
-	size_t	j;
-	size_t	map_size;
+	int	i;
+	int	j;
+	int	map_size;
 
 	fill_map_dimensions(map_str, g);
 	map_size = g->map.width * g->map.height * sizeof(int);
