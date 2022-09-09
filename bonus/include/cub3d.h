@@ -24,6 +24,7 @@
 # define TILEMAP_SIZE 12
 # define PLANE_LENGTH 0.7
 # define PI2_F 6.28318530718
+# define RED 0x00FF0000
 
 # include <mlx.h>
 # include <unistd.h>
