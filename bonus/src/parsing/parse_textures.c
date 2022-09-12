@@ -12,9 +12,15 @@
 
 #include "cub3d.h"
 
-void	add_img()
+void	add_img(t_texture *texture, t_img img)
 {
+	t_node	*node;
 
+	node = new_node(x_calloc(1, sizeof(t_img)));
+	*(t_img *)node->content = img;
+	clst_add_back(&texture->imgs, node);
+	if (!texture->img)
+		texture->img = node->content;
 }
 
 static void	add_wall(char *str, t_game *g)
@@ -27,14 +33,9 @@ static void	add_wall(char *str, t_game *g)
 	i = 0;
 	while (arr[i])
 	{
-
-		node = new_node(x_calloc(1, sizeof(t_img)));
-		*(t_img *)node->content = get_img_from_xpm(
-				g->mlx,
-				skip_spaces(arr[i] + 2));
-		clst_add_back(&g->walls[str[0] - 49].imgs, node);
-		if (!g->walls[str[0] - 49].img)
-			g->walls[str[0] - 49].img = node->content;
+		add_img(
+			&g->walls[str[0] - 49],
+			get_img_from_xpm(g->mlx, skip_spaces(arr[i] + 2)));
 		i++;
 	}
 	str_arr_free(arr);

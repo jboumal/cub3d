@@ -110,6 +110,7 @@ char		*get_map_str(int fd);
 void		parse_map(char *map_str, t_game *g);
 
 /* parse_textures */
+void		add_img(t_texture *texture, t_img img);
 void		parse_textures(t_game *game, int fd);
 
 /* parse_sprite */
