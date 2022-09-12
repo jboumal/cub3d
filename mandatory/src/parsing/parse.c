@@ -19,8 +19,8 @@ enum e_side	get_direction(char c)
 
 static void	invert_map_rows(t_game *g)
 {
-	unsigned long	i;
-	unsigned long	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < g->map.height / 2)

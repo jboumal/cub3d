@@ -16,25 +16,19 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
-# define TEXTURES_MAX 79
+# define WALL_MAX 79
 # define SPRITE_MAX 20
+# define GUN_MAX 4
 
-typedef struct s_sprite t_sprite;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+typedef struct s_sprite	t_sprite;
 
 typedef struct s_map
 {
 	int		*data;
-	size_t	width;
-	size_t	height;
+	int		*object_map;
+	bool	*visible_tiles;
+	int		width;
+	int		height;
 	int		ceil;
 	int		floor;
 }	t_map;
@@ -64,14 +58,23 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
-	t_list	doors;
 }	t_state;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
 
 typedef struct s_texture
 {
-	t_data	data;
-	int		width;
-	int		height;
+	t_img	*img;
+	t_list	imgs;
 }	t_texture;
 
 typedef struct s_game
@@ -80,17 +83,19 @@ typedef struct s_game
 	void		*window;
 	int			img_w;
 	int			img_h;
-	t_data		small_buffer;
-	t_data		full_buffer;
+	t_img		small_buffer;
+	t_img		full_buffer;
+	int			fps;
 	int			active_gun;
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_list		textures[TEXTURES_MAX];
-	t_texture	floor;
-	t_texture	sky;
+	t_texture	walls[WALL_MAX];
+	t_img		floor;
+	t_img		sky;
+	t_list		doors;
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_sprites[10];
+	t_sprite	*list_gun[GUN_MAX];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 	char		*scene;
@@ -106,9 +111,11 @@ char		*get_map_str(int fd);
 void		parse_map(char *map_str, t_game *g);
 
 /* parse_textures */
+void		add_img(t_texture *texture, t_img img);
 void		parse_textures(t_game *game, int fd);
 
 /* parse_sprite */
+void		bound_start(t_sprite *s, t_img text);
 void		parse_sprite(t_game *game, int fd);
 
 /* parse */

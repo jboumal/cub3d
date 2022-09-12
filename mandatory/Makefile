@@ -19,8 +19,8 @@ SRC = 	main.c \
 		event/event.c \
 		gameloop/update_cam.c gameloop/gameloop.c \
 		parsing/check_map.c parsing/parse.c parsing/parse_map.c parsing/parse_textures.c parsing/get_map_str.c\
-		render/dda.c render/raycasting.c render/mlx_utils.c render/minimap.c render/render.c \
-		utils/error.c utils/swap.c utils/ato.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
+		render/dda.c render/raycasting.c render/render.c \
+		utils/mlx_utils.c utils/error.c utils/swap.c utils/ato.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c utils/vector.c utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
 		data_struct/dy_str.c
 
 SRC		:= $(addprefix src/,$(SRC))

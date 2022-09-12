@@ -47,7 +47,8 @@ static void	init_draw_line(t_draw_line_var *var, t_ray *ray, t_game *g)
 static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 {
 	int		y;
-	int		tex;
+	int		ty;
+	int		color;
 
 	y = 0;
 	while (y < SCREEN_H)
@@ -58,16 +59,12 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 			my_mlx_pixel_put(img, x, y, g->map.floor);
 		else
 		{
-			tex = (y - var->draw_start) * H / (var->line_height);
-			if (var->ray->side == N)
-				tex = g->textures[N].img[tex * H + var->tex_x];
-			else if (var->ray->side == E)
-				tex = g->textures[E].img[tex * H + var->tex_x];
-			else if (var->ray->side == S)
-				tex = g->textures[S].img[tex * H + var->tex_x];
-			else if (var->ray->side == W)
-				tex = g->textures[W].img[tex * H + var->tex_x];
-			my_mlx_pixel_put(img, x, y, tex);
+			ty = (y - var->draw_start) * H / (var->line_height);
+			color = mlx_get_pixel(
+					&g->textures[var->ray->side].data,
+					var->tex_x,
+					ty);
+			my_mlx_pixel_put(img, x, y, color);
 		}
 		y++;
 	}

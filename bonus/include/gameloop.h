@@ -21,6 +21,8 @@ bool	can_pass_door(int cell, t_game *g);
 
 /* gameloop */
 int		game_loop(t_game *game);
+void	title_update(t_game *game);
+void	game_update(t_game *game);
 
 /* update_cam */
 void	translate_cam(t_game *game);

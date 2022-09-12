@@ -16,16 +16,16 @@ static int	get_tx(t_ray *ray, t_game *g)
 {
 	double		wall_x;
 	int			tx;
-	t_texture	*texture;
+	t_img		*texture;
 
-	texture = g->textures[g->map.data[ray->cell] - 1].head->content;
+	texture = g->walls[g->map.data[ray->cell] - 1].img;
 	if (ray->side == W || ray->side == E)
 		wall_x = g->player.pos.y + ray->dist * ray->dir.y;
 	else
 		wall_x = g->player.pos.x + ray->dist * ray->dir.x;
 	wall_x -= floor((wall_x));
 	if (g->map.data[ray->cell] == 10)
-		wall_x -= get_door(ray->cell, g)->ratio;
+		wall_x += 1 - get_door(ray->cell, g)->ratio;
 	tx = (int)(wall_x * (double)texture->width);
 	if (g->map.data[ray->cell] != 10)
 	{
@@ -47,13 +47,15 @@ static void	init_draw_line(
 	var->draw_start = -var->line_height / 2 + g->img_h / 2;
 	var->draw_end = var->line_height / 2 + g->img_h / 2;
 	var->ray = ray;
-	var->tex = g->textures[g->map.data[var->ray->cell] - 1].head->content;
+	var->tex = g->walls[g->map.data[var->ray->cell] - 1].img;
+	var->mask = 1 << ((sizeof(unsigned int) << 3)
+			- __builtin_clz(var->tex->height));
 }
 
 static inline void	put_sky_reflect_px(
 			int x,
 			int y,
-			t_data *img,
+			t_img *img,
 			t_game *g)
 {
 	int	color;
@@ -65,27 +67,27 @@ static inline void	put_sky_reflect_px(
 	my_mlx_pixel_put(img, x, y, color);
 }
 
-static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
+static void	draw_line(int x, t_draw_line_var *var, t_img *img, t_game *g)
 {
 	int			y;
 	int			ty;
 	int			color;
-	int			reflect_y;
+	int			y_down;
 
 	y = 0;
 	while (y < g->img_h)
 	{
 		if (y >= var->draw_start && y <= var->draw_end)
 		{
-			ty = (y - var->draw_start) * var->tex->height / (var->line_height);
-			color = mlx_get_pixel(&var->tex->data, var->tx, ty);
+			ty = (((y - var->draw_start) * var->mask / var->line_height)
+					& (var->mask -1)) * ((double)var->tex->height / var->mask);
+			color = mlx_get_pixel(var->tex, var->tx, ty);
 			my_mlx_pixel_put(img, x, y, color);
-			reflect_y = 2 * var->line_height + 2 * var->draw_start - y;
-			if (reflect_y < g->img_h)
+			y_down = 2 * var->line_height + 2 * var->draw_start - y;
+			if (y_down < g->img_h)
 			{
-				color = shade(mlx_get_pixel(img, x, reflect_y),
-						color, 0.8, 0.6);
-				my_mlx_pixel_put(img, x, reflect_y, color);
+				color = shade(mlx_get_pixel(img, x, y_down), color, 0.8, 0.6);
+				my_mlx_pixel_put(img, x, y_down, color);
 			}
 		}
 		else if (y > var->draw_end + var->line_height)
@@ -94,7 +96,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_data *img, t_game *g)
 	}
 }
 
-void	raycasting(int x0, int x1, t_data *img, t_game *g)
+void	raycasting(int x0, int x1, t_img *img, t_game *g)
 {
 	double			camera_x;
 	t_ray			ray;
@@ -106,7 +108,8 @@ void	raycasting(int x0, int x1, t_data *img, t_game *g)
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
 	draw_line(x0, &var, img, g);
-	g->depth_buf[x0] = ray.dist + 1.0;
+	g->depth_buf[x0] = sqrt(pow((ray.cell % g->map.width) - g->player.pos.x, 2)
+			+ pow(ray.cell / (double) g->map.width - g->player.pos.y, 2)) + 0.5;
 	if (x0 < x1)
 		return (raycasting(x0 + 1, x1, img, g));
 }

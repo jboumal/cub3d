@@ -18,6 +18,7 @@ static void	initialize(t_game *game)
 	game->map.floor = -1;
 	game->map.ceil = -1;
 	game->mlx = mlx_init();
+	game->img = get_new_img(game->mlx, SCREEN_W, SCREEN_H);
 }
 
 int	main(int argc, char **argv)

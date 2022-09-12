@@ -14,11 +14,6 @@
 
 void	render(t_game *game)
 {
-	t_data	img;
-
-	img = get_new_img(game);
-	raycasting(0, &img, game);
-	render_minimap(&img, game);
-	mlx_put_image_to_window(game->mlx, game->window, img.img, 0, 0);
-	mlx_destroy_image(game->mlx, img.img);
+	raycasting(0, &game->img, game);
+	mlx_put_image_to_window(game->mlx, game->window, game->img.img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:43:00 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/21 18:29:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/07 00:46:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_door	*get_door(int cell, t_game *g)
 {
 	t_node	*node;
 
-	node = g->state.doors.head;
+	node = g->doors.head;
 	while (node)
 	{
 		if (((t_door *)node->content)->cell == cell)

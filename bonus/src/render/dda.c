@@ -102,6 +102,8 @@ void	dda(t_ray *ray, t_game *g)
 		else
 			hit = compute_cell_ns(&side_dist, delta_dist, ray, g);
 		hit |= (g->map.data[ray->cell] && g->map.data[ray->cell] != 10);
+		if (g->map.object_map[ray->cell])
+			g->map.visible_tiles[ray->cell] = true;
 	}
 	ray->dist = side_dist.y - delta_dist.y;
 	if (ray->side % 2)

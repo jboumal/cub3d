@@ -12,7 +12,7 @@
 
 #include "render.h"
 
-static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
+static void	compute_pixels(t_img *img, t_game *g, void *(*routine)(void *))
 {
 	pthread_t	th[N_THREAD];
 	int			i;
@@ -38,16 +38,32 @@ static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
 	}
 }
 
+static void	put_fps(t_game *g)
+{
+	char	buffer[100];
+
+	sprintf(buffer, "%d fps", g->fps);
+	mlx_string_put(
+		g->mlx,
+		g->window,
+		10,
+		(TILEMAP_SIZE + 1) * g->map.height,
+		0x00FFFFFF,
+		buffer);
+}
+
 void	render(t_game *game)
 {
-	t_data	*img;
+	t_img	*img;
 
 	img = &game->small_buffer;
+	ft_memset(game->map.visible_tiles, 0,
+		game->map.width * game->map.height * sizeof(bool));
 	compute_pixels(img, game, routine_floor);
 	compute_pixels(img, game, routine_sky);
 	compute_pixels(img, game, routine_wall);
-	render_sprites(img, game);
-	render_gun(img, game);
+	render_sprites(game);
+	render_gun(game);
 	if (SCALE != 1)
 	{
 		compute_pixels(img, game, routine_rescale);
@@ -55,4 +71,5 @@ void	render(t_game *game)
 	}
 	render_minimap(img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
+	put_fps(game);
 }

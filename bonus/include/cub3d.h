@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # define SCREEN_TITLE "cub3d"
-# define SCREEN_W 1300
+# define SCREEN_W 1350
 # define SCREEN_H 800
 # define SCALE 0.8
 # define N_THREAD 4
@@ -23,6 +23,9 @@
 # define MRS 0.003 // Mouse rotation speed
 # define TILEMAP_SIZE 12
 # define PLANE_LENGTH 0.7
+# define PI2_F 6.28318530718
+# define RED 0x00FF0000
+# define DEATH_SIZE 4
 
 # include <mlx.h>
 # include <unistd.h>

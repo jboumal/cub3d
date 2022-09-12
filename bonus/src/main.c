@@ -28,8 +28,6 @@ static void	initialize(t_game *game)
 	game->scene = "title";
 	if (MAC)
 		mouse_move(game, 500, 500);
-	else
-		;//mouse_move(game, 400, 400);
 }
 
 int mouse_click(int code, int x, int y, t_game *game)

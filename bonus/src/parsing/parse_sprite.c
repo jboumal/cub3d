@@ -3,46 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/08/31 01:31:44 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 04:17:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	bound_start(t_sprite *s, t_texture text)
+void	bound_start(t_sprite *s, t_img text)
 {
 	int		lx;
 	int		ly;
-	int		color;
-	int		y_start;
+	int		y_end;
+	int		x_end;
 
-	lx = 0;
-	y_start = text.height;
-	s->x_start = 0;
-	while (lx <= text.width)
+	y_end = text.height;
+	x_end = text.width;
+	lx = -1;
+	while (++lx < text.width)
 	{
-		ly = 0;
-		while (ly++ <= text.height)
+		ly = -1;
+		while (++ly < text.height)
 		{
-			color = mlx_get_pixel(&text.data, lx, ly);
-			if (color != NOT_PIXEL && color > 0)
+			if (mlx_get_pixel(&text, lx, ly) != NOT_PIXEL)
 			{
-				if (!s->x_start)
-					s->x_start = lx / (double) text.width;
-				if (ly < y_start)
-					y_start = ly;
+				if (lx < x_end)
+					x_end = lx + 1;
+				if (ly < y_end)
+					y_end = ly + 1;
 			}
-			ly++;
 		}
-		lx++;
 	}
-	s->y_start = y_start / (double) text.height;
+	s->y_end = y_end / (double) text.height;
+	s->x_end = x_end / (double) text.width;
 }
 
-static int	create_sprite(t_game *game, char **line_split, int s_index)
+static void	add_action_sprite(t_sprite *s, char *sprite_name)
+{
+	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
+	{
+		s->collect_action = replace_gun;
+		s->enum_gun = MACH;
+	}
+}
+
+static int	init_sprite(t_game *game, char **line_split, int s_index)
 {
 	t_sprite	*s;
 	int			index;
@@ -51,37 +58,30 @@ static int	create_sprite(t_game *game, char **line_split, int s_index)
 	while (line_split[index])
 	{
 		s = x_malloc(sizeof(t_sprite));
-		load_texture(game->mlx, line_split[0], &s->t);
+		s->t = get_img_from_xpm(game->mlx, line_split[0]);
 		s->is_collect = ft_atoi(line_split[1]);
-		s->x = ft_atoi(line_split[index]);
-		s->y = ft_atoi(line_split[index + 1]);
-		if (s->x >= game->map.width || s->y >= game->map.height
-			|| game->map.data[(int)(s->y * game->map.width + s->x)] != 0)
+		s->collect_action = NULL;
+		s->x = ft_atoi(line_split[index]) + 0.5;
+		s->y = ft_atoi(line_split[index + 1]) + 0.5;
+		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
+		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
 		{
 			index += 2;
 			continue ;
 		}
-		s->x += 0.5;
-		s->y += 0.5;
+		if (s->is_collect)
+		{
+			add_action_sprite(s, line_split[0] + 11);
+			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 2;
+		}
+		else
+			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 1;
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
 		s_index++;
 	}
 	return (s_index);
-}
-
-static void	init_gun(t_game *game)
-{
-	t_sprite	*gun;
-
-	gun = x_malloc(sizeof(t_sprite));
-	gun->dist_to_p = 0;
-	gun->angle = 0;
-	load_texture(game->mlx, "img/sprite/gun/pistol0.xpm", &gun->t);
-	game->list_sprites[0] = gun;
-	game->list_active_gun[0] = gun;
-	bound_start(gun, gun->t);
 }
 
 void	parse_sprite(t_game *game, int fd)
@@ -95,7 +95,7 @@ void	parse_sprite(t_game *game, int fd)
 	while (line)
 	{
 		line_split = ft_split(line, ' ');
-		s_index = create_sprite(game, line_split, s_index);
+		s_index = init_sprite(game, line_split, s_index);
 		free(line);
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);

@@ -56,10 +56,10 @@ int64_t			min(int64_t a, int64_t b);
 int64_t			max(int64_t a, int64_t b);
 
 /* mlx_utils */
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data			get_new_img(void *mlx, int width, int height);
-unsigned int	mlx_get_pixel(t_data *data, int x, int y);
-void			load_texture(void *mlx, char *path, t_texture *texture);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+t_img			get_new_img(void *mlx, int width, int height);
+unsigned int	mlx_get_pixel(t_img *img, int x, int y);
+t_img			get_img_from_xpm(void *mlx, char *path);
 
 /* put */
 void			dputstr(int fd, char *s);
@@ -69,6 +69,8 @@ char			**ft_split(char const *str, char c);
 
 /* str */
 size_t			str_len(const char *str);
+char			*ft_strncpy(char *dest, const char *src, unsigned int n);
+char			*strjoin(char const *s1, char const *s2);
 int				str_n_cmp(const char *s1, const char *s2, size_t n);
 bool			is_token(char *str, char *tokens, char sep, size_t n);
 
