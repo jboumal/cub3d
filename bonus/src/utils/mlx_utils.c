@@ -43,6 +43,15 @@ unsigned int	mlx_get_pixel(t_data *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
+unsigned int	*mlx_get_pixel_ptr(t_data *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr
+		+ (y * data->line_length + x * (data->bits_per_pixel / 8));
+	return ((unsigned int *)dst);
+}
+
 void	load_texture(void *mlx, char *path, t_texture *texture)
 {
 	texture->data.img = mlx_xpm_file_to_image(

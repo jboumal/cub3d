@@ -57,6 +57,7 @@ void	render(t_game *game)
 	t_data	*img;
 
 	img = &game->small_buffer;
+
 	ft_memset(game->map.visible_tiles, 0,
 		game->map.width * game->map.height * sizeof(bool));
 	compute_pixels(img, game, routine_floor);
@@ -68,6 +69,11 @@ void	render(t_game *game)
 	{
 		compute_pixels(img, game, routine_rescale);
 		img = &game->full_buffer;
+	}
+	if (game->remove)
+	{
+		light_window(game);
+		game->remove = false;
 	}
 	render_minimap(img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);

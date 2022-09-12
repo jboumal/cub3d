@@ -6,11 +6,27 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 20:25:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/10 15:58:26 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	light_window(t_game *g)
+{
+	int			i;
+	int			color;
+	t_data		*img;
+
+	img = &g->full_buffer;
+	i = 0;
+	while (i < SCREEN_W * SCREEN_H)
+	{
+		my_mlx_pixel_put(img, i / SCREEN_H, i % SCREEN_H, WHITE);
+		i++;
+	}
+	g->remove = true;
+}
 
 void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 {
@@ -30,6 +46,7 @@ void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 		}
 		i++;
 	}
+	light_window(g);
 }
 
 void	render_sprites(t_game *g)
