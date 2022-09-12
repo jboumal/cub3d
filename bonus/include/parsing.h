@@ -22,6 +22,7 @@
 
 typedef struct s_sprite	t_sprite;
 typedef struct s_gun	t_gun;
+typedef struct s_object	t_object;
 
 typedef struct s_data
 {
@@ -97,6 +98,7 @@ typedef struct s_game
 	t_texture	sky;
 	t_list		doors;
 	t_sprite	*list_sprite[SPRITE_MAX];
+	t_object	*list_collect[SPRITE_MAX];
 	t_gun		*list_gun[GUN_MAX];
 	double		depth_buf[SCREEN_W];
 }	t_game;

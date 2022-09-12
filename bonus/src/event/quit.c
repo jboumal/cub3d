@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/10 00:02:32 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:23:51 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	free_sprites(t_game *g)
 
 	i = -1;
 	while (++i < SPRITE_MAX)
-		free(g->list_sprite[i]);
+		free(g->list_collect[i]);
 	i = -1;
 	while (++i < GUN_MAX)
 		free(g->list_gun[i]);

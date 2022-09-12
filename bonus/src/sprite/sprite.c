@@ -6,11 +6,52 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 17:58:35 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:24:53 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	remove_object(t_game *g, t_object *obj, int sprite_index)
+{
+	int	i;
+
+	free(g->list_collect[sprite_index]);
+	g->list_sprite[sprite_index] = NULL;
+	i = sprite_index;
+	while (i < SPRITE_MAX - 1)
+	{
+		if (g->list_sprite[i + 1])
+		{
+			g->list_sprite[i] = g->list_sprite[i + 1];
+			g->list_sprite[i + 1] = NULL;
+		}
+		i++;
+	}
+}
+
+void	collect_items(t_game *g)
+{
+	t_object	*obj;
+	int			collect_index;
+
+	collect_index = 0;
+	while (collect_index < SPRITE_MAX - 1)
+	{
+		obj = g->list_collect[collect_index];
+		if (obj)
+		{
+			if (hypot(obj->s.x - g->player.pos.x , obj->s.y - g->player.pos.y) <= MIN_DIST)
+			{
+				free(g->list_collect[collect_index]);
+				g->list_collect[collect_index] = NULL;
+				if (obj->collect_action)
+					obj->collect_action(g, obj);
+			}
+		}
+		collect_index++;
+	}
+}
 
 static void	sort_sprite(t_game *g, t_sprite *s, int i)
 {
@@ -24,28 +65,6 @@ static void	sort_sprite(t_game *g, t_sprite *s, int i)
 		i--;
 	}
 }
-
-/*
-static void	remove_object(t_game *g, t_object *obj, int sprite_index)
-{
-	int	i;
-
-	if (obj->collect_action)
-		obj->collect_action(g, obj);
-	free(g->list_sprite[sprite_index]);
-	g->list_sprite[sprite_index] = NULL;
-	i = sprite_index;
-	while (i < SPRITE_MAX - 1)
-	{
-		if (g->list_sprite[i + 1])
-		{
-			g->list_sprite[i] = g->list_sprite[i + 1];
-			g->list_sprite[i + 1] = NULL;
-		}
-		i++;
-	}
-}
-*/
 
 static void	compute_field_sprite(t_game *g)
 {

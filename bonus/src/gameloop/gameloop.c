@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/07 00:46:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:11:33 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	game_update(t_game *game)
 	rotate_cam(game);
 	update_doors(game);
 	update_textures(game);
+	collect_items(game);
 }
 
 int	game_loop(t_game *game)

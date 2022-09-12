@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 17:44:49 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:15:22 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ typedef struct s_sprite
 typedef struct s_object
 {
 	t_sprite		s;
-	bool			is_collect;
 	t_spr_action	collect_action;
 	enum e_gun		enum_gun;
+	int				game_index;
 }	t_object;
 
 typedef struct s_gun
@@ -68,6 +68,7 @@ typedef struct s_gun
 
 
 /* sprite */
+void	collect_items(t_game *g);
 void	render_sprites(t_game *game);
 
 /* draw sprite */
