@@ -21,6 +21,7 @@
 # define GUN_MAX 4
 
 typedef struct s_sprite	t_sprite;
+typedef struct s_gun	t_gun;
 
 typedef struct s_data
 {
@@ -48,6 +49,8 @@ typedef struct s_player
 	t_vector	dir;
 	t_vector	plane;
 	double		fov;
+	int			active_gun;
+	t_gun		*list_active_gun[2];
 }	t_player;
 
 typedef struct s_door
@@ -86,7 +89,6 @@ typedef struct s_game
 	t_data		small_buffer;
 	t_data		full_buffer;
 	int			fps;
-	int			active_gun;
 	t_map		map;
 	t_player	player;
 	t_state		state;
@@ -95,8 +97,7 @@ typedef struct s_game
 	t_texture	sky;
 	t_list		doors;
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_gun[GUN_MAX];
-	t_sprite	*list_active_gun[2];
+	t_gun		*list_gun[GUN_MAX];
 	double		depth_buf[SCREEN_W];
 }	t_game;
 

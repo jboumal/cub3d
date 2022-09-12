@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 20:32:34 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:09:52 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,44 +40,46 @@ void	bound_start(t_sprite *s, t_texture text)
 	s->x_end = x_end / (double) text.width;
 }
 
-static void	add_action_sprite(t_sprite *s, char *sprite_name)
+static void	add_action_object(t_object *obj, char *sprite_name)
 {
 	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
 	{
-		s->collect_action = replace_gun;
-		s->enum_gun = MACH;
+		obj->collect_action = &replace_gun;
+		obj->enum_gun = MACH;
 	}
 }
 
-static int	init_sprite(t_game *game, char **line_split, int s_index)
+static int	init_object(t_game *game, char **line_split, int s_index)
 {
-	t_sprite	*s;
+	t_object	*obj;
 	int			index;
 
 	index = 2;
 	while (line_split[index])
 	{
-		s = x_malloc(sizeof(t_sprite));
-		load_texture(game->mlx, line_split[0], &s->t);
-		s->is_collect = ft_atoi(line_split[1]);
-		s->collect_action = NULL;
-		s->x = ft_atoi(line_split[index]) + 0.5;
-		s->y = ft_atoi(line_split[index + 1]) + 0.5;
-		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
-		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
+		obj = x_malloc(sizeof(t_object));
+		load_texture(game->mlx, line_split[0], &obj->s.t);
+		obj->is_collect = ft_atoi(line_split[1]);
+		obj->collect_action = NULL;
+		obj->s.x = ft_atoi(line_split[index]) + 0.5;
+		obj->s.y = ft_atoi(line_split[index + 1]) + 0.5;
+		if (game->map.data[(int)((obj->s.y - 0.5) * game->map.width + obj->s.x - 0.5)]
+		!= 0 || obj->s.x - 0.5 >= game->map.width || obj->s.y - 0.5 >= game->map.height)
 		{
 			index += 2;
 			continue ;
 		}
-		if (s->is_collect)
+		if (obj->is_collect)
 		{
-			add_action_sprite(s, line_split[0] + 11);
-			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 2;
+			add_action_object(obj, line_split[0] + 11);
+			game->map.object_map[(int)((obj->s.y - 0.5) * game->map.width + obj->s.x - 0.5)] = 2;
 		}
 		else
-			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 1;
-		bound_start(s, s->t);
-		game->list_sprite[s_index] = s;
+			game->map.object_map[(int)((obj->s.y - 0.5) * game->map.width + obj->s.x - 0.5)] = 1;
+		bound_start(&obj->s, obj->s.t);
+		printf("obj->s.x_end : %f\n", obj->s.x_end);
+		printf("obj->s.y_end : %f\n", obj->s.y_end);
+		game->list_sprite[s_index] = &(obj->s);
 		index += 2;
 		s_index++;
 	}
@@ -95,7 +97,7 @@ void	parse_sprite(t_game *game, int fd)
 	while (line)
 	{
 		line_split = ft_split(line, ' ');
-		s_index = init_sprite(game, line_split, s_index);
+		s_index = init_object(game, line_split, s_index);
 		free(line);
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);
