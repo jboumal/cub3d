@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 18:09:55 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:25:42 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	replace_gun(t_game *game, t_object *obj)
 void	init_gun(t_game *game)
 {
 	t_gun		*gun;
-
 	int			i;
+
 	i = 0;
 	while (i < GUN_MAX)
 	{

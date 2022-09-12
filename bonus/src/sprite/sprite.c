@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 19:24:53 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:27:34 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	collect_items(t_game *g)
 		obj = g->list_collect[collect_index];
 		if (obj)
 		{
-			if (hypot(obj->s.x - g->player.pos.x , obj->s.y - g->player.pos.y) <= MIN_DIST)
+			if (hypot(obj->s.x - g->player.pos.x, obj->s.y - g->player.pos.y)
+				<= MIN_DIST)
 			{
 				free(g->list_collect[collect_index]);
 				g->list_collect[collect_index] = NULL;
@@ -118,8 +119,6 @@ void	render_sprites(t_game *g)
 					s->pixel_size = 1;
 				draw_sprite(g, s, &s->t, 0);
 			}
-			//if (s->is_collect && s->dist_to_p <= MIN_DIST)
-				//remove_object(g, s, sprite_index);
 		}
 		sprite_index++;
 	}
