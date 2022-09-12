@@ -22,9 +22,9 @@ static void	add_wall(char *str, t_game *g)
 	i = 0;
 	while (arr[i])
 	{
-		node = new_node(x_calloc(1, sizeof(t_texture)));
+		node = new_node(x_calloc(1, sizeof(t_img)));
 		load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
-		clst_add_back(&g->textures[str[0] - 49], node);
+		clst_add_back(&g->walls[str[0] - 49], node);
 		i++;
 	}
 	str_arr_free(arr);

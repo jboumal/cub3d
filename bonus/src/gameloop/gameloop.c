@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/07 00:46:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/12 02:38:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	update_textures(t_game *g)
 		i = 0;
 		while (i < TEXTURES_MAX)
 		{
-			clst_rotate(&g->textures[i]);
+			clst_rotate(&g->walls[i]);
 			i++;
 		}
 	}

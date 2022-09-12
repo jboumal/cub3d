@@ -27,8 +27,6 @@ static void	initialize(t_game *game)
 	game->full_buffer = get_new_img(game->mlx, SCREEN_W, SCREEN_H);
 	if (MAC)
 		mouse_move(game, 500, 500);
-	else
-		;//mouse_move(game, 400, 400);
 }
 
 int	main(int argc, char **argv)

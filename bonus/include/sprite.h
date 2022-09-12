@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 21:48:40 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:16:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_sprite
 	t_spr_action	collect_action;
 	enum e_gun		enum_gun;
 	double			image;
-	t_texture		t;
+	t_img			t;
 }	t_sprite;
 
 typedef struct s_gun
@@ -59,13 +59,12 @@ typedef struct s_gun
 	enum e_gun		enum_gun;
 }	t_gun;
 
-
 /* sprite */
 void	render_sprites(t_game *game);
 
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
-void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image);
+void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image);
 
 /* gun */
 void	anim_gun(t_game *game);
@@ -75,4 +74,3 @@ void	init_gun(t_game *game);
 void	render_gun(t_game *game);
 
 #endif
-

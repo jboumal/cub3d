@@ -14,7 +14,7 @@
 
 void	*routine_floor(void *arg)
 {
-	t_data	*img;
+	t_img	*img;
 	t_game	*g;
 	int		i;
 	int		start;
@@ -31,7 +31,7 @@ void	*routine_floor(void *arg)
 
 void	*routine_sky(void *arg)
 {
-	t_data	*img;
+	t_img	*img;
 	t_game	*g;
 	int		i;
 	int		start;
@@ -48,7 +48,7 @@ void	*routine_sky(void *arg)
 
 void	*routine_wall(void *arg)
 {
-	t_data	*img;
+	t_img	*img;
 	t_game	*g;
 	int		i;
 	int		start;
@@ -68,7 +68,7 @@ void	*routine_rescale(void *arg)
 	int			i;
 	int			j;
 	int			end;
-	t_data		*img;
+	t_img		*img;
 	t_game		*g;
 
 	i = get_start(((t_th_arg *)arg)->i, 0, SCREEN_H - 1, N_THREAD);

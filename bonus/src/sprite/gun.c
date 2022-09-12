@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 21:58:07 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:01:46 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	render_gun(t_game *game)
 		gun->ceil = game->img_h - gun->height;
 		gun->width = gun->height;
 		gun->pixel_size = (int) gun->height / gun->t.height;
-		if (gun->image == gun->t.n_image)
+		if (gun->image == gun->t.width / gun->t.height)
 			gun->image = 0;
 		else
 		{

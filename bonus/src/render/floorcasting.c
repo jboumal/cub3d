@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
+static void	draw_line(int y, t_scanline *scanline, t_img *img, t_game *g)
 {
 	int				x;
 	int				tx;
@@ -31,12 +31,12 @@ static void	draw_line(int y, t_scanline *scanline, t_data *img, t_game *g)
 		ty *= (double)g->floor.height / h;
 		scanline->floor.x += scanline->step.x;
 		scanline->floor.y += scanline->step.y;
-		my_mlx_pixel_put(img, x, y, mlx_get_pixel(&g->floor.data, tx, ty));
+		my_mlx_pixel_put(img, x, y, mlx_get_pixel(&g->floor, tx, ty));
 		x++;
 	}
 }
 
-void	floorcasting(int y0, int y1, t_data *img, t_game *g)
+void	floorcasting(int y0, int y1, t_img *img, t_game *g)
 {
 	t_vector	ray_dir_0;
 	t_vector	ray_dir_1;

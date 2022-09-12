@@ -51,7 +51,7 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 
 	if (map_char == '0')
 		g->map.data[i * g->map.width + j] = 0;
-	else if (isascii_48(map_char) && g->textures[map_char - 49].head)
+	else if (isascii_48(map_char) && g->walls[map_char - 49].head)
 		g->map.data[i * g->map.width + j] = map_char - 48;
 	else if (ft_strchr("NSWE", map_char))
 	{

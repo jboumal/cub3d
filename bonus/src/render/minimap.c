@@ -21,7 +21,7 @@ static void	init_rect(t_rect *rect, int size)
 	rect->color = 0;
 }
 
-static int	render_rect(t_data *img, t_rect rect)
+static int	render_rect(t_img *img, t_rect rect)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ static int	render_rect(t_data *img, t_rect rect)
 	return (0);
 }
 
-static void	drawline(t_data *img, t_vector p0, t_vector p1, t_game *g)
+static void	drawline(t_img *img, t_vector p0, t_vector p1, t_game *g)
 {
 	double	delta_x;
 	double	delta_y;
@@ -68,7 +68,7 @@ static void	drawline(t_data *img, t_vector p0, t_vector p1, t_game *g)
 	}
 }
 
-static void	render_miniplayer(t_data *img, t_game *g)
+static void	render_miniplayer(t_img *img, t_game *g)
 {
 	t_rect		rect;
 	t_vector	position0;
@@ -94,7 +94,7 @@ static void	render_miniplayer(t_data *img, t_game *g)
 	render_rect(img, rect);
 }
 
-void	render_minimap(t_data *img, t_game *game)
+void	render_minimap(t_img *img, t_game *game)
 {
 	int		i;
 	t_rect	rect;
