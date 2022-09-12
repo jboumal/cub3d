@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/12 02:38:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:38:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ static void	update_textures(t_game *g)
 	if (!(accu % 10))
 	{
 		i = 0;
-		while (i < TEXTURES_MAX)
+		while (i < WALL_MAX)
 		{
-			clst_rotate(&g->walls[i]);
+			if (g->walls[i].img)
+			{
+				clst_rotate(&g->walls[i].imgs);
+				g->walls[i].img = g->walls[i].imgs.head->content;
+			}
 			i++;
 		}
 	}
@@ -75,6 +79,7 @@ static void	game_update(t_game *game)
 
 int	game_loop(t_game *game)
 {
+
 	fps_counter(game);
 	if (LINUX)
 		my_mouse_hook(game);

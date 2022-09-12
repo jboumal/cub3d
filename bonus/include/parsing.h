@@ -16,7 +16,7 @@
 # include "cub3d.h"
 
 # define SPACES " \t"
-# define TEXTURES_MAX 79
+# define WALL_MAX 79
 # define SPRITE_MAX 20
 # define GUN_MAX 4
 
@@ -71,6 +71,12 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_texture
+{
+	t_img	*img;
+	t_list	imgs;
+}	t_texture;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -84,7 +90,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_list		walls[TEXTURES_MAX];
+	t_texture	walls[WALL_MAX];
 	t_img		floor;
 	t_img		sky;
 	t_list		doors;

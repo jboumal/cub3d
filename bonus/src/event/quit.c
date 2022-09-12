@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/12 03:10:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:36:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int	quit(t_game *g)
 
 	mlx_destroy_window(g->mlx, g->window);
 	i = 0;
-	while (i < TEXTURES_MAX)
+	while (i < WALL_MAX)
 	{
-		clear_images(g->walls[i], g);
-		clst_clear(&g->walls[i], free);
+		//clear_images(g->walls[i], g);
+		//clst_clear(&g->walls[i], free);
 		i++;
 	}
 	mlx_destroy_image(g->mlx, g->sky.img);

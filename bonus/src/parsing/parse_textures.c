@@ -14,17 +14,20 @@
 
 static void	add_wall(char *str, t_game *g)
 {
-	int		i;
-	char	**arr;
-	t_node	*node;
+	int			i;
+	char		**arr;
+	t_node		*node;
 
 	arr = ft_split(str, ',');
 	i = 0;
 	while (arr[i])
 	{
+
 		node = new_node(x_calloc(1, sizeof(t_img)));
 		load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
-		clst_add_back(&g->walls[str[0] - 49], node);
+		clst_add_back(&g->walls[str[0] - 49].imgs, node);
+		if (!g->walls[str[0] - 49].img)
+			g->walls[str[0] - 49].img = node->content;
 		i++;
 	}
 	str_arr_free(arr);

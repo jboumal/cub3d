@@ -18,7 +18,7 @@ static int	get_tx(t_ray *ray, t_game *g)
 	int			tx;
 	t_img		*texture;
 
-	texture = g->walls[g->map.data[ray->cell] - 1].head->content;
+	texture = g->walls[g->map.data[ray->cell] - 1].img;
 	if (ray->side == W || ray->side == E)
 		wall_x = g->player.pos.y + ray->dist * ray->dir.y;
 	else
@@ -47,7 +47,7 @@ static void	init_draw_line(
 	var->draw_start = -var->line_height / 2 + g->img_h / 2;
 	var->draw_end = var->line_height / 2 + g->img_h / 2;
 	var->ray = ray;
-	var->tex = g->walls[g->map.data[var->ray->cell] - 1].head->content;
+	var->tex = g->walls[g->map.data[var->ray->cell] - 1].img;
 	var->mask = 1 << ((sizeof(unsigned int) << 3)
 			- __builtin_clz(var->tex->height));
 }
