@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 03:01:46 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/12 04:18:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	init_gun(t_game *game)
 		gun->y_end = 0;
 		gun->image = 0;
 		if (i == 0)
-			load_texture(game->mlx, "img/sprite/gun/pistol.xpm", &gun->t);
+			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/pistol.xpm");
 		else if (i == 1)
-			load_texture(game->mlx, "img/sprite/gun/mach.xpm", &gun->t);
+			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/mach.xpm");
 		else if (i == 2)
-			load_texture(game->mlx, "img/sprite/gun/gatling.xpm", &gun->t);
+			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/gatling.xpm");
 		else if (i == 3)
-			load_texture(game->mlx, "img/sprite/gun/knife.xpm", &gun->t);
+			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/knife.xpm");
 		bound_start(gun, gun->t);
 		game->list_gun[i] = gun;
 		i++;
