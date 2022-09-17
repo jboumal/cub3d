@@ -27,6 +27,12 @@
 # define RED 0x00FF0000
 # define DEATH_SIZE 4
 
+enum e_scene
+{
+	TITLE,
+	GAME,
+};
+
 # include <mlx.h>
 # include <unistd.h>
 # include <stdio.h>

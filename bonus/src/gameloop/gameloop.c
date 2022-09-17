@@ -6,7 +6,7 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/12 18:36:14 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:06:35 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	game_loop(t_game *game)
 	fps_counter(game);
 	if (LINUX)
 		my_mouse_hook(game);
-	if (!str_n_cmp(game->scene, "title", 5))
+	if (game->scene == TITLE)
 	 	title_update(game);
 	else {
 		game_update(game);

@@ -98,7 +98,14 @@ typedef struct s_game
 	t_sprite	*list_gun[GUN_MAX];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
-	char		*scene;
+	enum e_scene	scene;
+	t_img		options;
+	t_img		newgame1;
+	t_img		newgame2;
+	t_img		select1;
+	t_img		quit1;
+	t_img		quit2;
+	int			index;
 }	t_game;
 
 /* check_map */
