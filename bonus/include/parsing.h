@@ -60,17 +60,6 @@ typedef struct s_state
 	int		m_right;
 }	t_state;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_img;
-
 typedef struct s_texture
 {
 	t_img	*img;
@@ -98,14 +87,8 @@ typedef struct s_game
 	t_sprite	*list_gun[GUN_MAX];
 	t_sprite	*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
-	enum e_scene	scene;
-	t_img		options;
-	t_img		newgame1;
-	t_img		newgame2;
-	t_img		select1;
-	t_img		quit1;
-	t_img		quit2;
-	int			index;
+	t_scene		scene;
+	t_title		title;
 }	t_game;
 
 /* check_map */

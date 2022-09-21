@@ -27,12 +27,6 @@
 # define RED 0x00FF0000
 # define DEATH_SIZE 4
 
-enum e_scene
-{
-	TITLE,
-	GAME,
-};
-
 # include <mlx.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -47,6 +41,7 @@ enum e_scene
 # include <pthread.h>
 
 # include "data_struct.h"
+# include "scene_title.h"
 # include "parsing.h"
 # include "utils.h"
 # include "gameloop.h"
