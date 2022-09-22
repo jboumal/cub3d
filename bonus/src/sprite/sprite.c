@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/22 16:30:00 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:54:04 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	collect_items(t_game *g)
 			if (hypot(obj->s.x - g->player.pos.x, obj->s.y - g->player.pos.y)
 				<= MIN_DIST)
 			{
-				free(g->list_collect[collect_index]);
+				//free(g->list_collect[collect_index]);
 				g->list_collect[collect_index] = NULL;
 				g->list_object[obj->game_index] = NULL;
 				if (obj->collect_action)
@@ -88,11 +88,10 @@ void	render_sprites(t_game *g)
 	sprite_index = 0;
 	while (sprite_index < SPRITE_MAX - 1)
 	{
-		s = &g->list_object[sprite_index]->s;
-		if (s)
+		if (g->list_object[sprite_index])
 		{
+			s = &g->list_object[sprite_index]->s;
 			g->list_object[sprite_index]->game_index = sprite_index;
-			
 			if (s->dist_player >= MIN_DIST && s->is_in_fov && g->map.visible_tiles
 				[(int)((s->y - 0.5) * g->map.width + s->x - 0.5)])
 			{
