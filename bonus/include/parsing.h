@@ -97,7 +97,8 @@ typedef struct s_game
 	t_texture	floor;
 	t_texture	sky;
 	t_list		doors;
-	t_sprite	*list_sprite[SPRITE_MAX];
+	//t_sprite	*list_sprite[SPRITE_MAX];
+	t_object	*list_object[SPRITE_MAX];
 	t_object	*list_collect[SPRITE_MAX];
 	t_gun		*list_gun[GUN_MAX];
 	double		depth_buf[SCREEN_W];

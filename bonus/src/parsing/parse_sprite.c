@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 19:11:00 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:30:06 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	add_action_object(t_object *obj, char *sprite_name)
 		obj->collect_action = &replace_gun;
 		obj->enum_gun = MACH;
 	}
+	else
+		obj->collect_action = NULL;
 }
 
 static int	init_object(t_game *game, char **line_split, int s_index)
@@ -71,13 +73,14 @@ static int	init_object(t_game *game, char **line_split, int s_index)
 		if (ft_atoi(line_split[1]))
 		{
 			game->list_collect[s_index] = obj;
+			obj->game_index = s_index;
 			add_action_object(obj, line_split[0] + 11);
 			game->map.object_map[(int)((obj->s.y - 0.5) * game->map.width + obj->s.x - 0.5)] = 2;
 		}
 		else
 			game->map.object_map[(int)((obj->s.y - 0.5) * game->map.width + obj->s.x - 0.5)] = 1;
 		bound_start(&obj->s, obj->s.t);
-		game->list_sprite[s_index] = &(obj->s);
+		game->list_object[s_index] = obj;
 		index += 2;
 		s_index++;
 	}

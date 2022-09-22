@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 19:27:34 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:30:00 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	remove_object(t_game *g, t_object *obj, int sprite_index)
-{
-	int	i;
-
-	free(g->list_collect[sprite_index]);
-	g->list_sprite[sprite_index] = NULL;
-	i = sprite_index;
-	while (i < SPRITE_MAX - 1)
-	{
-		if (g->list_sprite[i + 1])
-		{
-			g->list_sprite[i] = g->list_sprite[i + 1];
-			g->list_sprite[i + 1] = NULL;
-		}
-		i++;
-	}
-}
 
 void	collect_items(t_game *g)
 {
@@ -46,6 +28,7 @@ void	collect_items(t_game *g)
 			{
 				free(g->list_collect[collect_index]);
 				g->list_collect[collect_index] = NULL;
+				g->list_object[obj->game_index] = NULL;
 				if (obj->collect_action)
 					obj->collect_action(g, obj);
 			}
@@ -56,13 +39,13 @@ void	collect_items(t_game *g)
 
 static void	sort_sprite(t_game *g, t_sprite *s, int i)
 {
-	t_sprite	*sprite;
+	t_object	*object;
 
-	while (i >= 1 && s->dist_player > g->list_sprite[i - 1]->dist_player)
+	while (i >= 1 && s->dist_player > g->list_object[i - 1]->s.dist_player)
 	{
-		sprite = g->list_sprite[i];
-		g->list_sprite[i] = g->list_sprite[i - 1];
-		g->list_sprite[i - 1] = sprite;
+		object = g->list_object[i];
+		g->list_object[i] = g->list_object[i - 1];
+		g->list_object[i - 1] = object;
 		i--;
 	}
 }
@@ -77,7 +60,7 @@ static void	compute_field_sprite(t_game *g)
 	i = -1;
 	while (i++ < SPRITE_MAX - 1)
 	{
-		s = g->list_sprite[i];
+		s = &g->list_object[i]->s;
 		if (!s)
 			continue ;
 		fvec_x = s->x - g->player.pos.x;
@@ -105,9 +88,11 @@ void	render_sprites(t_game *g)
 	sprite_index = 0;
 	while (sprite_index < SPRITE_MAX - 1)
 	{
-		s = g->list_sprite[sprite_index];
+		s = &g->list_object[sprite_index]->s;
 		if (s)
 		{
+			g->list_object[sprite_index]->game_index = sprite_index;
+			
 			if (s->dist_player >= MIN_DIST && s->is_in_fov && g->map.visible_tiles
 				[(int)((s->y - 0.5) * g->map.width + s->x - 0.5)])
 			{
