@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 22:48:56 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 18:10:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:35:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 {
 	int		i;
 	int		j;
-	t_data	*img;
+	t_img	*img;
 
 	img = &g->small_buffer;
 	i = 0;
@@ -34,7 +34,7 @@ static void	put_big_pixel(t_game *g, t_sprite *s, int color, int ly)
 	}
 }
 
-void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image)
+void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image)
 {
 	int		color;
 	int		lx;
@@ -46,7 +46,7 @@ void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image)
 		ly = s->height * s->y_end;
 		while (ly < s->height)
 		{
-			color = mlx_get_pixel(&t->data, (lx + n_image * s->width) / s->width
+			color = mlx_get_pixel(t, (lx + n_image * s->width) / s->width
 					* (t->width / t->n_image), ly / s->height * t->height);
 			if (color != NOT_PIXEL && color != STILL_NOT_PIXEL)
 			{

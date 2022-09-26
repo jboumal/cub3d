@@ -24,14 +24,17 @@ typedef struct s_sprite	t_sprite;
 typedef struct s_gun	t_gun;
 typedef struct s_object	t_object;
 
-typedef struct s_data
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_data;
+	int		width;
+	int		height;
+	int		n_image;
+}	t_img;
 
 typedef struct s_map
 {
@@ -73,29 +76,21 @@ typedef struct s_state
 	int		m_right;
 }	t_state;
 
-typedef struct s_texture
-{
-	t_data	data;
-	int		width;
-	int		height;
-	int		n_image;
-}	t_texture;
-
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
 	int			img_w;
 	int			img_h;
-	t_data		small_buffer;
-	t_data		full_buffer;
+	t_img		small_buffer;
+	t_img		full_buffer;
 	int			fps;
 	t_map		map;
 	t_player	player;
 	t_state		state;
 	t_list		textures[TEXTURES_MAX];
-	t_texture	floor;
-	t_texture	sky;
+	t_img	floor;
+	t_img	sky;
 	t_list		doors;
 	t_object	*list_object[SPRITE_MAX];
 	t_object	*list_collect[SPRITE_MAX];
@@ -116,7 +111,7 @@ void		parse_map(char *map_str, t_game *g);
 void		parse_textures(t_game *game, int fd);
 
 /* parse_sprite */
-void		bound_start(t_sprite *s, t_texture text);
+void		bound_start(t_sprite *s, t_img text);
 void		parse_sprite(t_game *game, int fd);
 
 /* parse */

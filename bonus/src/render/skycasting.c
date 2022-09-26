@@ -25,7 +25,7 @@ double	get_fov_ratio(t_game *g)
 	return (g->player.fov / (2 * M_PI));
 }
 
-void	skycasting(int x0, int x1, t_data *img, t_game *g)
+void	skycasting(int x0, int x1, t_img *img, t_game *g)
 {
 	double	angle;
 	int		tx;
@@ -45,7 +45,7 @@ void	skycasting(int x0, int x1, t_data *img, t_game *g)
 	{
 		ty = y * (double)ty_range / (double)(g->img_h / 2);
 		ty += (g->sky.height - ty_range) / 2;
-		my_mlx_pixel_put(img, x0, y, mlx_get_pixel(&g->sky.data, tx, ty));
+		my_mlx_pixel_put(img, x0, y, mlx_get_pixel(&g->sky, tx, ty));
 		y++;
 	}
 	if (x0 < x1)

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -21,9 +21,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-t_data	get_new_img(void *mlx, int width, int height)
+t_img	get_new_img(void *mlx, int width, int height)
 {
-	t_data	img;
+	t_img	img;
 
 	img.img = mlx_new_image(mlx, width, height);
 	img.addr = mlx_get_data_addr(
@@ -34,7 +34,7 @@ t_data	get_new_img(void *mlx, int width, int height)
 	return (img);
 }
 
-unsigned int	mlx_get_pixel(t_data *data, int x, int y)
+unsigned int	mlx_get_pixel(t_img *data, int x, int y)
 {
 	char	*dst;
 
@@ -43,22 +43,22 @@ unsigned int	mlx_get_pixel(t_data *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	load_texture(void *mlx, char *path, t_texture *texture)
+void	load_texture(void *mlx, char *path, t_img *texture)
 {
-	texture->data.img = mlx_xpm_file_to_image(
+	texture->img = mlx_xpm_file_to_image(
 			mlx,
 			path,
 			&texture->width,
 			&texture->height);
-	if (!texture->data.img)
+	if (!texture->img)
 	{
 		printf("%s\n", path);
 		exit_error("unable to load texture");
 	}
-	texture->data.addr = mlx_get_data_addr(
-			texture->data.img,
-			&texture->data.bits_per_pixel,
-			&texture->data.line_length,
-			&texture->data.endian);
+	texture->addr = mlx_get_data_addr(
+			texture->img,
+			&texture->bits_per_pixel,
+			&texture->line_length,
+			&texture->endian);
 	texture->n_image = texture->width / texture->height;
 }

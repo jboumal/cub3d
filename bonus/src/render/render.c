@@ -12,7 +12,7 @@
 
 #include "render.h"
 
-static void	compute_pixels(t_data *img, t_game *g, void *(*routine)(void *))
+static void	compute_pixels(t_img *img, t_game *g, void *(*routine)(void *))
 {
 	pthread_t	th[N_THREAD];
 	int			i;
@@ -54,7 +54,7 @@ static void	put_fps(t_game *g)
 
 void	render(t_game *game)
 {
-	t_data	*img;
+	t_img	*img;
 
 	img = &game->small_buffer;
 	ft_memset(game->map.visible_tiles, 0,

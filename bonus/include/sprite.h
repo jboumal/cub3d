@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 19:15:22 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:32:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_sprite
 	int				pixel_size;
 	int				col;
 	bool			is_in_fov;
-	t_texture		t;
+	t_img		t;
 }	t_sprite;
 
 typedef struct s_object
@@ -72,7 +72,7 @@ void	collect_items(t_game *g);
 void	render_sprites(t_game *game);
 
 /* draw sprite */
-void	draw_sprite(t_game *g, t_sprite *s, t_texture *t, int n_image);
+void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image);
 
 /* gun */
 void	anim_gun(t_game *game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/12 19:23:51 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:33:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	clear_images(t_list lst, t_game *g)
 {
 	size_t		i;
 	t_node		*node;
-	t_texture	*texture;
+	t_img	*texture;
 
 	i = 0;
 	node = lst.head;
@@ -24,7 +24,7 @@ static void	clear_images(t_list lst, t_game *g)
 	{
 		texture = node->content;
 		if (texture)
-			mlx_destroy_image(g->mlx, texture->data.img);
+			mlx_destroy_image(g->mlx, texture->img);
 		node = node->next;
 		i++;
 	}
@@ -54,8 +54,8 @@ int	quit(t_game *g)
 		clst_clear(&g->textures[i], free);
 		i++;
 	}
-	mlx_destroy_image(g->mlx, g->sky.data.img);
-	mlx_destroy_image(g->mlx, g->floor.data.img);
+	mlx_destroy_image(g->mlx, g->sky.img);
+	mlx_destroy_image(g->mlx, g->floor.img);
 	mlx_destroy_image(g->mlx, g->small_buffer.img);
 	mlx_destroy_image(g->mlx, g->full_buffer.img);
 	free(g->map.data);

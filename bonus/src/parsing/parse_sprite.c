@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/22 16:30:06 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:34:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	bound_start(t_sprite *s, t_texture text)
+void	bound_start(t_sprite *s, t_img text)
 {
 	int		lx;
 	int		ly;
@@ -27,7 +27,7 @@ void	bound_start(t_sprite *s, t_texture text)
 		ly = -1;
 		while (++ly < text.height)
 		{
-			if (mlx_get_pixel(&text.data, lx, ly) != NOT_PIXEL)
+			if (mlx_get_pixel(&text, lx, ly) != NOT_PIXEL)
 			{
 				if (lx < x_end)
 					x_end = lx + 1;

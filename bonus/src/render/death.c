@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:09:12 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/10 00:02:07 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:32:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	shuffle(int *array, size_t n)
 	}
 }
 
-static void	put_pixel(t_game *g, t_data *img, int elem, int pixel_size)
+static void	put_pixel(t_game *g, t_img *img, int elem, int pixel_size)
 {
 	int		i;
 	int		j;
@@ -58,7 +58,7 @@ static void	put_pixel(t_game *g, t_data *img, int elem, int pixel_size)
 
 static void	draw_death(t_game *game, int *red_pixel)
 {
-	t_data	*img;
+	t_img	*img;
 	int		i;
 	int		j;
 
