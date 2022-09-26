@@ -43,22 +43,22 @@ unsigned int	mlx_get_pixel(t_img *data, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	load_texture(void *mlx, char *path, t_img *texture)
+t_img	get_img_from_xpm(void *mlx, char *path)
 {
-	texture->img = mlx_xpm_file_to_image(
+	t_img	img;
+
+	img.img = mlx_xpm_file_to_image(
 			mlx,
 			path,
-			&texture->width,
-			&texture->height);
-	if (!texture->img)
-	{
-		printf("%s\n", path);
-		exit_error("unable to load texture");
-	}
-	texture->addr = mlx_get_data_addr(
-			texture->img,
-			&texture->bits_per_pixel,
-			&texture->line_length,
-			&texture->endian);
-	texture->n_image = texture->width / texture->height;
+			&img.width,
+			&img.height);
+	if (!img.img)
+		exit_error("unable to load image");
+	img.addr = mlx_get_data_addr(
+			img.img,
+			&img.bits_per_pixel,
+			&img.line_length,
+			&img.endian);
+	img.n_image = img.width / img.height;
+	return (img);
 }

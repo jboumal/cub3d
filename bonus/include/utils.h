@@ -59,7 +59,7 @@ int64_t			max(int64_t a, int64_t b);
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 t_img			get_new_img(void *mlx, int width, int height);
 unsigned int	mlx_get_pixel(t_img *data, int x, int y);
-void			load_texture(void *mlx, char *path, t_img *texture);
+t_img			get_img_from_xpm(void *mlx, char *path);
 
 /* put */
 void			dputstr(int fd, char *s);

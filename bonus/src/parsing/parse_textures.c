@@ -23,7 +23,7 @@ static void	add_wall(char *str, t_game *g)
 	while (arr[i])
 	{
 		node = new_node(x_calloc(1, sizeof(t_img)));
-		load_texture(g->mlx, skip_spaces(arr[i] + 2), node->content);
+		*(t_img *)node->content = get_img_from_xpm(g->mlx, skip_spaces(arr[i] + 2));
 		clst_add_back(&g->textures[str[0] - 49], node);
 		i++;
 	}
@@ -46,10 +46,10 @@ void	parse_textures(t_game *g, int fd)
 		if (isascii_48(s.str[0]) && s.str[0] != 'F' && s.str[0] != 'C')
 			add_wall(s.str, g);
 		else if (!str_n_cmp("F ", s.str, 2))
-			load_texture(g->mlx, skip_spaces(s.str + 2), &g->floor);
+			g->floor = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
 		else if (!str_n_cmp("C ", s.str, 2))
 		{
-			load_texture(g->mlx, skip_spaces(s.str + 2), &g->sky);
+			g->sky = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
 			g->map.ceil = 1;
 		}
 		else

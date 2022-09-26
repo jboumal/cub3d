@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/26 17:34:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:44:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	init_object(t_game *game, char **line_split, int s_index)
 	while (line_split[index])
 	{
 		obj = x_malloc(sizeof(t_object));
-		load_texture(game->mlx, line_split[0], &obj->s.t);
+		obj->s.t = get_img_from_xpm(game->mlx, line_split[0]);
 		obj->collect_action = NULL;
 		obj->s.x = ft_atoi(line_split[index]) + 0.5;
 		obj->s.y = ft_atoi(line_split[index + 1]) + 0.5;
