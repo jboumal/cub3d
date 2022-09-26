@@ -11,7 +11,7 @@ SRC = 	main.c \
 		utils/mlx_utils.c utils/utils.c utils/get_next_line.c utils/min_max.c utils/copy.c utils/put.c utils/str.c  utils/split.c utils/str_alloc.c utils/str_arr.c utils/find.c utils/get_next_non_empty_line.c utils/x_alloc.c\
 		utils/thread.c utils/swap.c utils/mouse_move.c utils/error.c utils/color.c \
 		data_struct/vector_norme.c data_struct/circular_lst.c data_struct/dy_str_insert.c data_struct/node.c data_struct/lst.c data_struct/dy_str.c data_struct/vector.c\
-		sprite/sprite.c sprite/draw_sprite.c sprite/gun.c
+		sprite/sprite.c sprite/draw_sprite.c sprite/gun.c scene/title.c scene/title_draw.c
 
 ifneq ($(shell uname), Linux)
 	SRC +=	utils/mlx_mouse.m

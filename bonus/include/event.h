@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 09:33:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/10 00:01:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:32:24 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 #  define K_E 14
 #  define K_CTRL 256
 #  define K_SPACE 49
+#  define K_ENTER 36
 # endif
 
 /* event */

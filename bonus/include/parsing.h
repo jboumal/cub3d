@@ -24,17 +24,11 @@ typedef struct s_sprite	t_sprite;
 typedef struct s_gun	t_gun;
 typedef struct s_object	t_object;
 
-typedef struct s_img
+typedef enum e_scene
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-	int		n_image;
-}	t_img;
+	TITLE,
+	GAME,
+}	t_scene;
 
 typedef struct s_map
 {
@@ -89,13 +83,15 @@ typedef struct s_game
 	t_player	player;
 	t_state		state;
 	t_list		textures[TEXTURES_MAX];
-	t_img	floor;
-	t_img	sky;
+	t_img		floor;
+	t_img		sky;
 	t_list		doors;
 	t_object	*list_object[SPRITE_MAX];
 	t_object	*list_collect[SPRITE_MAX];
 	t_gun		*list_gun[GUN_MAX];
 	double		depth_buf[SCREEN_W];
+	t_scene		scene;
+	t_title		title;
 }	t_game;
 
 /* check_map */

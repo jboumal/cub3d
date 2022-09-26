@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/08/29 10:13:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:31:49 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define DATA_STRUCT_H
 
 # include "cub3d.h"
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+	int		n_image;
+}	t_img;
 
 typedef struct s_node
 {

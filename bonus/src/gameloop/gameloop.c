@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/12 19:11:33 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:26:57 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,12 @@ int	game_loop(t_game *game)
 	fps_counter(game);
 	if (LINUX)
 		my_mouse_hook(game);
-	game_update(game);
-	render(game);
+	if (game->scene == TITLE)
+		title_update(game);
+	else
+	{
+		game_update(game);
+		render(game);
+	}
 	return (0);
 }
