@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 00:12:25 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/07 20:25:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:04:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 	if (s->collect_action)
 		s->collect_action(g, s);
 	free(g->list_sprite[sprite_index]);
+	mlx_destroy_image(g->mlx, g->list_sprite[sprite_index]->t.img);
 	g->list_sprite[sprite_index] = NULL;
 	i = sprite_index;
 	while (i < SPRITE_MAX - 1)
