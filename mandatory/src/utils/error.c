@@ -14,7 +14,7 @@
 
 void	exit_error(char *e)
 {
-	dputstr(STDERR_FILENO, "Error: ");
+	dputstr(STDERR_FILENO, "Error\n");
 	dputstr(STDERR_FILENO, e);
 	dputstr(STDERR_FILENO, "\n");
 	exit(EXIT_FAILURE);

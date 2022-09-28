@@ -9,7 +9,7 @@ SRC = 	main.c \
 		utils/thread.c utils/swap.c utils/mouse_move.c utils/error.c utils/color.c \
 		data_struct/vector_norme.c data_struct/circular_lst.c data_struct/dy_str_insert.c data_struct/node.c data_struct/lst.c data_struct/dy_str.c data_struct/vector.c\
 		sprite/sprite.c sprite/draw_sprite.c sprite/gun.c sprite/init_gun.c\
-		scene/title.c scene/title_draw.c scene/game.c \
+		scene/title.c scene/title_draw.c \
 		enemy/enemy.c
 
 ifneq ($(shell uname), Linux)

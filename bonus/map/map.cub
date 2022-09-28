@@ -1,9 +1,9 @@
 
 1 img/mobile/WALL025.xpm
-: img/door_help.xpm
+: img/woodendoor.xpm
 
 F img/floor/floor_grey.xpm
-C img/sky/moon.xpm
+C img/sky/fullmoon.xpm
 
 1111111111111111111111
 1000000001000000000001
