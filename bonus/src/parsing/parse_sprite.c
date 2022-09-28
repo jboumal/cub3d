@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 04:17:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:14:02 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static int	init_sprite(t_game *game, char **line_split, int s_index)
 		}
 		handle_collectible(game, line_split, s);
 		bound_start(s, s->t);
+		s->image = 0;
 		game->list_sprite[s_index] = s;
 		index += 2;
 		s_index++;
@@ -110,4 +111,5 @@ void	parse_sprite(t_game *game, int fd)
 		line = get_next_non_empty_line(fd);
 	}
 	init_gun(game);
+	init_enemy_texture(game);
 }
