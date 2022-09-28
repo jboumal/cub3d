@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_title.h                                      :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:45:55 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/21 18:06:45 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:42:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_TITLE_H
-# define SCENE_TITLE_H
+#ifndef SCENE_H
+# define SCENE_H
 
 # include "cub3d.h"
 
