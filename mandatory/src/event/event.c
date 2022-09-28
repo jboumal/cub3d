@@ -39,6 +39,10 @@ int	key_down(int code, t_game *game)
 		game->state.left = true;
 	else if (code == K_D)
 		game->state.right = true;
+	else if (code == K_LEFT)
+		game->state.r_left = true;
+	else if (code == K_RIGHT)
+		game->state.r_right = true;
 	else if (code == K_ESC)
 		quit(game);
 	return (0);
@@ -54,5 +58,9 @@ int	key_release(int code, t_game *game)
 		game->state.left = false;
 	else if (code == K_D)
 		game->state.right = false;
+	else if (code == K_LEFT)
+		game->state.r_left = false;
+	else if (code == K_RIGHT)
+		game->state.r_right = false;
 	return (0);
 }
