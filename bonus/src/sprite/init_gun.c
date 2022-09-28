@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:27:35 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 16:27:58 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:46:19 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	init_sprite_gun(t_game *game, t_gun *gun, int i)
 	gun->s.dist_to_p = 0;
 	gun->s.angle = 0;
 	gun->s.image = 0;
-	if (i == 0)
+	if (i == PISTOL)
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/pistol.xpm");
-	else if (i == 1)
+	else if (i == MACH)
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/mach.xpm");
-	else if (i == 2)
+	else if (i == GATLING)
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/gatling.xpm");
-	else if (i == 3)
+	else if (i == KNIFE)
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/knife.xpm");
 	bound_start(&gun->s, gun->s.t);
 	gun->s.height = (game->img_h / gun->s.t.height - 1) * gun->s.t.height;
@@ -43,6 +43,8 @@ void	init_gun(t_game *game)
 		gun = x_malloc(sizeof(t_gun));
 		init_sprite_gun(game, gun, i);
 		gun->image = 0;
+		gun->ammo = 15;
+		gun->is_knife = i == KNIFE;
 		game->list_gun[i] = gun;
 		i++;
 	}
