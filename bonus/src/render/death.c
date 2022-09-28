@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:09:12 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 10:06:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 01:39:44 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,54 +48,36 @@ static void	put_pixel(t_img *img, int elem, int pixel_size)
 		j = 0;
 		while (j < pixel_size)
 		{
-			my_mlx_pixel_put(img, elem / SCREEN_H + i,
-				elem % SCREEN_H + j, RED);
+			if (elem < SCREEN_W * SCREEN_H)
+				my_mlx_pixel_put(img, elem / SCREEN_H + i,
+					(elem % SCREEN_H) + j, RED);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void	draw_death(t_game *game, int *red_pixel)
+static void	draw_death(t_game *game, int *red_pixel, int size)
 {
 	t_img	*img;
 	int		i;
 	int		j;
+	bool	t;
 
 	i = 0;
 	j = 0;
 	img = &game->full_buffer;
-	shuffle(red_pixel, SCREEN_W * SCREEN_H / DEATH_SIZE);
-	while (i < SCREEN_W * SCREEN_H)
-	{
-		put_pixel(img, red_pixel[j], DEATH_SIZE);
-		if (!(i % 2) && !(i % 3) && !(i % 17))
-			mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
-		i += DEATH_SIZE;
-		j++;
-	}
-	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
-	usleep(1000000);
-	free(red_pixel);
-}
-
-void	anim_death(t_game *game)
-{
-	int		i;
-	int		j;
-	int		*red_pixel;
-	bool	t;
-
-	red_pixel = x_malloc((SCREEN_W * SCREEN_H / DEATH_SIZE) * sizeof(int));
-	i = 0;
-	j = 0;
+	shuffle(red_pixel, size);
 	t = true;
 	while (i < SCREEN_W * SCREEN_H)
 	{
-		red_pixel[j] = i;
+		if (j < size)
+			put_pixel(img, red_pixel[j], DEATH_SIZE);
+		if (!(i % 2) && !(i % 3) && !(i % 5))
+			mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 		if (i > SCREEN_H && !(i % (SCREEN_H)) && t)
 		{
-			i += 3 * SCREEN_H;
+			i += (DEATH_SIZE - 1) * SCREEN_H;
 			t = false;
 		}
 		else
@@ -105,5 +87,40 @@ void	anim_death(t_game *game)
 		}
 		j++;
 	}
-	draw_death(game, red_pixel);
+	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
+	usleep(500000);
+	free(red_pixel);
+}
+
+void	anim_death(t_game *game)
+{
+	int		i;
+	int		j;
+	int		*red_pixel;
+	bool	t;
+	int		size;
+
+	size = (SCREEN_W * SCREEN_H) / (DEATH_SIZE * DEATH_SIZE);
+	red_pixel = x_malloc(size * sizeof(int));
+	//ft_memset(red_pixel, 0, size * sizeof(int));
+	i = 0;
+	j = 0;
+	t = true;
+	while (i < SCREEN_W * SCREEN_H)
+	{
+		if (j < size)
+			red_pixel[j] = i;
+		if (i > SCREEN_H && !(i % (SCREEN_H)) && t)
+		{
+			i += (DEATH_SIZE - 1) * SCREEN_H;
+			t = false;
+		}
+		else
+		{
+			i += DEATH_SIZE;
+			t = true;
+		}
+		j++;
+	}
+	draw_death(game, red_pixel, size);
 }

@@ -35,7 +35,8 @@ static int	fill_map_dimensions(char *map_str, t_game *g)
 	map_size = g->map.width * g->map.height * sizeof(int);
 	g->map.data = x_malloc(map_size);
 	g->map.object_map = x_malloc(map_size);
-	g->map.visible_tiles = x_malloc(map_size);
+	g->map.visible_tiles = x_malloc(g->map.width
+			* g->map.height * sizeof(bool));
 	return (map_size);
 }
 
