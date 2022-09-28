@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:21:53 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 15:49:27 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:04:41 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	add_enemy(t_game *game, t_enemy *enemy)
 
 	i = 0;
 	while (game->list_sprite[i])
-	i++;
+		i++;
 	game->list_sprite[i] = &enemy->s;
 	game->list_enemy[0] = enemy;
 }

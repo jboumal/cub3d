@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 16:31:24 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:08:50 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static void	add_action_sprite(t_sprite *s, char *sprite_name)
 	if (!str_n_cmp(sprite_name, "machinegun.xpm", strlen(sprite_name)))
 	{
 		s->collect_action = replace_gun;
+		s->enum_gun = MACH;
+	}
+	if (!str_n_cmp(sprite_name, "bullet.xpm", strlen(sprite_name)))
+	{
+		s->collect_action = collect_ammo;
 		s->enum_gun = MACH;
 	}
 }

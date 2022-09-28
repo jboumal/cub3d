@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 16:05:49 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:13:05 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_gun
 {
 	t_sprite		s;
 	double			image;
-	int				ammo;
+	unsigned int	ammo;
+	bool			is_knife;
 }	t_gun;
 
 /* sprite */
@@ -67,6 +68,7 @@ void	compute_field_sprite(t_game *g);
 void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image);
 
 /* gun */
+void	collect_ammo(t_game *game, t_sprite *ammo);
 void	anim_gun(t_game *game);
 void	switch_gun(t_game *game);
 void	replace_gun(t_game *game, t_sprite *gun);

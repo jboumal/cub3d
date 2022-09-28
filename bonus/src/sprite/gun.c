@@ -6,11 +6,28 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 16:27:53 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:44:39 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	collect_ammo(t_game *game, t_sprite *ammo)
+{
+	t_gun		*gun;
+
+	(void) ammo;
+	gun = game->list_active_gun[game->active_gun];
+	if (gun)
+	{
+		if (gun->is_knife)
+		{
+			game->list_active_gun[0] = game->list_gun[PISTOL];
+			game->list_active_gun[0]->ammo = 15;
+		}
+		gun->ammo += 15;
+	}
+}
 
 void	anim_gun(t_game *game)
 {
@@ -19,24 +36,50 @@ void	anim_gun(t_game *game)
 
 	i = 0;
 	gun = game->list_active_gun[game->active_gun];
-	if (!gun->image)
-		gun->image += 1;
+	if (gun)
+	{
+		if (gun->ammo || gun->is_knife)
+		{
+			gun->ammo--;
+			if (!gun->image)
+				gun->image += 1;
+		}
+		else
+		{
+			if (game->list_active_gun[!game->active_gun]
+				&& game->list_active_gun[!game->active_gun]->ammo)
+				game->active_gun = !game->active_gun;
+			else
+				game->list_active_gun[0] = game->list_gun[KNIFE];
+		}
+	}
 }
 
 void	switch_gun(t_game *game)
 {
-	if (game->list_active_gun[1])
+	if (game->list_active_gun[1]
+		&& game->list_active_gun[!game->active_gun]->ammo)
 		game->active_gun = !game->active_gun;
 }
 
 void	replace_gun(t_game *game, t_sprite *gun)
 {
+	t_gun	*new_gun;
+
+	new_gun = game->list_gun[gun->enum_gun];
+	new_gun->ammo = 15;
+	if (game->list_active_gun[0]->is_knife)
+	{
+		game->list_active_gun[0] = new_gun;
+		game->list_active_gun[1] = NULL;
+		return ;
+	}
 	if (!game->list_active_gun[1])
-		game->list_active_gun[1] = game->list_gun[gun->enum_gun];
+		game->list_active_gun[1] = new_gun;
 	else
 	{
 		free(game->list_active_gun[game->active_gun]);
-		game->list_active_gun[game->active_gun] = game->list_gun[gun->enum_gun];
+		game->list_active_gun[game->active_gun] = new_gun;
 	}
 }
 
