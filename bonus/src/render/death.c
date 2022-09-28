@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:09:12 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 03:10:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:06:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	shuffle(int *array, size_t n)
 	}
 }
 
-static void	put_pixel(t_game *g, t_img *img, int elem, int pixel_size)
+static void	put_pixel(t_img *img, int elem, int pixel_size)
 {
 	int		i;
 	int		j;
@@ -68,7 +68,7 @@ static void	draw_death(t_game *game, int *red_pixel)
 	shuffle(red_pixel, SCREEN_W * SCREEN_H / DEATH_SIZE);
 	while (i < SCREEN_W * SCREEN_H)
 	{
-		put_pixel(game, img, red_pixel[j], DEATH_SIZE);
+		put_pixel(img, red_pixel[j], DEATH_SIZE);
 		if (!(i % 2) && !(i % 3) && !(i % 17))
 			mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 		i += DEATH_SIZE;

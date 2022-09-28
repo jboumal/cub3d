@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/27 17:02:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:05:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,15 @@ static void	free_sprites(t_game *g)
 
 int	quit(t_game *g)
 {
-	int		i;
+	int	i;
 
-	mlx_destroy_window(g->mlx, g->window);
 	i = 0;
 	while (i < WALL_MAX)
 	{
-		//clear_images(g->walls[i], g);
-		//clst_clear(&g->walls[i], free);
+		clear_images(g->walls[i].imgs, g);
 		i++;
 	}
+	mlx_destroy_window(g->mlx, g->window);
 	mlx_destroy_image(g->mlx, g->sky.img);
 	mlx_destroy_image(g->mlx, g->floor.img);
 	mlx_destroy_image(g->mlx, g->small_buffer.img);

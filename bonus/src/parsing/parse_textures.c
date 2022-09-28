@@ -27,7 +27,6 @@ static void	add_wall(char *str, t_game *g)
 {
 	int			i;
 	char		**arr;
-	t_node		*node;
 
 	arr = ft_split(str, ',');
 	i = 0;
