@@ -42,6 +42,9 @@ static void	init_draw_line(t_draw_line_var *var, t_ray *ray, t_game *g)
 	set_start_end(var->line_height, &(var->draw_start), &(var->draw_end));
 	var->tex_x = get_tex_x(ray, g);
 	var->ray = ray;
+	var->tex = &g->textures[var->ray->side];
+	var->mask = 1 << ((sizeof(unsigned int) << 3)
+			- clz(var->tex->height));
 }
 
 static void	draw_line(int x, t_draw_line_var *var, t_img *img, t_game *g)
@@ -59,9 +62,10 @@ static void	draw_line(int x, t_draw_line_var *var, t_img *img, t_game *g)
 			my_mlx_pixel_put(img, x, y, g->map.floor);
 		else
 		{
-			ty = (y - var->draw_start) * H / (var->line_height);
+			ty = (((y - var->draw_start) * var->mask / var->line_height)
+					& (var->mask -1)) * ((double)var->tex->height / var->mask);
 			color = mlx_get_pixel(
-					&g->textures[var->ray->side],
+					var->tex,
 					var->tex_x,
 					ty);
 			my_mlx_pixel_put(img, x, y, color);

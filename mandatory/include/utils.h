@@ -20,6 +20,9 @@
 /* ato */
 bool			atoui8_error(const char *s, uint8_t *n);
 
+/* bits */
+int				clz(unsigned int i);
+
 /* copy */
 void			*ft_memset(void *b, int c, size_t len);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
