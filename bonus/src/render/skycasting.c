@@ -38,8 +38,8 @@ void	skycasting(int x0, int x1, t_img *img, t_game *g)
 				vector_scalar_multiplication(
 					g->player.plane,
 					(double)2 * x0 / (double)g->img_w - 1)));
-	tx = 4 * angle / (2 * M_PI) * g->sky.width;
-	ty_range = 4 * get_fov_ratio(g) * g->sky.width / g->img_w * (g->img_h / 2);
+	tx = angle / (2 * M_PI) * g->sky.width;
+	ty_range = get_fov_ratio(g) * g->sky.width / g->img_w * (g->img_h / 2);
 	y = 0;
 	while (y < g->img_h / 2)
 	{
