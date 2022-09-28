@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface.c                                        :+:      :+:    :+:   */
+/*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 21:39:19 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:55:21 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,53 @@ static void	render_background(t_img *img)
 {
 	int	i;
 	int	j;
-	int	border_width;
 
-	border_width = 5;
 	i = SCREEN_H - UI_H;
 	while (i < SCREEN_H)
 	{
 		j = 0;
 		while (j < SCREEN_W)
 		{
-			if (i < SCREEN_H - UI_H + border_width)
-				my_mlx_pixel_put(img, j, i, UI_COLOR1);
-			else
-				my_mlx_pixel_put(img, j, i, UI_COLOR2);
+			my_mlx_pixel_put(img, j, i, UI_COLOR2);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void	render_frame(t_img *img)
+void	blt_dst(t_img *src, t_img *dst, int dx, int dy)
 {
-	int	i;
-	int	j;
-	int	border_width;
+	int		x;
+	int		y;
+	char	*pixel_dst;
+	char	*pixel_src;
+	int		color;
 
-	i = SCREEN_H - UI_H;
-	border_width = 5;
-	while (i < SCREEN_H)
+	y = 0;
+	while (y < src->height)
 	{
-		j = 0;
-		while (j < UI_H)
+		x = 0;
+		while (x < src->width)
 		{
-			if (i < SCREEN_H - UI_H + border_width || j < border_width
-				|| j > UI_H - border_width)
-				my_mlx_pixel_put(img, j, i, 0x2d6e6f);
-			j++;
+			pixel_dst = dst->addr + ((y + dy) * dst->line_length + (x + dx)
+					* (dst->bits_per_pixel / 8));
+			pixel_src = src->addr + (y * src->line_length + x
+					* (src->bits_per_pixel / 8));
+			color = (*(int *)pixel_src);
+			if (color >= 0)
+				*(unsigned int *) pixel_dst = *(unsigned int *) pixel_src;
+			if (color > 0 && *(unsigned int *) pixel_dst == 0)
+				*(unsigned int *) pixel_dst = 0xff000000;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
 void	render_ui(t_img *img, t_game *game)
 {
 	render_background(img);
+	blt_dst(&game->title.hud, img, SCREEN_W / 2 - game->title.hud.width / 2,
+		SCREEN_H - UI_H);
 	render_minimap(img, game);
-	render_frame(img);
 }

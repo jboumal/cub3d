@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:45:55 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 16:42:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:07:06 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_title
 	t_img	quit[2];
 	t_img	select;
 	t_img	render;
+	t_img	hud;
 }	t_title;
 
 #endif
