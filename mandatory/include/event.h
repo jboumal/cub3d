@@ -28,7 +28,7 @@
 #  define K_A 97
 #  define K_S 115
 #  define K_D 100
-#  define K_ESC 653076563463
+#  define K_ESC 65307
 
 # else
 #  define K_W 13

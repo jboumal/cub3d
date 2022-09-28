@@ -43,7 +43,7 @@ static bool	is_full(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (!game->textures[i].data.img)
+		if (!game->textures[i].img)
 			return (false);
 		i++;
 	}
@@ -59,10 +59,9 @@ void	parse_textures(t_game *game, int fd)
 		line = get_next_non_empty_line(fd);
 		line[strlen(line) - 2] = '\0';
 		if (is_token(line, "NO :SO :EA :WE ", ':', 3))
-			load_texture(
-				game->mlx,
-				skip_spaces(line + 2),
-				&game->textures[get_direction(line[0])]);
+			game->textures[get_direction(line[0])] = get_img_from_xpm(
+					game->mlx,
+					skip_spaces(line + 2));
 		else if (!str_n_cmp("F ", line, 2))
 			game->map.floor = parse_color(skip_spaces(line + 1));
 		else if (!str_n_cmp("C ", line, 2))

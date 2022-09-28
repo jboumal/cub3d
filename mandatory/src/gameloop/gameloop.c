@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-static void	fps_counter(void)
-{
-	static int		n_frame = 0;
-	static int		second = 0;
-	struct timeval	t;
-
-	n_frame ++;
-	gettimeofday(&t, NULL);
-	if (t.tv_sec > second)
-	{
-		printf ("%d fps\n", n_frame);
-		n_frame = 0;
-		second = t.tv_sec;
-	}
-}
-
 static void	game_update(t_game *game)
 {
 	translate_cam(game);
@@ -36,7 +20,6 @@ static void	game_update(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	fps_counter();
 	game_update(game);
 	render(game);
 	return (0);

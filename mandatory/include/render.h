@@ -56,7 +56,7 @@ typedef struct s_draw_line_var
 void	dda(t_ray *ray, t_game *game);
 
 /* raycasting */
-void	raycasting(int x, t_data *img, t_game *game);
+void	raycasting(int x, t_img *img, t_game *game);
 
 /* render */
 void	render(t_game *game);

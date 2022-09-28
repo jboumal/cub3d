@@ -17,14 +17,16 @@
 
 # define SPACES " \t"
 
-typedef struct s_data
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_data;
+	int		width;
+	int		height;
+}	t_img;
 
 typedef struct s_map
 {
@@ -50,23 +52,15 @@ typedef struct s_state
 	bool	right;
 }	t_state;
 
-typedef struct s_texture
-{
-	t_data	data;
-	int		width;
-	int		height;
-	int		n_image;
-}	t_texture;
-
 typedef struct s_game
 {
 	void		*mlx;
 	void		*window;
-	t_data		img;
+	t_img		img;
 	t_map		map;
 	t_player	player;
 	t_state		state;
-	t_texture	textures[4];
+	t_img	textures[4];
 }	t_game;
 
 /* check_map */

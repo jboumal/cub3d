@@ -44,10 +44,10 @@ int64_t			min(int64_t a, int64_t b);
 int64_t			max(int64_t a, int64_t b);
 
 /* mlx_utils */
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_data			get_new_img(void *mlx, int width, int height);
-unsigned int	mlx_get_pixel(t_data *data, int x, int y);
-void			load_texture(void *mlx, char *path, t_texture *texture);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+t_img			get_new_img(void *mlx, int width, int height);
+unsigned int	mlx_get_pixel(t_img *img, int x, int y);
+t_img			get_img_from_xpm(void *mlx, char *path);
 
 /* put */
 void			dputstr(int fd, char *s);
