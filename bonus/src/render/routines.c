@@ -71,8 +71,8 @@ void	*routine_rescale(void *arg)
 	t_img		*img;
 	t_game		*g;
 
-	i = get_start(((t_th_arg *)arg)->i, 0, SCREEN_H - 1, N_THREAD);
-	end = get_end(((t_th_arg *)arg)->i, 0, SCREEN_H - 1, N_THREAD);
+	i = get_start(((t_th_arg *)arg)->i, 0, SCREEN_H, N_THREAD);
+	end = get_end(((t_th_arg *)arg)->i, 0, SCREEN_H, N_THREAD);
 	img = ((t_th_arg *)arg)->data[0];
 	g = ((t_th_arg *)arg)->data[1];
 	while (i <= end)
@@ -83,7 +83,7 @@ void	*routine_rescale(void *arg)
 			my_mlx_pixel_put(
 				&g->full_buffer,
 				j,
-				i,
+				i * (SCREEN_H - UI_H) / SCREEN_H,
 				mlx_get_pixel(img, j * SCALE, i * SCALE));
 			j++;
 		}

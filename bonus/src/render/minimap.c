@@ -32,7 +32,8 @@ static int	render_rect(t_img *img, t_rect rect)
 		j = rect.x;
 		while (j < rect.x + rect.width)
 		{
-			my_mlx_pixel_put(img, j, i, rect.color);
+			if (i < UI_H && i >= 0 && j >= 0 && j < UI_H)
+				my_mlx_pixel_put(img, j, i + SCREEN_H - UI_H, rect.color);
 			j++;
 		}
 		i++;
@@ -40,7 +41,7 @@ static int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
-static void	drawline(t_img *img, t_vector p0, t_vector p1, t_game *g)
+static void	drawline(t_img *img, t_vector p0, t_vector p1)
 {
 	double	delta_x;
 	double	delta_y;
@@ -54,17 +55,13 @@ static void	drawline(t_img *img, t_vector p0, t_vector p1, t_game *g)
 	delta_x /= pixels;
 	delta_y /= pixels;
 	pixel_x = p0.x;
-	pixel_y = p0.y;
+	pixel_y = p0.y + SCREEN_H - UI_H;
 	while (pixels)
 	{
-		if (
-			pixel_x >= 0 && pixel_y >= 0
-			&& pixel_x < g->map.width * TILEMAP_SIZE
-			&& pixel_y < g->map.height * TILEMAP_SIZE)
-			my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
+		my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
-		--pixels;
+		pixels--;
 	}
 }
 
@@ -78,43 +75,45 @@ static void	render_miniplayer(t_img *img, t_game *g)
 
 	p = g->player;
 	init_rect(&rect, 6);
-	rect.x = g->player.pos.x * TILEMAP_SIZE - 6 / 2;
-	rect.y = (g->map.height - g->player.pos.y) * TILEMAP_SIZE - 6 / 2;
+	rect.x = UI_H / 2;
+	rect.y = UI_H / 2;
 	rect.color = 0xFF0000;
 	position0 = vector(rect.x + 3, rect.y + 3);
-	position1 = vector((p.pos.x + (p.dir.x * 1 - p.plane.x) * 2) * TILEMAP_SIZE,
-			((g->map.height - p.pos.y) - (p.dir.y - p.plane.y) * 2)
-			* TILEMAP_SIZE);
-	position2 = vector((p.pos.x + (p.dir.x * 1 + p.plane.x) * 2) * TILEMAP_SIZE,
-			((g->map.height - p.pos.y) - (p.dir.y + p.plane.y) * 2)
-			* TILEMAP_SIZE);
-	drawline(img, position0, position1, g);
-	drawline(img, position0, position2, g);
-	drawline(img, position1, position2, g);
+	position1 = vector((rect.x + 3 + (p.dir.x * 1 - p.plane.x) * 20),
+			(rect.x + 3 - (p.dir.y - p.plane.y) * 20));
+	position2 = vector((rect.y + 3 + (p.dir.x * 1 + p.plane.x) * 20),
+			(rect.y + 3 - (p.dir.y + p.plane.y) * 20));
+	drawline(img, position0, position1);
+	drawline(img, position0, position2);
+	drawline(img, position1, position2);
 	render_rect(img, rect);
 }
 
-void	render_minimap(t_img *img, t_game *game)
+void	render_minimap(t_img *img, t_game *g)
 {
 	int		i;
 	t_rect	rect;
 	t_map	map;
 
-	init_rect(&rect, TILEMAP_SIZE);
-	map = game->map;
+	init_rect(&rect, UI_H);
+	rect.color = MMAP_COLOR1;
+	render_rect(img, rect);
+	map = g->map;
 	i = 0;
+	init_rect(&rect, TILEMAP_SIZE);
 	while (i < map.height * map.width)
 	{
-		rect.x = (i % map.width) * TILEMAP_SIZE;
-		rect.y = ((map.height * map.width - 1 - i) / map.width) * TILEMAP_SIZE;
+		rect.x = (i % map.width) * TILEMAP_SIZE
+			- (TILEMAP_SIZE * (g->player.pos.x - 6.25)) + 3;
+		rect.y = ((map.height * map.width - 1 - i) / map.width) * TILEMAP_SIZE
+			- (TILEMAP_SIZE * (g->map.height - g->player.pos.y - 6.25)) + 3;
+		rect.color = 0x000000;
 		if (map.data[i] == 1)
-			rect.color = 0x4B7A68;
+			rect.color = MMAP_COLOR1;
 		else if (map.data[i] == 0)
-			rect.color = 0x7CE7D6;
-		else
-			rect.color = 0;
+			rect.color = MMAP_COLOR2;
 		render_rect(img, rect);
 		i++;
 	}
-	render_miniplayer(img, game);
+	render_miniplayer(img, g);
 }

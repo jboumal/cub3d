@@ -64,12 +64,9 @@ void	render(t_game *game)
 	compute_pixels(img, game, routine_wall);
 	render_sprites(game);
 	render_gun(game);
-	if (SCALE != 1)
-	{
-		compute_pixels(img, game, routine_rescale);
-		img = &game->full_buffer;
-	}
-	render_minimap(img, game);
+	compute_pixels(img, game, routine_rescale);
+	img = &game->full_buffer;
+	render_ui(img, game);
 	mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 	put_fps(game);
 }

@@ -15,13 +15,12 @@
 
 # define SCREEN_TITLE "cub3d"
 # define SCREEN_W 1350
-# define SCREEN_H 800
+# define SCREEN_H 900
 # define SCALE 0.8
 # define N_THREAD 4
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define MRS 0.003 // Mouse rotation speed
-# define TILEMAP_SIZE 12
 # define PLANE_LENGTH 0.7
 # define PI2_F 6.28318530718
 # define RED 0x00FF0000
@@ -43,6 +42,7 @@
 # include "data_struct.h"
 # include "scene_title.h"
 # include "parsing.h"
+# include "interface.h"
 # include "utils.h"
 # include "gameloop.h"
 # include "event.h"
