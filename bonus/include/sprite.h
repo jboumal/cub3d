@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 17:13:05 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:56:45 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define NOT_PIXEL 9961608
 # define STILL_NOT_PIXEL -16777216
-# define MIN_DIST 0.5
+# define MIN_DIST 0.35
 # define MAX_DIST 20
 
 typedef void	(*t_spr_action)(t_game *game, t_sprite *gun);
