@@ -37,7 +37,7 @@ static void	set_player(int i, int j, enum e_side direction, t_game *g)
 {
 	if (g->player.pos.x)
 		exit_error("mutiple player position in map");
-	g->player.pos = vector(j, i);
+	g->player.pos = vector(j + 0.5, i - 0.5);
 	g->player.dir.y = (direction == N) - (direction == S);
 	g->player.dir.x = (direction == E) - (direction == W);
 	g->player.plane.x = 0.66 * g->player.dir.y;
