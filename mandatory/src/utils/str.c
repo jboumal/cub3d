@@ -41,3 +41,17 @@ bool	is_token(char *str, char *tokens, char sep, size_t n)
 		return (is_token(str, ptr + 1, sep, n));
 	return (false);
 }
+
+char	*str_r_chr(const char *s, int c)
+{
+	int		i;
+	char	ch;
+
+	i = str_len(s);
+	ch = (char) c;
+	while (i >= 0 && s[i] != ch)
+		i--;
+	if (i >= 0 && s[i] == ch)
+		return ((char *) s + i);
+	return (NULL);
+}

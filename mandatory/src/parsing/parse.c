@@ -17,6 +17,19 @@ enum e_side	get_direction(char c)
 	return ((c == 'N') * N + (c == 'S') * S + (c == 'W') * W + (c == 'E') * E);
 }
 
+static void	check_filename(char *filename)
+{
+	char	*dot;
+	int		len;
+
+	dot = str_r_chr(filename, '.');
+	if (!dot)
+		exit_error("invalid map format");
+	len = strlen(dot);
+	if (len != 4 || str_n_cmp(".cub", dot, len))
+		exit_error("invalid map format");
+}
+
 static void	invert_map_rows(t_game *g)
 {
 	int	i;
@@ -45,6 +58,7 @@ void	parse(int argc, char **argv, t_game *game)
 
 	if (argc != 2)
 		exit_error("invalid number of arguments");
+	check_filename(argv[1]);
 	fd = open(argv[1], O_DIRECTORY);
 	if (fd != -1)
 		exit_error("the map is a folder");
