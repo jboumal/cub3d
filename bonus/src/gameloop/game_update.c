@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:25:54 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/12 18:36:10 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:57:46 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	game_update(t_game *game)
 	rotate_cam(game);
 	update_doors(game);
 	update_textures(game);
+	update_enemy(game);
 }

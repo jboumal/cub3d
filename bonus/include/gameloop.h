@@ -28,4 +28,7 @@ void	game_update(t_game *game);
 void	translate_cam(t_game *game);
 void	rotate_cam(t_game *game);
 
+/* update_enemy */
+void	update_enemy(t_game *g);
+
 #endif
