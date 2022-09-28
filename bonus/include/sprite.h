@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 03:16:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:05:49 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ typedef struct s_sprite
 
 typedef struct s_gun
 {
-	t_sprite		sprite;
+	t_sprite		s;
 	double			image;
-	enum e_gun		enum_gun;
+	int				ammo;
 }	t_gun;
 
 /* sprite */

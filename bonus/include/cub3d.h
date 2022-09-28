@@ -48,5 +48,6 @@
 # include "event.h"
 # include "render.h"
 # include "sprite.h"
+# include "enemy.h"
 
 #endif

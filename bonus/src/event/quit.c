@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/28 11:07:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:20:25 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	free_sprites(t_game *g)
 	while (i < GUN_MAX)
 	{
 		if (g->list_gun[i])
-			mlx_destroy_image(g->mlx, g->list_gun[i]->t.img);
+			mlx_destroy_image(g->mlx, g->list_gun[i]->s.t.img);
 		free(g->list_gun[i]);
 		i++;
 	}

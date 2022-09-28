@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 04:17:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:31:24 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,9 @@ static int	init_sprite(t_game *game, char **line_split, int s_index)
 		s->collect_action = NULL;
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
-		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
-		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
-		{
-			index += 2;
-			continue ;
-		}
 		handle_collectible(game, line_split, s);
 		bound_start(s, s->t);
+		s->image = 0;
 		game->list_sprite[s_index] = s;
 		index += 2;
 		s_index++;
@@ -110,4 +105,5 @@ void	parse_sprite(t_game *game, int fd)
 		line = get_next_non_empty_line(fd);
 	}
 	init_gun(game);
+	init_enemy_texture(game);
 }
