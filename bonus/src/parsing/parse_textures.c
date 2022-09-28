@@ -59,7 +59,8 @@ void	parse_textures(t_game *g, int fd)
 			g->floor = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
 		else if (!str_n_cmp("C ", s.str, 2))
 		{
-			g->sky = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
+			g->map.ceil_repeat = s.str[2] - '0';
+			g->sky = get_img_from_xpm(g->mlx, skip_spaces(s.str + 4));
 			g->map.ceil = 1;
 		}
 		else

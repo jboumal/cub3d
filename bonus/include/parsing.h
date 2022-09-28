@@ -34,6 +34,7 @@ typedef struct s_map
 	int		height;
 	int		ceil;
 	int		floor;
+	int		ceil_repeat;
 }	t_map;
 
 typedef struct s_player

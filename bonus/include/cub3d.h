@@ -41,7 +41,7 @@
 # include <pthread.h>
 
 # include "data_struct.h"
-# include "scene_title.h"
+# include "scene.h"
 # include "parsing.h"
 # include "utils.h"
 # include "gameloop.h"
