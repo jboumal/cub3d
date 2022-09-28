@@ -23,6 +23,7 @@
 
 typedef struct s_sprite	t_sprite;
 typedef struct s_enemy	t_enemy;
+typedef struct s_gun	t_gun;
 
 typedef struct s_map
 {
@@ -87,8 +88,8 @@ typedef struct s_game
 	t_list		doors;
 	t_enemy		*list_enemy[ENEMY_MAX];
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_gun[GUN_MAX];
-	t_sprite	*list_active_gun[2];
+	t_gun		*list_gun[GUN_MAX];
+	t_gun		*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 	t_scene		scene;
 	t_title		title;

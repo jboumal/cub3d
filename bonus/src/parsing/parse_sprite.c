@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 15:14:02 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:31:24 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,6 @@ static int	init_sprite(t_game *game, char **line_split, int s_index)
 		s->collect_action = NULL;
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
-		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
-		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
-		{
-			index += 2;
-			continue ;
-		}
 		handle_collectible(game, line_split, s);
 		bound_start(s, s->t);
 		s->image = 0;
