@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_norme.c                                     :+:      :+:    :+:   */
+/*   enemy.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 11:19:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/28 17:41:13 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/09/28 14:36:45 by bperraud          #+#    #+#             */
+/*   Updated: 2022/09/28 19:51:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ENEMY_H
+# define ENEMY_H
+
+# define WALK_START 0
+# define WALK_END 3
+# define SHOOT_START 4
+# define SHOOT_END 6
+# define DIE_START 7
+# define DIE_END 10
+# define PADDING 0.9
+
 #include "cub3d.h"
 
-double	vector_norme(t_vector v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y));
-}
+void    init_enemy_texture(t_game *game);
 
-t_vector	vector_normalize(t_vector v)
+enum e_enemy
 {
-	return (vector(v.x / vector_norme(v), v.y / vector_norme(v)));
-}
+	WALK,
+	SHOOT,
+	DIE
+};
+
+typedef struct s_enemy
+{
+	t_sprite		s;
+	enum e_enemy	state;
+}	t_enemy;
+
+#endif

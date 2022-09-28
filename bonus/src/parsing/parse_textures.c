@@ -40,6 +40,20 @@ static void	add_wall(char *str, t_game *g)
 	str_arr_free(arr);
 }
 
+static void	parse_ceiling(t_game *g, t_dy_str *s)
+{
+	char		**spt;
+
+	spt = ft_split(s->str, ' ');
+	g->sky = get_img_from_xpm(g->mlx, spt[1]);
+	if (spt[2])
+		g->map.ceil_repeat = ft_atoi(spt[2]);
+	else
+		g->map.ceil_repeat = 1;
+	g->map.ceil = 1;
+	str_arr_free(spt);
+}
+
 void	parse_textures(t_game *g, int fd)
 {
 	char		*line;
@@ -58,10 +72,7 @@ void	parse_textures(t_game *g, int fd)
 		else if (!str_n_cmp("F ", s.str, 2))
 			g->floor = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
 		else if (!str_n_cmp("C ", s.str, 2))
-		{
-			g->sky = get_img_from_xpm(g->mlx, skip_spaces(s.str + 2));
-			g->map.ceil = 1;
-		}
+			parse_ceiling(g, &s);
 		else
 			exit_error("invalid identifier");
 		dy_str_destroy(&s);

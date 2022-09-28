@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/21 17:05:49 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:41:09 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_scalar_multiplication(t_vector v, double a);
 t_vector	vector_rotate(t_vector v, double a);
 double		vector_norme(t_vector v);
+t_vector	vector_normalize(t_vector v);
 
 #endif

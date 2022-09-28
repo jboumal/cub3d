@@ -3,88 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 04:18:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:44:39 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	collect_ammo(t_game *game, t_sprite *ammo)
+{
+	t_gun		*gun;
+
+	(void) ammo;
+	gun = game->list_active_gun[game->active_gun];
+	if (gun)
+	{
+		if (gun->is_knife)
+		{
+			game->list_active_gun[0] = game->list_gun[PISTOL];
+			game->list_active_gun[0]->ammo = 15;
+		}
+		gun->ammo += 15;
+	}
+}
+
 void	anim_gun(t_game *game)
 {
 	int			i;
-	t_sprite	*gun;
+	t_gun		*gun;
 
 	i = 0;
 	gun = game->list_active_gun[game->active_gun];
-	if (!gun->image)
-		gun->image += 1;
+	if (gun)
+	{
+		if (gun->ammo || gun->is_knife)
+		{
+			gun->ammo--;
+			if (!gun->image)
+				gun->image += 1;
+		}
+		else
+		{
+			if (game->list_active_gun[!game->active_gun]
+				&& game->list_active_gun[!game->active_gun]->ammo)
+				game->active_gun = !game->active_gun;
+			else
+				game->list_active_gun[0] = game->list_gun[KNIFE];
+		}
+	}
 }
 
 void	switch_gun(t_game *game)
 {
-	if (game->list_active_gun[1])
+	if (game->list_active_gun[1]
+		&& game->list_active_gun[!game->active_gun]->ammo)
 		game->active_gun = !game->active_gun;
 }
 
 void	replace_gun(t_game *game, t_sprite *gun)
 {
+	t_gun	*new_gun;
+
+	new_gun = game->list_gun[gun->enum_gun];
+	new_gun->ammo = 15;
+	if (game->list_active_gun[0]->is_knife)
+	{
+		game->list_active_gun[0] = new_gun;
+		game->list_active_gun[1] = NULL;
+		return ;
+	}
 	if (!game->list_active_gun[1])
-		game->list_active_gun[1] = game->list_gun[gun->enum_gun];
+		game->list_active_gun[1] = new_gun;
 	else
 	{
 		free(game->list_active_gun[game->active_gun]);
-		game->list_active_gun[game->active_gun] = game->list_gun[gun->enum_gun];
+		game->list_active_gun[game->active_gun] = new_gun;
 	}
-}
-
-void	init_gun(t_game *game)
-{
-	t_sprite	*gun;
-	int			i;
-
-	i = 0;
-	while (i < GUN_MAX)
-	{
-		gun = x_malloc(sizeof(t_sprite));
-		gun->dist_to_p = 0;
-		gun->angle = 0;
-		gun->x_end = 0;
-		gun->y_end = 0;
-		gun->image = 0;
-		if (i == 0)
-			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/pistol.xpm");
-		else if (i == 1)
-			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/mach.xpm");
-		else if (i == 2)
-			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/gatling.xpm");
-		else if (i == 3)
-			gun->t = get_img_from_xpm(game->mlx, "img/sprite/gun/knife.xpm");
-		bound_start(gun, gun->t);
-		game->list_gun[i] = gun;
-		i++;
-	}
-	game->list_active_gun[0] = game->list_gun[0];
 }
 
 void	render_gun(t_game *game)
 {
-	t_sprite	*gun;
+	t_gun	*gun;
 
 	gun = game->list_active_gun[game->active_gun];
 	if (gun)
 	{
-		gun->height = (game->img_h / gun->t.height - 1) * gun->t.height;
-		gun->ceil = game->img_h - gun->height;
-		gun->width = gun->height;
-		gun->pixel_size = (int) gun->height / gun->t.height;
-		if (gun->image == gun->t.width / gun->t.height)
+		if (gun->image == gun->s.t.width / gun->s.t.height)
 			gun->image = 0;
 		else
 		{
-			draw_sprite(game, gun, &gun->t, gun->image);
+			draw_sprite(game, &gun->s, &gun->s.t, gun->image);
 			if (gun->image)
 				gun->image += 0.5;
 		}

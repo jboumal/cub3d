@@ -19,8 +19,11 @@
 # define WALL_MAX 79
 # define SPRITE_MAX 20
 # define GUN_MAX 4
+# define ENEMY_MAX 10
 
 typedef struct s_sprite	t_sprite;
+typedef struct s_enemy	t_enemy;
+typedef struct s_gun	t_gun;
 
 typedef struct s_map
 {
@@ -31,6 +34,7 @@ typedef struct s_map
 	int		height;
 	int		ceil;
 	int		floor;
+	int		ceil_repeat;
 }	t_map;
 
 typedef struct s_player
@@ -83,9 +87,10 @@ typedef struct s_game
 	t_img		floor;
 	t_img		sky;
 	t_list		doors;
+	t_enemy		*list_enemy[ENEMY_MAX];
 	t_sprite	*list_sprite[SPRITE_MAX];
-	t_sprite	*list_gun[GUN_MAX];
-	t_sprite	*list_active_gun[2];
+	t_gun		*list_gun[GUN_MAX];
+	t_gun		*list_active_gun[2];
 	double		depth_buf[SCREEN_W];
 	t_scene		scene;
 	t_title		title;

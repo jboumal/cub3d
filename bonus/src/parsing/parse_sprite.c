@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sprite.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/12 04:17:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:08:50 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static void	add_action_sprite(t_sprite *s, char *sprite_name)
 		s->collect_action = replace_gun;
 		s->enum_gun = MACH;
 	}
+	if (!str_n_cmp(sprite_name, "bullet.xpm", strlen(sprite_name)))
+	{
+		s->collect_action = collect_ammo;
+		s->enum_gun = MACH;
+	}
 }
 
 static void	handle_collectible(t_game *game, char **line_split, t_sprite *s)
@@ -78,14 +83,9 @@ static int	init_sprite(t_game *game, char **line_split, int s_index)
 		s->collect_action = NULL;
 		s->x = ft_atoi(line_split[index]) + 0.5;
 		s->y = ft_atoi(line_split[index + 1]) + 0.5;
-		if (game->map.data[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)]
-		!= 0 || s->x - 0.5 >= game->map.width || s->y - 0.5 >= game->map.height)
-		{
-			index += 2;
-			continue ;
-		}
 		handle_collectible(game, line_split, s);
 		bound_start(s, s->t);
+		s->image = 0;
 		game->list_sprite[s_index] = s;
 		index += 2;
 		s_index++;
@@ -110,4 +110,5 @@ void	parse_sprite(t_game *game, int fd)
 		line = get_next_non_empty_line(fd);
 	}
 	init_gun(game);
+	init_enemy_texture(game);
 }

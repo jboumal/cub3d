@@ -11,7 +11,7 @@
 a img/mobile/WALL010.xpm
 
 F img/floor/floor_grey.xpm
-C img/sky/sky.xpm
+C img/sky/sky.xpm 4
 
          11111111
        110000000011

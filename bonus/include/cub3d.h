@@ -40,7 +40,7 @@
 # include <pthread.h>
 
 # include "data_struct.h"
-# include "scene_title.h"
+# include "scene.h"
 # include "parsing.h"
 # include "interface.h"
 # include "utils.h"
@@ -48,5 +48,6 @@
 # include "event.h"
 # include "render.h"
 # include "sprite.h"
+# include "enemy.h"
 
 #endif
