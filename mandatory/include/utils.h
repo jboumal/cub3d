@@ -62,6 +62,7 @@ char			**ft_split(char const *str, char c);
 size_t			str_len(const char *str);
 int				str_n_cmp(const char *s1, const char *s2, size_t n);
 bool			is_token(char *str, char *tokens, char sep, size_t n);
+char			*str_r_chr(const char *s, int c);
 
 /* str_alloc */
 char			*ft_strdup(const char *s);
