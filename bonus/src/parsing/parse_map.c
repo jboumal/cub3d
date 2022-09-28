@@ -12,9 +12,10 @@
 
 #include "cub3d.h"
 
-static void	fill_map_dimensions(char *map_str, t_game *g)
+static int	fill_map_dimensions(char *map_str, t_game *g)
 {
 	int	width;
+	int	map_size;
 
 	width = 0;
 	while (*map_str)
@@ -31,6 +32,11 @@ static void	fill_map_dimensions(char *map_str, t_game *g)
 		map_str++;
 	}
 	g->map.height++;
+	map_size = g->map.width * g->map.height * sizeof(int);
+	g->map.data = x_malloc(map_size);
+	g->map.object_map = x_malloc(map_size);
+	g->map.visible_tiles = x_malloc(map_size);
+	return (map_size);
 }
 
 static void	set_player(size_t i, size_t j, enum e_side direction, t_game *g)
@@ -89,13 +95,10 @@ void	parse_map(char *map_str, t_game *g)
 	int	j;
 	int	map_size;
 
-	fill_map_dimensions(map_str, g);
-	map_size = g->map.width * g->map.height * sizeof(int);
-	g->map.data = x_malloc(map_size);
-	g->map.object_map = x_malloc(map_size);
-	g->map.visible_tiles = x_malloc(map_size);
+	map_size = fill_map_dimensions(map_str, g);
 	ft_memset(g->map.object_map, 0, map_size);
-	ft_memset(g->map.visible_tiles, 0, g->map.width * g->map.height * sizeof(bool));
+	ft_memset(g->map.visible_tiles, 0, g->map.width
+		* g->map.height * sizeof(bool));
 	i = 0;
 	init_map_data(g);
 	while (i < g->map.height)

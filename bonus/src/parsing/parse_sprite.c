@@ -49,6 +49,21 @@ static void	add_action_sprite(t_sprite *s, char *sprite_name)
 	}
 }
 
+static void	handle_collectible(t_game *game, char **line_split, t_sprite *s)
+{
+	if (s->is_collect)
+	{
+		add_action_sprite(s, line_split[0] + 11);
+		game->map.object_map[(int)((s->y - 0.5)
+				* game->map.width + s->x - 0.5)] = 2;
+	}
+	else
+	{
+		game->map.object_map[(int)((s->y - 0.5)
+				* game->map.width + s->x - 0.5)] = 1;
+	}
+}
+
 static int	init_sprite(t_game *game, char **line_split, int s_index)
 {
 	t_sprite	*s;
@@ -69,13 +84,7 @@ static int	init_sprite(t_game *game, char **line_split, int s_index)
 			index += 2;
 			continue ;
 		}
-		if (s->is_collect)
-		{
-			add_action_sprite(s, line_split[0] + 11);
-			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 2;
-		}
-		else
-			game->map.object_map[(int)((s->y - 0.5) * game->map.width + s->x - 0.5)] = 1;
+		handle_collectible(game, line_split, s);
 		bound_start(s, s->t);
 		game->list_sprite[s_index] = s;
 		index += 2;
