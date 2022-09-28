@@ -24,9 +24,7 @@ OBJ = $(OBJ1:.m=.o)
 CC = gcc
 
 ifeq ($(shell uname), Linux)
-#CFLAGS = -Wall -Wextra -Werror -D LINUX
 	CFLAGS = -I$(INCLUDES) -D LINUX
-#LIB = -lpthread -#mlx -lXext -lX11 -lm
 	LIB			= -lpthread	-Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
 	CFLAGS = -Wall -Wextra -I$(INCLUDES) -D MAC
