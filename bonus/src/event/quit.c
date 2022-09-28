@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/28 10:05:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:07:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ static void	free_sprites(t_game *g)
 	i = 0;
 	while (i < SPRITE_MAX)
 	{
-		free(g->list_sprite[i]);
 		if (g->list_sprite[i])
 			mlx_destroy_image(g->mlx, g->list_sprite[i]->t.img);
+		free(g->list_sprite[i]);
 		i++;
 	}
 	i = 0;
 	while (i < GUN_MAX)
 	{
-		free(g->list_gun[i]);
 		if (g->list_gun[i])
 			mlx_destroy_image(g->mlx, g->list_gun[i]->t.img);
+		free(g->list_gun[i]);
 		i++;
 	}
 }
