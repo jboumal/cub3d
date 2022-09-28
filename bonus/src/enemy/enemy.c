@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:21:53 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 17:04:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:04:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_enemy_texture(t_game *game)
 	enemy = x_malloc(sizeof(t_enemy));
 	enemy->s.is_collect = 0;
 	enemy->s.collect_action = NULL;
-	enemy->s.x = 27.5;
+	enemy->s.x = 28.5;
 	enemy->s.y = 9.5;
 	enemy->s.t = get_img_from_xpm(game->mlx, "img/enemy/enemy1.xpm");
 	bound_start(&enemy->s, enemy->s.t);
