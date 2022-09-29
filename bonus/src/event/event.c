@@ -30,7 +30,13 @@ static void	update_door_opened(t_game *g)
 	door |= (uintptr_t)get_door(y * width + (x - 1), g) * !door * (dir.x < 0);
 	door |= (uintptr_t)get_door(y * width + (x + 1), g) * !door * (dir.x > 0);
 	if (door)
+	{
 		((t_door *)door)->opened = !((t_door *)door)->opened;
+		if (!((t_door *)door)->opened)
+			play_sound("Interaction/doors/door2_close.wav");
+		else
+			play_sound("Interaction/doors/door2_open.wav");
+	}
 }
 
 int	key_down(int code, t_game *game)

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 19:41:55 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:01:51 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,14 @@ static void	update_doors(t_game *g)
 		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5
 				&& accu > 300);
 		if (!door->opened && door->ratio < 1)
-		{
-			play_sound("Interaction/doors/door2_close.wav");
-			door->ratio += 0.01;
-		}
+			door->ratio += 0.02;
 		if (door->opened)
 		{
 			accu++;
 			if (door->ratio > 0.1)
 			{
-				door->ratio -= 0.01;
+				door->ratio -= 0.02;
 				accu = 0;
-				play_sound("Interaction/doors/door2_open.wav");
 			}
 		}
 		node = node->next;
