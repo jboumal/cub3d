@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collectible.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 19:30:02 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:44:11 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,14 @@ void	replace_gun(t_game *game, t_sprite *gun)
 
 void	collect_chiken(t_game *game, t_sprite *chicken)
 {
-	(void) game;
 	(void) chicken;
-	play_sound("Interaction/items/pickup/health/hot_pickup.wav");
+	if (game->player_hp < 100)
+	{
+		play_sound("Interaction/items/pickup/health/hot_pickup.wav");
+		game->player_hp += 10;
+		if (game->player_hp > 100)
+			game->player_hp = 100;
+	}
 }
 
 void	collect_ammo(t_game *game, t_sprite *ammo)
