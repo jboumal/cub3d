@@ -14,7 +14,6 @@
 
 static void	update_pos(t_game *g, t_vector *pos, t_vector *np)
 {
-	printf("%f %d\n", pos->x, (int)pos->x);
 	if (!g->map.data[(int)pos->y * g->map.width + (int)np->x])
 	{
 		if ((np->x - (int)np->x < 0.9999
