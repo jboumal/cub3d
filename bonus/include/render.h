@@ -73,9 +73,6 @@ typedef struct s_th_arg
 /* dda */
 void	dda(t_ray *ray, t_game *game);
 
-/* death */
-void	anim_death(t_game *game);
-
 /* floorcasting */
 void	floorcasting(int y0, int y1, t_img *img, t_game *game);
 
