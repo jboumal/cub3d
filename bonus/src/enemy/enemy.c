@@ -27,7 +27,7 @@ static void	add_enemy(t_game *game, t_enemy *enemy)
 	game->list_enemy[j] = enemy;
 }
 
-void	create_enemy(t_game *game, int x, int y, char *path)
+void	create_enemy(t_game *game, double x, double y, char *path)
 {
 	t_enemy		*enemy;
 	int			i;
