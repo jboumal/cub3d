@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 13:42:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:12:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ static void	update_doors(t_game *g)
 	{
 		door = node->content;
 		cell = vector(door->cell % g->map.width, door->cell / g->map.width);
-		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5 && accu > 300);
+		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5
+				&& accu > 300);
 		if (!door->opened && door->ratio < 1)
 			door->ratio += 0.01;
 		if (door->opened)
 		{
+			accu++;
 			if (door->ratio > 0.1)
 			{
 				door->ratio -= 0.01;
 				accu = 0;
 			}
-			else
-				accu++;
 		}
 		node = node->next;
 	}
