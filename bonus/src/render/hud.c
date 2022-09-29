@@ -6,7 +6,7 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 22:32:55 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:47:11 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static void	render_number(t_img *img, t_game *game)
 		draw_number(game, ammo, img, pos);
 	pos.x = SCREEN_W / 2 + 87;
 	draw_number(game, game->player_hp, img, pos);
+	pos.x = SCREEN_W / 2 - 180;
+	draw_number(game, 1, img, pos);
 	pos.x = SCREEN_W / 2 - 280;
 	draw_number(game, 0, img, pos);
 	pos.x = SCREEN_W / 2 - 500;
