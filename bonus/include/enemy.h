@@ -24,7 +24,7 @@
 
 #include "cub3d.h"
 
-void	create_enemy(t_game *game, int x, int y, char *path);
+void	create_enemy(t_game *game, double x, double y, char *path);
 
 enum e_enemy
 {
