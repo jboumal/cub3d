@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:27:35 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 17:46:19 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:47:03 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	init_gun(t_game *game)
 		gun = x_malloc(sizeof(t_gun));
 		init_sprite_gun(game, gun, i);
 		gun->image = 0;
-		gun->ammo = 15;
 		gun->is_knife = i == KNIFE;
+		gun->ammo = 0;
+		if (!gun->is_knife)
+			gun->ammo = 8;
 		game->list_gun[i] = gun;
 		i++;
 	}

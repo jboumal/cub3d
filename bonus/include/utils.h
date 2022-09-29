@@ -23,6 +23,9 @@ int				isascii_48(int c);
 int				shade_color(int color, double divide);
 int				ft_atoi(const char *str);
 
+/* sound */
+void			play_sound(char *path);
+
 /* color */
 int				get_r(int c);
 int				get_g(int c);

@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:09:12 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 01:39:44 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:01:13 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	draw_death(t_game *game, int *red_pixel, int size)
 	{
 		if (j < size)
 			put_pixel(img, red_pixel[j], DEATH_SIZE);
-		if (!(i % 2) && !(i % 3) && !(i % 5))
+		if (!(i % 2) && !(i % 3))
 			mlx_put_image_to_window(game->mlx, game->window, img->img, 0, 0);
 		if (i > SCREEN_H && !(i % (SCREEN_H)) && t)
 		{

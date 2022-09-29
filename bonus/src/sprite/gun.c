@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 17:44:39 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:00:35 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	collect_ammo(t_game *game, t_sprite *ammo)
 		if (gun->is_knife)
 		{
 			game->list_active_gun[0] = game->list_gun[PISTOL];
-			game->list_active_gun[0]->ammo = 15;
+			game->list_active_gun[0]->ammo = 8;
 		}
-		gun->ammo += 15;
+		gun->ammo += 8;
 	}
 }
 
@@ -40,6 +40,8 @@ void	anim_gun(t_game *game)
 	{
 		if (gun->ammo || gun->is_knife)
 		{
+			if (gun->is_knife)
+				play_sound("weapons/knife/knife_slash1.wav");
 			gun->ammo--;
 			if (!gun->image)
 				gun->image += 1;

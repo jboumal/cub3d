@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 01:43:29 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:43:36 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,26 @@ static void	free_sprites(t_game *g)
 		if (g->list_gun[i])
 			mlx_destroy_image(g->mlx, g->list_gun[i]->s.t.img);
 		free(g->list_gun[i]);
+		i++;
+	}
+}
+
+static void	put_pixel(t_img *img, int elem, int pixel_size)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < pixel_size)
+	{
+		j = 0;
+		while (j < pixel_size)
+		{
+			if (elem < SCREEN_W * SCREEN_H)
+				my_mlx_pixel_put(img, elem / SCREEN_H + i,
+					(elem % SCREEN_H) + j, RED);
+			j++;
+		}
 		i++;
 	}
 }
