@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:36:45 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 19:51:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 09:59:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define SHOOT_END 6
 # define DIE_START 7
 # define DIE_END 10
-# define PADDING 0.9
 
 #include "cub3d.h"
 

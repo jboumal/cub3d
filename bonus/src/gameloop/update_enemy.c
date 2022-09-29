@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:57:03 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/28 23:54:23 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:00:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void update_enemy_pos(t_game *g, t_enemy *enemy)
 		enemy->state = WALK;
 		np = vector(enemy->s.x + dir.x * (MOVE_SPEED * 3), enemy->s.y + dir.y * (MOVE_SPEED * 3));
 		g->map.object_map[(int)enemy->s.y * g->map.width + (int)enemy->s.x] = 0;
-		if (!g->map.data[(int)(enemy->s.y + PADDING * dir.y) * g->map.width + (int)(np.x + PADDING * dir.x)]
-			|| can_pass_door((int)(enemy->s.y + PADDING * dir.y) * g->map.width + (int)(np.x + PADDING * dir.x), g))
+		if (!g->map.data[(int)enemy->s.y * g->map.width + (int)np.x]
+			|| can_pass_door((int)enemy->s.y * g->map.width + (int)np.x, g))
 			enemy->s.x = np.x;
-		if (!g->map.data[(int)(np.y + PADDING * dir.y) * g->map.width + (int)(enemy->s.x + PADDING * dir.x)]
-			|| can_pass_door((int)(np.y + PADDING * dir.y) * g->map.width + (int)(enemy->s.x + PADDING * dir.x), g))
+		if (!g->map.data[(int)np.y * g->map.width + (int)enemy->s.x]
+			|| can_pass_door((int)np.y * g->map.width + (int)enemy->s.x, g))
 			enemy->s.y = np.y;
 		g->map.object_map[(int)np.y * g->map.width + (int)enemy->s.x] = 1;
 	}
