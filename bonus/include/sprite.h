@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 23:56:45 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:47:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_sprite
 	bool			is_collect;
 	bool			is_in_fov;
 	t_spr_action	collect_action;
-	enum e_gun		enum_gun;
+	enum e_gun		take_gun;
 	double			image;
 	t_img			t;
 }	t_sprite;
@@ -58,6 +58,7 @@ typedef struct s_gun
 	double			image;
 	unsigned int	ammo;
 	bool			is_knife;
+	char			*path_sound;
 }	t_gun;
 
 /* sprite */
@@ -68,11 +69,14 @@ void	compute_field_sprite(t_game *g);
 void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image);
 
 /* gun */
-void	collect_ammo(t_game *game, t_sprite *ammo);
 void	anim_gun(t_game *game);
 void	switch_gun(t_game *game);
-void	replace_gun(t_game *game, t_sprite *gun);
 void	init_gun(t_game *game);
 void	render_gun(t_game *game);
+
+/* collectible */
+void	collect_ammo(t_game *game, t_sprite *ammo);
+void	replace_gun(t_game *game, t_sprite *gun);
+void	collect_chiken(t_game *game, t_sprite *chicken);
 
 #endif
