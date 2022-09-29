@@ -32,3 +32,9 @@ C img/sky/fullmoon.xpm
          111111111
 
 img/sprite/silver_key.xpm 1 16 1
+
+Enemy
+img/enemy/nazi.xpm 13 10
+img/enemy/nazi.xpm 14 10
+img/enemy/nazi.xpm 15 10
+Reflect OFF
