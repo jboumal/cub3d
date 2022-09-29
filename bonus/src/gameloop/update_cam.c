@@ -15,29 +15,25 @@
 static void	update_pos(t_game *g, t_vector *pos, t_vector *np)
 {
 	if ((!g->map.data[(int)pos->y * g->map.width + (int)np->x]
-			&& g->map.object_map[(int)pos->y * g->map.width + (int)np->x] != 1)
-		|| can_pass_door((int)pos->y * g->map.width + (int)np->x, g))
-	{
-		if ((np->x - (int)np->x < 0.9999
-				|| !g->map.data[(int)pos->y * g->map.width + (int)np->x + 1]
-				|| g->map.data[(int)pos->y * g->map.width + (int)np->x + 1] == 10)
-			&& (np->x - (int)np->x > 0.0001
-				|| !g->map.data[(int)pos->y * g->map.width + (int)np->x - 1]
-				|| g->map.data[(int)pos->y * g->map.width + (int)np->x - 1] == 10))
-			pos->x = np->x;
-	}
+			&&g->map.object_map[(int)pos->y * g->map.width + (int)np->x] != 1)
+		|| can_pass_door((int)pos->y * g->map.width + (int)np->x, g)
+		&& (np->x - (int)np->x < 0.9999
+			||!g->map.data[(int)pos->y * g->map.width + (int)np->x + 1]
+			||g->map.data[(int)pos->y * g->map.width + (int)np->x + 1] == 10)
+		&& (np->x - (int)np->x > 0.0001
+			||!g->map.data[(int)pos->y * g->map.width + (int)np->x - 1]
+			||g->map.data[(int)pos->y * g->map.width + (int)np->x - 1] == 10))
+		pos->x = np->x;
 	if ((!g->map.data[(int)np->y * g->map.width + (int)pos->x]
 			&& g->map.object_map[(int)np->y * g->map.width + (int)pos->x] != 1)
-		|| can_pass_door((int)np->y * g->map.width + (int)pos->x, g))
-	{
-		if ((np->y - (int)np->y < 0.9999
-				|| !g->map.data[((int)np->y + 1) * g->map.width + (int)pos->x]
-				|| g->map.data[((int)np->y + 1) * g->map.width + (int)pos->x] == 10)
-			&& (np->y - (int)np->y > 0.0001
-				|| !g->map.data[((int)np->y - 1) * g->map.width + (int)pos->x]
-				|| g->map.data[((int)np->y - 1) * g->map.width + (int)pos->x] == 10))
-			pos->y = np->y;
-	}
+		|| can_pass_door((int)np->y * g->map.width + (int)pos->x, g)
+		&& (np->y - (int)np->y < 0.9999
+			||!g->map.data[((int)np->y + 1) * g->map.width + (int)pos->x]
+			||g->map.data[((int)np->y + 1) * g->map.width + (int)pos->x] == 10)
+		&& (np->y - (int)np->y > 0.0001
+			||!g->map.data[((int)np->y - 1) * g->map.width + (int)pos->x]
+			||g->map.data[((int)np->y - 1) * g->map.width + (int)pos->x] == 10))
+		pos->y = np->y;
 }
 
 static void	translate_rl(t_game *g, t_vector *pos, t_vector *dir)
