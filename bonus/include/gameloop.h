@@ -30,4 +30,7 @@ void	rotate_cam(t_game *game);
 /* update_enemy */
 void	update_enemy(t_game *g);
 
+/* enemy_shot */
+void	ennemy_shot(t_game *g, t_enemy *enemy);
+
 #endif
