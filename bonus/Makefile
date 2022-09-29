@@ -33,7 +33,7 @@ endif
 
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB) -fsanitize=address
 
 all: $(NAME)
 

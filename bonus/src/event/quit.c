@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 18:50:39 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:01:35 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ static void	free_sprites(t_game *g)
 	}
 }
 
+static void	destroy_hud(t_game *g)
+{
+	mlx_destroy_image(g->mlx, g->title.options.img);
+	mlx_destroy_image(g->mlx, g->title.newgame[0].img);
+	mlx_destroy_image(g->mlx, g->title.newgame[1].img);
+	mlx_destroy_image(g->mlx, g->title.quit[0].img);
+	mlx_destroy_image(g->mlx, g->title.quit[1].img);
+	mlx_destroy_image(g->mlx, g->title.select.img);
+	mlx_destroy_image(g->mlx, g->title.render.img);
+	mlx_destroy_image(g->mlx, g->title.hud.img);
+	mlx_destroy_image(g->mlx, g->title.chars.img);
+}
+
 int	quit(t_game *g)
 {
 	int	i;
@@ -67,6 +80,7 @@ int	quit(t_game *g)
 	mlx_destroy_image(g->mlx, g->floor.img);
 	mlx_destroy_image(g->mlx, g->small_buffer.img);
 	mlx_destroy_image(g->mlx, g->full_buffer.img);
+	destroy_hud(g);
 	free(g->map.data);
 	free(g->map.object_map);
 	free(g->map.visible_tiles);
