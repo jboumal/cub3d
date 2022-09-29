@@ -62,6 +62,7 @@ typedef struct s_state
 	bool	r_right;
 	int		m_left;
 	int		m_right;
+	bool	shoot;
 }	t_state;
 
 typedef struct s_texture

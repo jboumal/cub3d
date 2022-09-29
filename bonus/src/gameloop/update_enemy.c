@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:57:03 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 10:00:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:28:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int start(t_enemy *enemy)
 		return (WALK_START);
 	else if (enemy->state == SHOOT)
 		return (SHOOT_START);
+	else if (enemy->state == SHOT)
+		return (SHOT_START);
 	else
 		return (DIE_START);
 }
@@ -53,6 +55,8 @@ static int end(t_enemy *enemy)
 		return (WALK_END);
 	else if (enemy->state == SHOOT)
 		return (SHOOT_END);
+	else if (enemy->state == SHOT)
+		return (SHOT_END);
 	else
 		return (DIE_END);
 }
@@ -71,16 +75,25 @@ void	update_enemy(t_game *g)
 			if (g->list_enemy[i])
 			{
 				enemy = g->list_enemy[i];
-				update_enemy_pos(g, enemy);
-				enemy->s.image += 1;
+				if (enemy->hp <= 0)
+					enemy->state = DIE;
+				else if (g->state.shoot)
+				{
+					enemy->state = SHOT;
+					enemy->hp -= 20;
+				}
+				else
+					update_enemy_pos(g, enemy);
+				if (enemy->s.image < start(enemy))
+					enemy->s.image = start(enemy);
+				if (enemy->s.image != DIE_END)
+					enemy->s.image += 1;
 				if (enemy->s.image > end(enemy))
 					enemy->s.image = start(enemy);
-				if (enemy->s.image > 7) {
-					printf("fdsaojfilokdsahfikldsalhfdsahgfshdkfjusidaof\n");
-				}
 			}
 			i++;
 		}
+		g->state.shoot = 0;
 	}
 	accu++;
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:21:53 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/28 18:04:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:28:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_enemy_texture(t_game *game)
 
 	i = 0;
 	enemy = x_malloc(sizeof(t_enemy));
+	enemy->hp = 100;
 	enemy->s.is_collect = 0;
 	enemy->s.collect_action = NULL;
 	enemy->s.x = 28.5;

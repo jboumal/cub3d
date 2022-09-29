@@ -52,7 +52,10 @@ int	key_down(int code, t_game *game)
 	else if (code == K_SPACE)
 		switch_gun(game);
 	else if (code == K_CTRL)
+	{
 		anim_gun(game);
+		game->state.shoot = true;
+	}
 	return (0);
 }
 
