@@ -26,6 +26,7 @@ static void	initialize(t_game *game)
 	game->small_buffer = get_new_img(game->mlx, game->img_w, game->img_h);
 	game->full_buffer = get_new_img(game->mlx, SCREEN_W, SCREEN_H);
 	game->scene = TITLE;
+	game->player_hp = 100;
 	if (MAC)
 		mouse_move(game, 500, 500);
 }

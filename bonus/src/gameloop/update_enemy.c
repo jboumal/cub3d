@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:57:03 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 14:09:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:52:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	update_enemy_pos(t_game *g, t_enemy *enemy)
 
 	v = vector(g->player.pos.x - enemy->s.x, g->player.pos.y - enemy->s.y);
 	dir = vector_normalize(v);
-	if (vector_norme(v) > 3)
+	if (vector_norme(v) > 1.3)
 	{
 		enemy->state = WALK;
 		np = vector(
@@ -36,7 +36,7 @@ static void	update_enemy_pos(t_game *g, t_enemy *enemy)
 		g->map.object_map[(int)np.y * g->map.width + (int)enemy->s.x] = 1;
 	}
 	else
-		enemy->state = SHOOT;
+		ennemy_shot(g, enemy);
 }
 
 static int	start(t_enemy *enemy)
@@ -57,23 +57,29 @@ static int	end(t_enemy *enemy)
 		+ (enemy->state == DIE) * DIE_END);
 }
 
-static void	update_enemy_animation(t_enemy *enemy, t_game *g)
+static void	update_enemy_animation(t_enemy *e, t_game *g)
 {
-	if (enemy->hp <= 0)
-		enemy->state = DIE;
-	else if (g->state.shoot)
+	if (e->hp <= 0)
+		e->state = DIE;
+	else if (g->state.shoot
+		&& g->map.visible_tiles[((int)(e->s.y) * g->map.width + (int)(e->s.x))])
 	{
-		enemy->state = SHOT;
-		enemy->hp -= 20;
+		if (fabs(e->s.angle) < M_PI / 16)
+		{
+			e->state = SHOT;
+			e->hp -= 20;
+		}
 	}
 	else
-		update_enemy_pos(g, enemy);
-	if (enemy->s.image < start(enemy))
-		enemy->s.image = start(enemy);
-	if (enemy->s.image != DIE_END)
-		enemy->s.image += 1;
-	if (enemy->s.image > end(enemy))
-		enemy->s.image = start(enemy);
+		update_enemy_pos(g, e);
+	if (e->s.image < start(e))
+		e->s.image = start(e);
+	if (e->s.image == DIE_END)
+		g->map.object_map[(int)e->s.y * g->map.width + (int)e->s.x] = 0;
+	if (e->s.image != DIE_END)
+		e->s.image += 1;
+	if (e->s.image > end(e))
+		e->s.image = start(e);
 }
 
 void	update_enemy(t_game *g)

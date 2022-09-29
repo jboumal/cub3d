@@ -95,6 +95,8 @@ typedef struct s_game
 	double		depth_buf[SCREEN_W];
 	t_scene		scene;
 	t_title		title;
+	bool		reflect;
+	int			player_hp;
 }	t_game;
 
 /* check_map */

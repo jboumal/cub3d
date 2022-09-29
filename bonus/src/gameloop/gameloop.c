@@ -6,7 +6,7 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 19:31:54 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:30:33 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static void	update_doors(t_game *g)
 		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5
 				&& accu > 300);
 		if (!door->opened && door->ratio < 1)
-			door->ratio += 0.01;
+			door->ratio += 0.02;
 		if (door->opened)
 		{
 			accu++;
 			if (door->ratio > 0.1)
 			{
-				door->ratio -= 0.01;
+				door->ratio -= 0.02;
 				accu = 0;
 			}
 		}

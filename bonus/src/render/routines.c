@@ -84,7 +84,7 @@ void	*routine_rescale(void *arg)
 				&g->full_buffer,
 				j,
 				i * (SCREEN_H - UI_H) / SCREEN_H,
-				mlx_get_pixel(img, j * SCALE, i * SCALE));
+				mlx_get_pixel(img, j * SCALE, i * SCALE - !!i));
 			j++;
 		}
 		i++;
