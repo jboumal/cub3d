@@ -60,7 +60,8 @@ static void	drawline(t_img *img, t_vector p0, t_vector p1)
 	pixel_y = p0.y + SCREEN_H - UI_H;
 	while (pixels)
 	{
-		my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
+		if (pixel_x < SCREEN_W)
+			my_mlx_pixel_put(img, pixel_x, pixel_y, 0xff0000);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		pixels--;

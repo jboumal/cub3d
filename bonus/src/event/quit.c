@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 03:51:06 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 23:01:35 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:43:10 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	destroy_hud(t_game *g)
 	mlx_destroy_image(g->mlx, g->title.render.img);
 	mlx_destroy_image(g->mlx, g->title.hud.img);
 	mlx_destroy_image(g->mlx, g->title.chars.img);
+	mlx_destroy_image(g->mlx, g->title.faces.img);
 }
 
 int	quit(t_game *g)

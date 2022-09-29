@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 22:47:11 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:41:53 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,17 @@ static void	render_number(t_img *img, t_game *game)
 
 void	render_ui(t_img *img, t_game *game)
 {
+	static int	count = 0;
+	t_rect		r;
+	int			type_face;
+
+	type_face = (100 - game->player_hp) / 15;
 	render_background(img, game);
 	render_number(img, game);
 	render_minimap(img, game);
+	create_rect(&r, vector(((count / 30) % 3) * 90, 4 + 120 * type_face),
+		89, 115);
+	blt_dst(&game->title.faces, img, vector(SCREEN_W / 2 - 87, SCREEN_H - 130),
+		r);
+	count++;
 }
