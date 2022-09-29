@@ -108,8 +108,8 @@ void	raycasting(int x0, int x1, t_img *img, t_game *g)
 	dda(&ray, g);
 	init_draw_line(&var, &ray, g);
 	draw_line(x0, &var, img, g);
-	g->depth_buf[x0] = sqrt(pow((ray.cell % g->map.width) - g->player.pos.x, 2)
-			+ pow(ray.cell / (double) g->map.width - g->player.pos.y, 2));
+	g->depth_buf[x0] = hypot((ray.cell % g->map.width) + 0.5 - g->player.pos.x,
+			(ray.cell / g->map.width) + 0.5 - g->player.pos.y);
 	if (x0 < x1)
 		return (raycasting(x0 + 1, x1, img, g));
 }

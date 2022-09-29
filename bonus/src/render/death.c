@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:09:12 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 15:01:13 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:52:19 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	anim_death(t_game *game)
 
 	size = (SCREEN_W * SCREEN_H) / (DEATH_SIZE * DEATH_SIZE);
 	red_pixel = x_malloc(size * sizeof(int));
-	//ft_memset(red_pixel, 0, size * sizeof(int));
 	i = 0;
 	j = 0;
 	t = true;
