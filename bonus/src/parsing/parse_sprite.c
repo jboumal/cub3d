@@ -101,7 +101,7 @@ void	parse_sprite(t_game *game, int fd)
 
 	line = get_next_non_empty_line(fd);
 	s_index = 0;
-	while (line)
+	while (line && line[0] != 'E')
 	{
 		line_split = ft_split(line, ' ');
 		s_index = init_sprite(game, line_split, s_index);
@@ -110,6 +110,5 @@ void	parse_sprite(t_game *game, int fd)
 		line = get_next_non_empty_line(fd);
 	}
 	init_gun(game);
-	create_enemy(game, 28.5, 9.5, "img/enemy/hitler.xpm");
-	create_enemy(game, 2.5, 8.5, "img/enemy/enemy1.xpm");
+	parse_enemy(game, fd);
 }

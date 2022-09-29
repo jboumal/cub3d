@@ -103,6 +103,9 @@ void		check_map(t_game *g);
 /* get_map_str */
 char		*get_map_str(int fd);
 
+/* parse enemy */
+void		parse_enemy(t_game *game, int fd);
+
 /* parse_map */
 void		parse_map(char *map_str, t_game *g);
 

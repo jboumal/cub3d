@@ -35,3 +35,7 @@ img/sprite/machinegun.xpm 1 9 7
 img/sprite/bullet.xpm 1 7 7 7 5
 img/sprite/chicken.xpm 1 30 6
 img/sprite/silver_key.xpm 1 13 1
+
+Enemy
+img/enemy/enemy1.xpm 2 8
+img/enemy/hitler.xpm 28 9

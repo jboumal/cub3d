@@ -22,7 +22,7 @@
 # define DIE_START 8
 # define DIE_END 10
 
-#include "cub3d.h"
+# include "cub3d.h"
 
 void	create_enemy(t_game *game, double x, double y, char *path);
 
