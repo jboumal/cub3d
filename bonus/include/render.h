@@ -13,6 +13,13 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+# define TILEMAP_SIZE 12
+# define UI_H 150
+# define UI_COLOR1 0x2d6e6f
+# define UI_COLOR2 0x173f3f
+# define MMAP_COLOR1 0x0000A8
+# define MMAP_COLOR2 0x7CE7D6
+
 # include "cub3d.h"
 
 enum e_side
@@ -66,14 +73,17 @@ typedef struct s_th_arg
 /* dda */
 void	dda(t_ray *ray, t_game *game);
 
+/* death */
+void	anim_death(t_game *game);
+
 /* floorcasting */
 void	floorcasting(int y0, int y1, t_img *img, t_game *game);
 
+/* hud */
+void	render_ui(t_img *img, t_game *game);
+
 /* minimap */
 void	render_minimap(t_img *img, t_game *game);
-
-/* raincasting */
-void	raincasting(int x0, int x1, t_img *img, t_game *g);
 
 /* raycasting */
 void	raycasting(int x0, int x1, t_img *img, t_game *game);
@@ -91,8 +101,5 @@ void	*routine_rescale(void *arg);
 /* skycasting */
 void	load_sky_texture(t_game *game);
 void	skycasting(int x0, int x1, t_img *img, t_game *g);
-
-/* death */
-void	anim_death(t_game *game);
 
 #endif

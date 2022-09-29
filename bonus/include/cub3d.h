@@ -42,7 +42,6 @@
 # include "data_struct.h"
 # include "scene.h"
 # include "parsing.h"
-# include "hud.h"
 # include "utils.h"
 # include "gameloop.h"
 # include "event.h"

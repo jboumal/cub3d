@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:33:24 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 17:04:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:42:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,29 @@ static void	fps_counter(t_game *g)
 
 static void	update_doors(t_game *g)
 {
-	t_vector	cell;
-	t_node		*node;
-	t_door		*door;
+	t_vector			cell;
+	t_node				*node;
+	t_door				*door;
+	static unsigned int	accu;
 
 	node = g->doors.head;
 	while (node)
 	{
 		door = node->content;
 		cell = vector(door->cell % g->map.width, door->cell / g->map.width);
-		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5);
+		door->opened &= !(vector_norme(vector_sub(cell, g->player.pos)) > 5 && accu > 300);
 		if (!door->opened && door->ratio < 1)
 			door->ratio += 0.01;
-		if (door->opened && door->ratio > 0.1)
-			door->ratio -= 0.01;
+		if (door->opened)
+		{
+			if (door->ratio > 0.1)
+			{
+				door->ratio -= 0.01;
+				accu = 0;
+			}
+			else
+				accu++;
+		}
 		node = node->next;
 	}
 }
