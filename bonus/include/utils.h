@@ -104,4 +104,6 @@ int				mlx_mouse_move(void *mlx, void *win, int x, int y);
 int				mlx_mouse_get_pos(void *mlx, void *win, int *x, int *y);
 int				mlx_mouse_hide(void *mlx, void *win);
 
+void			blt_dst(t_img *src, t_img *dst, t_vector d, t_rect r);
+
 #endif

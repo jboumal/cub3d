@@ -44,15 +44,6 @@ typedef struct s_ray
 	enum e_side	side;
 }	t_ray;
 
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-	int	color;
-}	t_rect;
-
 typedef struct s_draw_line_var
 {
 	int				tx;
@@ -81,7 +72,6 @@ void	render_ui(t_img *img, t_game *game);
 
 /* minimap */
 void	render_minimap(t_img *img, t_game *game);
-void	blt_dst(t_img *src, t_img *dst, t_vector d, t_rect r);
 
 /* raycasting */
 void	raycasting(int x0, int x1, t_img *img, t_game *game);
