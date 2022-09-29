@@ -16,12 +16,10 @@ void	remove_sprite(t_game *g, t_sprite *s, int sprite_index)
 {
 	int	i;
 
-	printf("%d: 1\n", sprite_index);
 	if (s->collect_action)
 		s->collect_action(g, s);
 	free(g->list_sprite[sprite_index]);
 	mlx_destroy_image(g->mlx, g->list_sprite[sprite_index]->t.img);
-	printf("%d: 2\n", sprite_index);
 	g->list_sprite[sprite_index] = NULL;
 	i = sprite_index;
 	while (i < SPRITE_MAX - 1)

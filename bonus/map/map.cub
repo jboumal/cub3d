@@ -32,6 +32,7 @@ C img/sky/fullmoon.xpm
          111111111
 
 img/sprite/silver_key.xpm 1 16 1
+img/sprite/bullet.xpm 1 14 15 15 15 16 15
 
 Enemy
 img/enemy/nazi.xpm 13 10
