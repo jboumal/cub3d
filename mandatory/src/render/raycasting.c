@@ -60,7 +60,7 @@ static void	draw_line(int x, t_draw_line_var *var, t_img *img, t_game *g)
 			my_mlx_pixel_put(img, x, y, g->map.ceil);
 		else if (y > var->draw_end)
 			my_mlx_pixel_put(img, x, y, g->map.floor);
-		else
+		else if (var->line_height)
 		{
 			ty = (((y - var->draw_start) * var->mask / var->line_height)
 					& (var->mask -1)) * ((double)var->tex->height / var->mask);
