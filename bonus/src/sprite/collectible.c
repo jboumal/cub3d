@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 18:52:41 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:30:02 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	collect_ammo(t_game *game, t_sprite *ammo)
 	t_gun		*gun;
 
 	(void) ammo;
+	play_sound("ammo_pickup.wav");
 	gun = game->list_active_gun[game->active_gun];
 	if (gun)
 	{
