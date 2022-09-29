@@ -32,9 +32,10 @@ static int	render_rect(t_img *img, t_rect rect)
 		j = rect.x;
 		while (j < rect.x + rect.width)
 		{
-			if (i < UI_H - 20 && i >= 20 && j >= -48 && j < UI_H + 30)
-				my_mlx_pixel_put(img, j + 1060, i + SCREEN_H - UI_H,
-					rect.color);
+			if (i < UI_H - 20 && i >= 20 && j >= -48 && j < UI_H + 30
+				&& j + SCREEN_W / 2 + 380 < SCREEN_W)
+				my_mlx_pixel_put(img, j + SCREEN_W / 2 + 380,
+					i + SCREEN_H - UI_H, rect.color);
 			j++;
 		}
 		i++;
@@ -55,7 +56,7 @@ static void	drawline(t_img *img, t_vector p0, t_vector p1)
 	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
 	delta_x /= pixels;
 	delta_y /= pixels;
-	pixel_x = p0.x + 1060;
+	pixel_x = p0.x + SCREEN_W / 2 + 380;
 	pixel_y = p0.y + SCREEN_H - UI_H;
 	while (pixels)
 	{
