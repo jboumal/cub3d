@@ -6,16 +6,27 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 22:55:21 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:32:55 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	render_background(t_img *img)
+static void	create_rect(t_rect *rect, t_vector pos, int width, int height)
 {
-	int	i;
-	int	j;
+	rect->x = pos.x;
+	rect->y = pos.y;
+	rect->width = width;
+	rect->height = height;
+	rect->color = 0;
+}
+
+static void	render_background(t_img *img, t_game *game)
+{
+	int			i;
+	int			j;
+	t_rect		rect;
+	t_vector	pos;
 
 	i = SCREEN_H - UI_H;
 	while (i < SCREEN_H)
@@ -28,41 +39,61 @@ static void	render_background(t_img *img)
 		}
 		i++;
 	}
+	pos = vector(SCREEN_W / 2 - game->title.hud.width / 2, SCREEN_H - UI_H);
+	create_rect(&rect, vector(0, 0), game->title.hud.width,
+		game->title.hud.height);
+	blt_dst(&game->title.hud, img, pos, rect);
 }
 
-void	blt_dst(t_img *src, t_img *dst, int dx, int dy)
+static void	draw_number(t_game *game, int d, t_img *img, t_vector pos)
 {
-	int		x;
-	int		y;
-	char	*pixel_dst;
-	char	*pixel_src;
-	int		color;
+	t_rect	r;
+	int		w;
 
-	y = 0;
-	while (y < src->height)
+	w = 32;
+	if (d >= 100)
 	{
-		x = 0;
-		while (x < src->width)
-		{
-			pixel_dst = dst->addr + ((y + dy) * dst->line_length + (x + dx)
-					* (dst->bits_per_pixel / 8));
-			pixel_src = src->addr + (y * src->line_length + x
-					* (src->bits_per_pixel / 8));
-			color = (*(int *)pixel_src);
-			if (color >= 0)
-				*(unsigned int *) pixel_dst = *(unsigned int *) pixel_src;
-			if (color > 0 && *(unsigned int *) pixel_dst == 0)
-				*(unsigned int *) pixel_dst = 0xff000000;
-			x++;
-		}
-		y++;
+		d = 100;
+		create_rect(&r, vector(0, 0), w, game->title.chars.height);
+		blt_dst(&game->title.chars, img, pos, r);
+		pos.x -= w;
+		blt_dst(&game->title.chars, img, pos, r);
+		r.x += w;
+		pos.x -= w;
+		blt_dst(&game->title.chars, img, pos, r);
+		return ;
 	}
+	create_rect(&r, vector(w * (d % 10) + 1, 0), w, game->title.chars.height);
+	blt_dst(&game->title.chars, img, pos, r);
+	if (d >= 10)
+	{
+		pos.x -= w;
+		create_rect(&r, vector(w * (d / 10) + 1, 0), w,
+			game->title.chars.height);
+		blt_dst(&game->title.chars, img, pos, r);
+	}
+}
+
+static void	render_number(t_img *img, t_game *game)
+{
+	t_vector	pos;
+	int			ammo;
+
+	ammo = game->list_active_gun[game->active_gun]->ammo;
+	pos = vector(SCREEN_W / 2 + 230, SCREEN_H - UI_H + 58);
+	if (!game->list_active_gun[game->active_gun]->is_knife)
+		draw_number(game, ammo, img, pos);
+	pos.x = SCREEN_W / 2 + 87;
+	draw_number(game, game->player_hp, img, pos);
+	pos.x = SCREEN_W / 2 - 280;
+	draw_number(game, 0, img, pos);
+	pos.x = SCREEN_W / 2 - 500;
+	draw_number(game, 1, img, pos);
 }
 
 void	render_ui(t_img *img, t_game *game)
 {
-	render_background(img);
-	blt_dst(&game->title.hud, img, SCREEN_W / 2 - game->title.hud.width / 2,
-		SCREEN_H - UI_H);
+	render_background(img, game);
+	render_number(img, game);
 	render_minimap(img, game);
 }

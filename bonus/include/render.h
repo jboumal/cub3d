@@ -81,6 +81,7 @@ void	render_ui(t_img *img, t_game *game);
 
 /* minimap */
 void	render_minimap(t_img *img, t_game *game);
+void	blt_dst(t_img *src, t_img *dst, t_vector d, t_rect r);
 
 /* raycasting */
 void	raycasting(int x0, int x1, t_img *img, t_game *game);
