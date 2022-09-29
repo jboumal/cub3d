@@ -6,7 +6,7 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:26:44 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 22:10:16 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:41:14 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	title_start(t_game *g)
 	g->title.quit[0] = get_img_from_xpm(g->mlx, "img/title/quit1.xpm");
 	g->title.quit[1] = get_img_from_xpm(g->mlx, "img/title/quit2.xpm");
 	g->title.hud = get_img_from_xpm(g->mlx, "img/hud.xpm");
+	g->title.chars = get_img_from_xpm(g->mlx, "img/chars.xpm");
 	mlx_hook(g->window, K_PRESS_EVENT, K_PRESS_EVENT, move_index, g);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:45:55 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/28 22:07:06 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:39:13 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_title
 	t_img	select;
 	t_img	render;
 	t_img	hud;
+	t_img	chars;
 }	t_title;
 
 #endif
