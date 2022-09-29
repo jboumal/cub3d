@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:02:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/28 17:41:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:28 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_vector	vector_sub(t_vector v1, t_vector v2);
 t_vector	vector_scalar_multiplication(t_vector v, double a);
 t_vector	vector_rotate(t_vector v, double a);
 double		vector_norme(t_vector v);
+double		vector_dot_product(t_vector v1, t_vector v2);
 t_vector	vector_normalize(t_vector v);
 
 #endif
