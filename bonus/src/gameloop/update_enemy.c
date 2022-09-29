@@ -20,7 +20,7 @@ static void	update_enemy_pos(t_game *g, t_enemy *enemy)
 
 	v = vector(g->player.pos.x - enemy->s.x, g->player.pos.y - enemy->s.y);
 	dir = vector_normalize(v);
-	if (vector_norme(v) > 3)
+	if (vector_norme(v) > 1.3)
 	{
 		enemy->state = WALK;
 		np = vector(
@@ -36,7 +36,7 @@ static void	update_enemy_pos(t_game *g, t_enemy *enemy)
 		g->map.object_map[(int)np.y * g->map.width + (int)enemy->s.x] = 1;
 	}
 	else
-		enemy->state = SHOOT;
+		ennemy_shot(g, enemy);
 }
 
 static int	start(t_enemy *enemy)
@@ -74,6 +74,8 @@ static void	update_enemy_animation(t_enemy *e, t_game *g)
 		update_enemy_pos(g, e);
 	if (e->s.image < start(e))
 		e->s.image = start(e);
+	if (e->s.image == DIE_END)
+		g->map.object_map[(int)e->s.y * g->map.width + (int)e->s.x] = 0;
 	if (e->s.image != DIE_END)
 		e->s.image += 1;
 	if (e->s.image > end(e))

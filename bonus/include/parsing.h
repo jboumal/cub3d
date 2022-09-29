@@ -96,6 +96,7 @@ typedef struct s_game
 	t_scene		scene;
 	t_title		title;
 	bool		reflect;
+	int			player_hp;
 }	t_game;
 
 /* check_map */

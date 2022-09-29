@@ -67,6 +67,7 @@ void	render_sprites(t_game *game);
 /* draw sprite */
 void	compute_field_sprite(t_game *g);
 void	draw_sprite(t_game *g, t_sprite *s, t_img *t, int n_image);
+void	remove_sprite(t_game *g, t_sprite *s, int sprite_index);
 
 /* gun */
 void	anim_gun(t_game *game);
