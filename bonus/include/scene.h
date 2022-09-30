@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <bel-mous@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:45:55 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/29 15:39:13 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:06:54 by bel-mous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_title
 	t_img	render;
 	t_img	hud;
 	t_img	chars;
+	t_img	faces;
 }	t_title;
 
 #endif
