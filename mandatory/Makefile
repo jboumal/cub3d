@@ -27,10 +27,10 @@ OBJ = $(SRC:.c=.o)
 CC = gcc
 
 ifeq ($(shell uname), Linux)
-	CFLAGS = -I$(INCLUDES) -D LINUX
+	CFLAGS = -I$(INCLUDES) -D LINUX -Wall -Wextra -Werror
 	LIB			= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
-	CFLAGS = -Wall -Wextra -I$(INCLUDES) -D MAC
+	CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES) -D MAC
 	LIB = -lmlx -framework OpenGL -framework AppKit
 endif
 
