@@ -38,13 +38,11 @@ static void	invert_map_rows(t_game *g)
 	g->player.pos.y = g->map.height - 1 - g->player.pos.y;
 }
 
-void	parse(int argc, char **argv, t_game *game)
+void	parse(char **argv, t_game *game)
 {
 	int		fd;
 	char	*map_str;
 
-	if (argc != 2)
-		exit_error("invalid number of arguments");
 	fd = open(argv[1], O_DIRECTORY);
 	if (fd != -1)
 		exit_error("the map is a folder");

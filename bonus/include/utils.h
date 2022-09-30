@@ -16,6 +16,14 @@
 # include "cub3d.h"
 # define BUFFER_SIZE 2048
 
+# ifdef LINUX
+#  define SOUND_PATH "/usr/bin/play"
+#  define SOUND_CMD "play"
+# else
+#  define SOUND_PATH "/usr/bin/afplay"
+#  define SOUND_CMD "afplay"
+# endif
+
 /* utils */
 bool			atoui8_error(const char *s, uint8_t *n);
 int				isdigit(int c);

@@ -35,8 +35,10 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 2)
+		exit_error("invalid number of arguments");
 	initialize(&game);
-	parse(argc, argv, &game);
+	parse(argv, &game);
 	game.window = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, SCREEN_TITLE);
 	mlx_hook(game.window, K_RELEASE_EVENT, K_RELEASE_MASK, key_release, &game);
 	mlx_hook(game.window, DESTROY_NOTIFY_EVENT, NO_EVENT_MASK, quit, &game);

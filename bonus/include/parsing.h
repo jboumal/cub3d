@@ -121,7 +121,7 @@ void		parse_sprite(t_game *game, int fd);
 
 /* parse */
 enum e_side	get_direction(char c);
-void		parse(int argc, char **argv, t_game *game);
+void		parse(char **argv, t_game *game);
 
 /* mlx mouse */
 int			mouse_hide(t_game *game);
