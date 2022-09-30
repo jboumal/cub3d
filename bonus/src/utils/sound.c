@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sound.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:54:02 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 15:57:08 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/30 10:33:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	play_sound(char *path)
+void	play_sound(char *path, t_game *g)
 {
 	char	*str;
 
@@ -21,6 +21,6 @@ void	play_sound(char *path)
 		str = strjoin("afplay sounds/", path);
 		system(str);
 		free(str);
-		exit(1);
+		quit(g);
 	}
 }

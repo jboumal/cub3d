@@ -33,9 +33,9 @@ static void	update_door_opened(t_game *g)
 	{
 		((t_door *)door)->opened = !((t_door *)door)->opened;
 		if (!((t_door *)door)->opened)
-			play_sound("Interaction/doors/door2_close.wav");
+			play_sound("Interaction/doors/door2_close.wav", g);
 		else
-			play_sound("Interaction/doors/door2_open.wav");
+			play_sound("Interaction/doors/door2_open.wav", g);
 	}
 }
 

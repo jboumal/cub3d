@@ -24,7 +24,7 @@ int				shade_color(int color, double divide);
 int				ft_atoi(const char *str);
 
 /* sound */
-void			play_sound(char *path);
+void			play_sound(char *path, t_game *g);
 
 /* color */
 int				get_r(int c);
