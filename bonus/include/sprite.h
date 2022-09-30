@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 18:47:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:00:48 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_gun
 	unsigned int	ammo;
 	bool			is_knife;
 	char			*path_sound;
+	unsigned int 	dmg;
 }	t_gun;
 
 /* sprite */

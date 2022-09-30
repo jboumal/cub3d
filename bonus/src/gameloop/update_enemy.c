@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:57:03 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/09/29 17:52:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:16:46 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,13 @@ static void	update_enemy_animation(t_enemy *e, t_game *g)
 	else if (g->state.shoot
 		&& g->map.visible_tiles[((int)(e->s.y) * g->map.width + (int)(e->s.x))])
 	{
-		if (fabs(e->s.angle) < M_PI / 16)
+		if (fabs(e->s.angle) < M_PI / 16
+			&& (!g->list_active_gun[g->active_gun]->is_knife
+				|| (g->list_active_gun[g->active_gun]->is_knife
+					&& e->s.dist_to_p < REACH_KNIFE)))
 		{
 			e->state = SHOT;
-			e->hp -= 20;
+			e->hp -= g->list_active_gun[g->active_gun]->dmg;
 		}
 	}
 	else

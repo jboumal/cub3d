@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/30 14:49:21 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:57:38 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	collect_chiken(t_game *game, t_sprite *chicken)
 	(void) chicken;
 	if (game->player_hp < 100)
 	{
-		play_sound("sounds/Interaction/items/pickup/health/hot_pickup.wav", game);
+		play_sound("sounds/Interaction/items/pickup/health/chicken.wav", game);
 		game->player_hp += 10;
 		if (game->player_hp > 100)
 			game->player_hp = 100;

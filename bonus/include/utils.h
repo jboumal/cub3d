@@ -17,8 +17,8 @@
 # define BUFFER_SIZE 2048
 
 # ifdef LINUX
-#  define SOUND_PATH "/usr/bin/play"
-#  define SOUND_CMD "play"
+#  define SOUND_PATH "/usr/bin/aplay"
+#  define SOUND_CMD "aplay"
 # else
 #  define SOUND_PATH "/usr/bin/afplay"
 #  define SOUND_CMD "afplay"
