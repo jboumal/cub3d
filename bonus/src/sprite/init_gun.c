@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:27:35 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 18:51:34 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 23:01:48 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ void	init_gun(t_game *game)
 		init_sprite_gun(game, gun, i);
 		gun->image = 0;
 		gun->is_knife = i == KNIFE;
-		gun->ammo = 0;
-		if (!gun->is_knife)
-			gun->ammo = 8;
 		gun->s.height = (game->img_h / gun->s.t.height - 1) * gun->s.t.height;
 		gun->s.ceil = game->img_h - gun->s.height;
 		gun->s.width = gun->s.height;
@@ -63,4 +60,5 @@ void	init_gun(t_game *game)
 		i++;
 	}
 	game->list_active_gun[0] = game->list_gun[0];
+	game->ammo = 8;
 }

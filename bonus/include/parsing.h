@@ -74,30 +74,31 @@ typedef struct s_texture
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*window;
-	int			img_w;
-	int			img_h;
-	t_img		small_buffer;
-	t_img		full_buffer;
-	int			fps;
-	int			active_gun;
-	t_map		map;
-	t_player	player;
-	t_state		state;
-	t_texture	walls[WALL_MAX];
-	t_img		floor;
-	t_img		sky;
-	t_list		doors;
-	t_enemy		*list_enemy[ENEMY_MAX];
-	t_sprite	*list_sprite[SPRITE_MAX];
-	t_gun		*list_gun[GUN_MAX];
-	t_gun		*list_active_gun[2];
-	double		depth_buf[SCREEN_W];
-	t_scene		scene;
-	t_title		title;
-	bool		reflect;
-	int			player_hp;
+	void			*mlx;
+	void			*window;
+	int				img_w;
+	int				img_h;
+	t_img			small_buffer;
+	t_img			full_buffer;
+	int				fps;
+	int				active_gun;
+	t_map			map;
+	t_player		player;
+	t_state			state;
+	t_texture		walls[WALL_MAX];
+	t_img			floor;
+	t_img			sky;
+	t_list			doors;
+	t_enemy			*list_enemy[ENEMY_MAX];
+	t_sprite		*list_sprite[SPRITE_MAX];
+	t_gun			*list_gun[GUN_MAX];
+	t_gun			*list_active_gun[2];
+	double			depth_buf[SCREEN_W];
+	t_scene			scene;
+	t_title			title;
+	bool			reflect;
+	int				player_hp;
+	unsigned int	ammo;
 }	t_game;
 
 /* check_map */

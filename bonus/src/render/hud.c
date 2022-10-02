@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bel-mous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 21:10:51 by bel-mous          #+#    #+#             */
-/*   Updated: 2022/09/30 01:41:53 by bel-mous         ###   ########.fr       */
+/*   Updated: 2022/10/02 23:03:31 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	render_number(t_img *img, t_game *game)
 	t_vector	pos;
 	int			ammo;
 
-	ammo = game->list_active_gun[game->active_gun]->ammo;
+	ammo = game->ammo;
 	pos = vector(SCREEN_W / 2 + 230, SCREEN_H - UI_H + 58);
 	if (!game->list_active_gun[game->active_gun]->is_knife)
 		draw_number(game, ammo, img, pos);

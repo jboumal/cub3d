@@ -34,7 +34,7 @@ C img/sky/fullmoon.xpm
 img/sprite/silver_key.xpm 1 16 1
 img/sprite/bullet.xpm 1 14 12 15 12 16 12
 img/sprite/machinegun.xpm 1 14 11
-img/sprite/chicken.xpm 0 4 6
+img/sprite/chicken.xpm 1 4 6
 
 
 Enemy
