@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 18:05:15 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 18:47:10 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 21:49:34 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	render_gun(t_game *game);
 void	collect_ammo(t_game *game, t_sprite *ammo);
 void	replace_gun(t_game *game, t_sprite *gun);
 void	collect_chiken(t_game *game, t_sprite *chicken);
-
+void	collect_key(t_game *game, t_sprite *key);
 #endif

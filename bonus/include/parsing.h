@@ -48,6 +48,7 @@ typedef struct s_player
 typedef struct s_door
 {
 	int		cell;
+	bool	is_locked;
 	bool	opened;
 	double	ratio;
 }	t_door;

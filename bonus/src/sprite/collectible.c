@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collectible.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/30 10:34:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:33:30 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ void	replace_gun(t_game *game, t_sprite *gun)
 	{
 		free(game->list_active_gun[game->active_gun]);
 		game->list_active_gun[game->active_gun] = new_gun;
+	}
+}
+
+void	collect_key(t_game *game, t_sprite *key)
+{
+	t_door	*door;
+	(void) key;
+
+	door = get_door(429, game);
+	if (door)
+	{
+		printf("door\n");
+		door->is_locked = !door->is_locked;
 	}
 }
 

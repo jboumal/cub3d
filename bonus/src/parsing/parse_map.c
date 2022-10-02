@@ -72,7 +72,10 @@ static void	parse_map_char(char map_char, int i, int j, t_game *g)
 	if (map_char == ':')
 	{
 		door = x_calloc(1, sizeof(t_door));
+		door->is_locked = false;
 		door->cell = (g->map.height - 1 - i) * g->map.width + j;
+		if (door->cell == 429)
+			door->is_locked = true;
 		door->ratio = 1;
 		lst_add_front(&g->doors, new_node(door));
 	}

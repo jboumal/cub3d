@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 18:03:50 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 18:46:17 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 21:42:19 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	add_action_sprite(t_sprite *s, char *sprite_name)
 		s->collect_action = collect_ammo;
 	if (!str_n_cmp(sprite_name, "chicken.xpm", strlen(sprite_name)))
 		s->collect_action = collect_chiken;
+	if (!str_n_cmp(sprite_name, "silver_key.xpm", strlen(sprite_name)))
+		s->collect_action = collect_key;
 }
 
 static void	handle_collectible(t_game *game, char **line_split, t_sprite *s)

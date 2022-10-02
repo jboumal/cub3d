@@ -29,7 +29,7 @@ static void	update_door_opened(t_game *g)
 	door |= (uintptr_t)get_door((y - 1) * width + x, g) * !door * (dir.y < 0);
 	door |= (uintptr_t)get_door(y * width + (x - 1), g) * !door * (dir.x < 0);
 	door |= (uintptr_t)get_door(y * width + (x + 1), g) * !door * (dir.x > 0);
-	if (door)
+	if (door && !((t_door *)door)->is_locked)
 	{
 		((t_door *)door)->opened = !((t_door *)door)->opened;
 		if (!((t_door *)door)->opened)
