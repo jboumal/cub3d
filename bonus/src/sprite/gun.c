@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 14:11:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:54:10 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	anim_gun(t_game *game)
 			if (!gun->image)
 				gun->image += 1;
 		}
-		else
+		if (!gun->ammo && !gun->is_knife)
 		{
 			if (game->list_active_gun[!game->active_gun]
 				&& game->list_active_gun[!game->active_gun]->ammo)
