@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 23:04:11 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 23:24:12 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	replace_gun(t_game *game, t_sprite *gun)
 {
 	t_gun	*new_gun;
+	t_gun	*active_gun;
 
+	active_gun = game->list_active_gun[game->active_gun];
 	new_gun = game->list_gun[gun->take_gun];
 	game->ammo += 8;
-	if (game->list_active_gun[0]->is_knife)
+	if (active_gun->is_knife)
 	{
-		game->list_active_gun[0] = new_gun;
-		game->list_active_gun[1] = NULL;
-		return ;
+		game->list_active_gun[0] = game->list_gun[PISTOL];
 	}
 	if (!game->list_active_gun[1])
 		game->list_active_gun[1] = new_gun;
@@ -31,6 +31,7 @@ void	replace_gun(t_game *game, t_sprite *gun)
 		free(game->list_active_gun[game->active_gun]);
 		game->list_active_gun[game->active_gun] = new_gun;
 	}
+	game->active_gun = 1;
 }
 
 void	collect_key(t_game *game, t_sprite *key)
