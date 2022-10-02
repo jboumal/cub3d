@@ -28,7 +28,7 @@ static int	get_tex_x(t_ray *ray, t_game *g)
 	else
 		wall_x = g->player.pos.x + ray->wall_dist * ray->dir.x;
 	wall_x -= floor((wall_x));
-	tex_x = (int)(wall_x * (double)g->textures[E].width);
+	tex_x = (int)(wall_x * (double)g->textures[ray->side].width);
 	if ((ray->side == W || ray->side == E) && ray->dir.x > 0)
 		tex_x = g->textures[E].width - tex_x - 1;
 	if ((ray->side == N || ray->side == S) && ray->dir.y < 0)
