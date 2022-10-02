@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:21:53 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 10:28:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/10/02 14:11:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static void	add_enemy(t_game *game, t_enemy *enemy)
 void	create_enemy(t_game *game, double x, double y, char *path)
 {
 	t_enemy		*enemy;
-	int			i;
 
-	i = 0;
 	enemy = x_malloc(sizeof(t_enemy));
 	enemy->hp = 100;
 	enemy->s.is_collect = 0;
