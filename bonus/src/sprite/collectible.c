@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 22:33:30 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:42:46 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	collect_key(t_game *game, t_sprite *key)
 	t_door	*door;
 	(void) key;
 
-	door = get_door(429, game);
+	door = get_door(LOCKED_DOOR, game);
 	if (door)
 	{
-		printf("door\n");
 		door->is_locked = !door->is_locked;
 	}
 }

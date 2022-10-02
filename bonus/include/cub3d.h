@@ -25,6 +25,7 @@
 # define PI2_F 6.28318530718
 # define RED 0x00FF0000
 # define DEATH_SIZE 4
+# define LOCKED_DOOR 429
 
 # include <mlx.h>
 # include <unistd.h>
