@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:18:00 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 22:42:46 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:45:43 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	replace_gun(t_game *game, t_sprite *gun)
 void	collect_key(t_game *game, t_sprite *key)
 {
 	t_door	*door;
-	(void) key;
 
+	(void) key;
 	door = get_door(LOCKED_DOOR, game);
 	if (door)
 	{
