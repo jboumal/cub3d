@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:36:45 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/29 10:27:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:13:11 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define SHOT_END 7
 # define DIE_START 8
 # define DIE_END 10
+# define REACH_KNIFE 1.3
 
 # include "cub3d.h"
 
