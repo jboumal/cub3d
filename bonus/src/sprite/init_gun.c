@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:27:35 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 23:01:48 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:59:41 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ static void	init_sprite_gun(t_game *game, t_gun *gun, int i)
 	gun->s.image = 0;
 	if (i == PISTOL)
 	{
-		gun->path_sound = "weapons/colt/coltf1.wav";
+		gun->path_sound = "sounds/weapons/colt/coltf1.wav";
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/pistol.xpm");
 	}
 	else if (i == MACH)
 	{
-		gun->path_sound = "weapons/thompson/thompson.wav";
+		gun->path_sound = "sounds/weapons/thompson/thompson.wav";
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/mach.xpm");
 	}
 	else if (i == GATLING)
 	{
-		gun->path_sound = "weapons/thompson.wav";
+		gun->path_sound = "sounds/weapons/thompson.wav";
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/gatling.xpm");
 	}
 	else if (i == KNIFE)
 	{
-		gun->path_sound = "weapons/knife/knife_slash1.wav";
+		gun->path_sound = "sounds/weapons/knife/knife_slash1.wav";
 		gun->s.t = get_img_from_xpm(game->mlx, "img/sprite/gun/knife.xpm");
 	}
 	bound_start(&gun->s, gun->s.t);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sound.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:54:02 by bperraud          #+#    #+#             */
-/*   Updated: 2022/09/30 10:33:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:56:21 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	play_sound(char *path, t_game *g)
 {
-	char	*str;
+	char	*cmd_arg[3];
 
+	cmd_arg[0] = SOUND_CMD;
+	cmd_arg[1] = path;
+	cmd_arg[2] = NULL;
 	if (!fork())
 	{
-		str = strjoin("afplay sounds/", path);
-		system(str);
-		free(str);
+		execv(SOUND_PATH, cmd_arg);
+		printf("command not found\n");
 		quit(g);
 	}
 }

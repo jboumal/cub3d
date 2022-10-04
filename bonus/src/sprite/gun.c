@@ -6,7 +6,7 @@
 /*   By: bperraud <bperraud@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 23:33:01 by bperraud          #+#    #+#             */
-/*   Updated: 2022/10/02 23:07:40 by bperraud         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:59:16 by bperraud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	switch_gun(t_game *game)
 	if (game->list_active_gun[1]
 		&& game->ammo)
 	{
-		play_sound("weapons/change.wav", game);
+		play_sound("sounds/weapons/change.wav", game);
 		game->active_gun = !game->active_gun;
 	}
 }
