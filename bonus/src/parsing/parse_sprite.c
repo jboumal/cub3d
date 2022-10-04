@@ -115,6 +115,8 @@ void	parse_sprite(t_game *game, int fd)
 		str_arr_free(line_split);
 		line = get_next_non_empty_line(fd);
 	}
+	if (line)
+		free(line);
 	init_gun(game);
 	parse_enemy(game, fd);
 }
