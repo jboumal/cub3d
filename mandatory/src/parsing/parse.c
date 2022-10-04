@@ -64,7 +64,7 @@ void	parse(int argc, char **argv, t_game *game)
 		exit_error("the map is a folder");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		exit(EXIT_FAILURE);
+		exit_error("file does not exist");
 	parse_textures(game, fd);
 	map_str = get_map_str(fd);
 	parse_map(map_str, game);
