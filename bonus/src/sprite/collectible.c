@@ -51,7 +51,8 @@ void	collect_chiken(t_game *game, t_sprite *chicken)
 	(void) chicken;
 	if (game->player_hp < 100)
 	{
-		play_sound("sounds/Interaction/items/pickup/health/hot_pickup.wav", game);
+		play_sound("sounds/Interaction/items/pickup/health/hot_pickup.wav",
+			game);
 		game->player_hp += 10;
 		if (game->player_hp > 100)
 			game->player_hp = 100;
